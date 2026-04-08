@@ -323,57 +323,65 @@
   <script src="kris-admin.js"></script>
 <script>
   (async function(){
-    await KMCData.init();
-    function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    var upcoming = document.getElementById('kmc-events-upcoming');
-    var pastList = document.getElementById('kmc-events-past');
-    var pastWrap = document.getElementById('kmc-events-past-wrap');
-    if (!upcoming) return;
-    var events = KMCData.get('events').filter(function(e){ return e.active; });
-    var today = new Date(); today.setHours(0,0,0,0);
-    var upList = [], pastArr = [];
-    var icons = ['&#127925;','&#129504;','&#127908;','&#127881;','&#127867;','&#127928;'];
-    events.forEach(function(e, i){
-      var isPast = e.date && new Date(e.date) < today;
-      (isPast ? pastArr : upList).push(e);
-    });
-    var IH2 = 'inner' + 'HTML';
-    function renderCard(e, i) {
-      var icon = icons[i % icons.length];
-      var dateStr = e.date ? new Date(e.date + 'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : '';
-      var timeStr = _s(e.time || '');
-      var meta = [dateStr, timeStr].filter(Boolean).join(' · ');
-      return '<div class="event-card reveal">' +
-        '<div class="event-icon">' + icon + '</div>' +
-        '<div class="event-info">' +
-        '<h3>' + _s(e.title) + '</h3>' +
-        (meta ? '<p style="font-size:0.78rem;color:var(--gold);margin-bottom:0.5rem;">' + meta + '</p>' : '') +
-        '<p>' + _s(e.description) + '</p>' +
-        (e.free ? '<p style="font-size:0.75rem;color:var(--gold);margin-top:0.5rem;">Free to Attend</p>' : '') +
-        '</div></div>';
+    try {
+      await KMCData.init();
+      function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+      var upcoming = document.getElementById('kmc-events-upcoming');
+      var pastList = document.getElementById('kmc-events-past');
+      var pastWrap = document.getElementById('kmc-events-past-wrap');
+      if (!upcoming) return;
+      var events = KMCData.get('events').filter(function(e){ return e.active; });
+      var today = new Date(); today.setHours(0,0,0,0);
+      var upList = [], pastArr = [];
+      var icons = ['&#127925;','&#129504;','&#127908;','&#127881;','&#127867;','&#127928;'];
+      events.forEach(function(e, i){
+        var isPast = e.date && new Date(e.date) < today;
+        (isPast ? pastArr : upList).push(e);
+      });
+      var IH2 = 'inner' + 'HTML';
+      function renderCard(e, i) {
+        var icon = icons[i % icons.length];
+        var dateStr = e.date ? new Date(e.date + 'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : '';
+        var timeStr = _s(e.time || '');
+        var meta = [dateStr, timeStr].filter(Boolean).join(' · ');
+        return '<div class="event-card reveal">' +
+          '<div class="event-icon">' + icon + '</div>' +
+          '<div class="event-info">' +
+          '<h3>' + _s(e.title) + '</h3>' +
+          (meta ? '<p style="font-size:0.78rem;color:var(--gold);margin-bottom:0.5rem;">' + meta + '</p>' : '') +
+          '<p>' + _s(e.description) + '</p>' +
+          (e.free ? '<p style="font-size:0.75rem;color:var(--gold);margin-top:0.5rem;">Free to Attend</p>' : '') +
+          '</div></div>';
+      }
+      var upHTML = upList.length ? upList.map(renderCard).join('') :
+        '<div class="event-card"><div class="event-info"><h3>Stay Tuned</h3><p>Check our Facebook page for upcoming events.</p><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top:1rem;">Follow on Facebook</a></div></div>';
+      upcoming[IH2] = upHTML;
+      if (pastArr.length) {
+        pastList[IH2] = pastArr.map(renderCard).join('');
+        pastWrap.style.display = 'block';
+      }
+      // Re-run reveal
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+      }, {threshold:0.1});
+      upcoming.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+    } catch(err) {
+      console.error('KMCData render error:', err);
     }
-    var upHTML = upList.length ? upList.map(renderCard).join('') :
-      '<div class="event-card"><div class="event-info"><h3>Stay Tuned</h3><p>Check our Facebook page for upcoming events.</p><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top:1rem;">Follow on Facebook</a></div></div>';
-    upcoming[IH2] = upHTML;
-    if (pastArr.length) {
-      pastList[IH2] = pastArr.map(renderCard).join('');
-      pastWrap.style.display = 'block';
-    }
-    // Re-run reveal
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
-    }, {threshold:0.1});
-    upcoming.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
   })();
   </script>
 
   <script>
   (async function(){
-    await KMCData.init();
-    var bar = document.getElementById('kmc-ann-bar');
-    if (!bar) return;
-    var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-    if (anns.length) { bar.textContent = anns[0].text; }
+    try {
+      await KMCData.init();
+      var bar = document.getElementById('kmc-ann-bar');
+      if (!bar) return;
+      var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
+      if (anns.length) { bar.textContent = anns[0].text; }
+    } catch(err) {
+      console.error('KMCData render error:', err);
+    }
   })();
   </script>
 </body>

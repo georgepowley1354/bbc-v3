@@ -20,6 +20,9 @@
   // In-memory cache — populated by init()
   var _cache = {};
 
+  // Promise deduplication — prevents multiple parallel inits
+  var _initPromise = null;
+
   // Supabase client — created after DOM is ready
   var _sb = null;
 
@@ -37,10 +40,12 @@
   var KMCData = {
 
     // Fetch all tables into cache. Call once on page load and await before rendering.
-    init: async function() {
+    // Memoized — multiple calls return the same promise, preventing duplicate fetches.
+    init: function() {
+      if (_initPromise) return _initPromise;
       var client = _client();
       var tableNames = Object.values(TABLES);
-      var fetches = tableNames.map(function(table) {
+      _initPromise = Promise.all(tableNames.map(function(table) {
         return client.from(table).select('*').then(function(res) {
           if (res.error) { console.error('KMCData.init error on ' + table, res.error); return; }
           var key = _tableToKey[table];
@@ -51,8 +56,8 @@
             _cache[key] = res.data || [];
           }
         });
-      });
-      await Promise.all(fetches);
+      }));
+      return _initPromise;
     },
 
     // Synchronous read from cache

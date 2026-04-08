@@ -743,32 +743,40 @@
   <script src="kris-admin.js"></script>
 <script>
   (async function(){
-    await KMCData.init();
-    function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    var grid = document.getElementById('kmc-specials-grid');
-    if (!grid) return;
-    var specials = KMCData.get('weeklySpecials');
-    var IH2 = 'inner' + 'HTML';
-    var h = '';
-    specials.forEach(function(s){
-      h += '<div class="special-card">';
-      h += '<div class="special-day">' + _s(s.day) + '</div>';
-      h += '<div class="special-deal">' + _s(s.deal) + '</div>';
-      h += '<div class="special-detail">' + _s(s.note) + '</div>';
-      h += '</div>';
-    });
-    grid[IH2] = h;
+    try {
+      await KMCData.init();
+      function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+      var grid = document.getElementById('kmc-specials-grid');
+      if (!grid) return;
+      var specials = KMCData.get('weeklySpecials');
+      var IH2 = 'inner' + 'HTML';
+      var h = '';
+      specials.forEach(function(s){
+        h += '<div class="special-card">';
+        h += '<div class="special-day">' + _s(s.day) + '</div>';
+        h += '<div class="special-deal">' + _s(s.deal) + '</div>';
+        h += '<div class="special-detail">' + _s(s.note) + '</div>';
+        h += '</div>';
+      });
+      grid[IH2] = h;
+    } catch(err) {
+      console.error('KMCData render error:', err);
+    }
   })();
   </script>
 
 
   <script>
   (async function(){
-    await KMCData.init();
-    var bar = document.getElementById('kmc-ann-bar');
-    if (!bar) return;
-    var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-    if (anns.length) { bar.textContent = anns[0].text; }
+    try {
+      await KMCData.init();
+      var bar = document.getElementById('kmc-ann-bar');
+      if (!bar) return;
+      var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
+      if (anns.length) { bar.textContent = anns[0].text; }
+    } catch(err) {
+      console.error('KMCData render error:', err);
+    }
   })();
   </script>
 </body>
