@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kris Mid City — Data Migration</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+    button { padding: 12px 24px; font-size: 16px; cursor: pointer; margin: 8px 4px; }
+    #log { background: #f4f4f4; padding: 16px; margin-top: 20px; white-space: pre-wrap; font-family: monospace; font-size: 13px; max-height: 400px; overflow-y: auto; }
+    input { padding: 10px; font-size: 15px; width: 280px; display: block; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <h1>Kris Mid City — Data Migration</h1>
+  <p>This tool reads localStorage data and pushes it to Supabase. Run once, then delete this file.</p>
+
+  <input type="email" id="email" placeholder="Admin email">
+  <input type="password" id="password" placeholder="Admin password">
+  <button onclick="runMigration()">Sign In & Migrate</button>
+
+  <div id="log">Ready. Enter credentials and click Migrate.</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="kris-config.js"></script>
+  <script>
+    var sb = supabase.createClient(KMC_SUPABASE_URL, KMC_SUPABASE_ANON_KEY);
+    var logEl = document.getElementById('log');
+
+    function log(msg) {
+      logEl.textContent += '\n' + msg;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function readLocal(key) {
+      try { return JSON.parse(localStorage.getItem(key)); } catch(e) { return null; }
+    }
+
+    async function runMigration() {
+      logEl.textContent = 'Starting migration...';
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
+      var auth = await sb.auth.signInWithPassword({ email: email, password: password });
+      if (auth.error) { log('ERROR: ' + auth.error.message); return; }
+      log('Signed in as ' + email);
+
+      // announcements
+      var announcements = readLocal('kmc_announcements') || [];
+      for (var a of announcements) {
+        var row = { text: a.text, active: a.active !== false };
+        var res = await sb.from('announcements').insert(row);
+        log('announcements: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted "' + a.text.slice(0,40) + '"'));
+      }
+
+      // events
+      var events = readLocal('kmc_events') || [];
+      for (var e of events) {
+        var row = { title: e.title, date: e.date||'', time: e.time||'', description: e.description||'', free: e.free!==false, featured: e.featured||false, photo: e.photo||'', active: e.active!==false };
+        var res = await sb.from('events').insert(row);
+        log('events: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted "' + e.title + '"'));
+      }
+
+      // weekly_specials
+      var specials = readLocal('kmc_weeklySpecials') || [];
+      for (var s of specials) {
+        var row = { day: s.day, deal: s.deal, note: s.note||'', time: s.time||'' };
+        var res = await sb.from('weekly_specials').insert(row);
+        log('weekly_specials: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted ' + s.day));
+      }
+
+      // happy_hour (single object)
+      var hh = readLocal('kmc_happyHour');
+      if (hh) {
+        var row = { days: hh.days, time: hh.time, deals: hh.deals || [] };
+        var res = await sb.from('happy_hour').insert(row);
+        log('happy_hour: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted'));
+      }
+
+      // drinks
+      var drinks = readLocal('kmc_drinks') || [];
+      for (var d of drinks) {
+        var row = { name: d.name, price: parseFloat(d.price)||0, category: d.category||'', featured: d.featured||false, available: d.available!==false };
+        var res = await sb.from('drinks').insert(row);
+        log('drinks: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted "' + d.name + '"'));
+      }
+
+      // menu_items
+      var items = readLocal('kmc_menuItems') || [];
+      for (var m of items) {
+        var row = { name: m.name, price: parseFloat(m.price)||0, category: m.category||'', featured: m.featured||false, available: m.available!==false };
+        var res = await sb.from('menu_items').insert(row);
+        log('menu_items: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted "' + m.name + '"'));
+      }
+
+      // gallery
+      var gallery = readLocal('kmc_gallery') || [];
+      for (var g of gallery) {
+        var row = { url: g.src||g.url||'', alt: g.alt||'', caption: g.caption||'', category: g.category||'', active: true };
+        var res = await sb.from('gallery').insert(row);
+        log('gallery: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted img ' + (g.src||g.url||'').split('/').pop()));
+      }
+
+      // team
+      var team = readLocal('kmc_team') || [];
+      for (var t of team) {
+        var row = { name: t.name, role: t.role||'', bio: t.bio||'', photo_url: t.photo||t.photo_url||'', active: t.active!==false };
+        var res = await sb.from('team').insert(row);
+        log('team: ' + (res.error ? 'ERROR ' + res.error.message : 'inserted "' + t.name + '"'));
+      }
+
+      log('\nMigration complete. Verify data in Supabase dashboard, then delete this file.');
+      await sb.auth.signOut();
+    }
+  </script>
+</body>
+</html>
