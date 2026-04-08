@@ -1,0 +1,14 @@
+/*.html
+  Cache-Control: no-cache, must-revalidate
+
+/kris-admin.js
+  Cache-Control: no-cache, must-revalidate
+
+/kris-data.js
+  Cache-Control: no-cache, must-revalidate
+
+/kris-config.js
+  Cache-Control: no-cache, must-revalidate
+
+/kris-shared.css
+  Cache-Control: no-cache, must-revalidate
