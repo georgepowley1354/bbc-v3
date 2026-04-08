@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Kris' Mid City Tavern, Menands NY</title>
+  <meta name="description" content="The story behind Kris' Mid City Tavern. Your neighborhood bar at 327 Broadway, Menands, NY. Call (518) 621-7449.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kris-shared.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <style>
+    /* === ABOUT HERO === */
+    .about-hero {
+      position: relative;
+      padding: 5rem 0 4rem;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      background-image: url('https://images.pexels.com/photos/30691575/pexels-photo-30691575.jpeg?auto=compress&cs=tinysrgb&w=1280');
+      background-size: cover;
+      background-position: center;
+    }
+    .about-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(15,14,11,0.5) 0%, rgba(15,14,11,0.9) 100%);
+    }
+    .about-hero-inner {
+      position: relative; z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .about-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--cream); }
+    .about-hero h1 em { color: var(--gold); font-style: italic; }
+    .about-hero p { margin-top: 1rem; color: var(--cream-dim); max-width: 540px; font-size: 1.05rem; }
+
+    /* === STORY SECTION === */
+    .story-section { background: var(--bg); }
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .story-image {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 2px;
+      background-image: url('https://images.pexels.com/photos/30691575/pexels-photo-30691575.jpeg?auto=compress&cs=tinysrgb&w=800');
+      background-size: cover;
+      background-position: center;
+    }
+    .story-image::after {
+      content: '';
+      position: absolute; inset: 0;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .story-text p { color: var(--cream-dim); font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; }
+    .story-stats { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 700; color: var(--gold); }
+    .stat-label { font-size: 0.78rem; color: var(--cream-dim); margin-top: 0.15rem; }
+
+    /* === VALUES SECTION === */
+    .values-section { background: var(--bg-alt); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .value-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .value-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-3px); }
+    .value-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .value-card h3 { font-family: var(--font-serif); font-size: 1.3rem; color: var(--cream); margin-bottom: 0.75rem; }
+    .value-card p { font-size: 0.88rem; color: var(--cream-dim); line-height: 1.7; }
+
+    /* === TEAM SECTION === */
+    .team-section { background: var(--bg); }
+
+    /* === CONTACT SECTION === */
+    .contact-section { background: var(--bg-alt); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg-card);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--cream-dim); opacity: 0.6; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .contact-info-col { display: flex; flex-direction: column; gap: 1.5rem; }
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .info-card h3 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--gold); margin-bottom: 0.75rem; }
+    .info-card p { font-size: 0.9rem; color: var(--cream-dim); line-height: 1.7; }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table td { font-size: 0.88rem; color: var(--cream-dim); padding: 0.35rem 0; }
+    .hours-table td:last-child { text-align: right; color: var(--cream); }
+    .map-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .map-wrap iframe { width: 100%; height: 220px; border: none; filter: grayscale(0.3) brightness(0.85); display: block; }
+
+    /* === MOBILE CTA === */
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 7000; background: rgba(15,14,11,0.98); border-top: 1px solid rgba(201,168,76,0.2); }
+    .mobile-cta-inner { display: grid; grid-template-columns: 1fr 1fr; }
+    .mobile-cta a { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .mobile-cta .m-call { color: var(--cream); border-right: 1px solid rgba(201,168,76,0.15); }
+    .mobile-cta .m-order-btn { background: var(--gold); color: var(--bg); }
+
+    @media (max-width: 820px) {
+      .nav-links, .nav-order { display: none; }
+      .hamburger { display: flex; }
+      .mobile-cta { display: block; }
+      body { padding-bottom: 62px; }
+      .story-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="announcement-bar" id="kmc-ann-bar">FREE DELIVERY Monday–Friday 11am–2pm &nbsp;·&nbsp; <a href="tel:5186217449">(518) 621-7449</a></div>
+
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="krismidcity-index.html" class="nav-logo">Kris' <span>Mid City</span> Tavern</a>
+      <div class="nav-links">
+        <a href="krismidcity-index.html">Home</a>
+        <a href="krismidcity-menu.html">Menu</a>
+        <a href="krismidcity-events.html">Events</a>
+        <a href="krismidcity-gallery.html">Gallery</a>
+        <a href="krismidcity-about.html" class="active">About</a>
+      </div>
+      <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer" class="nav-order">Order Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div id="mobile-menu" role="navigation">
+      <ul>
+        <li><a href="krismidcity-index.html">Home</a></li>
+        <li><a href="krismidcity-menu.html">Menu</a></li>
+        <li><a href="krismidcity-events.html">Events</a></li>
+        <li><a href="krismidcity-gallery.html">Gallery</a></li>
+        <li><a href="krismidcity-about.html" class="active">About</a></li>
+        <li><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer" class="m-order">Order Online</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="about-hero">
+    <div class="about-hero-overlay"></div>
+    <div class="about-hero-inner reveal">
+      <span class="section-label">Our Story</span>
+      <h1>About <em>Mid City</em></h1>
+      <p>The neighborhood tavern at 327 Broadway. Where Menands eats, drinks, and exhales.</p>
+    </div>
+  </div>
+
+  <!-- STORY SECTION -->
+  <section id="story" class="story-section" aria-labelledby="story-heading">
+    <div class="container">
+      <div class="story-grid reveal">
+        <div class="story-image" role="img" aria-label="Inside Kris' Mid City Tavern"></div>
+        <div class="story-text">
+          <span class="section-label">Who We Are</span>
+          <h2 id="story-heading" style="font-family:var(--font-serif);font-size:clamp(1.75rem,4vw,2.5rem);color:var(--cream);margin-bottom:1.5rem;">Kris spent years<br><em style="color:var(--gold);font-style:italic;">behind the bar</em></h2>
+          <p>Before she had the chance to own one. When this Broadway spot came available, she took it — with a little help from a believer who saw what she saw.</p>
+          <p>That's how Mid City Tavern was born. A real neighborhood bar with a full kitchen, cold beers on tap, and the kind of food that makes you want to come back on a Wednesday just because.</p>
+          <p>Come as you are.</p>
+          <div class="story-stats">
+            <div class="stat"><span class="stat-num">4.6★</span><span class="stat-label">Google · 204 reviews</span></div>
+            <div class="stat"><span class="stat-num">4.8★</span><span class="stat-label">Facebook · 201 reviews</span></div>
+            <div class="stat"><span class="stat-num">96%</span><span class="stat-label">Recommend us</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES SECTION -->
+  <section id="values" class="values-section" aria-labelledby="values-heading">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+        <span class="section-label">What We're About</span>
+        <h2 id="values-heading" class="section-title">The <em>Mid City</em> Way</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal">
+          <div class="value-icon">🍔</div>
+          <h3>Real Food</h3>
+          <p>House-made chili, hand-tossed wings, roasted roast beef. Nothing from a bag. Everything made to order.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-1">
+          <div class="value-icon">🍺</div>
+          <h3>Cold Drinks</h3>
+          <p>Domestic and import buckets, rotating drafts, well spirits, house wine. Happy hour Sunday through Thursday.</p>
+        </div>
+        <div class="value-card reveal reveal-delay-2">
+          <div class="value-icon">📍</div>
+          <h3>Neighborhood First</h3>
+          <p>Menands is home. Free delivery Monday through Friday. Office lunches, late nights, casual Sundays — we're here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section id="team" class="team-section" aria-labelledby="team-heading">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+        <span class="section-label">Our People</span>
+        <h2 id="team-heading" class="section-title">Meet the <em>Team</em></h2>
+      </div>
+      <div id="kmc-team-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact-section" aria-labelledby="contact-form-heading">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form-col reveal">
+          <span class="section-label">Get in Touch</span>
+          <h2 id="contact-form-heading" class="section-title">Send Us a <em>Message</em></h2>
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form" onsubmit="return _kmcSubmit(event)">
+            <input type="hidden" name="form-name" value="contact">
+            <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone (optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="(518) 000-0000">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="Private events, catering, feedback..." rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;border:none;">Send Message</button>
+          </form>
+        </div>
+
+        <div class="contact-info-col reveal reveal-delay-1">
+          <div class="info-card">
+            <h3>Find Us</h3>
+            <p>327 Broadway<br>Menands, NY 12204</p>
+            <p style="margin-top:1rem;"><a href="tel:5186217449" style="color:var(--gold);">(518) 621-7449</a></p>
+          </div>
+          <div class="info-card">
+            <h3>Hours</h3>
+            <table class="hours-table">
+              <tbody id="kmc-about-hours">
+                <tr><td>Monday – Saturday</td><td>11am – 12am</td></tr>
+                <tr><td>Sunday</td><td>12pm – 10pm</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="info-card">
+            <h3>Free Delivery</h3>
+            <p>Monday–Friday · 11am–2pm<br>Order online or call us.</p>
+            <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:1rem;display:inline-block;">Order Online</a>
+          </div>
+          <div class="map-wrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.2!2d-73.7389!3d42.6876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89de0a1c1b2c3d4e%3A0x5f6a7b8c9d0e1f2a!2s327%20Broadway%2C%20Menands%2C%20NY%2012204!5e0!3m2!1sen!2sus!4v1234567890"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Kris Mid City Tavern location">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h4>Kris' Mid City Tavern</h4><p>Your neighborhood escape.<br>327 Broadway<br>Menands, NY 12204</p></div>
+        <div class="footer-col"><h4>Hours</h4><p>Mon–Sat &nbsp;11am–12am<br>Sunday &nbsp;12pm–10pm</p></div>
+        <div class="footer-col"><h4>Contact</h4><p><a href="tel:5186217449">(518) 621-7449</a><br><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Order Online</a></p></div>
+        <div class="footer-col"><h4>Follow Us</h4><p><a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer">Instagram @midcitymenands</a><br><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer">Facebook · 5.5K followers</a></p></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Kris' Mid City Tavern. All rights reserved.</span><span>327 Broadway, Menands, NY 12204</span></div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta" aria-label="Quick actions">
+    <div class="mobile-cta-inner">
+      <a href="tel:5186217449" class="m-call">Call Us</a>
+      <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer" class="m-order-btn">Order Now</a>
+    </div>
+  </div>
+
+  <script>
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobile-menu');
+    ham.addEventListener('click', () => {
+      const open = mob.classList.toggle('open');
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
+    });
+    const revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+      }, {threshold: 0.1});
+      revealEls.forEach(el => obs.observe(el));
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="kris-config.js"></script>
+  <script src="kris-data.js"></script>
+  <script src="kris-admin.js"></script>
+<script>
+  (async function(){
+    await KMCData.init();
+    var IH2 = 'inner' + 'HTML';
+    // Dynamic hours
+    var htbl = document.getElementById('kmc-about-hours');
+    if (htbl) {
+      var hours = KMCData.get('hours');
+      var hh = '';
+      hours.forEach(function(row){ hh += '<tr><td>' + row.days + '</td><td>' + row.time + '</td></tr>'; });
+      htbl[IH2] = hh;
+    }
+    // Dynamic team
+    var teamList = document.getElementById('kmc-team-list');
+    if (teamList) {
+      var team = KMCData.get('team');
+      var th = '';
+      team.forEach(function(m){
+        th += '<div class="reveal" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;">';
+        if (m.photo) th += '<img src="' + m.photo + '" alt="' + m.name + '" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;" />';
+        else th += '<div style="width:80px;height:80px;border-radius:50%;background:var(--gold-dim);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:2rem;">&#128100;</div>';
+        th += '<h3 style="font-family:var(--font-serif);font-size:1.2rem;color:var(--cream);">' + m.name + '</h3>';
+        th += '<p style="font-size:0.75rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin:0.25rem 0 0.75rem;">' + m.role + '</p>';
+        if (m.bio) th += '<p style="font-size:0.85rem;color:var(--cream-dim);line-height:1.7;">' + m.bio + '</p>';
+        th += '</div>';
+      });
+      teamList[IH2] = th;
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+      }, {threshold:0.1});
+      teamList.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+    }
+  })();
+  </script>
+
+  <script>
+  (async function(){
+    await KMCData.init();
+    var bar = document.getElementById('kmc-ann-bar');
+    if (!bar) return;
+    var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
+    if (anns.length) { bar.textContent = anns[0].text; }
+  })();
+  </script>
+
+  <script>
+  function _kmcSubmit(e) {
+    var RATE_KEY = 'kmc_contact_last';
+    var COOLDOWN = 60000;
+    var last = parseInt(localStorage.getItem(RATE_KEY) || '0', 10);
+    if (Date.now() - last < COOLDOWN) {
+      var secs = Math.ceil((COOLDOWN - (Date.now() - last)) / 1000);
+      alert('Please wait ' + secs + ' seconds before sending another message.');
+      e.preventDefault(); return false;
+    }
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var message = document.getElementById('message').value.trim();
+    if (!name || name.length < 2) { alert('Please enter your name (at least 2 characters).'); e.preventDefault(); return false; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); e.preventDefault(); return false; }
+    if (!message || message.length < 10) { alert('Please enter a message (at least 10 characters).'); e.preventDefault(); return false; }
+    localStorage.setItem(RATE_KEY, Date.now().toString());
+    return true;
+  }
+  </script>
+</body>
+</html>

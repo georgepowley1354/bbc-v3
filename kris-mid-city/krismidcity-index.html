@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kris' Mid City Tavern — Menands, NY</title>
+  <meta name="description" content="Your neighborhood escape. Full menu, craft cocktails, and weekly specials at 327 Broadway, Menands, NY. Order online or call (518) 621-7449.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kris-shared.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <style>
+    /* === HERO === */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background-image: url('https://images.pexels.com/photos/30658142/pexels-photo-30658142.jpeg?auto=compress&cs=tinysrgb&w=1280');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(15,14,11,0.3) 0%, rgba(15,14,11,0.65) 50%, rgba(15,14,11,0.9) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-family: var(--font-serif);
+      color: var(--cream);
+      line-height: 1.0;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--cream-dim);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .hero-phone {
+      display: block;
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--cream-dim);
+    }
+    .hero-phone a {
+      color: var(--cream);
+      border-bottom: 1px solid rgba(240,232,216,0.3);
+      transition: border-color var(--transition);
+    }
+    .hero-phone a:hover { border-color: var(--gold); color: var(--gold); }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--cream-dim);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* === TRUST BAR === */
+    .trust-bar {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+    .trust-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem 2.5rem;
+      gap: 0.15rem;
+      border-right: 1px solid var(--border);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-value {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .trust-label {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+    }
+
+    /* === STORY SECTION === */
+    .story { background: var(--bg-alt); }
+    .story-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .story-img {
+      aspect-ratio: 4/3;
+      border-radius: 2px;
+      background-image: url('https://images.pexels.com/photos/15789101/pexels-photo-15789101.jpeg?auto=compress&cs=tinysrgb&w=1280');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .story-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .story-text p {
+      color: var(--cream-dim);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .story-text p:last-of-type { margin-bottom: 2rem; }
+
+    /* === MENU PREVIEW === */
+    .menu-preview { background: var(--bg); }
+    .menu-preview-header { text-align: center; margin-bottom: 3rem; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 2.5rem;
+    }
+    .menu-card {
+      background: var(--bg-card);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      transition: background var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .menu-card:hover { background: #201e1a; }
+    .menu-card:hover .menu-card-title { color: var(--gold); }
+    .menu-card-icon { font-size: 1.75rem; margin-bottom: 1rem; }
+    .menu-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      transition: color var(--transition);
+    }
+    .menu-card-sub { font-size: 0.73rem; color: var(--cream-dim); letter-spacing: 0.04em; }
+    .menu-preview-cta { text-align: center; }
+
+    /* === SPECIALS SECTION === */
+    .specials-section { background: var(--bg-alt); }
+    .specials-header { text-align: center; margin-bottom: 3rem; }
+    .specials-note { font-size: 0.78rem; color: var(--cream-dim); letter-spacing: 0.05em; margin-top: 0.5rem; }
+
+    /* === HAPPY HOUR === */
+    .happy-hour {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 4.5rem 0;
+    }
+    .hh-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hh-badge {
+      text-align: center;
+      padding: 2rem 2.5rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .hh-badge-label {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .hh-badge-time {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--cream);
+      line-height: 1.1;
+    }
+    .hh-badge-days { font-size: 0.72rem; color: var(--cream-dim); margin-top: 0.4rem; letter-spacing: 0.05em; }
+    .hh-details h3 { font-size: 1.6rem; margin-bottom: 1.25rem; font-family: var(--font-serif); color: var(--cream); }
+    .hh-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem 2rem;
+    }
+    .hh-list li {
+      font-size: 0.88rem;
+      color: var(--cream-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hh-list li::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* === REVIEWS === */
+    .reviews { background: var(--bg-alt); }
+    .reviews-header { text-align: center; margin-bottom: 3rem; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2.25rem 2rem;
+    }
+    .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 1rem; }
+    .review-quote {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+    .review-author { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
+    .review-source { font-size: 0.68rem; color: var(--gold); margin-top: 0.2rem; letter-spacing: 0.06em; }
+    .reviews-aggregate { margin-top: 2.5rem; text-align: center; font-size: 0.8rem; color: var(--cream-dim); letter-spacing: 0.04em; }
+    .reviews-aggregate strong { color: var(--cream); }
+
+    /* === GALLERY PREVIEW === */
+    .gallery-preview { background: var(--bg); }
+    .gallery-preview-header { text-align: center; margin-bottom: 2.5rem; }
+    .gallery-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      margin-bottom: 2rem;
+    }
+    .gp-item {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 1px;
+      background: var(--bg-card);
+    }
+    .gp-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gp-item:hover img { transform: scale(1.05); }
+    .gallery-preview-cta { text-align: center; }
+
+    /* === CONTACT === */
+    .contact-section { background: var(--bg-alt); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 2rem; }
+    .contact-detail { display: flex; gap: 1rem; margin-bottom: 1.75rem; align-items: flex-start; }
+    .contact-icon {
+      width: 36px; height: 36px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .contact-detail-text { font-size: 0.88rem; color: var(--cream-dim); line-height: 1.7; }
+    .contact-detail-text strong { color: var(--cream); display: block; margin-bottom: 0.1rem; }
+    .contact-detail-text a { color: var(--gold); }
+    .contact-detail-text a:hover { text-decoration: underline; }
+    .hours-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.5rem; }
+    .hours-table tr { border-bottom: 1px solid rgba(201,168,76,0.08); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td { padding: 0.45rem 0; }
+    .hours-table td:last-child { text-align: right; color: var(--cream); }
+    .hours-table td:first-child { color: var(--cream-dim); }
+    .contact-map {
+      aspect-ratio: 4/3;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .contact-map iframe { width: 100%; height: 100%; border: none; filter: grayscale(0.3) brightness(0.85); }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 960px) {
+      .story-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .hh-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .hh-badge { padding: 1.25rem; display: flex; gap: 1.5rem; align-items: center; text-align: left; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .gallery-preview-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.75rem; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .trust-item { padding: 0.5rem 1.25rem; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .hh-list { grid-template-columns: 1fr; }
+      .gallery-preview-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar" id="kmc-ann-bar">FREE DELIVERY Monday–Friday 11am–2pm &nbsp;·&nbsp; <a href="tel:5186217449">(518) 621-7449</a></div>
+
+  <!-- NAVIGATION -->
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="krismidcity-index.html" class="nav-logo">Kris' <span>Mid City</span> Tavern</a>
+      <ul class="nav-links" role="list">
+        <li><a href="krismidcity-index.html" class="active">Home</a></li>
+        <li><a href="krismidcity-menu.html">Menu</a></li>
+        <li><a href="krismidcity-events.html">Events &amp; Specials</a></li>
+        <li><a href="krismidcity-gallery.html">Gallery</a></li>
+        <li><a href="krismidcity-about.html">About</a></li>
+      </ul>
+      <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" class="nav-order" target="_blank" rel="noopener noreferrer">Order Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobile-menu" role="dialog" aria-label="Mobile navigation">
+    <ul>
+      <li><a href="krismidcity-index.html" class="active">Home</a></li>
+      <li><a href="krismidcity-menu.html">Menu</a></li>
+      <li><a href="krismidcity-events.html">Events &amp; Specials</a></li>
+      <li><a href="krismidcity-gallery.html">Gallery</a></li>
+      <li><a href="krismidcity-about.html">About</a></li>
+      <li><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" class="m-order" target="_blank" rel="noopener noreferrer">Order Online</a></li>
+    </ul>
+  </div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <span class="hero-eyebrow">327 Broadway · Menands, NY</span>
+        <h1>Escape the<br><em>Ordinary</em></h1>
+        <p class="hero-sub">Your neighborhood tavern. Cold drinks, real food, and a room that feels like yours.</p>
+        <div class="hero-ctas">
+          <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Order Online</a>
+          <a href="krismidcity-menu.html" class="btn btn-outline">View Menu</a>
+        </div>
+        <span class="hero-phone">Call us: <a href="tel:5186217449">(518) 621-7449</a></span>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar" aria-label="Ratings and recognition">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <span class="trust-value">4.6★</span>
+            <span class="trust-label">Google Reviews</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-value">4.8★</span>
+            <span class="trust-label">Facebook Rating</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-value">400+</span>
+            <span class="trust-label">Reviews</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-value">96%</span>
+            <span class="trust-label">Recommend</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORY SECTION -->
+    <section class="story" aria-labelledby="story-heading">
+      <div class="container">
+        <div class="story-inner">
+          <div class="story-img reveal" role="img" aria-label="Inside Kris' Mid City Tavern"></div>
+          <div class="story-text reveal reveal-delay-1">
+            <span class="section-label">Our Story</span>
+            <h2 id="story-heading" class="section-title">Born from <em>Behind the Bar</em></h2>
+            <p>Kris spent years behind the bar before she had the chance to own one. When this Broadway spot came available, she took it — with a little help from a believer who saw what she saw.</p>
+            <p>That's how Mid City Tavern was born. A real neighborhood bar with a full kitchen, cold beers on tap, and the kind of food that makes you want to come back on a Wednesday just because.</p>
+            <a href="krismidcity-about.html" class="btn btn-outline">Read Our Story</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- MENU PREVIEW -->
+    <section class="menu-preview" aria-labelledby="menu-heading">
+      <div class="container">
+        <div class="menu-preview-header reveal">
+          <span class="section-label">What We Serve</span>
+          <h2 id="menu-heading" class="section-title">Something for <em>Everyone</em></h2>
+        </div>
+        <div class="menu-grid reveal">
+          <a href="krismidcity-menu.html#starters" class="menu-card">
+            <div class="menu-card-icon">🍟</div>
+            <div class="menu-card-title">Starters</div>
+            <div class="menu-card-sub">Wings · Nachos · Pretzel Bites</div>
+          </a>
+          <a href="krismidcity-menu.html#hot-sandwiches" class="menu-card">
+            <div class="menu-card-icon">🥩</div>
+            <div class="menu-card-title">Sandwiches &amp; Wraps</div>
+            <div class="menu-card-sub">Melts · Subs · Paninis</div>
+          </a>
+          <a href="krismidcity-menu.html#salads" class="menu-card">
+            <div class="menu-card-icon">🥗</div>
+            <div class="menu-card-title">Salads</div>
+            <div class="menu-card-sub">House · Caesar · Steak Salad</div>
+          </a>
+          <a href="krismidcity-menu.html#pizza" class="menu-card">
+            <div class="menu-card-icon">🍕</div>
+            <div class="menu-card-title">Pizza &amp; Wings</div>
+            <div class="menu-card-sub">12 Cut · Personal · 12 Sauces</div>
+          </a>
+        </div>
+        <div class="menu-preview-cta reveal">
+          <a href="krismidcity-menu.html" class="btn btn-outline">View Full Menu</a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- WEEKLY SPECIALS -->
+    <section class="specials-section" aria-labelledby="specials-heading">
+      <div class="container">
+        <div class="specials-header reveal">
+          <span class="section-label">Week Night Specials</span>
+          <h2 id="specials-heading" class="section-title">A Reason to Come Back <em>Every Night</em></h2>
+          <p class="specials-note">Available 4–10PM nightly</p>
+        </div>
+        <div class="specials-grid reveal" id="kmc-specials-grid"></div>
+      </div>
+    </section>
+
+    <!-- HAPPY HOUR CALLOUT -->
+    <section class="happy-hour" aria-labelledby="hh-heading">
+      <div class="container">
+        <div class="hh-inner reveal">
+          <div class="hh-badge">
+            <div>
+              <div class="hh-badge-label">Happy Hour</div>
+              <div class="hh-badge-time">4–7 PM</div>
+              <div class="hh-badge-days">Sunday – Thursday</div>
+            </div>
+          </div>
+          <div class="hh-details">
+            <span class="section-label">Daily Deals</span>
+            <h3 id="hh-heading">Happy Hour Specials</h3>
+            <ul class="hh-list">
+              <li>Domestic Buckets — 5 for $20</li>
+              <li>Import Buckets — 5 for $25</li>
+              <li>$10 Well Spirits</li>
+              <li>$1 Off Drafts</li>
+              <li>$3 Wine</li>
+              <li>5 Wings — $5.50</li>
+              <li>½ Portion Nachos — $8</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- REVIEWS -->
+    <section class="reviews" aria-labelledby="reviews-heading">
+      <div class="container">
+        <div class="reviews-header reveal">
+          <span class="section-label">What People Say</span>
+          <h2 id="reviews-heading" class="section-title">Don't Take Our <em>Word for It</em></h2>
+        </div>
+        <div class="reviews-grid">
+          <div class="review-card reveal">
+            <div class="review-stars">★★★★★</div>
+            <blockquote class="review-quote">"We order lunch weekly at our office. Kris' is absolutely incredible. The food, staff and delivery are all AMAZING!!!"</blockquote>
+            <div class="review-author">Courtney Ackerman</div>
+            <div class="review-source">Facebook · Verified Review</div>
+          </div>
+          <div class="review-card reveal reveal-delay-1">
+            <div class="review-stars">★★★★★</div>
+            <blockquote class="review-quote">"Great atmosphere. Great food. What's not to love?"</blockquote>
+            <div class="review-author">Dan M.</div>
+            <div class="review-source">Google Reviews</div>
+          </div>
+        </div>
+        <p class="reviews-aggregate">
+          <strong>4.6★</strong> on Google (204 reviews) &nbsp;·&nbsp; <strong>4.8★</strong> on Facebook &nbsp;·&nbsp; <strong>96%</strong> of guests recommend us
+        </p>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- GALLERY PREVIEW -->
+    <section class="gallery-preview" aria-labelledby="gallery-heading">
+      <div class="container">
+        <div class="gallery-preview-header reveal">
+          <span class="section-label">The Tavern</span>
+          <h2 id="gallery-heading" class="section-title">See for <em>Yourself</em></h2>
+        </div>
+        <div class="gallery-preview-grid reveal">
+          <div class="gp-item">
+            <img src="https://images.pexels.com/photos/30658142/pexels-photo-30658142.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bar interior warm atmosphere" loading="lazy">
+          </div>
+          <div class="gp-item">
+            <img src="https://images.pexels.com/photos/31228738/pexels-photo-31228738.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wings and food" loading="lazy">
+          </div>
+          <div class="gp-item">
+            <img src="https://images.pexels.com/photos/12478607/pexels-photo-12478607.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Illuminated bar window" loading="lazy">
+          </div>
+        </div>
+        <div class="gallery-preview-cta reveal">
+          <a href="krismidcity-gallery.html" class="btn btn-outline">View Full Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="gold-rule">
+
+    <!-- HOURS & LOCATION -->
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="contact-inner">
+          <div class="contact-info reveal">
+            <span class="section-label">Find Us</span>
+            <h2 id="contact-heading" class="section-title">Hours &amp; <em>Location</em></h2>
+
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">📍</div>
+              <div class="contact-detail-text">
+                <strong>Address</strong>
+                327 Broadway, Menands, NY 12204
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">📞</div>
+              <div class="contact-detail-text">
+                <strong>Phone</strong>
+                <a href="tel:5186217449">(518) 621-7449</a>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">🕐</div>
+              <div class="contact-detail-text">
+                <strong>Hours</strong>
+                <table class="hours-table" aria-label="Business hours">
+                  <tr><td>Monday – Saturday</td><td>11am – 12am</td></tr>
+                  <tr><td>Sunday</td><td>12pm – 10pm</td></tr>
+                  <tr><td>Free Delivery</td><td>Mon–Fri 11am–2pm</td></tr>
+                </table>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-icon" aria-hidden="true">🛒</div>
+              <div class="contact-detail-text">
+                <strong>Order &amp; Gift Cards</strong>
+                <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Order Online via SpotOn</a><br>
+                <a href="https://egiftcards.spoton.com/7163/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Purchase Gift Cards</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-map reveal reveal-delay-1">
+            <iframe
+              title="Kris' Mid City Tavern location map"
+              src="https://maps.google.com/maps?q=327+Broadway,+Menands,+NY+12204&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              aria-label="Google Maps showing Kris' Mid City Tavern at 327 Broadway, Menands NY">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">Kris' Mid City Tavern</div>
+          <p class="footer-tagline">Escape the Ordinary</p>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+            <a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="krismidcity-index.html">Home</a></li>
+            <li><a href="krismidcity-menu.html">Menu</a></li>
+            <li><a href="krismidcity-events.html">Events &amp; Specials</a></li>
+            <li><a href="krismidcity-gallery.html">Gallery</a></li>
+            <li><a href="krismidcity-about.html">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Order</h4>
+          <ul>
+            <li><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Order Online</a></li>
+            <li><a href="https://egiftcards.spoton.com/7163/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Gift Cards</a></li>
+            <li><a href="tel:5186217449">Call (518) 621-7449</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Visit</h4>
+          <ul>
+            <li><a href="https://maps.google.com/?q=327+Broadway+Menands+NY" target="_blank" rel="noopener noreferrer">327 Broadway, Menands</a></li>
+            <li style="color:var(--cream-dim);font-size:0.83rem;">Mon–Sat: 11am–12am</li>
+            <li style="color:var(--cream-dim);font-size:0.83rem;">Sun: 12pm–10pm</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Kris' Mid City Tavern. All rights reserved.</span>
+        <span>327 Broadway, Menands, NY 12204</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY CTA BAR -->
+  <div class="mobile-cta" role="navigation" aria-label="Quick actions">
+    <div class="mobile-cta-inner">
+      <a href="tel:5186217449" class="m-call">📞 Call Us</a>
+      <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" class="m-order-btn" target="_blank" rel="noopener noreferrer">Order Now</a>
+    </div>
+  </div>
+
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="kris-config.js"></script>
+  <script src="kris-data.js"></script>
+  <script src="kris-admin.js"></script>
+<script>
+  (async function(){
+    await KMCData.init();
+    function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    var grid = document.getElementById('kmc-specials-grid');
+    if (!grid) return;
+    var specials = KMCData.get('weeklySpecials');
+    var IH2 = 'inner' + 'HTML';
+    var h = '';
+    specials.forEach(function(s){
+      h += '<div class="special-card">';
+      h += '<div class="special-day">' + _s(s.day) + '</div>';
+      h += '<div class="special-deal">' + _s(s.deal) + '</div>';
+      h += '<div class="special-detail">' + _s(s.note) + '</div>';
+      h += '</div>';
+    });
+    grid[IH2] = h;
+  })();
+  </script>
+
+
+  <script>
+  (async function(){
+    await KMCData.init();
+    var bar = document.getElementById('kmc-ann-bar');
+    if (!bar) return;
+    var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
+    if (anns.length) { bar.textContent = anns[0].text; }
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Kris' Mid City Tavern, Menands NY</title>
+  <meta name="description" content="Photos from Kris' Mid City Tavern. Food, drinks, and good times at 327 Broadway, Menands, NY.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="kris-shared.css">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <style>
+    /* === GALLERY HERO === */
+    .gallery-hero {
+      position: relative;
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(139,38,53,0.2) 0%, rgba(15,14,11,0) 60%), var(--bg-alt);
+    }
+    .gallery-hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .gallery-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--cream); }
+    .gallery-hero h1 em { color: var(--gold); font-style: italic; }
+    .gallery-hero p { margin-top: 1rem; color: var(--cream-dim); max-width: 540px; font-size: 1.05rem; }
+
+    /* === GALLERY SECTION === */
+    .gallery-section { padding: 4rem 0 5rem; }
+
+    /* === MOBILE CTA === */
+    .mobile-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 7000; background: rgba(15,14,11,0.98); border-top: 1px solid rgba(201,168,76,0.2); }
+    .mobile-cta-inner { display: grid; grid-template-columns: 1fr 1fr; }
+    .mobile-cta a { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .mobile-cta .m-call { color: var(--cream); border-right: 1px solid rgba(201,168,76,0.15); }
+    .mobile-cta .m-order-btn { background: var(--gold); color: var(--bg); }
+
+    @media (max-width: 820px) {
+      .nav-links, .nav-order { display: none; }
+      .hamburger { display: flex; }
+      .mobile-cta { display: block; }
+      body { padding-bottom: 62px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="announcement-bar" id="kmc-ann-bar">FREE DELIVERY Monday–Friday 11am–2pm &nbsp;·&nbsp; <a href="tel:5186217449">(518) 621-7449</a></div>
+
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="krismidcity-index.html" class="nav-logo">Kris' <span>Mid City</span> Tavern</a>
+      <div class="nav-links">
+        <a href="krismidcity-index.html">Home</a>
+        <a href="krismidcity-menu.html">Menu</a>
+        <a href="krismidcity-events.html">Events</a>
+        <a href="krismidcity-gallery.html" class="active">Gallery</a>
+        <a href="krismidcity-about.html">About</a>
+      </div>
+      <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer" class="nav-order">Order Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div id="mobile-menu" role="navigation">
+      <ul>
+        <li><a href="krismidcity-index.html">Home</a></li>
+        <li><a href="krismidcity-menu.html">Menu</a></li>
+        <li><a href="krismidcity-events.html">Events</a></li>
+        <li><a href="krismidcity-gallery.html" class="active">Gallery</a></li>
+        <li><a href="krismidcity-about.html">About</a></li>
+        <li><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer" class="m-order">Order Online</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="gallery-hero">
+    <div class="gallery-hero-inner reveal">
+      <span class="section-label">The Vibe</span>
+      <h1>Our <em>Gallery</em></h1>
+      <p>Food, drinks, and good company. This is what Menands looks like on a good night.</p>
+    </div>
+  </div>
+
+  <!-- GALLERY SECTION -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="kmc-filter-bar" id="kmc-gallery-filters"></div>
+      <div class="gallery-masonry" id="kmc-gallery-grid"></div>
+      <div class="reveal" style="text-align:center;margin-top:3rem;">
+        <p style="color:var(--cream-dim);margin-bottom:1.5rem;">See more on Instagram and Facebook.</p>
+        <a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-right:1rem;">@midcitymenands</a>
+        <a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h4>Kris' Mid City Tavern</h4><p>Your neighborhood escape.<br>327 Broadway<br>Menands, NY 12204</p></div>
+        <div class="footer-col"><h4>Hours</h4><p>Mon–Sat &nbsp;11am–12am<br>Sunday &nbsp;12pm–10pm</p></div>
+        <div class="footer-col"><h4>Contact</h4><p><a href="tel:5186217449">(518) 621-7449</a><br><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Order Online</a></p></div>
+        <div class="footer-col"><h4>Follow Us</h4><p><a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer">Instagram @midcitymenands</a><br><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer">Facebook · 5.5K followers</a></p></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Kris' Mid City Tavern. All rights reserved.</span><span>327 Broadway, Menands, NY 12204</span></div>
+    </div>
+  </footer>
+
+  <div class="mobile-cta" aria-label="Quick actions">
+    <div class="mobile-cta-inner">
+      <a href="tel:5186217449" class="m-call">Call Us</a>
+      <a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer" class="m-order-btn">Order Now</a>
+    </div>
+  </div>
+
+  <script>
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobile-menu');
+    ham.addEventListener('click', () => {
+      const open = mob.classList.toggle('open');
+      ham.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
+    });
+    const revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+      }, {threshold: 0.1});
+      revealEls.forEach(el => obs.observe(el));
+    }
+  </script>
+
+  <!-- Lightbox -->
+  <div id="kmc-lightbox" role="dialog" aria-modal="true">
+    <button id="kmc-lb-close" aria-label="Close">&times;</button>
+    <button id="kmc-lb-prev" aria-label="Previous">&#8249;</button>
+    <img id="kmc-lb-img" src="" alt="" />
+    <button id="kmc-lb-next" aria-label="Next">&#8250;</button>
+    <div id="kmc-lb-caption"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="kris-config.js"></script>
+  <script src="kris-data.js"></script>
+  <script src="kris-admin.js"></script>
+<script>
+  (async function(){
+    await KMCData.init();
+    function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function _a(v) { return _s(v).replace(/"/g,'&quot;'); }
+    var grid = document.getElementById('kmc-gallery-grid');
+    var filterBar = document.getElementById('kmc-gallery-filters');
+    if (!grid) return;
+    var photos = KMCData.get('gallery');
+    var IH2 = 'inner' + 'HTML';
+    var currentFilter = 'all';
+    var currentIndex = 0;
+    var visible = [];
+    function render(filter) {
+      currentFilter = filter;
+      visible = filter === 'all' ? photos : photos.filter(function(p){ return p.category === filter; });
+      var h = '';
+      visible.forEach(function(p, i){
+        h += '<div class="gallery-item reveal" data-idx="' + i + '">' +
+          '<img src="' + _a(p.src) + '" alt="' + _a(p.alt||'') + '" loading="lazy" onerror="this.parentElement.hidden=true">' +
+          '<div class="gallery-overlay">' +
+          (p.caption ? '<span style="color:#fff;font-size:0.8rem;padding:0.5rem;">' + _s(p.caption) + '</span>' : '') +
+          '</div></div>';
+      });
+      grid[IH2] = h;
+      grid.querySelectorAll('.gallery-item').forEach(function(item){
+        item.addEventListener('click', function(){ openLightbox(parseInt(this.dataset.idx)); });
+      });
+      // Reveal
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+      }, {threshold:0.1});
+      grid.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+    }
+    // Filter buttons
+    var cats = ['all','food','drinks','interior','events'];
+    var fb = '';
+    cats.forEach(function(c){ fb += '<button class="kmc-filter-btn' + (c==='all'?' active':'') + '" data-cat="' + c + '">' + (c==='all'?'All':c.charAt(0).toUpperCase()+c.slice(1)) + '</button>'; });
+    filterBar[IH2] = fb;
+    filterBar.querySelectorAll('.kmc-filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        filterBar.querySelectorAll('.kmc-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+        this.classList.add('active');
+        render(this.dataset.cat);
+      });
+    });
+    render('all');
+    // Lightbox
+    var lb = document.getElementById('kmc-lightbox');
+    var lbImg = document.getElementById('kmc-lb-img');
+    var lbCap = document.getElementById('kmc-lb-caption');
+    function openLightbox(idx){ currentIndex=idx; lbImg.src=visible[idx].src; lbImg.alt=visible[idx].alt||''; lbCap.textContent=visible[idx].caption||''; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+    document.getElementById('kmc-lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('kmc-lb-prev').addEventListener('click', function(){ currentIndex=(currentIndex-1+visible.length)%visible.length; openLightbox(currentIndex); });
+    document.getElementById('kmc-lb-next').addEventListener('click', function(){ currentIndex=(currentIndex+1)%visible.length; openLightbox(currentIndex); });
+    lb.addEventListener('click', function(e){ if(e.target===lb) closeLightbox(); });
+    document.addEventListener('keydown', function(e){ if(!lb.classList.contains('open')) return; if(e.key==='Escape') closeLightbox(); if(e.key==='ArrowLeft') document.getElementById('kmc-lb-prev').click(); if(e.key==='ArrowRight') document.getElementById('kmc-lb-next').click(); });
+  })();
+  </script>
+
+  <script>
+  (async function(){
+    await KMCData.init();
+    var bar = document.getElementById('kmc-ann-bar');
+    if (!bar) return;
+    var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
+    if (anns.length) { bar.textContent = anns[0].text; }
+  })();
+  </script>
+</body>
+</html>
