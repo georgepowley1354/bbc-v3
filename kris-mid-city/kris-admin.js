@@ -460,12 +460,16 @@
     r.readAsDataURL(file);
   }
   function _toast(msg) {
+    var existing = document.getElementById('kmc-toast');
+    if (existing) existing.remove();
     var t = document.createElement('div');
+    t.id = 'kmc-toast';
     t.textContent = msg;
-    t.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#C9A84C;color:#1A1714;' +
-      'padding:10px 20px;border-radius:4px;font-weight:700;z-index:999999;pointer-events:none;';
+    t.style.cssText = 'position:fixed;bottom:30px;right:30px;background:#C9A84C;color:#1A1714;' +
+      'padding:14px 24px;border-radius:6px;font-weight:700;font-size:16px;z-index:999999;pointer-events:none;' +
+      'box-shadow:0 4px 12px rgba(0,0,0,0.4);';
     document.body.appendChild(t);
-    setTimeout(function(){ t.remove(); }, 2000);
+    setTimeout(function(){ t.remove(); }, 3000);
   }
 
   async function _saveAnn(id){ await KMCData.updateItem('announcements',id,{text:_v('ann-text-'+id),active:_b('ann-active-'+id)}); _toast('Saved!'); renderAnnouncements(); }
