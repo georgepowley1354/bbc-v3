@@ -161,8 +161,8 @@
         '<div class="kmc-toggle-row">' +
           '<input type="checkbox" id="ann-active-' + item.id + '"' + (item.active ? ' checked' : '') + ' />' +
           '<label for="ann-active-' + item.id + '">Show on site</label>' +
-          '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveAnn(' + item.id + ')">Save</button>' +
-          '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delAnn(' + item.id + ')">Delete</button>' +
+          '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveAnn(\'' + item.id + '\')">Save</button>' +
+          '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delAnn(\'' + item.id + '\')">Delete</button>' +
         '</div></div>';
     });
     html += '<div class="kmc-add-form"><h4>+ New Announcement</h4>' +
@@ -200,7 +200,7 @@
         '<div class="kmc-field"><label>Deal</label><input type="text" id="sp-deal-' + item.id + '" value="' + _esc(item.deal) + '" /></div>' +
         '<div class="kmc-field"><label>Note</label><input type="text" id="sp-note-' + item.id + '" value="' + _esc(item.note) + '" /></div>' +
         '<div class="kmc-field" style="flex:0 0 100px"><label>Time</label><input type="text" id="sp-time-' + item.id + '" value="' + _esc(item.time) + '" /></div>' +
-        '</div><button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveSpecial(' + item.id + ')">Save</button></div>';
+        '</div><button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveSpecial(\'' + item.id + '\')">Save</button></div>';
     });
     html += '<hr class="kmc-divider"><h2 class="kmc-section-title">Happy Hour</h2>' +
       '<div class="kmc-card"><div class="kmc-row">' +
@@ -230,8 +230,8 @@
       html += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.title) + '</strong>' +
           '<div style="display:flex;gap:8px">' +
-            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveEvent(' + item.id + ')">Save</button>' +
-            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delEvent(' + item.id + ')">Delete</button>' +
+            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveEvent(\'' + item.id + '\')">Save</button>' +
+            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delEvent(\'' + item.id + '\')">Delete</button>' +
           '</div></div>' +
         '<div class="kmc-row">' +
           '<div class="kmc-field"><label>Title</label><input type="text" id="ev-title-' + item.id + '" value="' + _esc(item.title) + '" /></div>' +
@@ -269,7 +269,7 @@
       var thumb = src ? '<img src="' + src + '" class="kmc-photo-preview" onerror="this.hidden=true" />' : '';
       html += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.alt) + '</strong>' +
-          '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delPhoto(' + item.id + ')">Delete</button></div>' +
+          '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delPhoto(\'' + item.id + '\')">Delete</button></div>' +
         thumb +
         '<div class="kmc-row" style="margin-top:10px">' +
           '<div class="kmc-field"><label>Caption</label><input type="text" id="ph-cap-' + item.id + '" value="' + _esc(item.caption) + '" /></div>' +
@@ -277,7 +277,7 @@
             '<select id="ph-cat-' + item.id + '">' +
               ['food','drinks','interior','events'].map(function(c){ return '<option value="' + c + '"' + (item.category===c?' selected':'') + '>' + c + '</option>'; }).join('') +
             '</select></div></div>' +
-        '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._savePhoto(' + item.id + ')">Save</button></div>';
+        '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._savePhoto(\'' + item.id + '\')">Save</button></div>';
     });
     html += '<div class="kmc-add-form"><h4>+ Upload Photo</h4><div class="kmc-row">' +
       '<div class="kmc-field"><label>Photo File</label><input type="file" id="ph-new-file" accept="image/*" /></div>' +
@@ -296,8 +296,8 @@
       html += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.name) + ' &mdash; ' + _esc(item.role) + '</strong>' +
           '<div style="display:flex;gap:8px">' +
-            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveTeam(' + item.id + ')">Save</button>' +
-            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delTeam(' + item.id + ')">Delete</button>' +
+            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveTeam(\'' + item.id + '\')">Save</button>' +
+            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delTeam(\'' + item.id + '\')">Delete</button>' +
           '</div></div>' +
         thumb +
         '<div class="kmc-row">' +
@@ -335,8 +335,8 @@
       h += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.name) + (item.available === false ? ' <span style="color:#e55;font-size:12px">86\'d</span>' : '') + '</strong>' +
           '<div style="display:flex;gap:8px">' +
-            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveDrink(' + item.id + ')">Save</button>' +
-            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delDrink(' + item.id + ')">Delete</button>' +
+            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveDrink(\'' + item.id + '\')">Save</button>' +
+            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delDrink(\'' + item.id + '\')">Delete</button>' +
           '</div></div>' +
         '<div class="kmc-row">' +
           '<div class="kmc-field"><label>Name</label><input type="text" id="dr-name-' + item.id + '" value="' + _esc(item.name) + '" /></div>' +
@@ -377,8 +377,8 @@
       h += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.name) + (item.available === false ? ' <span style="color:#e55;font-size:12px">86\'d</span>' : '') + '</strong>' +
           '<div style="display:flex;gap:8px">' +
-            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveFood(' + item.id + ')">Save</button>' +
-            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delFood(' + item.id + ')">Delete</button>' +
+            '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveFood(\'' + item.id + '\')">Save</button>' +
+            '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delFood(\'' + item.id + '\')">Delete</button>' +
           '</div></div>' +
         '<div class="kmc-row">' +
           '<div class="kmc-field"><label>Name</label><input type="text" id="fd-name-' + item.id + '" value="' + _esc(item.name) + '" /></div>' +
