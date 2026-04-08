@@ -106,7 +106,10 @@
     div.id = 'kmc-admin-overlay';
     div.innerHTML = '<div id="kmc-admin-header">' +
         '<h1>&#x1F511; Mid City Admin</h1>' +
-        '<button id="kmc-admin-close" onclick="KMCAdmin.close()">&#x2715; Close</button>' +
+        '<div style="display:flex;gap:8px;align-items:center">' +
+          '<button id="kmc-admin-signout" onclick="KMCAdmin.signOut()" style="background:none;border:1px solid #8B2635;color:#e88;cursor:pointer;padding:8px 16px;border-radius:4px;font-size:14px;min-height:44px;">&#x1F6AA; Sign Out</button>' +
+          '<button id="kmc-admin-close" onclick="KMCAdmin.close()">&#x2715; Close</button>' +
+        '</div>' +
       '</div>' +
       '<div id="kmc-admin-tabs">' +
         '<button class="kmc-tab-btn" data-tab="announcements" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F4E2; Announcements</button>' +
@@ -505,7 +508,14 @@
       return;
     }
     _authenticated = true;
-    await KMCData.init();
+    try {
+      await KMCData.init();
+    } catch(err) {
+      console.error('KMCData.init failed after login:', err);
+      _authenticated = false;
+      errEl.textContent = 'Login succeeded but data failed to load. Please try again.';
+      return;
+    }
     _resetInactivity();
     showTabs();
   };
@@ -536,7 +546,7 @@
   function _resetInactivity() {
     if (_inactivityTimer) clearTimeout(_inactivityTimer);
     _inactivityTimer = setTimeout(function() {
-      if (_authenticated) { _authenticated = false; KMCAdmin.close(); }
+      if (_authenticated) { KMCAdmin.signOut(); }
     }, 30 * 60 * 1000);
   }
 
@@ -548,10 +558,22 @@
       if (_authenticated) {
         showTabs();
       } else {
-        var session = await KMCData.getSession();
+        var session = null;
+        try {
+          session = await KMCData.getSession();
+        } catch(err) {
+          console.error('getSession error:', err);
+        }
         if (session) {
           _authenticated = true;
-          await KMCData.init();
+          try {
+            await KMCData.init();
+          } catch(err) {
+            console.error('KMCData.init failed on session restore:', err);
+            _authenticated = false;
+            showGate();
+            return;
+          }
           _resetInactivity();
           showTabs();
         } else {
@@ -559,12 +581,17 @@
         }
       }
     },
-    close: async function() {
+    close: function() {
+      _authenticated = false;
+      document.getElementById('kmc-admin-overlay').classList.remove('open');
+      clearTimeout(_inactivityTimer);
+    },
+    signOut: async function() {
       await KMCData.signOut();
       _authenticated = false;
-      if (_inactivityTimer) { clearTimeout(_inactivityTimer); _inactivityTimer = null; }
       var el = document.getElementById('kmc-admin-overlay');
       if (el) el.classList.remove('open');
+      clearTimeout(_inactivityTimer);
     },
     switchTab: function(tab) {
       _activeTab = tab;

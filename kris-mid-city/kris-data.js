@@ -151,6 +151,8 @@
 
     signOut: async function() {
       await _client().auth.signOut();
+      _initPromise = null;
+      _cache = {};
     },
 
     getSession: async function() {
