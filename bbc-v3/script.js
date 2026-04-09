@@ -120,15 +120,15 @@ function onScroll() {
   updateStickyCTA();
 }
 
-// Run once on load
-onScroll();
-
 /* ───────────────────────────────────────────────────────
  * Sticky CTA Bar
  * ─────────────────────────────────────────────────────── */
 const stickyCTA = document.getElementById('sticky-cta');
 const heroSection = document.getElementById('hero');
 const contactSection = document.getElementById('contact');
+
+// Run once on load (after stickyCTA refs are initialized)
+onScroll();
 
 function updateStickyCTA() {
   if (!stickyCTA || !heroSection || !contactSection) return;

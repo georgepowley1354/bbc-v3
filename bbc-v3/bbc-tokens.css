@@ -1,0 +1,190 @@
+/*
+ * ═══════════════════════════════════════════════════════════
+ * BBC DESIGN TOKENS — SINGLE SOURCE OF TRUTH
+ * Big Bad Coding | Capital Region, NY
+ * ═══════════════════════════════════════════════════════════
+ *
+ * AESTHETIC DIRECTION: Dark Industrial Brutalism
+ * ─────────────────────────────────────────────
+ * Raw confidence without chaos. The dark industrial palette
+ * signals craft and seriousness. The electric accent says
+ * "we're not like the others." Bebas Neue headlines feel
+ * authoritative — the copy says "stop renting," the font
+ * makes you believe it.
+ *
+ * Typography rationale:
+ *   Bebas Neue — ultra-condensed, heavy, decisive. Every
+ *   headline commands attention without competing with copy.
+ *   DM Sans — clean, slightly rounded, approachable. Makes
+ *   technical content feel human. Critical for a brand that
+ *   says "we're your neighbors, not a ticket queue."
+ *   JetBrains Mono — code-adjacent, used sparingly. Quietly
+ *   reinforces "hand-coded" without shouting it.
+ *
+ * Accent color rationale:
+ *   #FF4D1C — electric orange-red. Not safe. Not corporate.
+ *   Dangerous without being aggressive. Used at <10% visual
+ *   weight — when it appears, it means something.
+ *
+ * CHANGING ANY VALUE HERE UPDATES THE ENTIRE SITE.
+ * Nothing is hardcoded in styles.css.
+ * ═══════════════════════════════════════════════════════════
+ */
+
+:root {
+
+  /* ───────────────────────────────────────────────────────
+   * COLORS — DARK MODE (DEFAULT)
+   * ─────────────────────────────────────────────────────── */
+
+  --c-bg:              #0E0E0E; /* Base background — near-black, warm undertone */
+  --c-surface:         #161616; /* Card backgrounds, slightly lifted surfaces */
+  --c-surface-2:       #1E1E1E; /* Hover states, elevated cards */
+  --c-border:          #282828; /* Dividers, card borders */
+  --c-border-muted:    #1C1C1C; /* Subtle section dividers */
+
+  --c-text:            #F0EDE8; /* Primary text — warm off-white, easier on dark */
+  --c-text-2:          #9E9891; /* Secondary — muted warm gray */
+  --c-text-3:          #5C5852; /* Tertiary — placeholder, disabled */
+
+  --c-accent:          #FF4D1C; /* Electric orange-red — use sparingly, max 10% */
+  --c-accent-hover:    #FF6B3D; /* Lightened for hover state */
+  --c-accent-dim:      rgba(255, 77, 28, 0.08); /* Tinted bg for accent elements */
+  --c-accent-border:   rgba(255, 77, 28, 0.25); /* Accent-tinted borders */
+
+  /* ───────────────────────────────────────────────────────
+   * TYPOGRAPHY
+   * ─────────────────────────────────────────────────────── */
+
+  --font-display: 'Bebas Neue', sans-serif; /* Headlines, lettermark, section numbers */
+  --font-body:    'DM Sans', sans-serif;    /* All body copy, UI text, navigation */
+  --font-mono:    'JetBrains Mono', monospace; /* Step numbers, code labels, tags */
+
+  /* ───────────────────────────────────────────────────────
+   * FONT SIZES — Fluid scale, clamp-ready
+   * ─────────────────────────────────────────────────────── */
+
+  --fs-xs:    0.70rem;   /* 11px — tiny labels, legal text */
+  --fs-sm:    0.8125rem; /* 13px — captions, metadata */
+  --fs-base:  1rem;      /* 16px — body text minimum on mobile */
+  --fs-lg:    1.125rem;  /* 18px — lead paragraphs */
+  --fs-xl:    1.25rem;   /* 20px — card headings */
+  --fs-2xl:   1.5rem;    /* 24px — sub-section titles */
+  --fs-3xl:   1.875rem;  /* 30px — section labels */
+  --fs-4xl:   2.5rem;    /* 40px — section headings (mobile) */
+  --fs-5xl:   3.25rem;   /* 52px — section headings (tablet) */
+  --fs-6xl:   4.5rem;    /* 72px — hero headline (mobile) */
+  --fs-7xl:   6rem;      /* 96px — hero headline (tablet) */
+  --fs-8xl:   8rem;      /* 128px — hero headline (desktop) */
+  --fs-giant: 16rem;     /* 256px — decorative section numbers */
+
+  /* ───────────────────────────────────────────────────────
+   * LINE HEIGHTS
+   * ─────────────────────────────────────────────────────── */
+
+  --lh-tight:   0.95; /* Display fonts, big Bebas Neue headings */
+  --lh-snug:    1.15; /* Sub-headings, card titles */
+  --lh-normal:  1.5;  /* Navigation, compact UI */
+  --lh-body:    1.65; /* Body paragraphs */
+  --lh-relaxed: 1.8;  /* Lead copy, FAQ answers */
+
+  /* ───────────────────────────────────────────────────────
+   * SPACING — 8px grid system
+   * ─────────────────────────────────────────────────────── */
+
+  --sp-1:   4px;   /* Micro — icon gaps, tight pairs */
+  --sp-2:   8px;   /* Compact — inner padding */
+  --sp-3:   12px;  /* Snug — button padding */
+  --sp-4:   16px;  /* Standard — component gap */
+  --sp-5:   20px;  /* Comfortable — card padding (mobile) */
+  --sp-6:   24px;  /* Section padding (mobile) */
+  --sp-8:   32px;  /* Large component gap */
+  --sp-10:  40px;  /* Section gap (mobile) */
+  --sp-12:  48px;  /* Card padding (desktop) */
+  --sp-16:  64px;  /* Section padding (tablet) */
+  --sp-20:  80px;  /* Section padding (desktop) */
+  --sp-24:  96px;  /* Large section spacing */
+  --sp-32:  128px; /* Hero padding, max spacing */
+  --sp-40:  160px; /* Very large spacing */
+
+  /* ───────────────────────────────────────────────────────
+   * LAYOUT
+   * ─────────────────────────────────────────────────────── */
+
+  --container:     1200px; /* Max content width */
+  --container-pad: var(--sp-6); /* Horizontal gutter (mobile) */
+  --nav-h:         72px;  /* Navigation bar height (desktop) */
+  --nav-h-mob:     60px;  /* Navigation bar height (mobile) */
+
+  /* ───────────────────────────────────────────────────────
+   * BORDERS & RADIUS
+   * Sharp corners are intentional — anti-corporate, direct
+   * ─────────────────────────────────────────────────────── */
+
+  --radius-0:    0px;      /* Cards, sections — sharp */
+  --radius-sm:   3px;      /* Buttons — very slight softening */
+  --radius-pill: 9999px;   /* Badges, tags */
+
+  --border: 1px solid var(--c-border);        /* Standard border */
+  --border-muted: 1px solid var(--c-border-muted); /* Subtle divider */
+
+  /* ───────────────────────────────────────────────────────
+   * SHADOWS
+   * ─────────────────────────────────────────────────────── */
+
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.7);
+
+  /* ───────────────────────────────────────────────────────
+   * ANIMATION TIMING
+   * ─────────────────────────────────────────────────────── */
+
+  --t-fast:    150ms;  /* Hover states, button press */
+  --t-base:    200ms;  /* Standard UI transitions */
+  --t-slow:    300ms;  /* Menu open, card reveals */
+  --t-reveal:  600ms;  /* Scroll-reveal animations */
+  --t-crawl:   900ms;  /* Slow, dramatic reveals */
+
+  --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1);  /* Enter — decelerating */
+  --ease-in:     cubic-bezier(0.4, 0.0, 1.0, 1);  /* Exit — accelerating */
+  --ease-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);  /* State change */
+
+  /* ───────────────────────────────────────────────────────
+   * Z-INDEX — Fixed scale, no arbitrary values
+   * ─────────────────────────────────────────────────────── */
+
+  --z-base:    10; /* Standard positioned elements */
+  --z-drop:    20; /* Dropdown menus */
+  --z-sticky:  30; /* Sticky nav, sticky CTAs */
+  --z-overlay: 40; /* Dark overlays */
+  --z-modal:   50; /* Mobile menus, dialogs */
+  --z-cursor:  60; /* Custom cursor — always on top */
+  --z-noise:   2;  /* Grain texture — above bg, below everything */
+}
+
+/* ───────────────────────────────────────────────────────
+ * LIGHT MODE OVERRIDES
+ * Applied via data-theme="light" on <html>
+ * Warm paper — intentional, not an afterthought
+ * ─────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --c-bg:           #F4F1ED; /* Warm paper — deliberately not white */
+  --c-surface:      #ECEAE5; /* Card surfaces in light */
+  --c-surface-2:    #E3E0DB; /* Hover, elevated cards */
+  --c-border:       #C8C4BE; /* Visible borders — essential in light mode */
+  --c-border-muted: #D6D2CD; /* Subtle dividers */
+
+  --c-text:         #0E0E0E; /* Near-black on warm paper — strong contrast */
+  --c-text-2:       #4A4642; /* Secondary — dark warm gray */
+  --c-text-3:       #7A7672; /* Muted — still readable (>4.5:1) */
+
+  --c-accent:       #D63A08; /* Slightly deeper in light for contrast */
+  --c-accent-hover: #FF4D1C; /* Returns to standard on hover */
+  --c-accent-dim:   rgba(214, 58, 8, 0.07);
+  --c-accent-border: rgba(214, 58, 8, 0.2);
+
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.10);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 16px 60px rgba(0, 0, 0, 0.15);
+}
