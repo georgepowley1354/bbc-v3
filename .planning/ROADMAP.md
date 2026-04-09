@@ -115,8 +115,8 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Netlify Forms integration + _headers security file
-- [ ] 06-02-PLAN.md — OG image + PWA icons + Apple touch icons generation
+- [x] 06-01-PLAN.md — Netlify Forms integration + _headers security file
+- [x] 06-02-PLAN.md — OG image + PWA icons + Apple touch icons generation
 - [ ] 06-03-PLAN.md — GA4 ID + social links replacement (owner input required)
 
 ## Progress
@@ -131,4 +131,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Mobile Compliance | 2/2 | Complete | 2026-04-09 |
 | 4. Security | 3/3 | Complete | 2026-04-09 |
 | 5. Performance | 2/2 | Complete | 2026-04-09 |
-| 6. Launch Prep | 0/3 | Not started | - |
+| 6. Launch Prep | 2/3 | In Progress|  |

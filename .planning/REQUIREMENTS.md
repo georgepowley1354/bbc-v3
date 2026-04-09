@@ -82,9 +82,9 @@
 - [ ] **LAUNCH-01**: GA4 ID replaced (`G-XXXXXXXXXX` → real ID)
 - [ ] **LAUNCH-02**: Social links replaced (`href="#"` → real URLs for Instagram, Facebook, LinkedIn)
 - [ ] **LAUNCH-03**: Contact form wired to real backend (Netlify Forms or Formspree)
-- [ ] **LAUNCH-04**: OG image created and placed at `images/og-image.jpg`
-- [ ] **LAUNCH-05**: PWA icon PNGs generated at all required sizes
-- [ ] **LAUNCH-06**: Apple touch icon PNGs generated at all required sizes
+- [x] **LAUNCH-04**: OG image created and placed at `images/og-image.jpg`
+- [x] **LAUNCH-05**: PWA icon PNGs generated at all required sizes
+- [x] **LAUNCH-06**: Apple touch icon PNGs generated at all required sizes
 - [ ] **LAUNCH-07**: Netlify `_headers` file created with security headers
 
 ---
