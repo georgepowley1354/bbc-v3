@@ -112,8 +112,12 @@ Plans:
   3. GA4 fires with a real measurement ID (verified in GA4 DebugView)
   4. OG image is present at `images/og-image.jpg` and loads correctly when URL is shared
   5. Site installs as a PWA without missing icon errors in Chrome DevTools
-**Plans**: TBD
-**UI hint**: no
+**Plans**: 3 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Netlify Forms integration + _headers security file
+- [ ] 06-02-PLAN.md — OG image + PWA icons + Apple touch icons generation
+- [ ] 06-03-PLAN.md — GA4 ID + social links replacement (owner input required)
 
 ## Progress
 
@@ -127,4 +131,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Mobile Compliance | 2/2 | Complete | 2026-04-09 |
 | 4. Security | 3/3 | Complete | 2026-04-09 |
 | 5. Performance | 2/2 | Complete | 2026-04-09 |
-| 6. Launch Prep | 0/TBD | Not started | - |
+| 6. Launch Prep | 0/3 | Not started | - |
