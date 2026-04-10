@@ -6,7 +6,7 @@
 /* Widget container — sized to bubble only; panel floats above */
 #bbc-chat-widget {
   position: fixed;
-  bottom: var(--sp-6);
+  bottom: 88px;
   right: var(--sp-6);
   z-index: calc(var(--z-modal) + 5);
   width: 56px;
