@@ -1,2 +1,5 @@
 .worktrees/
 node_modules/
+.aidesigner/*
+!.aidesigner/.gitkeep
+.env
