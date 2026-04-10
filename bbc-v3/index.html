@@ -1210,6 +1210,42 @@
         </div>
       </div>
 
+      <!-- Newsletter -->
+      <div class="footer-newsletter">
+        <div class="footer-newsletter-title">Stay in the loop</div>
+        <p class="footer-newsletter-sub">Tips for Capital Region business owners. No spam.</p>
+        <form
+          class="newsletter-form"
+          name="newsletter"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          novalidate
+          aria-label="Newsletter signup"
+        >
+          <input type="hidden" name="form-name" value="newsletter" />
+          <p class="visually-hidden" aria-hidden="true">
+            <label>Don't fill this: <input name="bot-field" /></label>
+          </p>
+          <div class="newsletter-row">
+            <label class="visually-hidden" for="newsletter-email">Email address</label>
+            <input
+              class="newsletter-input"
+              id="newsletter-email"
+              type="email"
+              name="email"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+            />
+            <button class="newsletter-btn" type="submit">Subscribe</button>
+          </div>
+          <p class="newsletter-success" id="newsletter-success" hidden aria-live="polite">
+            You're in. We'll be in touch.
+          </p>
+        </form>
+      </div>
+
     </div>
 
     <div class="footer-bottom">

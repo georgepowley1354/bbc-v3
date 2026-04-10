@@ -543,3 +543,21 @@ if (nameInputEl) {
     nameInputEl.value = nameInputEl.value.replace(/[^a-zA-ZÀ-ÿ\u00C0-\u017F '\-]/g, '');
   });
 }
+
+/* ───────────────────────────────────────────────────────
+ * Newsletter form — show success inline, no page reload
+ * ─────────────────────────────────────────────────────── */
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = newsletterForm.querySelector('[name="email"]').value;
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ 'form-name': 'newsletter', email }).toString()
+    });
+    newsletterForm.querySelector('.newsletter-row').hidden = true;
+    document.getElementById('newsletter-success').hidden = false;
+  });
+}
