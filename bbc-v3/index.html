@@ -39,6 +39,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="bbc-tokens.css" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="chatbot.css" />
 
   <!-- Open Graph / Social sharing -->
   <meta property="og:type"        content="website" />
@@ -1180,6 +1181,13 @@
     </div>
   </section>
 
+  <!-- Netlify Forms detection — chatbot lead capture (hidden, JS submits via fetch) -->
+  <form name="chatbot-leads" data-netlify="true" hidden aria-hidden="true">
+    <input type="hidden" name="form-name" value="chatbot-leads" />
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+  </form>
+
 </main>
 
 
@@ -1320,6 +1328,62 @@
 </div>
 
 
+<!-- ─── Chatbot Widget ─────────────────────────────────── -->
+<div id="bbc-chat-widget" aria-label="BBC Assistant" role="complementary">
+
+  <button
+    id="bbc-chat-bubble"
+    aria-expanded="false"
+    aria-controls="bbc-chat-panel"
+    aria-label="Open BBC Assistant chat"
+  >
+    <svg class="bbc-bubble-icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"/>
+    </svg>
+    <svg class="bbc-bubble-icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <div id="bbc-chat-panel" role="dialog" aria-label="BBC Assistant chat" aria-modal="false">
+
+    <div class="bbc-chat-header">
+      <div class="bbc-chat-header-info">
+        <div class="bbc-chat-avatar" aria-hidden="true">B</div>
+        <div>
+          <div class="bbc-chat-title">BBC Assistant</div>
+          <div class="bbc-chat-status">Online</div>
+        </div>
+      </div>
+      <button id="bbc-chat-close" aria-label="Close chat">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" style="width:18px;height:18px">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="bbc-chat-thread" role="log" aria-label="Chat messages" aria-live="polite"></div>
+
+    <div class="bbc-chat-input-row">
+      <input
+        id="bbc-chat-input"
+        type="text"
+        placeholder="Ask me anything..."
+        autocomplete="off"
+        aria-label="Chat message"
+        maxlength="500"
+      />
+      <button id="bbc-chat-send" aria-label="Send message">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
 <script src="script.js" defer></script>
+<script src="chatbot.js"></script>
 </body>
 </html>
