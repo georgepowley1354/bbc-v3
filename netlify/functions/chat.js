@@ -84,10 +84,13 @@ exports.handler = async (event) => {
       })
     });
   } catch (err) {
+    console.error('Fetch error:', err.message);
     return { statusCode: 502, body: 'Failed to reach AI service' };
   }
 
   if (!apiResponse.ok) {
+    const errText = await apiResponse.text();
+    console.error('Anthropic error:', apiResponse.status, errText);
     return { statusCode: 502, body: 'AI service returned an error' };
   }
 
