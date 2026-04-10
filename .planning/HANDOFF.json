@@ -1,0 +1,56 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-04-10T23:00:19.348Z",
+  "phase": null,
+  "phase_name": "remodelnow-phase1-static-shell",
+  "phase_dir": null,
+  "plan": null,
+  "task": 2,
+  "total_tasks": 15,
+  "status": "paused",
+  "completed_tasks": [
+    {"id": 1, "name": "Spec doc + project memory created", "status": "done"},
+    {"id": 2, "name": "Existing site scraped (remodelnowllc.com) — contact, reviews, copy harvested", "status": "done"},
+    {"id": 3, "name": "10 Facebook photos downloaded full-res to remodelnow-photos/ and remodelnow/images/", "status": "done"},
+    {"id": 4, "name": "Folder structure created: remodelnow/ with css/, js/, images/, services/", "status": "done"},
+    {"id": 5, "name": "CSS design system built: remodelnow/css/styles.css", "status": "done"},
+    {"id": 6, "name": "Home page built: remodelnow/index.html", "status": "done"},
+    {"id": 7, "name": "Nav JS built: remodelnow/js/main.js", "status": "done"},
+    {"id": 8, "name": "UI/UX audit run — emojis replaced with SVGs, focus states, prefers-reduced-motion added", "status": "done"}
+  ],
+  "remaining_tasks": [
+    {"id": 9, "name": "services.html — services overview page", "status": "not_started"},
+    {"id": 10, "name": "services/kitchens.html + bathrooms + decks + additions + season-rooms + siding + windows-doors + new-construction (8 pages)", "status": "not_started"},
+    {"id": 11, "name": "portfolio.html — filterable gallery grid", "status": "not_started"},
+    {"id": 12, "name": "about.html — family story, team, service area", "status": "not_started"},
+    {"id": 13, "name": "reviews.html — all 9 reviews from scrape", "status": "not_started"},
+    {"id": 14, "name": "contact.html — Netlify form, hours, map", "status": "not_started"},
+    {"id": 15, "name": "jobs.html — always accepting applications", "status": "not_started"}
+  ],
+  "blockers": [
+    {"description": "Stats (500+ projects, 5.0 Google rating) need Carl's confirmation before launch", "type": "human_action", "workaround": "Used as placeholder — marked TBD in spec"},
+    {"description": "Photos fb-photo-01 through fb-photo-11 not labeled by service category yet", "type": "advisory", "workaround": "Label as pages are built — open images/ folder to visually identify"}
+  ],
+  "human_actions_pending": [
+    {"action": "Carl to verify stats: 500+ projects, Google rating", "context": "Used in stats bar on homepage", "blocking": false},
+    {"action": "Carl to provide license number", "context": "Trust signal for About page", "blocking": false},
+    {"action": "Carl to provide Google Business Profile URL", "context": "Reviews page link + Write a Review button", "blocking": false},
+    {"action": "Carl to decide Google Workspace email address", "context": "Replacing Remodel.now@yahoo.com", "blocking": false}
+  ],
+  "decisions": [
+    {"decision": "Approach B: custom HTML/CSS + Netlify + Supabase", "rationale": "No frameworks, same pattern as other BBC client sites", "phase": "planning"},
+    {"decision": "Colors: Navy #1C2D9E, Red #C41230, Sky #4BB0D0", "rationale": "Directly from logo — overrides ui-ux tool's generic blue+orange recommendation", "phase": "planning"},
+    {"decision": "Typography: Georgia/Inter", "rationale": "Functionally identical to tool's EB Garamond/Lato — not worth changing", "phase": "planning"},
+    {"decision": "Domain: keep remodelnowllc.com", "rationale": "User confirmed — existing Squarespace site will be replaced", "phase": "planning"},
+    {"decision": "Jobs page: always accepting applications, no active listings right now", "rationale": "User confirmed", "phase": "planning"},
+    {"decision": "Photos: source from Facebook (downloaded) + Squarespace CDN", "rationale": "No SVG logo, no new photos from Carl yet — use existing assets", "phase": "planning"}
+  ],
+  "uncommitted_files": [
+    "remodelnow/ (entire project folder)",
+    "remodelnow-photos/ (10 FB photos)",
+    "docs/superpowers/specs/2026-04-10-remodelnow-design.md",
+    "memory/project_remodelnow.md"
+  ],
+  "next_action": "Build remaining 14 pages using parallel agents — services overview, 8 service landing pages, portfolio, about, reviews, contact, jobs. All share same nav/footer pattern from index.html.",
+  "context_notes": "Home page is complete and passes UI/UX audit. CSS design system is solid — don't change colors or typography. All 8 service cards use SVG icons, not emojis. Nav is mobile-responsive. Photo inventory in remodelnow/images/ needs visual labeling as pages are built."
+}
