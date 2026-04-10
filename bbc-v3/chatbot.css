@@ -3,16 +3,14 @@
  * Uses design tokens from bbc-tokens.css (loaded via styles.css)
  */
 
-/* Widget container */
+/* Widget container — sized to bubble only; panel floats above */
 #bbc-chat-widget {
   position: fixed;
   bottom: var(--sp-6);
   right: var(--sp-6);
   z-index: calc(var(--z-modal) + 5);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: var(--sp-3);
+  width: 56px;
+  height: 56px;
 }
 
 /* Bubble trigger */
@@ -28,7 +26,8 @@
   justify-content: center;
   box-shadow: var(--shadow-md);
   transition: background var(--t-fast), transform var(--t-fast);
-  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 #bbc-chat-bubble:hover { background: var(--c-accent-hover); transform: scale(1.06); }
 #bbc-chat-bubble:active { transform: scale(0.97); }
@@ -44,8 +43,11 @@
 #bbc-chat-bubble[aria-expanded="true"] .bbc-bubble-icon-open  { display: none;  }
 #bbc-chat-bubble[aria-expanded="true"] .bbc-bubble-icon-close { display: block; }
 
-/* Panel */
+/* Panel — floats above the bubble via absolute positioning */
 #bbc-chat-panel {
+  position: absolute;
+  bottom: calc(100% + var(--sp-3));
+  right: 0;
   width: 360px;
   max-width: calc(100vw - var(--sp-12));
   height: 500px;
