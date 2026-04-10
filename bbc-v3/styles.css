@@ -1247,6 +1247,7 @@ section + section {
   inset: 0;
   background-size: cover;
   background-position: center top;
+  background-color: var(--c-surface-2); /* fallback if image hasn't loaded */
   z-index: 1;
   transition: opacity var(--t-slow) var(--ease-out);
 }
@@ -2309,7 +2310,7 @@ select {
   border: var(--border);
   border-color: var(--c-accent-border);
   padding: var(--sp-4) var(--sp-5);
-  z-index: var(--z-modal);
+  z-index: calc(var(--z-modal) + 10); /* 60 — above chat widget (55) */
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-lg);
   transform: translateY(calc(100% + var(--sp-5) + env(safe-area-inset-bottom)));

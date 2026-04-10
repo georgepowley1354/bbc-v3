@@ -11,6 +11,12 @@
   z-index: calc(var(--z-modal) + 5);
   width: 56px;
   height: 56px;
+  transition: bottom var(--t-slow) var(--ease-out);
+}
+
+/* Raise chat bubble above the PWA install banner when it's visible */
+body.has-install-banner #bbc-chat-widget {
+  bottom: calc(88px + 72px);
 }
 
 /* Bubble trigger */

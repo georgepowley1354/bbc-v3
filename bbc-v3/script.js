@@ -489,12 +489,16 @@ window.addEventListener('beforeinstallprompt', (e) => {
   if (sessionStorage.getItem('a2hs-dismissed') || !a2hsEl) return;
 
   a2hsEl.hidden = false;
-  requestAnimationFrame(() => a2hsEl.classList.add('visible'));
+  requestAnimationFrame(() => {
+    a2hsEl.classList.add('visible');
+    document.body.classList.add('has-install-banner');
+  });
 });
 
 function hideA2HS() {
   if (!a2hsEl) return;
   a2hsEl.classList.remove('visible');
+  document.body.classList.remove('has-install-banner');
   setTimeout(() => { a2hsEl.hidden = true; }, 300);
 }
 
