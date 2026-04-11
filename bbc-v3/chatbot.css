@@ -231,6 +231,16 @@ body.has-install-banner #bbc-chat-widget {
 }
 .bbc-lead-input::placeholder { color: var(--c-text-3); }
 
+.bbc-lead-input[aria-invalid="true"] {
+  border-color: var(--c-accent);
+}
+
+.bbc-lead-error {
+  font-size: var(--fs-xs);
+  color: #ff8f73;
+  line-height: var(--lh-normal);
+}
+
 .bbc-lead-btn {
   background: var(--c-accent);
   color: #fff;
@@ -247,6 +257,10 @@ body.has-install-banner #bbc-chat-widget {
   align-self: flex-start;
 }
 .bbc-lead-btn:hover { background: var(--c-accent-hover); }
+.bbc-lead-btn:disabled {
+  background: var(--c-text-3);
+  cursor: wait;
+}
 
 .bbc-lead-thanks {
   font-size: var(--fs-sm);

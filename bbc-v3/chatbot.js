@@ -200,7 +200,14 @@
     emailInput.placeholder = 'your@email.com';
     emailInput.required = true;
     emailInput.autocomplete = 'email';
+    emailInput.inputMode = 'email';
     form.appendChild(emailInput);
+
+    var error = document.createElement('p');
+    error.className = 'bbc-lead-error';
+    error.hidden = true;
+    error.setAttribute('aria-live', 'polite');
+    form.appendChild(error);
 
     var submitBtn = document.createElement('button');
     submitBtn.className = 'bbc-lead-btn';
@@ -212,7 +219,31 @@
       e.preventDefault();
       var name  = nameInput.value.trim();
       var email = emailInput.value.trim();
-      if (!name || !email) return;
+      var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      error.hidden = true;
+      error.textContent = '';
+      nameInput.removeAttribute('aria-invalid');
+      emailInput.removeAttribute('aria-invalid');
+
+      if (!name || name.length < 2) {
+        nameInput.setAttribute('aria-invalid', 'true');
+        error.textContent = 'Please enter your name so we know who to reach out to.';
+        error.hidden = false;
+        nameInput.focus();
+        return;
+      }
+
+      if (!isValidEmail) {
+        emailInput.setAttribute('aria-invalid', 'true');
+        error.textContent = 'Please enter a valid email address.';
+        error.hidden = false;
+        emailInput.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
 
       fetch('/', {
         method: 'POST',
@@ -222,16 +253,24 @@
           name: name,
           email: email
         }).toString()
-      }).catch(function () {
-        // Silent fail — soft data, not critical
-      });
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Lead capture failed');
 
-      var thanks = document.createElement('p');
-      thanks.className = 'bbc-lead-thanks';
-      thanks.textContent = "Got it! We'll reach out soon.";
-      card.textContent = '';
-      card.appendChild(thanks);
-      scrollThread();
+        var thanks = document.createElement('p');
+        thanks.className = 'bbc-lead-thanks';
+        thanks.textContent = "Got it! We'll reach out soon.";
+        card.textContent = '';
+        card.appendChild(thanks);
+        scrollThread();
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Connect me \u2192';
+        emailInput.setAttribute('aria-invalid', 'true');
+        error.textContent = 'That did not go through. Email us at hello@bigbadcoding.com and we will get back to you.';
+        error.hidden = false;
+      });
     });
 
     card.appendChild(form);

@@ -77,12 +77,20 @@ const html = document.documentElement;
 const themeBtn = document.getElementById('theme-toggle');
 
 if (themeBtn) {
+  const applyThemeToggleLabel = () => {
+    const currentTheme = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    themeBtn.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+  };
+
+  applyThemeToggleLabel();
+
   themeBtn.addEventListener('click', () => {
     const current = html.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('bbc-theme', next);
-    themeBtn.setAttribute('aria-label', `Switch to ${current} mode`);
+    applyThemeToggleLabel();
   });
 }
 
@@ -555,13 +563,48 @@ const newsletterForm = document.querySelector('.newsletter-form');
 if (newsletterForm) {
   newsletterForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = newsletterForm.querySelector('[name="email"]').value;
-    await fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ 'form-name': 'newsletter', email }).toString()
-    });
-    newsletterForm.querySelector('.newsletter-row').hidden = true;
-    document.getElementById('newsletter-success').hidden = false;
+    const emailInput = newsletterForm.querySelector('[name="email"]');
+    const submitBtn = newsletterForm.querySelector('.newsletter-btn');
+    const row = newsletterForm.querySelector('.newsletter-row');
+    const successEl = document.getElementById('newsletter-success');
+    const errorEl = document.getElementById('newsletter-error');
+    const email = emailInput?.value.trim() ?? '';
+    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!emailInput || !row || !submitBtn || !successEl || !errorEl) return;
+
+    errorEl.hidden = true;
+    errorEl.textContent = '';
+    emailInput.removeAttribute('aria-invalid');
+
+    if (!isValidEmail) {
+      emailInput.setAttribute('aria-invalid', 'true');
+      errorEl.textContent = 'Please enter a valid email address.';
+      errorEl.hidden = false;
+      emailInput.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'form-name': 'newsletter', email }).toString()
+      });
+
+      if (!response.ok) throw new Error('Newsletter submission failed');
+
+      row.hidden = true;
+      successEl.hidden = false;
+    } catch {
+      emailInput.setAttribute('aria-invalid', 'true');
+      errorEl.textContent = 'Something went wrong. Please try again in a moment.';
+      errorEl.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Subscribe';
+    }
   });
 }

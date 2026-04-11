@@ -23,6 +23,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,6 +40,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-x: clip;
   cursor: none; /* hidden — replaced by custom cursor */
   transition: background-color var(--t-slow) var(--ease-smooth),
               color var(--t-slow) var(--ease-smooth);
@@ -430,10 +433,14 @@ body::before {
   inset: 0;
   background-color: var(--c-bg);
   z-index: var(--z-modal);
+  width: 100vw;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: var(--sp-24) var(--sp-8);
+  overflow-y: auto;
+  overflow-x: hidden;
   transform: translateX(-100%);
   transition: transform var(--t-slow) var(--ease-out);
   border-right: 1px solid var(--c-border);
@@ -526,6 +533,8 @@ body::before {
   pointer-events: none;
   user-select: none;
   opacity: 0.45;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 /* Radial fade over the grid */
@@ -1378,8 +1387,10 @@ section + section {
 
 .marquee-wrapper {
   overflow: hidden;
+  overflow-x: clip;
   margin-inline: calc(var(--container-pad) * -1);
   padding-bottom: var(--sp-4);
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -1939,6 +1950,10 @@ section + section {
   margin-bottom: var(--sp-5);
 }
 
+.footer-social .footer-location {
+  margin-top: var(--sp-2);
+}
+
 .social-links {
   display: flex;
   gap: var(--sp-3);
@@ -2033,6 +2048,21 @@ section + section {
   font-size: var(--fs-sm);
   color: var(--c-accent);
   margin-top: var(--sp-3);
+}
+
+.newsletter-error {
+  font-size: var(--fs-sm);
+  color: #ff8f73;
+  margin-top: var(--sp-3);
+}
+
+.newsletter-input[aria-invalid="true"] {
+  border-color: var(--c-accent);
+}
+
+.newsletter-btn:disabled {
+  background: var(--c-text-3);
+  cursor: wait;
 }
 
 .footer-bottom {
@@ -2210,6 +2240,7 @@ section + section {
 /* Prevent horizontal scroll at all breakpoints */
 html {
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ── Touch action: eliminate 300ms tap delay ── */
@@ -2252,6 +2283,13 @@ select {
 
 /* ── Mobile: hero CTAs full width below 768px ── */
 @media (max-width: 767px) {
+  .hero-watermark {
+    right: -6%;
+    bottom: 6%;
+    font-size: clamp(9rem, 42vw, 14rem);
+    opacity: 0.18;
+  }
+
   .hero-actions {
     flex-direction: column;
   }
@@ -2270,6 +2308,21 @@ select {
   .form-submit .btn-primary {
     width: 100%;
     justify-content: center;
+  }
+
+  .marquee-wrapper {
+    margin-inline: 0;
+    padding-inline: var(--container-pad);
+  }
+
+  .marquee-track {
+    animation: none;
+    width: auto;
+    padding-right: var(--container-pad);
+  }
+
+  .testimonial-card {
+    width: min(78vw, 300px);
   }
 }
 

@@ -56,15 +56,6 @@
   <meta name="twitter:description" content="Hand-coded websites for small businesses. No monthly fees. No templates. You own everything." />
   <meta name="twitter:image"       content="https://bigbadcoding.com/images/og-image.jpg" />
 
-  <!-- Google Analytics 4 — replace G-XXXXXXXXXX with your measurement ID -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-
   <!-- LocalBusiness structured data -->
   <script type="application/ld+json">
   {
@@ -129,7 +120,7 @@
   <script>
     (function () {
       var saved = localStorage.getItem('bbc-theme');
-      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var theme = saved || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
     }());
   </script>
@@ -393,7 +384,7 @@
         <div class="why-item reveal reveal-d3">
           <div class="why-num">03</div>
           <h3 class="why-title">Local means we actually pick up the phone.</h3>
-          <p class="why-desc">We're in the Capital Region. We understand this market and these customers. When you need something, you reach out to a real person — not a chatbot, not a ticket queue, not a void.</p>
+            <p class="why-desc">We're in the Capital Region. We understand this market and these customers. Use the assistant when you want quick answers. Reach out when you want a real person. Either way, you're not getting lost in a ticket queue or shouting into the void.</p>
         </div>
 
         <div class="why-item reveal reveal-d4">
@@ -416,7 +407,7 @@
   <!-- ══════════════════════════════════════
        MEET THE TEAM
   ══════════════════════════════════════ -->
-  <section id="team" aria-labelledby="team-heading">
+  <section id="team" aria-labelledby="team-heading" hidden>
     <div class="container">
 
       <div class="team-header reveal">
@@ -1224,30 +1215,9 @@
         </ul>
       </nav>
 
-      <!-- Social + Location -->
+      <!-- Location -->
       <div class="footer-social">
-        <div class="footer-social-title">Find us</div>
-        <div class="social-links" role="list">
-          <a href="#" class="social-link" aria-label="Big Bad Coding on Instagram" role="listitem">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-            </svg>
-          </a>
-          <a href="#" class="social-link" aria-label="Big Bad Coding on Facebook" role="listitem">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z"/>
-            </svg>
-          </a>
-          <a href="#" class="social-link" aria-label="Big Bad Coding on LinkedIn" role="listitem">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"/>
-              <rect x="2" y="9" width="4" height="12"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-          </a>
-        </div>
+        <div class="footer-social-title">Local</div>
         <div class="footer-location">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:14px;height:14px;display:inline;margin-right:4px;vertical-align:middle;" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
@@ -1267,7 +1237,6 @@
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
-          novalidate
           aria-label="Newsletter signup"
         >
           <input type="hidden" name="form-name" value="newsletter" />
@@ -1284,9 +1253,12 @@
               placeholder="your@email.com"
               required
               autocomplete="email"
+              inputmode="email"
+              aria-describedby="newsletter-error newsletter-success"
             />
             <button class="newsletter-btn" type="submit">Subscribe</button>
           </div>
+          <p class="newsletter-error" id="newsletter-error" hidden aria-live="polite"></p>
           <p class="newsletter-success" id="newsletter-success" hidden aria-live="polite">
             You're in. We'll be in touch.
           </p>
