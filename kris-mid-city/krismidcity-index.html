@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kris-shared.css">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net https://famewall.io https://*.famewall.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://famewall.io https://*.famewall.io; font-src https://fonts.gstatic.com https://famewall.io https://*.famewall.io; img-src 'self' data: blob: https://images.pexels.com https://famewall.io https://*.famewall.io; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://famewall.io https://*.famewall.io; frame-src https://www.google.com https://maps.google.com https://famewall.io https://*.famewall.io; frame-ancestors 'none';"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <style>
     /* === HERO === */
@@ -261,27 +261,6 @@
 
     /* === REVIEWS === */
     .reviews { background: var(--bg-alt); }
-    .reviews-header { text-align: center; margin-bottom: 3rem; }
-    .reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    .review-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 2.25rem 2rem;
-    }
-    .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 1rem; }
-    .review-quote {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-style: italic;
-      color: var(--cream);
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
-    }
-    .review-author { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-dim); }
-    .review-source { font-size: 0.68rem; color: var(--gold); margin-top: 0.2rem; letter-spacing: 0.06em; }
-    .reviews-aggregate { margin-top: 2.5rem; text-align: center; font-size: 0.8rem; color: var(--cream-dim); letter-spacing: 0.04em; }
-    .reviews-aggregate strong { color: var(--cream); }
 
     /* === GALLERY PREVIEW === */
     .gallery-preview { background: var(--bg); }
@@ -350,8 +329,7 @@
       .menu-grid { grid-template-columns: repeat(2, 1fr); }
       .hh-inner { grid-template-columns: 1fr; gap: 2rem; }
       .hh-badge { padding: 1.25rem; display: flex; gap: 1.5rem; align-items: center; text-align: left; }
-      .reviews-grid { grid-template-columns: 1fr; }
-      .gallery-preview-grid { grid-template-columns: repeat(2, 1fr); }
+.gallery-preview-grid { grid-template-columns: repeat(2, 1fr); }
       .contact-inner { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
@@ -367,7 +345,7 @@
 <body>
 
   <!-- ANNOUNCEMENT BAR -->
-  <div class="announcement-bar" id="kmc-ann-bar">FREE DELIVERY Monday–Friday 11am–2pm &nbsp;·&nbsp; <a href="tel:5186217449">(518) 621-7449</a></div>
+  <div class="announcement-bar" id="kmc-ann-bar"><span data-ann-text>FREE DELIVERY Monday–Friday 11am–2pm</span> <a href="tel:5186217449">(518) 621-7449</a></div>
 
   <!-- NAVIGATION -->
   <nav id="main-nav" role="navigation" aria-label="Main navigation">
@@ -544,27 +522,8 @@
     <!-- REVIEWS -->
     <section class="reviews" aria-labelledby="reviews-heading">
       <div class="container">
-        <div class="reviews-header reveal">
-          <span class="section-label">What People Say</span>
-          <h2 id="reviews-heading" class="section-title">Don't Take Our <em>Word for It</em></h2>
-        </div>
-        <div class="reviews-grid">
-          <div class="review-card reveal">
-            <div class="review-stars">★★★★★</div>
-            <blockquote class="review-quote">"We order lunch weekly at our office. Kris' is absolutely incredible. The food, staff and delivery are all AMAZING!!!"</blockquote>
-            <div class="review-author">Courtney Ackerman</div>
-            <div class="review-source">Facebook · Verified Review</div>
-          </div>
-          <div class="review-card reveal reveal-delay-1">
-            <div class="review-stars">★★★★★</div>
-            <blockquote class="review-quote">"Great atmosphere. Great food. What's not to love?"</blockquote>
-            <div class="review-author">Dan M.</div>
-            <div class="review-source">Google Reviews</div>
-          </div>
-        </div>
-        <p class="reviews-aggregate">
-          <strong>4.6★</strong> on Google (204 reviews) &nbsp;·&nbsp; <strong>4.8★</strong> on Facebook &nbsp;·&nbsp; <strong>96%</strong> of guests recommend us
-        </p>
+        <div class="famewall-embed" data-src="krismidcity" data-format="carousel" style="width:100%;min-height:300px;"></div>
+        <script type="text/javascript" src="https://embed.famewall.io/frame.js" defer></script>
       </div>
     </section>
 
@@ -665,8 +624,15 @@
           <div class="footer-brand-name">Kris' Mid City Tavern</div>
           <p class="footer-tagline">Escape the Ordinary</p>
           <div class="footer-social">
-            <a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-            <a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+            <a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.yelp.com/biz/kris-mid-city-tavern-menands-2" target="_blank" rel="noopener noreferrer" aria-label="Yelp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.19-1.64l2.747-4.332c.55-.867 1.8-.689 2.1.28l1.551 3.578c.245.683-.043 1.43-.213 1.681zm-9.378 6.89l-1.657 4.718c-.316.9.49 1.81 1.418 1.612l4.95-1.115c.943-.213 1.24-1.393.498-2.02l-3.293-2.77c-.81-.68-1.916-.424-1.916.575zm-3.698-2.96L2.1 17.864c-.932.246-1.278 1.41-.615 2.084l3.424 3.568c.668.696 1.845.413 2.12-.496l1.396-4.648c.316-1.048-.73-2.02-1.744-1.848h-.002zM3.9 11.503c-.012.96.912 1.67 1.84 1.393l4.707-1.4c1.01-.3 1.2-1.654.318-2.22L6.69 6.84c-.89-.567-2.06-.1-2.3.91L3.9 11.503zm9.013-9.5c-.44-.864-1.586-1.02-2.24-.307L7.4 5.16c-.653.71-.38 1.852.52 2.19l4.56 1.696c.987.366 1.977-.54 1.72-1.55L13.2 2.84c-.1-.295-.194-.59-.288-.838z"/></svg>
+            </a>
           </div>
         </div>
         <div class="footer-col">
@@ -699,6 +665,7 @@
       <div class="footer-bottom">
         <span>© 2026 Kris' Mid City Tavern. All rights reserved.</span>
         <span>327 Broadway, Menands, NY 12204</span>
+        <span>Built by Big Bad Coding</span>
       </div>
     </div>
   </footer>
@@ -711,31 +678,8 @@
     </div>
   </div>
 
-  <script>
-    // Hamburger menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    hamburger.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.toggle('open');
-      hamburger.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
-    });
-    // Scroll reveal
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-  </script>
-
+  <script src="kris-site.js"></script>
+  <script>window.KrisSite && window.KrisSite.initBase();</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="kris-config.js"></script>
@@ -773,7 +717,7 @@
       var bar = document.getElementById('kmc-ann-bar');
       if (!bar) return;
       var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-      if (anns.length) { bar.textContent = anns[0].text; }
+      if (anns.length && window.KrisSite) { window.KrisSite.setAnnouncementText(anns[0].text); }
     } catch(err) {
       console.error('KMCData render error:', err);
     }

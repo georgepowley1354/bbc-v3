@@ -14,7 +14,8 @@
     gallery:        'gallery',
     team:           'team',
     drinks:         'drinks',
-    menuItems:      'menu_items'
+    menuItems:      'menu_items',
+    reviews:        'reviews'
   };
 
   // In-memory cache — populated by init()
@@ -31,6 +32,28 @@
       _sb = supabase.createClient(KMC_SUPABASE_URL, KMC_SUPABASE_ANON_KEY);
     }
     return _sb;
+  }
+
+  // Route all writes through the server-side function so the service key
+  // never reaches the browser.
+  async function _write(operation, table, id, data) {
+    var sess = await _client().auth.getSession();
+    var token = sess.data.session && sess.data.session.access_token;
+    if (!token) {
+      console.error('KMCData._write: no active session');
+      return { data: null, error: { message: 'Not authenticated' } };
+    }
+    var res = await fetch('/.netlify/functions/kmc-write', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({ operation: operation, table: table, id: id || null, data: data || null })
+    });
+    var json = await res.json();
+    if (!res.ok) return { data: null, error: { message: json.error || 'Server error' } };
+    return { data: json.data, error: null };
   }
 
   // Map Supabase table name back to cache key
@@ -69,45 +92,27 @@
       return JSON.parse(JSON.stringify(_cache[key]));
     },
 
-    // Replace an entire collection (used for happyHour single-object updates)
+    // Upsert single-row table (happyHour only)
     set: async function(key, data) {
       var table = TABLES[key];
       if (!table) { console.error('KMCData.set: unknown key', key); return false; }
-      var client = _client();
-      if (key === 'happyHour') {
-        // Upsert single row — use existing id if present
-        var existing = _cache[key];
-        var row = Object.assign({}, data);
-        if (existing && existing.id) row.id = existing.id;
-        var res = await client.from(table).upsert(row).select().single();
-        if (res.error) { console.error('KMCData.set error', res.error); return false; }
-        _cache[key] = res.data;
-      } else {
-        // For array types, set() replaces all — delete then insert
-        await client.from(table).delete().neq('id', '00000000-0000-0000-0000-000000000000');
-        if (data && data.length) {
-          var rows = data.map(function(item) {
-            var r = Object.assign({}, item);
-            if (r.id && typeof r.id === 'number') delete r.id; // drop numeric legacy ids
-            return r;
-          });
-          var res = await client.from(table).insert(rows).select();
-          if (res.error) { console.error('KMCData.set error', res.error); return false; }
-          _cache[key] = res.data;
-        } else {
-          _cache[key] = [];
-        }
+      if (key !== 'happyHour') {
+        console.error('KMCData.set: collection writes must use addItem/updateItem/removeItem. set() is reserved for single-row tables only.', key);
+        return false;
       }
+      var existing = _cache[key];
+      var row = Object.assign({}, data);
+      if (existing && existing.id) row.id = existing.id;
+      var res = await _write('upsert', table, null, row);
+      if (res.error) { console.error('KMCData.set error', res.error); return false; }
+      _cache[key] = res.data;
       return true;
     },
 
     // Add one item to a collection
     addItem: async function(key, item) {
       var table = TABLES[key];
-      var client = _client();
-      var row = Object.assign({}, item);
-      delete row.id; // let Supabase generate uuid
-      var res = await client.from(table).insert(row).select().single();
+      var res = await _write('add', table, null, item);
       if (res.error) { console.error('KMCData.addItem error', res.error); return null; }
       _cache[key] = (_cache[key] || []).concat([res.data]);
       return res.data;
@@ -116,8 +121,7 @@
     // Update one item by id
     updateItem: async function(key, id, updates) {
       var table = TABLES[key];
-      var client = _client();
-      var res = await client.from(table).update(updates).eq('id', id).select().single();
+      var res = await _write('update', table, id, updates);
       if (res.error) { console.error('KMCData.updateItem error', res.error); return; }
       var arr = _cache[key] || [];
       var idx = arr.findIndex(function(x) { return x.id === id; });
@@ -128,8 +132,7 @@
     // Remove one item by id
     removeItem: async function(key, id) {
       var table = TABLES[key];
-      var client = _client();
-      var res = await client.from(table).delete().eq('id', id);
+      var res = await _write('remove', table, id, null);
       if (res.error) { console.error('KMCData.removeItem error', res.error); return; }
       _cache[key] = (_cache[key] || []).filter(function(x) { return x.id !== id; });
     },

@@ -107,20 +107,19 @@
     div.innerHTML = '<div id="kmc-admin-header">' +
         '<h1>&#x1F511; Mid City Admin</h1>' +
         '<div style="display:flex;gap:8px;align-items:center">' +
+          '<a href="https://no-front-door.netlify.app" target="_blank" rel="noopener noreferrer" style="background:none;border:1px solid #555;color:#ccc;cursor:pointer;padding:8px 16px;border-radius:4px;font-size:14px;min-height:44px;display:inline-flex;align-items:center;text-decoration:none;">&#x1F310; View Site</a>' +
           '<button id="kmc-admin-signout" onclick="KMCAdmin.signOut()" style="background:none;border:1px solid #8B2635;color:#e88;cursor:pointer;padding:8px 16px;border-radius:4px;font-size:14px;min-height:44px;">&#x1F6AA; Sign Out</button>' +
           '<button id="kmc-admin-close" onclick="KMCAdmin.close()">&#x2715; Close</button>' +
         '</div>' +
       '</div>' +
       '<div id="kmc-admin-tabs">' +
         '<button class="kmc-tab-btn" data-tab="announcements" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F4E2; Announcements</button>' +
-        '<button class="kmc-tab-btn" data-tab="hours" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F550; Hours</button>' +
         '<button class="kmc-tab-btn" data-tab="specials" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F37B; Specials</button>' +
         '<button class="kmc-tab-btn" data-tab="events" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F389; Events</button>' +
         '<button class="kmc-tab-btn" data-tab="gallery" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F5BC; Gallery</button>' +
         '<button class="kmc-tab-btn" data-tab="team" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F465; Team</button>' +
         '<button class="kmc-tab-btn" data-tab="drinks" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F379; Drinks</button>' +
         '<button class="kmc-tab-btn" data-tab="food" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x1F354; Food</button>' +
-        '<button class="kmc-tab-btn" data-tab="settings" onclick="KMCAdmin.switchTab(this.dataset.tab)">&#x2699; Settings</button>' +
       '</div>' +
       '<div id="kmc-admin-body"></div>';
     document.body.appendChild(div);
@@ -169,24 +168,6 @@
       '<div class="kmc-row"><div class="kmc-field"><label>Text</label>' +
       '<input type="text" id="ann-new-text" placeholder="Announcement text" /></div></div>' +
       '<button class="kmc-btn kmc-btn-gold" onclick="KMCAdmin._addAnn()">Add Announcement</button></div>';
-    document.getElementById('kmc-admin-body').innerHTML = html;
-  }
-
-  function renderHours() {
-    var items = KMCData.get('hours');
-    var html = '<h2 class="kmc-section-title">Hours</h2>';
-    items.forEach(function(item, i) {
-      html += '<div class="kmc-card"><div class="kmc-row">' +
-        '<div class="kmc-field"><label>Days</label><input type="text" id="hrs-days-' + i + '" value="' + _esc(item.days) + '" /></div>' +
-        '<div class="kmc-field"><label>Hours</label><input type="text" id="hrs-time-' + i + '" value="' + _esc(item.time) + '" /></div>' +
-        '<div class="kmc-field" style="justify-content:flex-end;flex:0 0 auto"><label>&nbsp;</label>' +
-          '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveHourRow(' + i + ')">Save</button></div>' +
-      '</div></div>';
-    });
-    html += '<div class="kmc-add-form"><h4>+ Add Hours Row</h4><div class="kmc-row">' +
-      '<div class="kmc-field"><label>Days</label><input type="text" id="hrs-new-days" placeholder="e.g. Monday" /></div>' +
-      '<div class="kmc-field"><label>Hours</label><input type="text" id="hrs-new-time" placeholder="e.g. 11am - 12am" /></div>' +
-      '</div><button class="kmc-btn kmc-btn-gold" onclick="KMCAdmin._addHourRow()">Add Row</button></div>';
     document.getElementById('kmc-admin-body').innerHTML = html;
   }
 
@@ -410,47 +391,6 @@
     _setBody(h);
   }
 
-  function _makeQR(url) {
-    var box = document.getElementById('kmc-qr-box');
-    if (!box || !window.QRCode) return;
-    while (box.firstChild) box.removeChild(box.firstChild);
-    new QRCode(box, { text: url, width: 200, height: 200, colorDark: '#000', colorLight: '#fff' });
-  }
-
-  function renderSettings() {
-    var qrUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, '') + 'krismidcity-index.html';
-    var h = '<h2 class="kmc-section-title">Settings</h2>' +
-      '<div class="kmc-card"><h4 style="margin:0 0 12px;color:#C9A84C">&#x1F4F1; Admin QR Code</h4>' +
-        '<p style="color:#a89880;font-size:14px;margin:0 0 12px">Screenshot this &amp; print for behind the bar.</p>' +
-        '<div id="kmc-qr-box" style="background:#fff;display:inline-block;padding:12px;border-radius:8px;margin-bottom:10px"></div><br>' +
-        '<p style="color:#666;font-size:12px;margin:0">Scan to open the site, then type <strong style="color:#C9A84C">admin</strong> to open this panel.</p>' +
-      '</div>' +
-      '<div class="kmc-card" style="margin-top:12px"><h4 style="margin:0 0 12px;color:#C9A84C">Backup &amp; Restore</h4>' +
-        '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
-          '<button class="kmc-btn kmc-btn-gold" onclick="KMCData.exportJSON()">&#x2B07; Export JSON Backup</button>' +
-          '<button class="kmc-btn kmc-btn-outline" onclick="KMCAdmin._triggerImport()">&#x2B06; Import JSON Backup</button>' +
-          '<input type="file" id="kmc-import-file" accept=".json" style="display:none" />' +
-        '</div></div>' +
-      '<div class="kmc-card" style="margin-top:12px"><h4 style="margin:0 0 12px;color:#8B2635">Danger Zone</h4>' +
-        '<button class="kmc-btn kmc-btn-danger" onclick="KMCData.reset()">&#x26A0; Reset All Data to Defaults</button></div>';
-    _setBody(h);
-    document.getElementById('kmc-import-file').addEventListener('change', function(e) {
-      var file = e.target.files[0];
-      if (!file) return;
-      var reader = new FileReader();
-      reader.onload = function(ev) { KMCData.importJSON(ev.target.result); };
-      reader.readAsText(file);
-    });
-    if (!window.QRCode) {
-      var s = document.createElement('script');
-      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
-      s.onload = function() { _makeQR(qrUrl); };
-      document.head.appendChild(s);
-    } else {
-      _makeQR(qrUrl);
-    }
-  }
-
   /* ── CRUD HELPERS ── */
   function _readFile(fileInput, cb) {
     var file = fileInput && fileInput.files && fileInput.files[0];
@@ -475,8 +415,6 @@
   async function _saveAnn(id){ await KMCData.updateItem('announcements',id,{text:_v('ann-text-'+id),active:_b('ann-active-'+id)}); _toast('Saved!'); renderAnnouncements(); }
   async function _delAnn(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('announcements',id); renderAnnouncements(); }
   async function _addAnn(){ var t=_v('ann-new-text').trim(); if(!t)return alert('Enter text.'); await KMCData.addItem('announcements',{text:t,active:true}); renderAnnouncements(); _toast('Added!'); }
-  async function _saveHourRow(i){ var arr=KMCData.get('hours'); arr[i].days=_v('hrs-days-'+i); arr[i].time=_v('hrs-time-'+i); await KMCData.set('hours',arr); _toast('Saved!'); }
-  async function _addHourRow(){ var d=_v('hrs-new-days').trim(),t=_v('hrs-new-time').trim(); if(!d||!t)return alert('Enter days and time.'); var arr=KMCData.get('hours'); arr.push({days:d,time:t}); await KMCData.set('hours',arr); renderHours(); _toast('Added!'); }
   async function _saveSpecial(id){ await KMCData.updateItem('weeklySpecials',id,{day:_v('sp-day-'+id),deal:_v('sp-deal-'+id),note:_v('sp-note-'+id),time:_v('sp-time-'+id)}); _toast('Saved!'); }
   async function _saveHHMeta(){ var hh=KMCData.get('happyHour'); hh.days=_v('hh-days'); hh.time=_v('hh-time'); await KMCData.set('happyHour',hh); _toast('Saved!'); }
   async function _saveHHDeal(i){ var hh=KMCData.get('happyHour'); hh.deals[i]={label:_v('hh-label-'+i),price:_v('hh-price-'+i)}; await KMCData.set('happyHour',hh); _toast('Saved!'); }
@@ -491,15 +429,12 @@
   async function _saveTeam(id){ var fi=document.getElementById('tm-photo-'+id); _readFile(fi,async function(dataUrl){ var u={name:_v('tm-name-'+id),role:_v('tm-role-'+id),bio:_v('tm-bio-'+id)}; if(dataUrl)u.photo=dataUrl; await KMCData.updateItem('team',id,u); renderTeam(); _toast('Saved!'); }); }
   async function _delTeam(id){ if(!confirm('Remove?'))return; await KMCData.removeItem('team',id); renderTeam(); }
   async function _addTeam(){ var n=_v('tm-new-name').trim(); if(!n)return alert('Enter a name.'); var fi=document.getElementById('tm-new-photo'); _readFile(fi,async function(dataUrl){ await KMCData.addItem('team',{name:n,role:_v('tm-new-role'),bio:_v('tm-new-bio'),photo:dataUrl||''}); renderTeam(); _toast('Added!'); }); }
-  function _triggerImport(){ document.getElementById('kmc-import-file').click(); }
-
   async function _saveDrink(id){ await KMCData.updateItem('drinks',id,{name:_v('dr-name-'+id),price:_v('dr-price-'+id),category:_v('dr-cat-'+id),description:_v('dr-desc-'+id),available:_b('dr-avail-'+id),featured:_b('dr-feat-'+id)}); _toast('Saved!'); renderDrinks(); }
   async function _delDrink(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('drinks',id); renderDrinks(); }
   async function _addDrink(){ var n=_v('dr-new-name').trim(); if(!n)return alert('Enter a name.'); await KMCData.addItem('drinks',{name:n,price:_v('dr-new-price'),category:_v('dr-new-cat'),description:_v('dr-new-desc'),available:_b('dr-new-avail'),featured:_b('dr-new-feat')}); renderDrinks(); _toast('Added!'); }
   async function _saveFood(id){ await KMCData.updateItem('menuItems',id,{name:_v('fd-name-'+id),price:_v('fd-price-'+id),category:_v('fd-cat-'+id),description:_v('fd-desc-'+id),available:_b('fd-avail-'+id),featured:_b('fd-feat-'+id)}); _toast('Saved!'); renderFood(); }
   async function _delFood(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('menuItems',id); renderFood(); }
   async function _addFood(){ var n=_v('fd-new-name').trim(); if(!n)return alert('Enter a name.'); await KMCData.addItem('menuItems',{name:n,price:_v('fd-new-price'),category:_v('fd-new-cat'),description:_v('fd-new-desc'),available:_b('fd-new-avail'),featured:_b('fd-new-feat')}); renderFood(); _toast('Added!'); }
-
   /* ── SUPABASE AUTH ── */
   window.kmc_doLogin = async function() {
     var email = document.getElementById('kmc-email').value.trim();
@@ -524,14 +459,17 @@
     showTabs();
   };
 
-  /* ── KEYBOARD TRIGGER ── */
-  var _buf = '';
-  document.addEventListener('keydown', function(e) {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
-    _buf += e.key.toLowerCase();
-    if (_buf.length > 9) _buf = _buf.slice(-9);
-    if (_buf.endsWith('krisadmin')) { _buf = ''; KMCAdmin.open(); }
-  });
+  /* ── KEYBOARD TRIGGER (desktop only) ── */
+  var _isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  if (!_isTouchDevice) {
+    var _buf = '';
+    document.addEventListener('keydown', function(e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+      _buf += e.key.toLowerCase();
+      if (_buf.length > 9) _buf = _buf.slice(-9);
+      if (_buf.endsWith('krisadmin')) { _buf = ''; KMCAdmin.open(); }
+    });
+  }
 
   /* ── LOCK ICON ── */
   function injectLockIcon() {
@@ -603,21 +541,19 @@
         b.classList.toggle('active', b.dataset.tab === tab);
       });
       var renders = {
-        announcements: renderAnnouncements, hours: renderHours, specials: renderSpecials,
+        announcements: renderAnnouncements, specials: renderSpecials,
         events: renderEvents, gallery: renderGallery, team: renderTeam,
-        drinks: renderDrinks, food: renderFood, settings: renderSettings
+        drinks: renderDrinks, food: renderFood
       };
       if (renders[tab]) renders[tab]();
     },
     refreshTab: function() { KMCAdmin.switchTab(_activeTab); },
     _checkPw: function() { /* replaced by kmc_doLogin */ },
     _saveAnn:_saveAnn,_delAnn:_delAnn,_addAnn:_addAnn,
-    _saveHourRow:_saveHourRow,_addHourRow:_addHourRow,
     _saveSpecial:_saveSpecial,_saveHHMeta:_saveHHMeta,_saveHHDeal:_saveHHDeal,_delHHDeal:_delHHDeal,_addHHDeal:_addHHDeal,
     _saveEvent:_saveEvent,_delEvent:_delEvent,_addEvent:_addEvent,
     _savePhoto:_savePhoto,_delPhoto:_delPhoto,_addPhoto:_addPhoto,
     _saveTeam:_saveTeam,_delTeam:_delTeam,_addTeam:_addTeam,
-    _triggerImport:_triggerImport,
     _saveDrink:_saveDrink,_delDrink:_delDrink,_addDrink:_addDrink,
     _saveFood:_saveFood,_delFood:_delFood,_addFood:_addFood
   };

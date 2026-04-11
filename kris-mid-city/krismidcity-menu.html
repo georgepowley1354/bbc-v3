@@ -209,7 +209,7 @@
 </head>
 <body>
 
-  <div class="announcement-bar" id="kmc-ann-bar">FREE DELIVERY Monday–Friday 11am–2pm &nbsp;|&nbsp; <a href="tel:5186217449">(518) 621-7449</a></div>
+  <div class="announcement-bar" id="kmc-ann-bar"><span data-ann-text>FREE DELIVERY Monday–Friday 11am–2pm</span> <a href="tel:5186217449">(518) 621-7449</a></div>
 
   <nav id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
@@ -418,7 +418,7 @@
         <div class="footer-col"><h4>Contact</h4><p><a href="tel:5186217449">(518) 621-7449</a><br><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Order Online</a></p></div>
         <div class="footer-col"><h4>Follow Us</h4><p><a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer">Instagram @midcitymenands</a><br><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer">Facebook · 5.5K followers</a></p></div>
       </div>
-      <div class="footer-bottom"><span>© 2026 Kris' Mid City Tavern. All rights reserved.</span><span>327 Broadway, Menands, NY 12204</span></div>
+      <div class="footer-bottom"><span>© 2026 Kris' Mid City Tavern. All rights reserved.</span><span>327 Broadway, Menands, NY 12204</span><span>Built by Big Bad Coding</span></div>
     </div>
   </footer>
 
@@ -429,16 +429,9 @@
     </div>
   </div>
 
+  <script src="kris-site.js"></script>
   <script>
-    // Hamburger
-    const ham = document.getElementById('hamburger');
-    const mob = document.getElementById('mobile-menu');
-    ham.addEventListener('click', () => {
-      const open = mob.classList.toggle('open');
-      ham.classList.toggle('open', open);
-      ham.setAttribute('aria-expanded', open);
-    });
-    // Tabs
+    window.KrisSite && window.KrisSite.initBase();
     function activateTab(id) {
       document.querySelectorAll('.tab-btn').forEach(b => { b.classList.toggle('active', b.dataset.tab === id); b.setAttribute('aria-selected', b.dataset.tab === id); });
       document.querySelectorAll('.tab-panel').forEach(p => { p.classList.toggle('active', p.id === 'tab-' + id); });
@@ -447,12 +440,6 @@
     document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
     const hash = location.hash.replace('#','');
     if (hash && document.getElementById('tab-' + hash)) activateTab(hash);
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    if (revealEls.length) {
-      const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }}); }, {threshold:0.1});
-      revealEls.forEach(el => obs.observe(el));
-    }
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
@@ -571,7 +558,7 @@
       var bar = document.getElementById('kmc-ann-bar');
       if (!bar) return;
       var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-      if (anns.length) { bar.textContent = anns[0].text; }
+      if (anns.length && window.KrisSite) { window.KrisSite.setAnnouncementText(anns[0].text); }
     } catch(err) {
       console.error('KMCData render error:', err);
     }

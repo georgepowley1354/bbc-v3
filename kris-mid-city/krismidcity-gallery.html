@@ -49,7 +49,7 @@
 </head>
 <body>
 
-  <div class="announcement-bar" id="kmc-ann-bar">FREE DELIVERY Monday–Friday 11am–2pm &nbsp;·&nbsp; <a href="tel:5186217449">(518) 621-7449</a></div>
+  <div class="announcement-bar" id="kmc-ann-bar"><span data-ann-text>FREE DELIVERY Monday–Friday 11am–2pm</span> <a href="tel:5186217449">(518) 621-7449</a></div>
 
   <nav id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
@@ -108,7 +108,7 @@
         <div class="footer-col"><h4>Contact</h4><p><a href="tel:5186217449">(518) 621-7449</a><br><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Order Online</a></p></div>
         <div class="footer-col"><h4>Follow Us</h4><p><a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer">Instagram @midcitymenands</a><br><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer">Facebook · 5.5K followers</a></p></div>
       </div>
-      <div class="footer-bottom"><span>© 2026 Kris' Mid City Tavern. All rights reserved.</span><span>327 Broadway, Menands, NY 12204</span></div>
+      <div class="footer-bottom"><span>© 2026 Kris' Mid City Tavern. All rights reserved.</span><span>327 Broadway, Menands, NY 12204</span><span>Built by Big Bad Coding</span></div>
     </div>
   </footer>
 
@@ -119,25 +119,10 @@
     </div>
   </div>
 
-  <script>
-    const ham = document.getElementById('hamburger');
-    const mob = document.getElementById('mobile-menu');
-    ham.addEventListener('click', () => {
-      const open = mob.classList.toggle('open');
-      ham.classList.toggle('open', open);
-      ham.setAttribute('aria-expanded', open);
-    });
-    const revealEls = document.querySelectorAll('.reveal');
-    if (revealEls.length) {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
-      }, {threshold: 0.1});
-      revealEls.forEach(el => obs.observe(el));
-    }
-  </script>
-
+  <script src="kris-site.js"></script>
+  <script>window.KrisSite && window.KrisSite.initBase();</script>
   <!-- Lightbox -->
-  <div id="kmc-lightbox" role="dialog" aria-modal="true">
+  <div id="kmc-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
     <button id="kmc-lb-close" aria-label="Close">&times;</button>
     <button id="kmc-lb-prev" aria-label="Previous">&#8249;</button>
     <img id="kmc-lb-img" src="" alt="" />
@@ -179,11 +164,7 @@
         grid.querySelectorAll('.gallery-item').forEach(function(item){
           item.addEventListener('click', function(){ openLightbox(parseInt(this.dataset.idx)); });
         });
-        // Reveal
-        var obs = new IntersectionObserver(function(entries){
-          entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
-        }, {threshold:0.1});
-        grid.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+        if (window.KrisSite) window.KrisSite.initReveal(grid);
       }
       // Filter buttons
       var cats = ['all','food','drinks','interior','events'];
@@ -202,9 +183,26 @@
       var lb = document.getElementById('kmc-lightbox');
       var lbImg = document.getElementById('kmc-lb-img');
       var lbCap = document.getElementById('kmc-lb-caption');
-      function openLightbox(idx){ currentIndex=idx; lbImg.src=visible[idx].src; lbImg.alt=visible[idx].alt||''; lbCap.textContent=visible[idx].caption||''; lb.classList.add('open'); document.body.style.overflow='hidden'; }
-      function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; }
-      document.getElementById('kmc-lb-close').addEventListener('click', closeLightbox);
+      var lbClose = document.getElementById('kmc-lb-close');
+      var lastFocused = null;
+      function openLightbox(idx){
+        currentIndex=idx;
+        lastFocused = document.activeElement;
+        lbImg.src=visible[idx].src;
+        lbImg.alt=visible[idx].alt||'';
+        lbCap.textContent=visible[idx].caption||'';
+        lb.classList.add('open');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow='hidden';
+        lbClose.focus();
+      }
+      function closeLightbox(){
+        lb.classList.remove('open');
+        lb.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow='';
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+      lbClose.addEventListener('click', closeLightbox);
       document.getElementById('kmc-lb-prev').addEventListener('click', function(){ currentIndex=(currentIndex-1+visible.length)%visible.length; openLightbox(currentIndex); });
       document.getElementById('kmc-lb-next').addEventListener('click', function(){ currentIndex=(currentIndex+1)%visible.length; openLightbox(currentIndex); });
       lb.addEventListener('click', function(e){ if(e.target===lb) closeLightbox(); });
@@ -222,7 +220,7 @@
       var bar = document.getElementById('kmc-ann-bar');
       if (!bar) return;
       var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-      if (anns.length) { bar.textContent = anns[0].text; }
+      if (anns.length && window.KrisSite) { window.KrisSite.setAnnouncementText(anns[0].text); }
     } catch(err) {
       console.error('KMCData render error:', err);
     }
