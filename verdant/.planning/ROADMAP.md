@@ -80,11 +80,11 @@ Plans:
   2. Each service has its own detail page with outcome copy and pricing range
   3. About page renders founder bio, philosophy, and credentials sections
   4. Process timeline page renders all 6 stages (Discovery → Design → Proposal → Build → Reveal → Aftercare)
-**Plans**:
+**Plans:** 2 plans
 
 Plans:
-- [ ] 04-01: Services index and individual service pages
-- [ ] 04-02: About and process pages
+- [ ] 04-01-PLAN.md — Services data layer, icon extraction, index page, and 5 detail pages
+- [ ] 04-02-PLAN.md — About page (founder, philosophy, credentials) and process timeline page
 
 ### Phase 5: Contact and Forms
 **Goal**: Contact page live with Netlify Forms, budget qualifier working, validation and success states complete
