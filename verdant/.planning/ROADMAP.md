@@ -67,8 +67,8 @@ Plans:
 **Plans**:
 
 Plans:
-- [ ] 03-01: Next.js scaffold and global layout
-- [ ] 03-02: Home page (all 10 sections)
+- [x] 03-01: Next.js scaffold and global layout
+- [x] 03-02: Home page (all 10 sections)
 - [ ] 03-03: Portfolio page and case study template
 
 ### Phase 4: Services, About, and Process Pages
