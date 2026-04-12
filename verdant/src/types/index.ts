@@ -10,3 +10,18 @@ export interface Project {
   description: string
   highlights: string[]
 }
+
+export interface Service {
+  id: string
+  slug: string
+  name: string
+  tagline: string
+  description: string
+  outcomes: string[]
+  pricingRange: string
+  pricingNote: string
+  heroImage: string
+  galleryImages: string[]
+  icon: string
+  relatedProjects: string[]
+}
