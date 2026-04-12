@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-04-12T22:36:33.031Z"
+last_updated: "2026-04-12T22:38:27Z"
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 3
-  completed_plans: 2
-  percent: 67
+  completed_plans: 3
+  percent: 100
 ---
 
 # Project State
@@ -17,7 +17,7 @@ progress:
 ## Current Position
 
 **Phase:** 3 of 8 (Home and Portfolio Pages)
-**Plan:** 03-01 complete — ready for 03-02
+**Plan:** 03-03 complete — Phase 3 Wave 2 done
 **Status:** IN PROGRESS
 
 ## What Was Completed
@@ -52,9 +52,22 @@ progress:
 - Button, SectionHeader, MotionDiv UI components
 - npm run build exits 0
 
+### Phase 3 — Plan 03-03: Portfolio Page + Case Study Template
+
+- src/data/projects.ts — 5 typed seed projects with Unsplash images, editorial descriptions, highlights
+- src/hooks/useMasonry.ts — pure CSS grid + JS marginTop offset, no external deps
+- ProjectCard, FilterBar, MasonryGrid — client components with group-hover, category filter state
+- /portfolio — Server Component page with SectionHeader + MasonryGrid
+- CaseStudyHero, CaseStudySpecs, CaseStudyGallery — full case study template components
+- /portfolio/[slug] — generateStaticParams for all 5 slugs, notFound() guard, next-project wrap
+- npm run build exits 0, 11 static pages generated
+
 ## Decisions Made
 
 - Scaffolded in temp dir (verdant-scaffold/) — create-next-app@14 refuses existing dirs
 - framer-motion@11 pinned explicitly as required by project spec
 - next.config.mjs kept as .mjs (scaffold default, functionally identical to .ts)
 - [Phase 03]: SeasonalBanner is a pure Server Component — narrow strip needs no animation
+- [03-03]: Button and SectionHeader are default exports — named import syntax corrected
+- [03-03]: MasonryGrid holds filter state internally — portfolio page stays a pure Server Component
+- [03-03]: useMasonry algorithm implemented verbatim from RESEARCH.md — no modifications
