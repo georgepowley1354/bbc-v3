@@ -2,23 +2,24 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: Verdant Portfolio Site
-status: awaiting_approval
-stopped_at: Phase 2 complete — design system ready, awaiting Jorge approval before build
+status: in_progress
+stopped_at: Phase 3 Plan 03-01 complete — Next.js scaffold + global layout done
 last_updated: "2026-04-12"
-last_activity: 2026-04-12 — Phase 1 research + Phase 2 design system complete
+last_activity: 2026-04-12 — Phase 3 Plan 03-01 complete (scaffold, design tokens, Navigation, Footer, page transitions)
 progress:
   total_phases: 8
   completed_phases: 2
-  percent: 25
+  current_phase: 3
+  percent: 30
 ---
 
 # Project State
 
 ## Current Position
 
-**Phase:** 2 of 8 (Design System)
-**Status:** STOP — Awaiting Jorge approval
-**Blocked on:** Jorge says "go" before Phase 3 begins
+**Phase:** 3 of 8 (Home and Portfolio Pages)
+**Plan:** 03-01 complete — ready for 03-02
+**Status:** IN PROGRESS
 
 ## What Was Completed
 
@@ -38,9 +39,19 @@ progress:
 - Homepage architecture: 10-section flow
 - Accessibility, performance, BBC badge rules documented
 
-## Pending Jorge Decision
+### Phase 3 — Plan 03-01: Scaffold + Global Layout
+- Next.js 14.2.35 scaffolded with TypeScript, Tailwind, ESLint, App Router, src-dir
+- framer-motion@11.18.2 + lucide-react@1.8.0 installed
+- Full Verdant design system color tokens in tailwind.config.ts
+- Cormorant Garamond + DM Sans via next/font/google as CSS variables
+- Navigation: transparent→forest-deep/95 scroll transition, mobile overlay with stagger
+- Footer: 4-col grid with BBC badge linked to bbc-agency.com
+- template.tsx: page-enter fade transition
+- Button, SectionHeader, MotionDiv UI components
+- npm run build exits 0
 
-Jorge must review design-system/MASTER.md and respond:
-- **"go"** — proceed to Phase 3 (Next.js scaffold + Home + Portfolio pages)
-- Feedback → incorporate changes, re-present
-- No code written until approval received
+## Decisions Made
+
+- Scaffolded in temp dir (verdant-scaffold/) — create-next-app@14 refuses existing dirs
+- framer-motion@11 pinned explicitly as required by project spec
+- next.config.mjs kept as .mjs (scaffold default, functionally identical to .ts)
