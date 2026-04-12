@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(gsd-new-project)",
+      "WebSearch",
+      "WebFetch(domain:lifescapecolorado.com)",
+      "WebFetch(domain:dabneycollins.com)",
+      "WebFetch(domain:www.toddhaimanlandscapedesign.com)",
+      "WebFetch(domain:www.bernardjardins.com)",
+      "WebFetch(domain:luxesource.com)",
+      "WebFetch(domain:creativeenvironments.com)",
+      "mcp__gitnexus__query",
+      "Skill(commit-commands:commit)"
+    ]
+  }
+}
