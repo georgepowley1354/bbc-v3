@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kris-shared.css">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <style>
     /* === MENU PAGE HERO === */
@@ -207,7 +206,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page="menu">
 
   <div class="announcement-bar" id="kmc-ann-bar"><span data-ann-text>FREE DELIVERY Monday–Friday 11am–2pm</span> <a href="tel:5186217449">(518) 621-7449</a></div>
 
@@ -430,139 +429,11 @@
   </div>
 
   <script src="kris-site.js"></script>
-  <script>
-    window.KrisSite && window.KrisSite.initBase();
-    function activateTab(id) {
-      document.querySelectorAll('.tab-btn').forEach(b => { b.classList.toggle('active', b.dataset.tab === id); b.setAttribute('aria-selected', b.dataset.tab === id); });
-      document.querySelectorAll('.tab-panel').forEach(p => { p.classList.toggle('active', p.id === 'tab-' + id); });
-      history.replaceState(null, '', '#' + id);
-    }
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
-    const hash = location.hash.replace('#','');
-    if (hash && document.getElementById('tab-' + hash)) activateTab(hash);
-  </script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="kris-config.js"></script>
   <script src="kris-data.js"></script>
   <script src="kris-admin.js"></script>
-<script>
-  (async function(){
-    try {
-      await KMCData.init();
-      function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-      // Search
-      var search = document.getElementById('kmc-menu-search');
-      if (search) {
-        search.addEventListener('input', function() {
-          var q = this.value.toLowerCase();
-          document.querySelectorAll('.menu-item').forEach(function(item) {
-            var name = (item.querySelector('.item-name')||{}).textContent || '';
-            item.style.display = name.toLowerCase().includes(q) ? '' : 'none';
-          });
-        });
-      }
-      // Dynamic specials tab
-      var sc = document.getElementById('kmc-menu-specials-content');
-      if (!sc) return;
-      var specials = KMCData.get('weeklySpecials');
-      var hh = KMCData.get('happyHour');
-      var IH2 = 'inner' + 'HTML';
-      var h = '<h3 style="font-family:var(--font-serif);color:var(--gold);margin-bottom:1.5rem;">Weekly Specials</h3>';
-      h += '<div class="menu-items-grid">';
-      specials.forEach(function(s){
-        h += '<div class="menu-item"><div class="item-info">';
-        h += '<div class="item-name">' + _s(s.day) + ': ' + _s(s.deal) + '</div>';
-        h += '<div class="item-desc">' + _s(s.note) + '</div></div>';
-        h += '<div class="item-price">' + _s(s.time) + '</div></div>';
-      });
-      h += '</div>';
-      if (hh) {
-        h += '<h3 style="font-family:var(--font-serif);color:var(--gold);margin:2rem 0 1rem;">Happy Hour &middot; ' + _s(hh.days) + ' ' + _s(hh.time) + '</h3>';
-        h += '<div class="menu-items-grid">';
-        if (hh.deals && hh.deals.length) {
-          hh.deals.forEach(function(d){
-            h += '<div class="menu-item"><div class="item-info"><div class="item-name">' + _s(d.label) + '</div></div><div class="item-price">' + _s(d.price) + '</div></div>';
-          });
-        }
-        h += '</div>';
-      }
-      sc[IH2] = h;
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
-
-  <script>
-  (async function(){
-    try {
-      await KMCData.init();
-      function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-      var IH3 = 'inner' + 'HTML';
-      // Drinks tab
-      var dc = document.getElementById('kmc-menu-drinks-content');
-      if (dc) {
-        var drinks = KMCData.get('drinks');
-        if (!drinks.length) {
-          dc[IH3] = '<p style="color:var(--cream-dim);padding:2rem 0">No drinks listed yet — check back soon.</p>';
-        } else {
-          var cats = ['Cocktails','Beer','Wine','Spirits','Non-Alcoholic'];
-          var h = '';
-          cats.forEach(function(cat) {
-            var items = drinks.filter(function(d){ return d.category === cat; });
-            if (!items.length) return;
-            h += '<h2 class="menu-category-title">' + cat + '</h2><div class="menu-items-grid">';
-            items.forEach(function(d) {
-              var cls = 'menu-item' + (d.featured ? ' menu-item-featured' : '') + (d.available === false ? ' menu-item-86' : '');
-              h += '<div class="' + cls + '"><div class="item-info"><div class="item-name">' + _s(d.name) + '</div>';
-              if (d.description) h += '<div class="item-desc">' + _s(d.description) + '</div>';
-              if (d.available === false) h += '<div class="badge-86">86\'d</div>';
-              h += '</div><div class="item-price">' + _s(d.price || '') + '</div></div>';
-            });
-            h += '</div>';
-          });
-          dc[IH3] = h || '<p style="color:var(--cream-dim);padding:2rem 0">No drinks listed yet.</p>';
-        }
-      }
-      // Featured food tab
-      var fc = document.getElementById('kmc-menu-food-content');
-      if (fc) {
-        var foodItems = KMCData.get('menuItems');
-        if (!foodItems.length) {
-          fc[IH3] = '<p style="color:var(--cream-dim);padding:2rem 0">No featured items yet — check back soon.</p>';
-        } else {
-          var fh = '<h2 class="menu-category-title">Featured Dishes</h2><div class="menu-items-grid">';
-          foodItems.forEach(function(item) {
-            var cls = 'menu-item' + (item.featured ? ' menu-item-featured' : '') + (item.available === false ? ' menu-item-86' : '');
-            fh += '<div class="' + cls + '"><div class="item-info"><div class="item-name">' + _s(item.name) + '</div>';
-            if (item.description) fh += '<div class="item-desc">' + _s(item.description) + '</div>';
-            if (item.available === false) fh += '<div class="badge-86">86\'d</div>';
-            fh += '</div><div class="item-price">' + _s(item.price || '') + '</div></div>';
-          });
-          fh += '</div>';
-          fc[IH3] = fh;
-        }
-      }
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
-
-  <script>
-  (async function(){
-    try {
-      await KMCData.init();
-      var bar = document.getElementById('kmc-ann-bar');
-      if (!bar) return;
-      var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-      if (anns.length && window.KrisSite) { window.KrisSite.setAnnouncementText(anns[0].text); }
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
+  <script src="kris-page-init.js"></script>
 </body>
 </html>

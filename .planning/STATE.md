@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 06-02-PLAN.md
-last_updated: "2026-04-09T17:17:12.965Z"
-last_activity: 2026-04-09 -- Phase 6 planning complete
+stopped_at: Phase 6 Wave 1 verified — awaiting deploy + owner input for 06-03
+last_updated: "2026-04-09T17:45:00.000Z"
+last_activity: 2026-04-09 -- Phase 6 Wave 1 complete and verified (UAT pass)
 progress:
   total_phases: 6
   completed_phases: 0
@@ -70,11 +70,11 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 6 needs external inputs before some tasks can execute: real GA4 ID, real social URLs, form backend choice (Netlify Forms or Formspree)
-- SEC-16 (CSP tightening) depends on LAUNCH-01 (GA4 ID live) — must sequence within Phase 6
+- **06-03 BLOCKED**: Needs real GA4 measurement ID and social media URLs (Instagram, Facebook, LinkedIn) from site owner — skipped for now
+- SEC-16 (CSP tightening) depends on LAUNCH-01 (GA4 ID live) — still pending
 
 ## Session Continuity
 
-Last session: 2026-04-09T17:17:12.962Z
-Stopped at: Completed 06-02-PLAN.md
+Last session: 2026-04-10
+Stopped at: Remodel Now design polish complete — all 4 homepage items done (nav phone, 3-card testimonials, How It Works, portfolio strip). BBC v3 Phase 6 still at 06-03 blocked on owner input.
 Resume file: None

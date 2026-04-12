@@ -3,3 +3,4 @@ node_modules/
 .aidesigner/*
 !.aidesigner/.gitkeep
 .env
+.gitnexus

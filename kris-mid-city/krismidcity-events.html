@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kris-shared.css">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <style>
     /* === EVENTS HERO === */
@@ -171,7 +170,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page="events">
 
   <div class="announcement-bar" id="kmc-ann-bar"><span data-ann-text>FREE DELIVERY Monday–Friday 11am–2pm</span> <a href="tel:5186217449">(518) 621-7449</a></div>
 
@@ -300,71 +299,11 @@
   </div>
 
   <script src="kris-site.js"></script>
-  <script>window.KrisSite && window.KrisSite.initBase();</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="kris-config.js"></script>
   <script src="kris-data.js"></script>
   <script src="kris-admin.js"></script>
-<script>
-  (async function(){
-    try {
-      await KMCData.init();
-      function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-      var upcoming = document.getElementById('kmc-events-upcoming');
-      var pastList = document.getElementById('kmc-events-past');
-      var pastWrap = document.getElementById('kmc-events-past-wrap');
-      if (!upcoming) return;
-      var events = KMCData.get('events').filter(function(e){ return e.active; });
-      var today = new Date(); today.setHours(0,0,0,0);
-      var upList = [], pastArr = [];
-      var icons = ['&#127925;','&#129504;','&#127908;','&#127881;','&#127867;','&#127928;'];
-      events.forEach(function(e, i){
-        var isPast = e.date && new Date(e.date) < today;
-        (isPast ? pastArr : upList).push(e);
-      });
-      var IH2 = 'inner' + 'HTML';
-      function renderCard(e, i) {
-        var icon = icons[i % icons.length];
-        var dateStr = e.date ? new Date(e.date + 'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) : '';
-        var timeStr = _s(e.time || '');
-        var meta = [dateStr, timeStr].filter(Boolean).join(' · ');
-        return '<div class="event-card reveal">' +
-          '<div class="event-icon">' + icon + '</div>' +
-          '<div class="event-info">' +
-          '<h3>' + _s(e.title) + '</h3>' +
-          (meta ? '<p style="font-size:0.78rem;color:var(--gold);margin-bottom:0.5rem;">' + meta + '</p>' : '') +
-          '<p>' + _s(e.description) + '</p>' +
-          (e.free ? '<p style="font-size:0.75rem;color:var(--gold);margin-top:0.5rem;">Free to Attend</p>' : '') +
-          '</div></div>';
-      }
-      var upHTML = upList.length ? upList.map(renderCard).join('') :
-        '<div class="event-card"><div class="event-info"><h3>Stay Tuned</h3><p>Check our Facebook page for upcoming events.</p><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top:1rem;">Follow on Facebook</a></div></div>';
-      upcoming[IH2] = upHTML;
-      if (pastArr.length) {
-        pastList[IH2] = pastArr.map(renderCard).join('');
-        pastWrap.style.display = 'block';
-      }
-      if (window.KrisSite) window.KrisSite.initReveal(upcoming);
-      if (pastArr.length && window.KrisSite) window.KrisSite.initReveal(pastList);
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
-
-  <script>
-  (async function(){
-    try {
-      await KMCData.init();
-      var bar = document.getElementById('kmc-ann-bar');
-      if (!bar) return;
-      var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-      if (anns.length && window.KrisSite) { window.KrisSite.setAnnouncementText(anns[0].text); }
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
+  <script src="kris-page-init.js"></script>
 </body>
 </html>

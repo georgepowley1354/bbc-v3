@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kris-shared.css">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <style>
     /* === ABOUT HERO === */
@@ -168,7 +167,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page="about">
 
   <div class="announcement-bar" id="kmc-ann-bar"><span data-ann-text>FREE DELIVERY Monday–Friday 11am–2pm</span> <a href="tel:5186217449">(518) 621-7449</a></div>
 
@@ -275,7 +274,7 @@
         <div class="contact-form-col reveal">
           <span class="section-label">Get in Touch</span>
           <h2 id="contact-form-heading" class="section-title">Send Us a <em>Message</em></h2>
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form" onsubmit="return _kmcSubmit(event)">
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
             <input type="hidden" name="form-name" value="contact">
             <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
             <div class="form-group">
@@ -352,75 +351,11 @@
   </div>
 
   <script src="kris-site.js"></script>
-  <script>window.KrisSite && window.KrisSite.initBase();</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="kris-config.js"></script>
   <script src="kris-data.js"></script>
   <script src="kris-admin.js"></script>
-<script>
-  (async function(){
-    try {
-      await KMCData.init();
-      function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-      var IH2 = 'inner' + 'HTML';
-      function _a(v) { return _s(v).replace(/"/g,'&quot;'); }
-      // Dynamic team
-      var teamList = document.getElementById('kmc-team-list');
-      if (teamList) {
-        var team = KMCData.get('team');
-        var th = '';
-        team.forEach(function(m){
-          th += '<div class="reveal" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;">';
-          if (m.photo) th += '<img src="' + _a(m.photo) + '" alt="' + _a(m.name) + '" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 1rem;" />';
-          else th += '<div style="width:80px;height:80px;border-radius:50%;background:var(--gold-dim);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:2rem;">&#128100;</div>';
-          th += '<h3 style="font-family:var(--font-serif);font-size:1.2rem;color:var(--cream);">' + _s(m.name) + '</h3>';
-          th += '<p style="font-size:0.75rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin:0.25rem 0 0.75rem;">' + _s(m.role) + '</p>';
-          if (m.bio) th += '<p style="font-size:0.85rem;color:var(--cream-dim);line-height:1.7;">' + _s(m.bio) + '</p>';
-          th += '</div>';
-        });
-        teamList[IH2] = th;
-        if (window.KrisSite) window.KrisSite.initReveal(teamList);
-      }
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
-
-  <script>
-  (async function(){
-    try {
-      await KMCData.init();
-      var bar = document.getElementById('kmc-ann-bar');
-      if (!bar) return;
-      var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-      if (anns.length && window.KrisSite) { window.KrisSite.setAnnouncementText(anns[0].text); }
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
-
-  <script>
-  function _kmcSubmit(e) {
-    var RATE_KEY = 'kmc_contact_last';
-    var COOLDOWN = 60000;
-    var last = parseInt(localStorage.getItem(RATE_KEY) || '0', 10);
-    if (Date.now() - last < COOLDOWN) {
-      var secs = Math.ceil((COOLDOWN - (Date.now() - last)) / 1000);
-      alert('Please wait ' + secs + ' seconds before sending another message.');
-      e.preventDefault(); return false;
-    }
-    var name = document.getElementById('name').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var message = document.getElementById('message').value.trim();
-    if (!name || name.length < 2) { alert('Please enter your name (at least 2 characters).'); e.preventDefault(); return false; }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); e.preventDefault(); return false; }
-    if (!message || message.length < 10) { alert('Please enter a message (at least 10 characters).'); e.preventDefault(); return false; }
-    localStorage.setItem(RATE_KEY, Date.now().toString());
-    return true;
-  }
-  </script>
+  <script src="kris-page-init.js"></script>
 </body>
 </html>

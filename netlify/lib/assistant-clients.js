@@ -12,7 +12,7 @@ const clients = {
       url: '#contact'
     },
     model: {
-      openai: 'gpt-5.4-mini',
+      openai: 'gpt-5-mini',
       anthropic: 'claude-haiku-4-5-20251001'
     },
     services: [

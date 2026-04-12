@@ -134,7 +134,16 @@ async function callOpenAI(config, messages) {
   }
 
   const data = await response.json();
-  const reply = typeof data.output_text === 'string' ? data.output_text.trim() : '';
+  let reply = typeof data.output_text === 'string' ? data.output_text.trim() : '';
+
+  if (!reply && Array.isArray(data.output)) {
+    reply = data.output
+      .flatMap((item) => Array.isArray(item.content) ? item.content : [])
+      .filter((item) => item && (item.type === 'output_text' || item.type === 'text'))
+      .map((item) => String(item.text || '').trim())
+      .filter(Boolean)
+      .join('\n\n');
+  }
 
   if (!reply) {
     throw new Error('OpenAI returned no reply text');

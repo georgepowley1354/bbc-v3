@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kris-shared.css">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://images.pexels.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src https://www.google.com https://maps.google.com; frame-ancestors 'none';"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <style>
     /* === GALLERY HERO === */
@@ -47,7 +46,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page="gallery">
 
   <div class="announcement-bar" id="kmc-ann-bar"><span data-ann-text>FREE DELIVERY Monday–Friday 11am–2pm</span> <a href="tel:5186217449">(518) 621-7449</a></div>
 
@@ -120,7 +119,6 @@
   </div>
 
   <script src="kris-site.js"></script>
-  <script>window.KrisSite && window.KrisSite.initBase();</script>
   <!-- Lightbox -->
   <div id="kmc-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
     <button id="kmc-lb-close" aria-label="Close">&times;</button>
@@ -135,96 +133,6 @@
   <script src="kris-config.js"></script>
   <script src="kris-data.js"></script>
   <script src="kris-admin.js"></script>
-<script>
-  (async function(){
-    try {
-      await KMCData.init();
-      function _s(v) { var x=String(v||''); return window.DOMPurify?DOMPurify.sanitize(x,{ALLOWED_TAGS:[],ALLOWED_ATTR:[]}):x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-      function _a(v) { return _s(v).replace(/"/g,'&quot;'); }
-      var grid = document.getElementById('kmc-gallery-grid');
-      var filterBar = document.getElementById('kmc-gallery-filters');
-      if (!grid) return;
-      var photos = KMCData.get('gallery');
-      var IH2 = 'inner' + 'HTML';
-      var currentFilter = 'all';
-      var currentIndex = 0;
-      var visible = [];
-      function render(filter) {
-        currentFilter = filter;
-        visible = filter === 'all' ? photos : photos.filter(function(p){ return p.category === filter; });
-        var h = '';
-        visible.forEach(function(p, i){
-          h += '<div class="gallery-item reveal" data-idx="' + i + '">' +
-            '<img src="' + _a(p.src) + '" alt="' + _a(p.alt||'') + '" loading="lazy" onerror="this.parentElement.hidden=true">' +
-            '<div class="gallery-overlay">' +
-            (p.caption ? '<span style="color:#fff;font-size:0.8rem;padding:0.5rem;">' + _s(p.caption) + '</span>' : '') +
-            '</div></div>';
-        });
-        grid[IH2] = h;
-        grid.querySelectorAll('.gallery-item').forEach(function(item){
-          item.addEventListener('click', function(){ openLightbox(parseInt(this.dataset.idx)); });
-        });
-        if (window.KrisSite) window.KrisSite.initReveal(grid);
-      }
-      // Filter buttons
-      var cats = ['all','food','drinks','interior','events'];
-      var fb = '';
-      cats.forEach(function(c){ fb += '<button class="kmc-filter-btn' + (c==='all'?' active':'') + '" data-cat="' + c + '">' + (c==='all'?'All':c.charAt(0).toUpperCase()+c.slice(1)) + '</button>'; });
-      filterBar[IH2] = fb;
-      filterBar.querySelectorAll('.kmc-filter-btn').forEach(function(btn){
-        btn.addEventListener('click', function(){
-          filterBar.querySelectorAll('.kmc-filter-btn').forEach(function(b){ b.classList.remove('active'); });
-          this.classList.add('active');
-          render(this.dataset.cat);
-        });
-      });
-      render('all');
-      // Lightbox
-      var lb = document.getElementById('kmc-lightbox');
-      var lbImg = document.getElementById('kmc-lb-img');
-      var lbCap = document.getElementById('kmc-lb-caption');
-      var lbClose = document.getElementById('kmc-lb-close');
-      var lastFocused = null;
-      function openLightbox(idx){
-        currentIndex=idx;
-        lastFocused = document.activeElement;
-        lbImg.src=visible[idx].src;
-        lbImg.alt=visible[idx].alt||'';
-        lbCap.textContent=visible[idx].caption||'';
-        lb.classList.add('open');
-        lb.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow='hidden';
-        lbClose.focus();
-      }
-      function closeLightbox(){
-        lb.classList.remove('open');
-        lb.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow='';
-        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-      }
-      lbClose.addEventListener('click', closeLightbox);
-      document.getElementById('kmc-lb-prev').addEventListener('click', function(){ currentIndex=(currentIndex-1+visible.length)%visible.length; openLightbox(currentIndex); });
-      document.getElementById('kmc-lb-next').addEventListener('click', function(){ currentIndex=(currentIndex+1)%visible.length; openLightbox(currentIndex); });
-      lb.addEventListener('click', function(e){ if(e.target===lb) closeLightbox(); });
-      document.addEventListener('keydown', function(e){ if(!lb.classList.contains('open')) return; if(e.key==='Escape') closeLightbox(); if(e.key==='ArrowLeft') document.getElementById('kmc-lb-prev').click(); if(e.key==='ArrowRight') document.getElementById('kmc-lb-next').click(); });
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
-
-  <script>
-  (async function(){
-    try {
-      await KMCData.init();
-      var bar = document.getElementById('kmc-ann-bar');
-      if (!bar) return;
-      var anns = KMCData.get('announcements').filter(function(a){ return a.active; });
-      if (anns.length && window.KrisSite) { window.KrisSite.setAnnouncementText(anns[0].text); }
-    } catch(err) {
-      console.error('KMCData render error:', err);
-    }
-  })();
-  </script>
+  <script src="kris-page-init.js"></script>
 </body>
 </html>
