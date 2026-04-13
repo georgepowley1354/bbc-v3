@@ -6,7 +6,7 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import Button from '@/components/ui/Button'
 
 export const metadata = {
-  title: 'About | Verdant Landscape Design',
+  title: 'About',
   description:
     'Meet Marcus Velde, principal of Verdant Landscape Design. APLD certified, ISA arborist, designing luxury landscapes in the Capital Region since 2012.',
 }

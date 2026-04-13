@@ -16,7 +16,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const service = getServiceBySlug(params.slug)
   if (!service) return {}
   return {
-    title: `${service.name} | Verdant Landscape Design`,
+    title: service.name,
     description: service.tagline,
   }
 }

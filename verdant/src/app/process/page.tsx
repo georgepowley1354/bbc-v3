@@ -4,7 +4,7 @@ import Button from '@/components/ui/Button'
 import { ProcessTimeline } from '@/components/process/ProcessTimeline'
 
 export const metadata = {
-  title: 'Our Process | Verdant Landscape Design',
+  title: 'Our Process',
   description:
     'From discovery consultation to aftercare — our 6-stage process for designing and building luxury outdoor environments.',
 }

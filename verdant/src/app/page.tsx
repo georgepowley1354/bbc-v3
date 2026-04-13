@@ -10,7 +10,9 @@ import { InstagramPlaceholder } from '@/components/home/InstagramPlaceholder'
 import { FinalCTA } from '@/components/home/FinalCTA'
 
 export const metadata = {
-  title: 'Verdant Landscape Design | We Build Outdoor Worlds',
+  title: {
+    absolute: 'Verdant Landscape Design | We Build Outdoor Worlds',
+  },
   description:
     'Luxury landscape design for the Adirondack region. Hardscape, pools, outdoor kitchens, and full property transformations.',
 }

@@ -2,7 +2,7 @@ import { ContactForm } from '@/components/contact/ContactForm'
 import SectionHeader from '@/components/ui/SectionHeader'
 
 export const metadata = {
-  title: 'Start a Project | Verdant Landscape Design',
+  title: 'Start a Project',
   description:
     'Tell us about your property and vision. Our team will review your inquiry and respond within 48 hours.',
 }

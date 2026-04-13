@@ -2,7 +2,7 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import { MasonryGrid } from '@/components/portfolio/MasonryGrid'
 
 export const metadata = {
-  title: 'Portfolio | Verdant Landscape Design',
+  title: 'Portfolio',
   description:
     'Browse our portfolio of luxury landscape design projects across the Adirondack region.',
 }

@@ -15,7 +15,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const project = getProjectBySlug(params.slug)
   if (!project) return {}
   return {
-    title: `${project.name} | Verdant Portfolio`,
+    title: project.name,
     description: project.description,
   }
 }

@@ -20,9 +20,18 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Verdant Landscape Design',
+  metadataBase: new URL('https://verdant.bbc-agency.com'),
+  title: {
+    default: 'Verdant Landscape Design',
+    template: '%s | Verdant Landscape Design',
+  },
   description:
     'We build outdoor worlds. Premium landscape architecture for discerning homeowners in the Capital Region and beyond.',
+  openGraph: {
+    siteName: 'Verdant Landscape Design',
+    locale: 'en_US',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({

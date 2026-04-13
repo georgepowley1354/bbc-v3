@@ -3,7 +3,7 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import { ServiceCardGrid } from '@/components/services/ServiceCardGrid'
 
 export const metadata = {
-  title: 'Services | Verdant Landscape Design',
+  title: 'Services',
   description:
     'Five ways we transform your property — hardscape, softscape, pool, outdoor kitchens, and full property design.',
 }
