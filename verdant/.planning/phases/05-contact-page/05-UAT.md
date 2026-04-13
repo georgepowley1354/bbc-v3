@@ -5,6 +5,8 @@ source:
   - .planning/phases/05-contact-page/05-01-SUMMARY.md
 started: 2026-04-12T00:00:00Z
 updated: 2026-04-12T00:00:00Z
+run: 2
+notes: Re-run after F-01/F-02/F-03 fixes from UI audit
 ---
 
 ## Current Test
@@ -13,49 +15,42 @@ updated: 2026-04-12T00:00:00Z
 
 ## Tests
 
-### 1. /contact page renders
-expected: Page loads with a dark forest-green hero strip containing "START YOUR PROJECT" eyebrow, "Let's Build Something Lasting" headline, and description. Below is a light warm-beige section with the inquiry form visible.
-result: pass
-method: playwright — screenshot confirmed bg-forest-deep hero + bg-stone-warm form section
+### 1. Form visible immediately on page load
+expected: Visit /contact. The inquiry form (Full Name, Email Address, etc.) should be fully visible without any scrolling or delay — no blank beige void where the form should be. The form renders immediately on paint, before any scroll interaction.
+result: issue
+reported: "I dont see it"
+severity: major
 
-### 2. All 7 form fields present
-expected: All 7 fields present with correct labels. Required fields have asterisk.
+### 2. Textarea matches input border style
+expected: The Project Description textarea should have a bottom-border underline only — matching the Full Name, Email Address, and other text inputs. It should NOT have a visible box border on all four sides.
 result: pass
-method: playwright — 7 labels confirmed: FULL NAME *, EMAIL ADDRESS *, PHONE NUMBER, PROJECT TYPE *, APPROXIMATE BUDGET, PROJECT DESCRIPTION *, PREFERRED TIMELINE. 3 inputs + 3 selects + 1 textarea = 7 visible fields.
 
-### 3. Client-side validation fires
-expected: Click Send Inquiry empty — inline errors under 4 required fields, no page reload.
+### 3. Error state — screen reader message matches visible message
+expected: Trigger a network error on the form (go offline or use dev tools to block the POST). The visible error message and the screen reader announcement should both say exactly "Something went wrong. Please try again or email us directly at hello@verdantdesign.com" — the same wording, the same email address.
 result: pass
-method: playwright — errors confirmed: "Full name is required.", "Email address is required.", "Please select a service type.", "Project description is required."
 
-### 4. Email format validation
-expected: "notanemail" triggers format error, not just required error.
+### 4. Client-side validation still fires (regression)
+expected: Submit the form empty. Four inline errors appear under: Full Name, Email Address, Project Type, and Project Description. No page reload.
 result: pass
-method: playwright — "Please enter a valid email address." confirmed on format-invalid input
 
-### 5. Success confirmation panel
-expected: Form replaced by "Message Received" confirmation panel after submission.
-result: skipped
-reason: Netlify Forms only processes submissions on a deployed Netlify site — fetch POST to localhost returns 404. Requires live Netlify deploy to verify.
-
-### 6. Error state preserves form values
-expected: Error message shown below submit button, form values preserved on network failure.
+### 5. Email format validation still works (regression)
+expected: Enter "notanemail" in the Email Address field and submit. Error says "Please enter a valid email address." — not just a required-field error.
 result: pass
-method: playwright offline mode — "Something went wrong. Please try again or email us directly at hello@verdantdesign.com" shown. Textarea value "Test landscaping project" preserved. Form not cleared.
-
-### 7. Navigation links reach /contact
-expected: Nav + footer CTAs link to /contact.
-result: pass
-method: playwright — 6 href="/contact" links confirmed across nav and footer.
 
 ## Summary
 
-total: 7
-passed: 6
-issues: 0
+total: 5
+passed: 4
+issues: 1
 pending: 0
-skipped: 1
+skipped: 0
 
 ## Gaps
 
-[none]
+- truth: "Form renders immediately on page load without scrolling or JS hydration delay"
+  status: failed
+  reason: "User reported: I dont see it"
+  severity: major
+  test: 1
+  artifacts: []
+  missing: []
