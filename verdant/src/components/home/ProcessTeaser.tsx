@@ -2,27 +2,27 @@
 
 import { useReducedMotion } from 'framer-motion'
 import { MotionDiv } from '@/components/ui/MotionDiv'
-import SectionHeader from '@/components/ui/SectionHeader'
 import { fadeUp, stagger } from '@/constants/animation'
+import SectionHeader from '@/components/ui/SectionHeader'
 
 const steps = [
   {
     number: '01',
-    name: 'Discovery Consultation',
+    name: 'Discovery',
     description:
-      'We begin by listening — to your vision, your site, and how you live outdoors. A two-hour on-site consultation maps every possibility.',
+      'We study the property, the existing architecture, and the way you want to live outdoors.',
   },
   {
     number: '02',
-    name: 'Design & Proposal',
+    name: 'Design',
     description:
-      'Our design team translates the consultation into a full landscape plan with material specifications, plant schedules, and a transparent investment estimate.',
+      'Materials, planting, grading, and investment are shaped into one clear proposal.',
   },
   {
     number: '03',
-    name: 'Expert Installation',
+    name: 'Reveal',
     description:
-      'Our craftspeople bring the plan to life with precision — stone laid to last generations, plantings established for immediate impact and long-term beauty.',
+      'The build is executed with the same restraint and detail that shaped the plan.',
   },
 ]
 
@@ -30,70 +30,46 @@ export function ProcessTeaser() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section
-      className="bg-forest-deep py-section-sm md:py-section"
-      aria-labelledby="process-headline"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+    <section className="bg-stone-warm py-section" aria-labelledby="process-headline">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
         <MotionDiv
+          className="mb-14"
           variants={prefersReducedMotion ? undefined : fadeUp}
           initial={prefersReducedMotion ? undefined : 'hidden'}
           whileInView={prefersReducedMotion ? undefined : 'visible'}
           viewport={{ once: true, margin: '-80px' }}
-          className="mb-16"
         >
           <SectionHeader
-            eyebrow="HOW IT WORKS"
-            headline="From Vision to Reality"
-            dark={true}
+            eyebrow="How it works"
+            headline="A premium process, designed to feel calm from the first conversation."
+            body="Verdant sells the experience as much as the finished landscape: clarity, timing, communication, and work that arrives feeling inevitable."
           />
         </MotionDiv>
 
-        {/* Steps container */}
         <MotionDiv
+          className="grid gap-6 lg:grid-cols-3"
           variants={prefersReducedMotion ? undefined : stagger}
           initial={prefersReducedMotion ? undefined : 'hidden'}
           whileInView={prefersReducedMotion ? undefined : 'visible'}
-          viewport={{ once: true, margin: '-80px' }}
-          className="relative"
+          viewport={{ once: true, margin: '-60px' }}
         >
-          {/* Connecting horizontal line — desktop only */}
-          <div
-            className="hidden lg:block absolute top-12 left-[16.666%] right-[16.666%] h-px"
-            style={{ backgroundColor: 'rgba(201, 168, 76, 0.3)' }}
-            aria-hidden="true"
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8">
-            {steps.map((step) => (
-              <MotionDiv
-                key={step.number}
-                variants={prefersReducedMotion ? undefined : fadeUp}
-                className="relative flex flex-col"
-              >
-                {/* Large step number */}
-                <div
-                  className="font-display font-light leading-none mb-4 select-none"
-                  style={{
-                    fontSize: '96px',
-                    lineHeight: 1,
-                    color: 'rgba(201, 168, 76, 0.2)',
-                  }}
-                  aria-hidden="true"
-                >
-                  {step.number}
-                </div>
-
-                {/* Step content */}
-                <h3 className="font-display text-white text-2xl leading-[1.15] mb-4">
-                  {step.name}
-                </h3>
-                <p className="font-sans text-base leading-[1.6]" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                  {step.description}
-                </p>
-              </MotionDiv>
-            ))}
-          </div>
+          {steps.map((step) => (
+            <MotionDiv
+              key={step.number}
+              variants={prefersReducedMotion ? undefined : fadeUp}
+              className="rounded-[30px] border border-stone-dark/55 bg-stone-mid/70 p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)]"
+            >
+              <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-text-muted">
+                {step.number}
+              </p>
+              <h3 className="mt-4 font-display text-3xl leading-[1.1] text-text-primary">
+                {step.name}
+              </h3>
+              <p className="mt-4 font-sans text-base leading-7 text-text-secondary">
+                {step.description}
+              </p>
+            </MotionDiv>
+          ))}
         </MotionDiv>
       </div>
     </section>

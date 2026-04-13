@@ -13,53 +13,38 @@ export function CaseStudyHero({ project }: CaseStudyHeroProps) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section className="relative min-h-[60vh] flex items-end overflow-hidden">
-      {/* Hero image */}
+    <section className="relative flex min-h-[72vh] items-end overflow-hidden bg-forest-deep">
       <Image
         src={project.heroImage}
-        alt={`${project.name} — ${project.location}`}
+        alt={`${project.name} in ${project.location}`}
         fill
         priority
         className="object-cover"
         sizes="100vw"
       />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,12,8,0.14),rgba(7,12,8,0.84))]" />
 
-      {/* Forest-deep gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-forest-deep via-forest-deep/60 to-forest-deep/10" />
-
-      {/* Content */}
       <motion.div
-        className="relative z-10 pb-16 px-8 md:px-16 w-full"
-        initial={prefersReducedMotion ? undefined : stagger.visible ? 'hidden' : 'hidden'}
+        className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 md:px-12 lg:px-20"
+        initial={prefersReducedMotion ? undefined : 'hidden'}
         animate="visible"
-        variants={stagger}
+        variants={prefersReducedMotion ? undefined : stagger}
       >
-        {/* Gold rule */}
-        <div className="w-12 h-px bg-gold mb-3" />
-
-        {/* Category eyebrow */}
-        <motion.p
-          className="font-sans text-[11px] uppercase tracking-[0.2em] text-gold mb-4"
+        <motion.div
+          className="max-w-3xl rounded-[34px] border border-white/10 bg-black/16 p-8 backdrop-blur-xl md:p-10"
           variants={prefersReducedMotion ? undefined : fadeUp}
         >
-          {project.category}
-        </motion.p>
-
-        {/* Project name */}
-        <motion.h1
-          className="font-display text-4xl md:text-6xl text-white font-light leading-tight mb-3"
-          variants={prefersReducedMotion ? undefined : fadeUp}
-        >
-          {project.name}
-        </motion.h1>
-
-        {/* Location */}
-        <motion.p
-          className="font-sans text-white/60 text-base mt-1"
-          variants={prefersReducedMotion ? undefined : fadeUp}
-        >
-          {project.location}
-        </motion.p>
+          <div className="mb-4 w-12 border-t border-gold" />
+          <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-gold">
+            {project.category}
+          </p>
+          <h1 className="mt-5 font-display text-5xl font-light leading-[0.98] text-white md:text-7xl">
+            {project.name}
+          </h1>
+          <p className="mt-5 font-sans text-base leading-7 text-white/82 md:text-lg">
+            {project.location} · {project.timeline} · {project.investmentRange}
+          </p>
+        </motion.div>
       </motion.div>
     </section>
   )

@@ -1,48 +1,31 @@
-'use client'
-
-import { useReducedMotion } from 'framer-motion'
-import { MotionDiv } from '@/components/ui/MotionDiv'
-import { fadeIn } from '@/constants/animation'
-
-const publications = [
-  'LUXE Interiors',
-  'Saratoga Living',
-  'Capital Region Life',
-  'Albany Business Review',
-  'The Knot',
+const proofPoints = [
+  'Estate Terraces',
+  'Poolscapes',
+  'Garden Rooms',
+  'Outdoor Kitchens',
+  'Full-Property Plans',
 ]
 
 export function LogoBar() {
-  const prefersReducedMotion = useReducedMotion()
-
   return (
-    <section
-      className="bg-stone-mid py-8"
-      aria-label="Featured in publications"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <MotionDiv
-          variants={prefersReducedMotion ? undefined : fadeIn}
-          initial={prefersReducedMotion ? undefined : 'hidden'}
-          whileInView={prefersReducedMotion ? undefined : 'visible'}
-          viewport={{ once: true, margin: '-80px' }}
-          className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10"
-        >
-          <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-text-muted opacity-60 shrink-0">
-            As Seen In
+    <section className="bg-forest-mid py-6" aria-label="Verdant service focus">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <p className="shrink-0 font-sans text-[10px] uppercase tracking-[0.24em] text-white/50">
+            We specialize in
           </p>
-          <div className="w-px h-4 bg-stone-dark hidden sm:block" aria-hidden="true" />
-          <div className="flex flex-wrap justify-center sm:justify-start items-center gap-6 sm:gap-10">
-            {publications.map((pub) => (
+          <div className="hidden h-3 w-px bg-white/20 sm:block" aria-hidden="true" />
+          <div className="flex flex-wrap justify-center gap-3">
+            {proofPoints.map((point) => (
               <span
-                key={pub}
-                className="font-sans text-[11px] tracking-[0.2em] uppercase text-text-muted opacity-60"
+                key={point}
+                className="rounded-full border border-white/12 px-4 py-1.5 font-sans text-[11px] uppercase tracking-[0.16em] text-white/70"
               >
-                {pub}
+                {point}
               </span>
             ))}
           </div>
-        </MotionDiv>
+        </div>
       </div>
     </section>
   )

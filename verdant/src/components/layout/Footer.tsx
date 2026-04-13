@@ -1,36 +1,41 @@
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import { services } from '@/data/services'
+import { VerdantWordmark } from '@/components/brand/VerdantWordmark'
 
 const navLinks = ['Portfolio', 'Services', 'Process', 'About', 'Contact']
 
 export default function Footer() {
   return (
-    <footer className="bg-forest-deep text-white py-16 px-6 md:px-12 lg:px-20">
-      <div className="max-w-7xl mx-auto">
-        {/* 4-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {/* Col 1: Brand */}
+    <footer className="bg-forest-deep px-6 py-16 text-white md:px-12 lg:px-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr] lg:gap-10">
           <div>
-            <p className="font-sans font-normal tracking-[0.3em] uppercase text-white text-base mb-4">
-              VERDANT
+            <VerdantWordmark className="h-10 w-auto text-white" priority="subtle" />
+            <p className="mt-6 max-w-sm font-sans text-base leading-7 text-white/70">
+              Estate-caliber landscape architecture for Saratoga Springs, Lake George, and the
+              Capital Region.
             </p>
-            <p className="font-sans text-sm text-white/60 leading-relaxed">
-              We Build Outdoor Worlds
-            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <span className="rounded-full border border-white/12 px-4 py-2 text-[11px] uppercase tracking-[0.16em] text-white/60">
+                Outdoor Worlds
+              </span>
+              <span className="rounded-full border border-white/12 px-4 py-2 text-[11px] uppercase tracking-[0.16em] text-white/60">
+                Now Booking 2026
+              </span>
+            </div>
           </div>
 
-          {/* Col 2: Navigation */}
           <div>
-            <p className="font-sans text-[11px] tracking-[0.15em] uppercase text-white/40 mb-6">
+            <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-white/56">
               Navigation
             </p>
-            <ul className="flex flex-col gap-3">
+            <ul className="mt-6 flex flex-col gap-3">
               {navLinks.map((link) => (
                 <li key={link}>
                   <Link
                     href={`/${link.toLowerCase()}`}
-                    className="font-sans text-sm text-white/70 hover:text-white transition-colors duration-200"
+                    className="font-sans text-sm text-white/72 transition-colors duration-200 hover:text-white"
                   >
                     {link}
                   </Link>
@@ -39,17 +44,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Services */}
           <div>
-            <p className="font-sans text-[11px] tracking-[0.15em] uppercase text-white/40 mb-6">
-              Services
+            <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-white/56">
+              Signature Services
             </p>
-            <ul className="flex flex-col gap-3">
+            <ul className="mt-6 flex flex-col gap-3">
               {services.map((service) => (
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="font-sans text-sm text-white/70 hover:text-white transition-colors duration-200"
+                    className="font-sans text-sm text-white/72 transition-colors duration-200 hover:text-white"
                   >
                     {service.name}
                   </Link>
@@ -58,38 +62,36 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4: Contact */}
           <div>
-            <p className="font-sans text-[11px] tracking-[0.15em] uppercase text-white/40 mb-6">
-              Contact
+            <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-white/56">
+              Inquiries
             </p>
-            <div className="flex flex-col gap-3 mb-8">
-              <p className="font-sans text-sm text-white/70">
-                Capital Region, NY
-              </p>
-              <p className="font-sans text-sm text-white/70">
-                info@verdantdesign.com
-              </p>
-              <p className="font-sans text-sm text-white/70">
-                (518) 000-0000
-              </p>
+            <div className="mt-6 space-y-3 font-sans text-sm text-white/72">
+              <p>Saratoga Springs, Lake George, and the Capital Region</p>
+              <a href="mailto:inquiries@verdant.bbc-agency.com" className="block transition-colors duration-200 hover:text-white">
+                inquiries@verdant.bbc-agency.com
+              </a>
+              <a href="tel:+15184502764" className="block transition-colors duration-200 hover:text-white">
+                (518) 450-2764
+              </a>
             </div>
-            <Button variant="ghost" href="/contact" size="md">
-              Start a Project
-            </Button>
+            <div className="mt-8">
+              <Button variant="ghost" href="/contact" size="md" className="rounded-full px-6 py-3">
+                Request a Consultation
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-8 mt-12 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="font-sans text-sm text-white/40">
-            © 2026 Verdant Landscape Design
+        <div className="flex flex-col gap-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-sans text-sm text-white/58">
+            © 2026 Verdant Landscape Design. Crafted as a BBC flagship showcase.
           </p>
           <a
             href="https://bbc-agency.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-sans text-[12px] text-text-muted hover:text-white/60 transition-colors duration-200"
+            className="font-sans text-[12px] uppercase tracking-[0.14em] text-white/50 transition-colors duration-200 hover:text-white"
           >
             Built by BBC
           </a>

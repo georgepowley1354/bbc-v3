@@ -24,7 +24,11 @@ export function CredentialsGrid({ credentials }: CredentialsGridProps) {
           viewport={{ once: true, margin: '-80px' }}
           className="mb-14"
         >
-          <SectionHeader eyebrow="CREDENTIALS" headline="Built on Expertise" />
+          <SectionHeader
+            eyebrow="STUDIO MARKERS"
+            headline="Built carefully, grown deliberately"
+            body="Verdant has evolved through a series of deliberate studio decisions: fewer projects, deeper planning, stronger craft partnerships, and a long-view approach to what makes a property feel complete."
+          />
         </MotionDiv>
 
         <MotionDiv

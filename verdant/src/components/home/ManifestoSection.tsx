@@ -3,66 +3,78 @@
 import Image from 'next/image'
 import { useReducedMotion } from 'framer-motion'
 import { MotionDiv } from '@/components/ui/MotionDiv'
+import { fadeUp, fadeIn, stagger } from '@/constants/animation'
 import SectionHeader from '@/components/ui/SectionHeader'
-import { fadeUp, slideInLeft } from '@/constants/animation'
 
 export function ManifestoSection() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section
-      className="bg-off-white py-section-sm md:py-section"
-      aria-labelledby="manifesto-headline"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-          {/* Left column — text */}
-          <MotionDiv
-            variants={prefersReducedMotion ? undefined : slideInLeft}
-            initial={prefersReducedMotion ? undefined : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, margin: '-80px' }}
-          >
+    <section className="bg-stone-warm py-section" aria-labelledby="manifesto-headline">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
+        <MotionDiv
+          className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
+          variants={prefersReducedMotion ? undefined : stagger}
+          initial={prefersReducedMotion ? undefined : 'hidden'}
+          whileInView={prefersReducedMotion ? undefined : 'visible'}
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          <MotionDiv className="max-w-xl" variants={prefersReducedMotion ? undefined : fadeUp}>
             <SectionHeader
-              eyebrow="OUR PHILOSOPHY"
-              headline="Where Architecture Meets Nature"
+              eyebrow="Our philosophy"
+              headline="Landscape architecture that makes a property feel inevitable."
               dark={false}
             />
             <div className="mt-8 space-y-5">
-              <p className="font-sans text-lg leading-[1.75] text-text-secondary">
-                Every great outdoor space begins as an act of listening — to the land, to the light,
-                to the way a family lives. We translate that understanding into environments where
-                stone, water, and living plants exist in deliberate harmony.
+              <p className="font-sans text-lg leading-8 text-text-secondary">
+                Verdant listens before it designs. We study grade, drainage, light, and the way a
+                family actually lives outside before we decide where stone should land or where a
+                view should open.
               </p>
-              <p className="font-sans text-lg leading-[1.75] text-text-secondary">
-                Our work spans hardscaped terraces built to last a century, pool surrounds that
-                mirror the Adirondack sky, and kitchen gardens that become the heart of every
-                gathering.
-              </p>
-              <p className="font-sans text-lg leading-[1.75] text-text-secondary">
-                We design for the long view — spaces that grow more beautiful with each passing
-                season, maturing alongside the families who inhabit them.
+              <p className="font-sans text-lg leading-8 text-text-secondary">
+                The result is not a collection of amenities. It is a sequence of outdoor rooms that
+                feel calm, permanent, and fully tuned to the property they inhabit.
               </p>
             </div>
           </MotionDiv>
 
-          {/* Right column — image */}
-          <MotionDiv
-            variants={prefersReducedMotion ? undefined : fadeUp}
-            initial={prefersReducedMotion ? undefined : 'hidden'}
-            whileInView={prefersReducedMotion ? undefined : 'visible'}
-            viewport={{ once: true, margin: '-80px' }}
-            className="relative aspect-square overflow-hidden"
-          >
-            <Image
-              src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80&auto=format&fit=crop"
-              alt="Lush garden path through mature plantings with stone stepping stones"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          <MotionDiv className="grid gap-4 md:grid-cols-[1.1fr_0.9fr]" variants={prefersReducedMotion ? undefined : fadeIn}>
+            <div className="relative overflow-hidden rounded-[34px]">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200&q=80&auto=format&fit=crop"
+                  alt="Formal garden with sculpted hedges and stone walkway through mature plantings"
+                  fill
+                  quality={68}
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 38vw"
+                />
+              </div>
+            </div>
+            <div className="grid gap-4">
+              <div className="rounded-[30px] bg-stone-mid p-6">
+                <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-text-muted">
+                  Design lens
+                </p>
+                <p className="mt-4 font-display text-3xl leading-[1.15] text-text-primary">
+                  Architecture, softened by time and planting.
+                </p>
+              </div>
+              <div className="relative overflow-hidden rounded-[30px]">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=900&q=80&auto=format&fit=crop"
+                    alt="Stone retaining wall with layered planting beds and mature greenery"
+                    fill
+                    quality={64}
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 26vw"
+                  />
+                </div>
+              </div>
+            </div>
           </MotionDiv>
-        </div>
+        </MotionDiv>
       </div>
     </section>
   )

@@ -1,4 +1,4 @@
-import { founder, philosophy } from '@/data/about'
+import { studio, philosophy } from '@/data/about'
 import { FounderSection } from '@/components/about/FounderSection'
 import { PhilosophySection } from '@/components/about/PhilosophySection'
 import { CredentialsGrid } from '@/components/about/CredentialsGrid'
@@ -8,33 +8,36 @@ import Button from '@/components/ui/Button'
 export const metadata = {
   title: 'About',
   description:
-    'Meet Marcus Velde, principal of Verdant Landscape Design. APLD certified, ISA arborist, designing luxury landscapes in the Capital Region since 2012.',
+    'Learn the story behind Verdant Landscape Design, a boutique studio creating luxury outdoor worlds across Saratoga Springs, Lake George, and the Capital Region.',
 }
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
       {/* Hero strip */}
-      <section className="bg-forest-deep pt-32 pb-section-sm md:pb-section">
+      <section className="bg-[radial-gradient(circle_at_top_right,rgba(184,147,75,0.14),transparent_28%),linear-gradient(180deg,#0f1210_0%,#0c0f0d_100%)] pt-32 pb-section-sm md:pb-section">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
           <SectionHeader
             eyebrow="OUR STORY"
-            headline="Where Architecture Meets Nature"
+            headline="A studio built for outdoor worlds that feel inherited."
+            body="Verdant was created for homeowners who want more than landscaping. The studio blends architecture, planting, grading, stonework, and outdoor living into landscapes that feel permanent, calm, and inseparable from the property."
             dark={true}
           />
         </div>
       </section>
 
       <FounderSection
-        name={founder.name}
-        title={founder.title}
-        bio={founder.bio}
-        photoUrl={founder.photoUrl}
+        name={studio.name}
+        title={studio.title}
+        eyebrow={studio.eyebrow}
+        imageAlt={studio.alt}
+        bio={studio.story}
+        photoUrl={studio.photoUrl}
       />
 
       <PhilosophySection pullQuote={philosophy.pullQuote} statement={philosophy.statement} />
 
-      <CredentialsGrid credentials={founder.credentials} />
+      <CredentialsGrid credentials={studio.credentials} />
 
       {/* CTA */}
       <section className="bg-stone-warm py-section text-center">

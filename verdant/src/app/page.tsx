@@ -7,6 +7,7 @@ import { ProcessTeaser } from '@/components/home/ProcessTeaser'
 import { SeasonalBanner } from '@/components/home/SeasonalBanner'
 import { Testimonials } from '@/components/home/Testimonials'
 import { InstagramPlaceholder } from '@/components/home/InstagramPlaceholder'
+import { DesignGuideCTA } from '@/components/home/DesignGuideCTA'
 import { FinalCTA } from '@/components/home/FinalCTA'
 
 export const metadata = {
@@ -28,6 +29,7 @@ export default function HomePage() {
       <ProcessTeaser />
       <SeasonalBanner />
       <Testimonials />
+      <DesignGuideCTA />
       <InstagramPlaceholder />
       <FinalCTA />
     </main>

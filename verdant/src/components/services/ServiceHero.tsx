@@ -36,7 +36,7 @@ export function ServiceHero({ service }: ServiceHeroProps) {
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-white mb-4">
             {service.name}
           </h1>
-          <p className="font-sans text-lg text-white/70 max-w-2xl">
+          <p className="font-sans text-lg text-white/82 max-w-2xl">
             {service.tagline}
           </p>
         </MotionDiv>

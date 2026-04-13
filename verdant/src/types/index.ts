@@ -5,10 +5,15 @@ export interface Project {
   category: 'Hardscape' | 'Softscape' | 'Pool' | 'Kitchen' | 'Full Property'
   location: string
   investmentRange: string
+  timeline: string
   heroImage: string
+  beforeImage: string
+  afterImage: string
   galleryImages: string[]
   description: string
   highlights: string[]
+  materials: string[]
+  outcome: string
 }
 
 export interface Service {
@@ -26,7 +31,6 @@ export interface Service {
   relatedProjects: string[]
 }
 
-// Contact form types
 export type ProjectType =
   | 'Hardscape'
   | 'Softscape'
@@ -35,12 +39,7 @@ export type ProjectType =
   | 'Full Property Design'
   | 'Maintenance Plan'
 
-export type BudgetRange =
-  | 'Under $25k'
-  | '$25k – $75k'
-  | '$75k – $150k'
-  | '$150k – $300k'
-  | '$300k+'
+export type BudgetRange = '$25k-50k' | '$50k-100k' | '$100k+'
 
 export type Timeline =
   | 'This season'

@@ -1,15 +1,26 @@
-"use client"
+'use client'
 
-import { motion } from 'framer-motion'
+import { useReducedMotion } from 'framer-motion'
+import { MotionDiv } from '@/components/ui/MotionDiv'
+import { ease } from '@/constants/animation'
+
+const pageTransition = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.4, ease: ease.out } },
+}
 
 export default function Template({ children }: { children: React.ReactNode }) {
+  const prefersReducedMotion = useReducedMotion()
+
+  if (prefersReducedMotion) return <>{children}</>
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+    <MotionDiv
+      variants={pageTransition}
+      initial="hidden"
+      animate="visible"
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   )
 }

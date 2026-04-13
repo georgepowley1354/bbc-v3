@@ -1,0 +1,42 @@
+type VerdantWordmarkProps = {
+  className?: string
+  priority?: 'brand' | 'subtle'
+}
+
+export function VerdantWordmark({
+  className = '',
+  priority = 'brand',
+}: VerdantWordmarkProps) {
+  const markClass =
+    priority === 'brand'
+      ? 'drop-shadow-[0_12px_32px_rgba(0,0,0,0.18)]'
+      : 'opacity-90'
+
+  return (
+    <svg
+      viewBox="0 0 520 128"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`${markClass} ${className}`}
+      aria-label="Verdant Landscape Design"
+      role="img"
+    >
+      {/* Botanical contour line — brass accent */}
+      <path d="M20 18 Q80 8, 150 16 Q220 24, 290 14 Q360 4, 430 16 Q470 22, 500 14" stroke="#B8934B" strokeWidth="1.2" strokeLinecap="round" fill="none" opacity="0.55"/>
+      {/* V */}
+      <path d="M27 38 L52 100 H60 L85 38 H77 L56 93 L35 38 Z" fill="currentColor"/>
+      {/* E */}
+      <path d="M95 38 H153 V46 H103 V65 H149 V73 H103 V92 H153 V100 H95 Z" fill="currentColor"/>
+      {/* R */}
+      <path fillRule="evenodd" d="M163 100 V38 H195 L206 42 L212 49 V61 L206 68 L195 73 L216 100 H206 L186 73 H170 V100 Z M170 45 H193 L199 49 L201 55 L199 61 L193 66 H170 Z" fill="currentColor"/>
+      {/* D */}
+      <path fillRule="evenodd" d="M231 38 H255 L268 42 L276 52 L279 61 L277 75 L268 86 L254 100 H231 Z M238 46 H253 L263 50 L268 58 L268 70 L262 80 L251 93 H238 Z" fill="currentColor"/>
+      {/* A */}
+      <path d="M299 100 L324 38 H332 L357 100 H349 L341 81 H315 L307 100 Z M318 74 H338 L328 47 Z" fill="currentColor"/>
+      {/* N */}
+      <path d="M367 100 V38 H375 L413 88 V38 H421 V100 H413 L375 50 V100 Z" fill="currentColor"/>
+      {/* T */}
+      <path d="M435 38 H493 V46 H468 V100 H460 V46 H435 Z" fill="currentColor"/>
+    </svg>
+  )
+}

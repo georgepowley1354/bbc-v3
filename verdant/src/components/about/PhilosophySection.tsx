@@ -46,7 +46,7 @@ export function PhilosophySection({ pullQuote, statement }: PhilosophySectionPro
           className="space-y-6 mt-8"
         >
           {statement.map((paragraph, i) => (
-            <p key={i} className="font-sans text-lg leading-[1.75] text-white/70">
+            <p key={i} className="font-sans text-lg leading-[1.75] text-white/82">
               {paragraph}
             </p>
           ))}

@@ -4,54 +4,56 @@ export interface Credential {
   detail?: string
 }
 
-export const founder = {
-  name: 'Marcus Velde',
-  title: 'Principal, Verdant Landscape Design',
-  bio: [
-    'Marcus Velde founded Verdant in 2012 after a decade practicing architecture in Manhattan — and a lifetime spent in the Adirondack foothills that eventually pulled him home. His work draws from both disciplines: the precision of architectural detailing and the patience of working with living systems.',
-    "Every Verdant project begins with the land itself. Before a single stone is placed or a plant is selected, Marcus and his team study the site's topography, light patterns, drainage, and existing ecology. The design grows from those conditions — not against them.",
-    'The result is landscape architecture that feels as though it was always there. Terraces that follow the natural grade. Plantings that thrive without fighting the climate. Outdoor rooms that frame the views the property was built to capture.',
+export const studio = {
+  name: 'Verdant Landscape Design',
+  title: 'Luxury landscape and outdoor living studio',
+  eyebrow: 'The Verdant Studio',
+  alt: 'Verdant landscape studio team reviewing garden and property plans outdoors',
+  story: [
+    'Verdant Landscape Design began as a quiet refusal to treat luxury properties like checklists. Long before the studio had a name, its early work was shaped by a simple belief: the most valuable landscapes are not the loudest ones, but the ones that feel inevitable to the land they belong to.',
+    'The studio formally took shape in Saratoga Springs in 2012, built around a cross-disciplinary team of landscape designers, planting specialists, stone artisans, and site planners who shared an obsession with proportion, restraint, and permanence. Verdant was never meant to be a volume operation. From the beginning, it was designed as a boutique practice for homeowners who wanted a property to feel fully composed, not merely improved.',
+    'Today Verdant serves Saratoga Springs, Lake George, and the wider Capital Region with projects that blend architecture, grading, planting, water, lighting, and outdoor living into one coherent experience. Each commission begins with the same question: what should this property feel like five years from now, once the materials have softened, the plantings have matured, and the work has settled naturally into place?',
   ],
   photoUrl:
-    'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&q=80&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1769787641374-cb51b024762a?w=900&h=1200&q=80&auto=format&fit=crop',
   credentials: [
     {
-      body: 'APLD Certified Landscape Designer',
-      year: '2014',
-      detail: 'Association of Professional Landscape Designers',
+      body: 'Boutique studio founded in Saratoga Springs',
+      year: '2012',
+      detail: 'Created to serve legacy-minded residential properties across the Adirondack region',
     },
     {
-      body: 'LEED AP — Landscape & Exterior Design',
+      body: 'Integrated hardscape, planting, and outdoor-living practice',
       year: '2016',
-      detail: 'U.S. Green Building Council',
+      detail: 'Expanded from design consultancy into full property-scale planning and build orchestration',
     },
     {
-      body: 'ISA Certified Arborist',
+      body: 'Regional network of specialty craftspeople',
       year: '2018',
-      detail: 'International Society of Arboriculture',
+      detail: 'Stone, timber, irrigation, lighting, and planting partners aligned to Verdant standards',
     },
     {
-      body: 'NYSLDA Design Excellence Award',
+      body: 'Estate-focused project model',
       year: '2021',
-      detail: 'New York State Landscape Designers Association',
+      detail: 'Refined around fewer projects, deeper planning, and higher-touch client communication',
     },
     {
-      body: 'AIA Residential Design Citation',
+      body: 'Known for calm, permanent outdoor worlds',
       year: '2023',
-      detail: 'American Institute of Architects, Eastern NY Chapter',
+      detail: 'A reputation built through referral-led work across Saratoga, Lake George, and the Capital Region',
     },
     {
-      body: 'Saratoga Living Best of the Best — Landscape Design',
-      year: '2024',
-      detail: 'Regional publication award, three consecutive years',
+      body: 'Now booking seasonal flagship commissions',
+      year: '2026',
+      detail: 'Selective project calendar prioritizing full-property transformations and layered outdoor living',
     },
   ] as Credential[],
 } as const
 
 export const philosophy = {
   statement: [
-    "We believe the best landscapes are the ones you forget were designed. When stone, water, and planting compose themselves around the way a family actually lives outdoors — when a terrace catches the last light at exactly the hour you sit down to dinner — that's not an accident. That's the result of listening longer than most designers are willing to.",
-    "Our work is rooted in restraint. We use fewer materials, placed with greater intention. We choose native species that don't need to be replaced every three years. We build structures heavy enough to outlast the mortgage. The properties we design are not showrooms — they're places where children grow up, where seasons turn, where the boundary between inside and outside quietly dissolves.",
+    'Verdant believes a landscape should feel quieter and more complete after design, not more decorated. The studio favors fewer materials, stronger lines, better drainage, deeper planting logic, and outdoor rooms that hold up long after the reveal photography is gone.',
+    'That philosophy is why Verdant approaches every commission as a long-view composition. Terraces are positioned for the real light. Garden rooms are scaled to the architecture. Planting palettes are built to mature beautifully rather than peak once. The goal is never spectacle for its own sake. It is the rare feeling that the property has become more itself than it was before.',
   ],
-  pullQuote: 'The best landscapes are the ones you forget were designed.',
+  pullQuote: 'Luxury is not more elements. It is greater coherence.',
 }

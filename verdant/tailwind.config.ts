@@ -10,23 +10,23 @@ const config: Config = {
     extend: {
       colors: {
         forest: {
-          deep: "#1C2B1E",
-          mid: "#2A3E2C",
+          deep: "#0F1210",
+          mid: "#1E2A20",
         },
         sage: {
-          DEFAULT: "#4A7C59",
-          light: "#6B9E7A",
+          DEFAULT: "#5A8A62",
+          light: "#78B084",
         },
         gold: {
-          DEFAULT: "#C9A84C",
-          light: "#D9B96C",
+          DEFAULT: "#B8934B",
+          light: "#CCA95E",
         },
         stone: {
-          warm: "#F5F0E8",
-          mid: "#EBE5D9",
-          dark: "#D4CCC0",
+          warm: "#F2EDE4",
+          mid: "#E8E2D6",
+          dark: "#D0C9BC",
         },
-        "off-white": "#FAF9F6",
+        "off-white": "#FAFAF7",
         "text-primary": "#1A1A1A",
         "text-secondary": "#4A4A4A",
         "text-muted": "#7A7A6E",

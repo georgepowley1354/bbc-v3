@@ -75,7 +75,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
       {/* Next service */}
       <section className="bg-forest-deep py-16 text-center">
         <div className="max-w-2xl mx-auto px-6">
-          <p className="font-sans text-[12px] uppercase tracking-[0.2em] text-white/40 mb-2">
+          <p className="font-sans text-[12px] uppercase tracking-[0.2em] text-white/60 mb-2">
             Next Service
           </p>
           <h3 className="font-display text-3xl text-white mb-6">{nextService.name}</h3>

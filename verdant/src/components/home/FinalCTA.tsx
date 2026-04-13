@@ -1,66 +1,50 @@
 'use client'
 
 import { useReducedMotion } from 'framer-motion'
-import { MotionDiv, MotionH2, MotionP } from '@/components/ui/MotionDiv'
+import { MotionDiv } from '@/components/ui/MotionDiv'
+import { fadeUp } from '@/constants/animation'
 import Button from '@/components/ui/Button'
-import { fadeUp, stagger } from '@/constants/animation'
 
 export function FinalCTA() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section
-      className="bg-forest-deep py-section-sm md:py-section"
-      aria-labelledby="final-cta-headline"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+    <section className="bg-forest-deep py-section" aria-labelledby="final-cta-headline">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
         <MotionDiv
-          variants={prefersReducedMotion ? undefined : stagger}
+          className="overflow-hidden rounded-[40px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(184,147,75,0.14),transparent_40%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] px-8 py-14 text-center md:px-14 md:py-20"
+          variants={prefersReducedMotion ? undefined : fadeUp}
           initial={prefersReducedMotion ? undefined : 'hidden'}
           whileInView={prefersReducedMotion ? undefined : 'visible'}
           viewport={{ once: true, margin: '-80px' }}
-          className="flex flex-col items-center text-center max-w-3xl mx-auto"
         >
-          {/* Gold rule + eyebrow */}
-          <MotionDiv variants={prefersReducedMotion ? undefined : fadeUp}>
-            <div className="w-12 h-px bg-gold mb-3 mx-auto" />
-            <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-gold mb-8">
-              Start Your Project
+          <div>
+            <div className="mx-auto w-12 border-t border-gold" />
+            <p className="mt-4 font-sans text-[11px] uppercase tracking-[0.18em] text-gold">
+              Start your project
             </p>
-          </MotionDiv>
+          </div>
 
-          {/* Headline */}
-          <MotionH2
+          <h2
             id="final-cta-headline"
-            variants={prefersReducedMotion ? undefined : fadeUp}
-            className="font-display font-light text-white text-4xl md:text-5xl leading-[1.05] mb-6"
+            className="mx-auto mt-8 max-w-4xl font-display text-5xl font-light leading-[1.02] text-white md:text-7xl"
           >
-            Your Outdoor World Awaits
-          </MotionH2>
+            If the property deserves more than landscaping, let&apos;s talk.
+          </h2>
 
-          {/* Subline */}
-          <MotionP
-            variants={prefersReducedMotion ? undefined : fadeUp}
-            className="font-sans text-base md:text-lg leading-[1.6] mb-10"
-            style={{ color: 'rgba(255,255,255,0.7)' }}
-          >
-            Every project begins with a conversation. Tell us about your property and your vision —
-            we&rsquo;ll tell you what&rsquo;s possible.
-            Spring 2026 slots are filling quickly for full-property transformations.
-          </MotionP>
+          <p className="mx-auto mt-6 max-w-2xl font-sans text-lg leading-8 text-white/80">
+            Verdant is now booking Spring and Summer 2026 for estate gardens, terraces,
+            poolscapes, and full-property transformations throughout the Capital Region.
+          </p>
 
-          {/* CTA buttons — side by side on sm+, stacked on mobile */}
-          <MotionDiv
-            variants={prefersReducedMotion ? undefined : fadeUp}
-            className="flex flex-col sm:flex-row gap-4"
-          >
-            <Button variant="primary" href="/contact">
-              Start a Project
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+            <Button variant="primary" href="/contact" size="lg" className="rounded-full px-8">
+              Request a consultation
             </Button>
-            <Button variant="ghost" href="/portfolio">
-              View Our Work
+            <Button variant="ghost" href="/portfolio" size="lg" className="rounded-full px-8">
+              Review the portfolio
             </Button>
-          </MotionDiv>
+          </div>
         </MotionDiv>
       </div>
     </section>

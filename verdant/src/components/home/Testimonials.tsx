@@ -3,35 +3,27 @@
 import Image from 'next/image'
 import { useReducedMotion } from 'framer-motion'
 import { MotionDiv } from '@/components/ui/MotionDiv'
-import SectionHeader from '@/components/ui/SectionHeader'
 import { fadeUp, stagger } from '@/constants/animation'
+import SectionHeader from '@/components/ui/SectionHeader'
 
-interface Testimonial {
-  quote: string
-  clientName: string
-  locationAndProject: string
-  projectImage: string
-  projectImageAlt: string
-}
-
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
     quote:
-      'The terrace Verdant built has completely transformed how we use our property. What was once an unusable slope is now the heart of our home — we entertain out there every week from May through October.',
+      'The terrace Verdant built has completely transformed how we use our property. What was once an unusable slope is now the heart of our home from May through October.',
     clientName: 'Margaret & Thomas K.',
     locationAndProject: 'Lake George | Adirondack Terrace',
     projectImage:
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
     projectImageAlt: 'Stone terrace overlooking Lake George with outdoor seating area',
   },
   {
     quote:
-      'From our first consultation to the final reveal, the Verdant team demonstrated a level of craft and intentionality I rarely encounter. They understood exactly what we were trying to achieve — and delivered something even better.',
+      'Verdant understood exactly what we wanted from the site visit onward. The final result feels calm, expensive, and entirely natural to the property.',
     clientName: 'Sarah L.',
     locationAndProject: 'Saratoga Springs | Willowmere Garden',
     projectImage:
-      'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80&auto=format&fit=crop',
-    projectImageAlt: 'Formal garden with stone path and mature plantings in Saratoga Springs',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80&auto=format&fit=crop',
+    projectImageAlt: 'Luxury garden estate with manicured lawn and stone accents in Saratoga Springs',
   },
 ]
 
@@ -39,79 +31,58 @@ export function Testimonials() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section
-      className="bg-forest-mid py-section-sm md:py-section"
-      aria-labelledby="testimonials-headline"
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+    <section className="bg-forest-mid py-section text-white" aria-labelledby="testimonials-headline">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-20">
         <MotionDiv
+          className="mb-14"
           variants={prefersReducedMotion ? undefined : fadeUp}
           initial={prefersReducedMotion ? undefined : 'hidden'}
           whileInView={prefersReducedMotion ? undefined : 'visible'}
           viewport={{ once: true, margin: '-80px' }}
-          className="mb-14"
         >
           <SectionHeader
-            eyebrow="CLIENT STORIES"
-            headline="What Our Clients Say"
+            eyebrow="Client stories"
+            headline="Proof that the finished work feels as good as it looks."
             dark={true}
           />
         </MotionDiv>
 
         <MotionDiv
+          className="grid gap-6 lg:grid-cols-2"
           variants={prefersReducedMotion ? undefined : stagger}
           initial={prefersReducedMotion ? undefined : 'hidden'}
           whileInView={prefersReducedMotion ? undefined : 'visible'}
-          viewport={{ once: true, margin: '-80px' }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+          viewport={{ once: true, margin: '-60px' }}
         >
           {testimonials.map((testimonial) => (
             <MotionDiv
               key={testimonial.clientName}
               variants={prefersReducedMotion ? undefined : fadeUp}
-              className="bg-forest-mid border border-white/10 overflow-hidden"
+              className="overflow-hidden rounded-[34px] border border-white/10 bg-white/6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
             >
-              {/* Project photo */}
-              <div className="relative h-[200px] w-full overflow-hidden">
-                <Image
-                  src={testimonial.projectImage}
-                  alt={testimonial.projectImageAlt}
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-
-              {/* Body */}
-              <div className="p-8">
-                {/* Gold quote mark — large Cormorant Garamond character */}
-                <div
-                  className="font-display leading-none mb-4 select-none"
-                  style={{
-                    fontSize: '72px',
-                    lineHeight: 0.5,
-                    color: 'rgba(201, 168, 76, 0.6)',
-                  }}
-                  aria-hidden="true"
-                >
-                  &ldquo;
+              <div className="grid md:grid-cols-[0.9fr_1.1fr]">
+                <div className="relative min-h-[260px]">
+                  <Image
+                    src={testimonial.projectImage}
+                    alt={testimonial.projectImageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 30vw"
+                  />
                 </div>
-
-                {/* Quote */}
-                <blockquote className="font-display italic text-white leading-[1.5]" style={{ fontSize: '22px' }}>
-                  {testimonial.quote}
-                </blockquote>
-
-                {/* Gold divider */}
-                <div className="w-8 h-px bg-gold mt-8 mb-6" aria-hidden="true" />
-
-                {/* Attribution */}
-                <p className="font-sans font-medium text-sm text-white tracking-[0.02em]">
-                  {testimonial.clientName}
-                </p>
-                <p className="font-sans font-light text-[13px] mt-1" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                  {testimonial.locationAndProject}
-                </p>
+                <div className="p-8 md:p-9">
+                  <p className="font-display text-6xl leading-none text-gold/55">"</p>
+                  <blockquote className="mt-4 font-display text-3xl italic leading-[1.35] text-white">
+                    {testimonial.quote}
+                  </blockquote>
+                  <div className="mt-8 h-px w-10 bg-gold" />
+                  <p className="mt-6 font-sans text-sm uppercase tracking-[0.12em] text-white">
+                    {testimonial.clientName}
+                  </p>
+                  <p className="mt-2 font-sans text-sm text-white/70">
+                    {testimonial.locationAndProject}
+                  </p>
+                </div>
               </div>
             </MotionDiv>
           ))}
