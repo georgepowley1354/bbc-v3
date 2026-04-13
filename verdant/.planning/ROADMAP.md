@@ -101,16 +101,16 @@ Plans:
   3. robots.ts and sitemap.ts are present and return correct content
   4. Site is deployed to Netlify at verdant.bbc-agency.com
   5. Lighthouse score is 95+ on Performance, Accessibility, Best Practices, and SEO
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Global nav audit, per-page SEO metadata, robots.ts, sitemap.ts
-- [ ] 06-02-PLAN.md — Netlify deployment, domain configuration, Lighthouse verification
+- [ ] 06-01-PLAN.md — Fix broken nav links, SEO metadata infrastructure (metadataBase + title.template), robots.ts, sitemap.ts
+- [ ] 06-02-PLAN.md — Merge to master, Netlify deployment, domain configuration, Lighthouse verification
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -119,4 +119,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Portfolio | 1/1 | Complete | 2026-04-12 |
 | 4. Services, About, and Process | 2/2 | Complete | 2026-04-12 |
 | 5. Contact Page | 1/1 | Complete | 2026-04-12 |
-| 6. Final Polish and Deploy | 0/2 | Pending | — |
+| 6. Final Polish and Deploy | 0/2 | Planned | — |
