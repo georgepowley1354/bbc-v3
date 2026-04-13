@@ -9,6 +9,9 @@ interface ButtonProps {
   href?: string
   children: React.ReactNode
   className?: string
+  disabled?: boolean
+  type?: 'button' | 'submit' | 'reset'
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
   [key: string]: unknown
 }
 
