@@ -104,7 +104,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Fix broken nav links, SEO metadata infrastructure (metadataBase + title.template), robots.ts, sitemap.ts
+- [x] 06-01-PLAN.md — Fix broken nav links, SEO metadata infrastructure (metadataBase + title.template), robots.ts, sitemap.ts
 - [ ] 06-02-PLAN.md — Merge to master, Netlify deployment, domain configuration, Lighthouse verification
 
 ## Progress
