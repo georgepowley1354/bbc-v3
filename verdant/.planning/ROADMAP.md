@@ -10,7 +10,7 @@ BBC portfolio showcase site demonstrating agency capability to $50,000+ luxury o
 - [x] **Phase 2: Home Page** - Cinematic hero, manifesto, services preview, featured project, testimonials, CTA
 - [x] **Phase 3: Portfolio** - Masonry grid, filterable by category, 5 case study detail pages
 - [x] **Phase 4: Services, About, and Process Pages** - 5 service pages, about, process timeline — 19 static pages total
-- [ ] **Phase 5: Contact Page** - Premium inquiry form with budget qualifier, Netlify Forms integration
+- [x] **Phase 5: Contact Page** - Premium inquiry form with budget qualifier, Netlify Forms integration
 - [ ] **Phase 6: Final Polish and Deploy** - Nav links audit, SEO meta per page, robots.ts, sitemap.ts, Netlify deploy
 
 ## Phase Details
@@ -89,7 +89,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 05-01-PLAN.md — Contact page, inquiry form, Netlify Forms wiring, nav CTA link update
+- [x] 05-01-PLAN.md — Contact page, inquiry form, Netlify Forms wiring, nav CTA link update
 
 ### Phase 6: Final Polish and Deploy
 **Goal**: Site is production-ready — all nav links wired, SEO meta present on every page, robots and sitemap live, deployed to Netlify
@@ -118,5 +118,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 2. Home Page | 1/1 | Complete | 2026-04-12 |
 | 3. Portfolio | 1/1 | Complete | 2026-04-12 |
 | 4. Services, About, and Process | 2/2 | Complete | 2026-04-12 |
-| 5. Contact Page | 0/1 | Pending | — |
+| 5. Contact Page | 1/1 | Complete | 2026-04-12 |
 | 6. Final Polish and Deploy | 0/2 | Pending | — |
