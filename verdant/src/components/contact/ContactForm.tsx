@@ -328,7 +328,7 @@ export function ContactForm() {
               onChange={handleChange}
               placeholder="Tell us about your property, what you're envisioning, and any specific requirements or constraints."
               rows={5}
-              className="w-full bg-transparent border border-stone-dark py-3 px-4 font-sans text-base text-text-primary placeholder-text-muted focus:outline-none focus:border-sage transition-colors duration-200 resize-none min-h-[140px]"
+              className="w-full bg-transparent border-b border-stone-dark py-3 px-0 font-sans text-base text-text-primary placeholder-text-muted focus:outline-none focus:border-sage transition-colors duration-200 resize-none min-h-[140px]"
               aria-required="true"
               aria-describedby={fieldErrors.description ? 'description-error' : undefined}
             />
