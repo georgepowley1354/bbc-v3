@@ -16,7 +16,28 @@
       "Bash(npx gitnexus:*)",
       "Skill(gsd-execute-phase)",
       "Skill(gsd-plan-phase)",
-      "Skill(gsd-next)"
+      "Skill(gsd-next)",
+      "Skill(gsd-code-review)",
+      "Skill(gsd-secure-phase)",
+      "Bash(python3 -c \"import sys,json; p=json.load\\(sys.stdin\\); print\\(p.get\\('scripts',{}\\).get\\('dev',''\\)\\)\")",
+      "Bash(cat next.config.*)",
+      "Bash(python3 -c \"import json; p=json.load\\(open\\('package.json'\\)\\); print\\(p['scripts']['dev']\\)\")",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3333/contact)",
+      "Bash(grep -v \"^$\\\\|Image\\\\|====\")",
+      "Bash(wmic process:*)",
+      "Bash(taskkill /PID 20680 /F)",
+      "Bash(taskkill /PID 254808 /F)",
+      "Bash(taskkill /PID 17616 /F)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4000/contact)",
+      "Bash(cd /c/Users/georg/my-project/verdant npx playwright install chromium --with-deps)",
+      "Bash(npx playwright:*)",
+      "Bash(npm install:*)",
+      "Bash(node:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Skill(gsd-ui-review)"
     ]
   }
 }
