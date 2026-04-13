@@ -1,80 +1,74 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.0
-milestone_name: Verdant Portfolio Site
-status: active
-last_updated: "2026-04-12"
+milestone_name: verdant-portfolio-site
+status: executing
+stopped_at: Phase 04 complete and verified — ready to execute Phase 05
+last_updated: "2026-04-12T00:00:00Z"
+last_activity: 2026-04-12 -- Phase 04 verified (PASS) — 19 static pages, build exits 0
 progress:
-  total_phases: 8
-  completed_phases: 3
-  total_plans: 7
-  completed_plans: 5
-  percent: 37
+  total_phases: 6
+  completed_phases: 4
+  total_plans: 6
+  completed_plans: 6
+  percent: 67
 ---
 
 # Project State
 
+## Project Reference
+
+See: .planning/PROJECT.md (updated 2026-04-12)
+
+**Core value:** Verdant Landscape Design — BBC portfolio showcase site demonstrating agency capability to $50k+ luxury market clients. Lives at verdant.bbc-agency.com.
+**Current focus:** Phase 05 — Contact Page and Navigation
+
 ## Current Position
 
-**Phase:** 3 of 8 complete — awaiting Jorge approval before Phase 4
-**Status:** STOP — Phase 3 verified, ready for next phase
+Phase: 4 of 6 complete (Services, About, and Process Pages)
+Plan: 2 of 2 complete in phase 04
+Status: Phase 04 VERIFIED — ready to execute Phase 05
+Last activity: 2026-04-12 -- Phase 04 verification passed (10/10 truths, 19/19 static pages)
 
-## What Was Completed
+Progress: [██████░░░░] 67% (4 of 6 phases complete)
 
-### Phase 1 — Research
+## Phase Completion Summary
 
-- BBC Brain: agency-identity, voice-and-tone, service-pillars all read
-- Studied: Lifescape Colorado, DabneyCollins (top luxury landscape firms)
-- Editorial references: LUXE Interiors + Design, HGTV Designer Awards
-- ui-ux-pro-max: design system generated, typography analyzed, landing patterns reviewed
+| Phase | Plans | Status | Completed | Notes |
+|-------|-------|--------|-----------|-------|
+| 01: Scaffold and Setup | 1/1 | Complete | 2026-04-12 | Next.js 14, Tailwind, Framer Motion, design tokens |
+| 02: Home Page | 1/1 | Complete | 2026-04-12 | Cinematic hero, manifesto, services preview, featured project, CTA |
+| 03: Portfolio | 1/1 | Complete | 2026-04-12 | Masonry grid, filterable, 5 case study detail pages |
+| 04: Services, About, Process | 2/2 | Complete | 2026-04-12 | 5 service pages, about, process timeline — 19 static pages total |
+| 05: Contact Page | TBD | Pending | — | Netlify Forms inquiry form with budget qualifier |
+| 06: Final Polish + Deploy | TBD | Pending | — | Nav audit, SEO meta, deploy to Netlify |
 
-### Phase 2 — Design System
+## Accumulated Context
 
-- Full MASTER.md written at design-system/MASTER.md
-- Color system: forest-deep #1C2B1E + stone-warm #F5F0E8 + sage #4A7C59 + gold #C9A84C
-- Typography: Cormorant Garamond (display) + DM Sans (body/UI)
-- Spacing: base-8 grid, 128px section rhythm
-- Animation: Framer Motion, cinematic pace, expo-out easing
-- All component anatomies documented
-- Homepage architecture: 10-section flow
-- Accessibility, performance, BBC badge rules documented
+### Decisions
 
-### Phase 3 — Plan 03-01: Scaffold + Global Layout
+| Decision | Choice | Phase |
+|----------|--------|-------|
+| Typography | Cormorant Garamond + DM Sans | 01 |
+| Primary dark | #1C2B1E (forest-deep) | 01 |
+| Primary light | #F5F0E8 (stone-warm) | 01 |
+| Accent | #4A7C59 sage + #C9A84C gold | 01 |
+| Animation | Framer Motion, 600-800ms, custom easing | 01 |
+| Service data | Single source of truth in src/data/services.ts | 04 |
+| Process timeline | <ol> with aria-label, mobile vertical rail + desktop horizontal | 04 |
+| Server/Client split | Server Component pages + Client leaf components for animation | 04 |
 
-- Next.js 14.2.35 scaffolded with TypeScript, Tailwind, ESLint, App Router, src-dir
-- framer-motion@11.18.2 + lucide-react@1.8.0 installed
-- Full Verdant design system color tokens in tailwind.config.ts
-- Cormorant Garamond + DM Sans via next/font/google as CSS variables
-- Navigation: transparent→forest-deep/95 scroll transition, mobile overlay with stagger
-- Footer: 4-col grid with BBC badge linked to bbc-agency.com
-- template.tsx: page-enter fade transition
-- Button, SectionHeader, MotionDiv UI components
-- npm run build exits 0
+### Pending Todos
 
-### Phase 3 — Plan 03-03: Portfolio Page + Case Study Template
+- Phase 05: Contact page with Netlify Forms integration and budget qualifier field
+- Phase 06: Global nav links audit (all pages wired), SEO meta per page, Netlify deploy
 
-- src/data/projects.ts — 5 typed seed projects with Unsplash images, editorial descriptions, highlights
-- src/hooks/useMasonry.ts — pure CSS grid + JS marginTop offset, no external deps
-- ProjectCard, FilterBar, MasonryGrid — client components with group-hover, category filter state
-- /portfolio — Server Component page with SectionHeader + MasonryGrid
-- CaseStudyHero, CaseStudySpecs, CaseStudyGallery — full case study template components
-- /portfolio/[slug] — generateStaticParams for all 5 slugs, notFound() guard, next-project wrap
-- npm run build exits 0, 11 static pages generated
+### Blockers/Concerns
 
-## Decisions Made
+None at this time.
 
-- Scaffolded in temp dir (verdant-scaffold/) — create-next-app@14 refuses existing dirs
-- framer-motion@11 pinned explicitly as required by project spec
-- next.config.mjs kept as .mjs (scaffold default, functionally identical to .ts)
-- [Phase 03]: SeasonalBanner is a pure Server Component — narrow strip needs no animation
-- [03-03]: Button and SectionHeader are default exports — named import syntax corrected
-- [03-03]: MasonryGrid holds filter state internally — portfolio page stays a pure Server Component
-- [03-03]: useMasonry algorithm implemented verbatim from RESEARCH.md — no modifications
+## Session Continuity
 
-## Session Handoff — 2026-04-12
-
-Phase 3 complete. Phase 4 planned and ready for execution.
-
-**To resume:** Start new session, reference commit `162f634`, read `.planning/STATE.md` and `ROADMAP.md`.
-**Next action:** `/gsd-execute-phase 4`
-**Phase 4 scope:** Services index + 5 individual service pages (04-01), About page + Process timeline (04-02)
+Last session: 2026-04-12
+Stopped at: Phase 04 verified — all services, about, and process pages complete and building
+Resume at: Execute Phase 05 (contact page)
