@@ -1,123 +1,111 @@
-# Roadmap: BBC v3 Technical Audit
+# Roadmap: Verdant Landscape Design Portfolio Site
 
 ## Overview
 
-A post-build technical audit across five layers (SEO, PWA, Mobile, Security, Performance) for bigbadcoding.com. Phases 1–5 are complete. Phase 6 delivers the remaining production-readiness items — real assets, real credentials, real backend, real security headers — so the site can ship.
+BBC portfolio showcase site demonstrating agency capability to $50,000+ luxury outdoor living clients in the Saratoga Springs / Lake George NY market. Built with Next.js 14 App Router, Tailwind CSS, Framer Motion, and TypeScript. Deploys to Netlify at verdant.bbc-agency.com.
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
-
-Decimal phases appear between their surrounding integers in numeric order.
-
-- [x] **Phase 1: SEO** - Search engine optimization — meta, schema, sitemap, OG tags
-- [x] **Phase 2: PWA** - Progressive Web App — manifest, service worker, offline, icons
-- [x] **Phase 3: Mobile Compliance** - Responsive layout, touch targets, iOS/Android fixes
-- [x] **Phase 4: Security** - CSP, headers, form sanitization, input validation
-- [x] **Phase 5: Performance** - Caching, defer, DNS prefetch, GA4 setup
-- [ ] **Phase 6: Launch Prep** - Replace all placeholders, wire form backend, generate real assets
+- [x] **Phase 1: Scaffold and Setup** - Next.js 14 App Router, Tailwind, Framer Motion, TypeScript, design tokens
+- [x] **Phase 2: Home Page** - Cinematic hero, manifesto, services preview, featured project, testimonials, CTA
+- [x] **Phase 3: Portfolio** - Masonry grid, filterable by category, 5 case study detail pages
+- [x] **Phase 4: Services, About, and Process Pages** - 5 service pages, about, process timeline — 19 static pages total
+- [ ] **Phase 5: Contact Page** - Premium inquiry form with budget qualifier, Netlify Forms integration
+- [ ] **Phase 6: Final Polish and Deploy** - Nav links audit, SEO meta per page, robots.ts, sitemap.ts, Netlify deploy
 
 ## Phase Details
 
-### Phase 1: SEO
-**Goal**: Site is fully discoverable — correct metadata, schema, and crawlability for local search
+### Phase 1: Scaffold and Setup
+**Goal**: Next.js 14 App Router scaffold with Tailwind, Framer Motion, TypeScript, and design tokens ready — build exits 0
 **Depends on**: Nothing (first phase)
-**Requirements**: SEO-01, SEO-02, SEO-03, SEO-04, SEO-05, SEO-06, SEO-07, SEO-08, SEO-09, SEO-10, SEO-11
+**Requirements**: SCAFFOLD-01, SCAFFOLD-02, SCAFFOLD-03, SCAFFOLD-04, SCAFFOLD-05
 **Success Criteria** (what must be TRUE):
-  1. Title, meta description, and canonical are set with Capital Region keyword targeting
-  2. Open Graph and Twitter Card tags are present and reference a real OG image
-  3. JSON-LD LocalBusiness schema with areaServed and contactPoint is present
-  4. sitemap.xml and robots.txt are accessible
-  5. OG image file exists at `images/og-image.jpg` (1200x630px)
+  1. `npm run build` exits 0 with no TypeScript errors
+  2. Design tokens (colors, fonts, animation constants) are defined and importable
+  3. Global layout with Navigation and Footer renders on all pages
+  4. Tailwind config extends the project color palette (forest-deep, stone-warm, sage, gold)
+  5. Framer Motion is installed and animation utilities are in place
 **Plans**: Complete
 
 Plans:
-- [x] 01-01: SEO implementation (title, meta, canonical, OG, Twitter, schema, sitemap, robots)
-- [x] 01-02: OG image asset creation
+- [x] 01-01: Project scaffold, design tokens, global layout, Tailwind config, Framer Motion setup
 
-### Phase 2: PWA
-**Goal**: Site installs as a PWA on Chrome/Android and iOS with full offline fallback
+### Phase 2: Home Page
+**Goal**: Full cinematic home page with all sections live and building
 **Depends on**: Phase 1
-**Requirements**: PWA-01, PWA-02, PWA-03, PWA-04, PWA-05, PWA-06, PWA-07, PWA-08, PWA-09, PWA-10
+**Requirements**: HOME-01, HOME-02, HOME-03, HOME-04, HOME-05, HOME-06, HOME-07
 **Success Criteria** (what must be TRUE):
-  1. manifest.json is valid and references real icon files at all 8 required sizes
-  2. Service worker caches assets (cache-first) and HTML (network-first) with offline fallback
-  3. A2HS prompt appears on Android Chrome and is dismissible
-  4. Apple touch icons are present at all 4 required sizes
-  5. Site is installable on Chrome/Android without installability errors
+  1. Hero section renders with headline, subtext, and CTA button
+  2. Services preview section links to /services with real service data
+  3. Featured project section displays a portfolio project with image, title, and link
+  4. Testimonials section renders 3+ client quotes
+  5. Final CTA section renders with inquiry link
 **Plans**: Complete
 
 Plans:
-- [x] 02-01: PWA implementation (manifest, sw.js, offline.html, registration, A2HS, iOS tags)
-- [x] 02-02: PWA icon PNG generation (8 manifest sizes + 4 Apple touch sizes)
+- [x] 02-01: Hero, manifesto, services preview, featured project, testimonials, seasonal banner, final CTA
 
-### Phase 3: Mobile Compliance
-**Goal**: Site renders correctly and is fully usable on all mobile devices from 320px to 1440px
+### Phase 3: Portfolio
+**Goal**: Portfolio page with filterable masonry grid and 5 case study detail pages
 **Depends on**: Phase 2
-**Requirements**: MOB-01, MOB-02, MOB-03, MOB-04, MOB-05, MOB-06, MOB-07, MOB-08, MOB-09, MOB-10, MOB-11
+**Requirements**: PORTFOLIO-01, PORTFOLIO-02, PORTFOLIO-03, PORTFOLIO-04, PORTFOLIO-05
 **Success Criteria** (what must be TRUE):
-  1. No horizontal scroll appears at any viewport width from 320px to 1440px
-  2. All tap targets are minimum 44x44px with no clipping or overlap
-  3. Form inputs do not trigger auto-zoom on iOS (font-size 16px+)
-  4. iOS safe area insets are applied to nav, sticky CTA, and footer
-  5. Custom cursor is hidden on touch devices
+  1. /portfolio renders all 5 projects in a masonry grid layout
+  2. Filter bar allows filtering by project category
+  3. Each project card links to its detail page at /portfolio/[slug]
+  4. All 5 case study detail pages render with hero, specs, and gallery
+  5. `npm run build` exits 0 with all 5 portfolio slug pages statically generated
 **Plans**: Complete
 
 Plans:
-- [x] 03-01: Mobile layout and touch compliance audit
-- [x] 03-02: iOS and Android platform-specific fixes
+- [x] 03-01: Portfolio masonry grid, filter bar, project cards, and 5 case study detail pages
 
-### Phase 4: Security
-**Goal**: Site passes a security header review and is protected against common form injection attacks
+### Phase 4: Services, About, and Process Pages
+**Goal**: All remaining content pages delivered — services index, 5 service detail pages, about, and process — 19 static pages total
 **Depends on**: Phase 3
-**Requirements**: SEC-01, SEC-02, SEC-03, SEC-04, SEC-05, SEC-06, SEC-07, SEC-08, SEC-09, SEC-10, SEC-11, SEC-12, SEC-13, SEC-14, SEC-15, SEC-16
+**Requirements**: SERVICES-01, SERVICES-02, SERVICES-03, ABOUT-01, ABOUT-02, PROCESS-01, PROCESS-02
 **Success Criteria** (what must be TRUE):
-  1. All security headers (CSP, X-Frame-Options, HSTS, etc.) are present and applied in Netlify production
-  2. Form inputs are sanitized — HTML stripped, maxlength enforced, character whitelist on name field
-  3. No user input is inserted via innerHTML
-  4. No API keys or credentials exist in source files
-  5. CSP does not contain unsafe-inline once GA4 ID is live
+  1. /services lists all 5 service categories with names, taglines, pricing ranges, and icons
+  2. Each of 5 service slugs resolves to a detail page at /services/[slug]
+  3. About page renders founder bio, philosophy pull quote, and credentials grid
+  4. Process page renders all 6 stages: Discovery, Design, Proposal, Build, Reveal, Aftercare
+  5. `npm run build` exits 0 with 19 static pages
 **Plans**: Complete
 
 Plans:
-- [x] 04-01: Security headers and CSP implementation
-- [x] 04-02: Form sanitization and input validation
-- [x] 04-03: Netlify _headers file + CSP tightening
+- [x] 04-01: Services data layer, service index page, and 5 service detail pages
+- [x] 04-02: About data layer, about page, process data file, and process timeline page
 
-### Phase 5: Performance
-**Goal**: Site loads fast on repeat visits and scores well on Lighthouse with GA4 properly configured
+### Phase 5: Contact Page
+**Goal**: Premium contact/inquiry page with Netlify Forms integration and budget qualifier field live and building
 **Depends on**: Phase 4
-**Requirements**: PERF-01, PERF-02, PERF-03, PERF-04, PERF-05, PERF-06, PERF-07
+**Requirements**: CONTACT-01, CONTACT-02, CONTACT-03, CONTACT-04, CONTACT-05
 **Success Criteria** (what must be TRUE):
-  1. All scripts have defer attribute and no render-blocking resources are introduced
-  2. DNS prefetch and preconnect are present for Google Fonts and GTM
-  3. Repeat visits are served from service worker cache
-  4. GA4 measurement ID is a real ID (not the G-XXXXXXXXXX placeholder)
-  5. No console.log or debug statements remain in production code
-**Plans**: Complete
+  1. /contact renders a premium inquiry form matching the site's editorial luxury aesthetic
+  2. Form includes: name, email, phone, project type selector, budget range qualifier, project description textarea, and preferred timeline
+  3. Form submits via Netlify Forms (netlify attribute, honeypot field, success/error states)
+  4. Navigation links to /contact and the global CTA button points to /contact
+  5. `npm run build` exits 0 with /contact statically generated (21 total pages)
+**Plans**: 1 plan
 
 Plans:
-- [x] 05-01: Performance pass (dns-prefetch, defer, cache, console cleanup)
-- [x] 05-02: GA4 measurement ID replacement
+- [ ] 05-01-PLAN.md — Contact page, inquiry form, Netlify Forms wiring, nav CTA link update
 
-### Phase 6: Launch Prep
-**Goal**: All placeholder values replaced with real data, form backend wired, and site is ready to deploy to production
+### Phase 6: Final Polish and Deploy
+**Goal**: Site is production-ready — all nav links wired, SEO meta present on every page, robots and sitemap live, deployed to Netlify
 **Depends on**: Phase 5
-**Requirements**: LAUNCH-01, LAUNCH-02, LAUNCH-03, LAUNCH-04, LAUNCH-05, LAUNCH-06, LAUNCH-07
+**Requirements**: DEPLOY-01, DEPLOY-02, DEPLOY-03, DEPLOY-04, DEPLOY-05
 **Success Criteria** (what must be TRUE):
-  1. Submitting the contact form delivers a real message — no fake setTimeout simulation
-  2. Social links in nav and footer point to real Instagram, Facebook, and LinkedIn URLs
-  3. GA4 fires with a real measurement ID (verified in GA4 DebugView)
-  4. OG image is present at `images/og-image.jpg` and loads correctly when URL is shared
-  5. Site installs as a PWA without missing icon errors in Chrome DevTools
-**Plans**: 3 plans
+  1. All navigation links resolve to existing pages with no 404s
+  2. Every page has unique <title> and <meta description> via Next.js metadata API
+  3. robots.ts and sitemap.ts are present and return correct content
+  4. Site is deployed to Netlify at verdant.bbc-agency.com
+  5. Lighthouse score is 95+ on Performance, Accessibility, Best Practices, and SEO
+**Plans**: TBD
 
 Plans:
-- [x] 06-01-PLAN.md — Netlify Forms integration + _headers security file
-- [x] 06-02-PLAN.md — OG image + PWA icons + Apple touch icons generation
-- [ ] 06-03-PLAN.md — GA4 ID + social links replacement (owner input required)
+- [ ] 06-01-PLAN.md — Global nav audit, per-page SEO metadata, robots.ts, sitemap.ts
+- [ ] 06-02-PLAN.md — Netlify deployment, domain configuration, Lighthouse verification
 
 ## Progress
 
@@ -126,9 +114,9 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. SEO | 2/2 | Complete | 2026-04-09 |
-| 2. PWA | 2/2 | Complete | 2026-04-09 |
-| 3. Mobile Compliance | 2/2 | Complete | 2026-04-09 |
-| 4. Security | 3/3 | Complete | 2026-04-09 |
-| 5. Performance | 2/2 | Complete | 2026-04-09 |
-| 6. Launch Prep | 2/3 | In Progress|  |
+| 1. Scaffold and Setup | 1/1 | Complete | 2026-04-12 |
+| 2. Home Page | 1/1 | Complete | 2026-04-12 |
+| 3. Portfolio | 1/1 | Complete | 2026-04-12 |
+| 4. Services, About, and Process | 2/2 | Complete | 2026-04-12 |
+| 5. Contact Page | 0/1 | Pending | — |
+| 6. Final Polish and Deploy | 0/2 | Pending | — |
