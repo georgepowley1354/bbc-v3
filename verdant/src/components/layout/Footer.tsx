@@ -1,14 +1,8 @@
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
+import { services } from '@/data/services'
 
 const navLinks = ['Portfolio', 'Services', 'Process', 'About', 'Contact']
-const serviceLinks = [
-  'Hardscape',
-  'Softscape',
-  'Pools',
-  'Outdoor Kitchens',
-  'Full Property',
-]
 
 export default function Footer() {
   return (
@@ -51,13 +45,13 @@ export default function Footer() {
               Services
             </p>
             <ul className="flex flex-col gap-3">
-              {serviceLinks.map((service) => (
-                <li key={service}>
+              {services.map((service) => (
+                <li key={service.slug}>
                   <Link
-                    href={`/services#${service.toLowerCase().replace(/\s+/g, '-')}`}
+                    href={`/services/${service.slug}`}
                     className="font-sans text-sm text-white/70 hover:text-white transition-colors duration-200"
                   >
-                    {service}
+                    {service.name}
                   </Link>
                 </li>
               ))}

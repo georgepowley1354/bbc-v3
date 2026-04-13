@@ -84,7 +84,7 @@ export function InstagramPlaceholder() {
 
         {/* Follow button */}
         <div className="flex justify-center">
-          <Button variant="ghost-dark" href="#">
+          <Button variant="ghost-dark" disabled>
             Follow on Instagram
           </Button>
         </div>
