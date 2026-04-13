@@ -30,6 +30,7 @@ export function ContactForm() {
   const [values, setValues] = useState<ContactFormValues>(emptyForm)
   const [status, setStatus] = useState<FormStatus>('idle')
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof ContactFormValues, string>>>({})
+  const [honeypot, setHoneypot] = useState('')
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -47,7 +48,12 @@ export function ContactForm() {
     // Client-side validation
     const errors: Partial<Record<keyof ContactFormValues, string>> = {}
     if (!values.name.trim()) errors.name = 'Full name is required.'
-    if (!values.email.trim()) errors.email = 'Email address is required.'
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!values.email.trim()) {
+      errors.email = 'Email address is required.'
+    } else if (!emailPattern.test(values.email.trim())) {
+      errors.email = 'Please enter a valid email address.'
+    }
     if (!values.projectType) errors.projectType = 'Please select a service type.'
     if (!values.description.trim()) errors.description = 'Project description is required.'
 
@@ -64,7 +70,7 @@ export function ContactForm() {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encode({
           'form-name': 'contact',
-          'bot-field': '',
+          'bot-field': honeypot,
           name: values.name,
           email: values.email,
           phone: values.phone,
@@ -107,12 +113,18 @@ export function ContactForm() {
   }
 
   return (
-    <MotionDiv
-      variants={prefersReducedMotion ? undefined : stagger}
-      initial={prefersReducedMotion ? undefined : 'hidden'}
-      whileInView={prefersReducedMotion ? undefined : 'visible'}
-      viewport={{ once: true, margin: '-80px' }}
-    >
+    <>
+      {/* Screen reader status announcer */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {status === 'error' && 'Submission failed. Please try again or email us directly.'}
+        {status === 'submitting' && 'Sending your inquiry…'}
+      </div>
+      <MotionDiv
+        variants={prefersReducedMotion ? undefined : stagger}
+        initial={prefersReducedMotion ? undefined : 'hidden'}
+        whileInView={prefersReducedMotion ? undefined : 'visible'}
+        viewport={{ once: true, margin: '-80px' }}
+      >
       <form
         name="contact"
         onSubmit={handleSubmit}
@@ -126,7 +138,8 @@ export function ContactForm() {
           aria-hidden="true"
           tabIndex={-1}
           autoComplete="off"
-          onChange={() => {/* ignored */}}
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
         />
 
         <div className="space-y-8">
@@ -380,5 +393,6 @@ export function ContactForm() {
         </div>
       </form>
     </MotionDiv>
+    </>
   )
 }
