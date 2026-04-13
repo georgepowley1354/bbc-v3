@@ -122,8 +122,7 @@ export function ContactForm() {
       <MotionDiv
         variants={prefersReducedMotion ? undefined : stagger}
         initial={prefersReducedMotion ? undefined : 'hidden'}
-        whileInView={prefersReducedMotion ? undefined : 'visible'}
-        viewport={{ once: true, margin: '-80px' }}
+        animate={prefersReducedMotion ? undefined : 'visible'}
       >
       <form
         name="contact"
