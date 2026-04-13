@@ -25,3 +25,35 @@ export interface Service {
   icon: string
   relatedProjects: string[]
 }
+
+// Contact form types
+export type ProjectType =
+  | 'Hardscape'
+  | 'Softscape'
+  | 'Pool & Water'
+  | 'Outdoor Kitchen'
+  | 'Full Property Design'
+  | 'Maintenance Plan'
+
+export type BudgetRange =
+  | 'Under $25k'
+  | '$25k – $75k'
+  | '$75k – $150k'
+  | '$150k – $300k'
+  | '$300k+'
+
+export type Timeline =
+  | 'This season'
+  | 'Within 6 months'
+  | 'Within a year'
+  | 'Planning ahead'
+
+export interface ContactFormValues {
+  name: string
+  email: string
+  phone: string
+  projectType: ProjectType | ''
+  budgetRange: BudgetRange | ''
+  description: string
+  timeline: Timeline | ''
+}
