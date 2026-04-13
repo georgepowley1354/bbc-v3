@@ -116,7 +116,7 @@ export function ContactForm() {
     <>
       {/* Screen reader status announcer */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
-        {status === 'error' && 'Submission failed. Please try again or email us directly.'}
+        {status === 'error' && 'Something went wrong. Please try again or email us directly at hello@verdantdesign.com'}
         {status === 'submitting' && 'Sending your inquiry…'}
       </div>
       <MotionDiv
