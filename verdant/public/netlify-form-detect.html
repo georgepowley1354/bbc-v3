@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Netlify Form Detection</title>
+</head>
+<body>
+  <form
+    name="contact"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    hidden
+  >
+    <input type="hidden" name="form-name" value="contact" />
+    <input name="bot-field" />
+    <input name="name" type="text" />
+    <input name="email" type="email" />
+    <input name="phone" type="tel" />
+    <select name="projectType">
+      <option value="Hardscape">Hardscape</option>
+      <option value="Softscape">Softscape</option>
+      <option value="Pool &amp; Water">Pool &amp; Water</option>
+      <option value="Outdoor Kitchen">Outdoor Kitchen</option>
+      <option value="Full Property Design">Full Property Design</option>
+      <option value="Maintenance Plan">Maintenance Plan</option>
+    </select>
+    <select name="budgetRange">
+      <option value="Under $25k">Under $25k</option>
+      <option value="$25k – $75k">$25k – $75k</option>
+      <option value="$75k – $150k">$75k – $150k</option>
+      <option value="$150k – $300k">$150k – $300k</option>
+      <option value="$300k+">$300k+</option>
+    </select>
+    <textarea name="description"></textarea>
+    <select name="timeline">
+      <option value="This season">This season</option>
+      <option value="Within 6 months">Within 6 months</option>
+      <option value="Within a year">Within a year</option>
+      <option value="Planning ahead">Planning ahead</option>
+    </select>
+  </form>
+</body>
+</html>
