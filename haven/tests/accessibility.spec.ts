@@ -85,7 +85,7 @@ test.describe('Accessibility', () => {
 
   test('contact page social links have aria-label', async ({ page }) => {
     await page.goto('/contact');
-    const fbLink = page.getByRole('link', { name: /Haven on Facebook/ });
+    const fbLink = page.locator('main').getByRole('link', { name: /Haven on Facebook/ });
     await expect(fbLink).toBeAttached();
   });
 

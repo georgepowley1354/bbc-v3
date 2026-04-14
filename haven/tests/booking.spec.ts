@@ -57,7 +57,7 @@ test.describe('Booking page', () => {
   });
 
   test('phone number is a tappable tel link', async ({ page }) => {
-    const telLink = page.getByRole('link', { name: /\(518\) 555-0174/ });
+    const telLink = page.locator('main').getByRole('link', { name: /\(518\) 555-0174/ });
     await expect(telLink).toBeVisible();
     await expect(telLink).toHaveAttribute('href', 'tel:+15185550174');
   });

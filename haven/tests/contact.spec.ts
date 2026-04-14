@@ -54,7 +54,7 @@ test.describe('Contact page', () => {
   });
 
   test('Facebook link opens in new tab with noopener', async ({ page }) => {
-    const fbLink = page.getByRole('link', { name: /Haven on Facebook/ });
+    const fbLink = page.locator('main').getByRole('link', { name: /Haven on Facebook/ });
     await expect(fbLink).toBeVisible();
     await expect(fbLink).toHaveAttribute('target', '_blank');
     await expect(fbLink).toHaveAttribute('rel', /noopener/);
@@ -62,7 +62,7 @@ test.describe('Contact page', () => {
   });
 
   test('Instagram link opens in new tab with noopener', async ({ page }) => {
-    const igLink = page.getByRole('link', { name: /Haven on Instagram/ });
+    const igLink = page.locator('main').getByRole('link', { name: /Haven on Instagram/ });
     await expect(igLink).toBeVisible();
     await expect(igLink).toHaveAttribute('target', '_blank');
     await expect(igLink).toHaveAttribute('rel', /noopener/);

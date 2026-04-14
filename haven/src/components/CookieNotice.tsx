@@ -60,7 +60,7 @@ export function CookieNotice() {
             href="/contact"
             className="font-body font-medium text-[13px] text-haven-text-muted underline underline-offset-2 hover:text-haven-text transition-colors duration-150 cursor-pointer"
           >
-            Learn more
+            About our privacy practices
           </Link>
 
           <button

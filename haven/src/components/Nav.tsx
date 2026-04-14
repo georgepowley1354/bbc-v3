@@ -49,7 +49,7 @@ export function Nav() {
           className="max-w-6xl mx-auto px-6 lg:px-8 h-[72px] flex items-center justify-between"
           aria-label="Main navigation"
         >
-          <Link href="/" aria-label="Haven — home" className="flex-shrink-0">
+          <Link href="/" className="flex-shrink-0">
             <HavenLogo variant={scrolled ? 'default' : 'inverse'} width={120} />
           </Link>
 

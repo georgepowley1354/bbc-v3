@@ -63,7 +63,7 @@ export default function AboutPage() {
           </FadeUp>
           <FadeUp delay={0.07}>
             <h1 className="font-display text-[2.5rem] md:text-[3.25rem] font-normal leading-[1.2] text-haven-text text-balance">
-              You&rsquo;re booking a person,<br className="hidden md:inline" /> not a service.
+              You're booking a person,<br className="hidden md:inline" /> not a service.
             </h1>
           </FadeUp>
         </div>
@@ -152,7 +152,7 @@ export default function AboutPage() {
                 Your first visit
               </p>
               <h2 className="font-display text-[2rem] md:text-[2.5rem] font-normal text-haven-text text-balance">
-                Here&rsquo;s what happens.
+                Here's what happens.
               </h2>
             </div>
           </FadeUp>
