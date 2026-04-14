@@ -70,7 +70,7 @@ export default function BookingPage() {
             {prepItems.map(({ icon: Icon, text }, i) => (
               <FadeUp key={i} delay={i * 0.08}>
                 <li className="flex items-start gap-4">
-                  <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-full bg-haven-surface flex items-center justify-center">
+                  <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-full bg-haven-surface flex items-center justify-center" aria-hidden="true">
                     <Icon size={17} strokeWidth={1.75} className="text-haven-accent" />
                   </span>
                   <p className="font-body font-light text-[1rem] leading-[1.75] text-haven-text-muted pt-1">
@@ -111,7 +111,7 @@ export default function BookingPage() {
       <section className="bg-haven-surface py-14">
         <div className="max-w-xl mx-auto px-6 lg:px-8 text-center">
           <FadeUp>
-            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-haven-bg mb-5">
+            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-haven-bg mb-5" aria-hidden="true">
               <Phone size={17} strokeWidth={1.75} className="text-haven-accent" />
             </span>
             <p className="font-body font-light text-[1rem] leading-[1.75] text-haven-text-muted mb-2">

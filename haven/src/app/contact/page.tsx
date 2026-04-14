@@ -16,8 +16,7 @@ export const metadata: Metadata = {
 function FacebookIcon() {
   return (
     <svg
-      role="img"
-      aria-label="Facebook"
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="w-4 h-4"
@@ -31,8 +30,7 @@ function FacebookIcon() {
 function InstagramIcon() {
   return (
     <svg
-      role="img"
-      aria-label="Instagram"
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="w-4 h-4"
@@ -46,8 +44,7 @@ function InstagramIcon() {
 function LinkedInIcon() {
   return (
     <svg
-      role="img"
-      aria-label="LinkedIn"
+      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="currentColor"
       className="w-4 h-4"
@@ -61,7 +58,7 @@ function LinkedInIcon() {
 function GooglePlaceholderIcon() {
   return (
     <span
-      aria-label="Google Business"
+      aria-hidden="true"
       className="w-4 h-4 flex items-center justify-center font-display font-bold text-[13px] leading-none"
     >
       G
@@ -101,7 +98,7 @@ const serviceAreas = ['Albany', 'Clifton Park', 'Saratoga Springs'];
 
 export default function ContactPage() {
   return (
-    <main>
+    <>
       {/* Section 1 — Page Header */}
       <section className="bg-haven-surface pt-[96px] pb-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
@@ -341,6 +338,6 @@ export default function ContactPage() {
           </FadeUp>
         </div>
       </section>
-    </main>
+    </>
   );
 }

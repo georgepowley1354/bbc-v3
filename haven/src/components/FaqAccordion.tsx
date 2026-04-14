@@ -72,13 +72,16 @@ export default function FaqAccordion() {
     <div className="divide-y divide-haven-border border-t border-haven-border">
       {faqs.map((item, index) => {
         const isOpen = openIndex === index;
-        const isLast = index === faqs.length - 1;
+        const buttonId = `faq-btn-${index}`;
+        const panelId = `faq-panel-${index}`;
 
         return (
-          <div key={index} className={isLast ? '' : ''}>
+          <div key={index}>
             <button
+              id={buttonId}
               onClick={() => toggle(index)}
               aria-expanded={isOpen}
+              aria-controls={panelId}
               className="flex w-full items-center justify-between gap-6 py-5 text-left"
             >
               <span className="font-body font-medium text-[17px] text-haven-text leading-snug">
@@ -97,7 +100,10 @@ export default function FaqAccordion() {
             <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
+                  id={panelId}
                   key="answer"
+                  role="region"
+                  aria-labelledby={buttonId}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}

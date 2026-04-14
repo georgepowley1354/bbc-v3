@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <main>
+    <>
       {/* Page Header */}
       <section className="bg-haven-surface pt-[96px] pb-16">
         <div className="max-w-2xl mx-auto px-6 lg:px-8">
@@ -72,6 +72,6 @@ export default function FaqPage() {
           </FadeUp>
         </div>
       </section>
-    </main>
+    </>
   );
 }
