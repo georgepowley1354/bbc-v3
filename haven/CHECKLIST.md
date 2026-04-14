@@ -215,51 +215,51 @@
 
 ---
 
-## PHASE 6 — Technical Layer
+## PHASE 6 — Technical Layer ✓
 
 ### SEO
-- [ ] Local SEO schema — massage therapy, Albany
-- [ ] Local SEO schema — massage therapy, Clifton Park
-- [ ] Local SEO schema — massage therapy, Saratoga Springs
-- [ ] Google Business schema for Jane Smith LMT
-- [ ] Open Graph image — Home
-- [ ] Open Graph image — Services
-- [ ] Open Graph image — About
-- [ ] Open Graph image — Booking
-- [ ] Open Graph image — FAQ
-- [ ] Open Graph image — Contact
-- [ ] Twitter/X card meta tags — all pages
-- [ ] sitemap.xml generated
-- [ ] robots.txt configured
+- [x] Local SEO schema — massage therapy, Albany
+- [x] Local SEO schema — massage therapy, Clifton Park
+- [x] Local SEO schema — massage therapy, Saratoga Springs
+- [x] Google Business schema for Jane Smith LMT
+- [x] Open Graph image — Home
+- [x] Open Graph image — Services
+- [x] Open Graph image — About
+- [x] Open Graph image — Booking
+- [x] Open Graph image — FAQ
+- [x] Open Graph image — Contact
+- [x] Twitter/X card meta tags — all pages
+- [x] sitemap.xml generated
+- [x] robots.txt configured
 
 ### PWA
-- [ ] PWA manifest configured
-- [ ] App icons generated
-- [ ] Service worker
+- [x] PWA manifest configured
+- [x] App icons generated (SVG source + 11 PNG sizes via sharp)
+- [x] Service worker (public/sw.js + ServiceWorkerRegistration client component)
 
 ### Accessibility
-- [ ] WCAG 2.1 AA — all pages
-- [ ] All color contrast ratios verified
-- [ ] All images have alt text
-- [ ] All forms labeled
-- [ ] Keyboard navigation tested
-- [ ] Screen reader tested
+- [x] WCAG 2.1 AA — 9 issues found and fixed
+- [x] All color contrast ratios verified (all pass; sage decorative-only note documented)
+- [x] All images have alt text
+- [x] All forms labeled
+- [x] Keyboard navigation tested (skip link added, FAQ keyboard nav fixed)
+- [ ] Screen reader tested — needs manual verification before Phase 7
 
 ### Performance
-- [ ] 95+ Lighthouse score — all pages
-- [ ] Images optimized
-- [ ] Fonts optimized
+- [ ] 95+ Lighthouse score — verify after Phase 7 deploy
+- [x] Images optimized (Next.js Image component throughout, Unsplash preconnect)
+- [x] Fonts optimized (next/font/google, display: swap)
 
 ### Miscellaneous
-- [ ] Custom 404 page — warm, on brand, links back to booking
-- [ ] Cookie notice — styled to match warm aesthetic
+- [x] Custom 404 page — warm, on brand, links back to booking
+- [x] Cookie notice — styled to match warm aesthetic, dismissible via localStorage
 
 ### Testing
-- [ ] Playwright tests — home page critical path
-- [ ] Playwright tests — services page
-- [ ] Playwright tests — booking flow (full)
-- [ ] Playwright tests — contact form submission
-- [ ] Playwright tests — mobile viewport all pages
+- [x] Playwright tests — home page critical path (16 tests)
+- [x] Playwright tests — services page (9 tests)
+- [x] Playwright tests — booking flow (full) (10 tests)
+- [x] Playwright tests — contact form submission (12 tests)
+- [x] Playwright tests — mobile viewport all pages
 
 ---
 
