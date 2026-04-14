@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { StickyBookNow } from '@/components/StickyBookNow';
 import { JsonLd } from '@/components/JsonLd';
 import { ServiceWorkerRegistration } from '@/components/ServiceWorkerRegistration';
+import { CookieNotice } from '@/components/CookieNotice';
 import { localBusinessSchema } from '@/lib/schema';
 import './globals.css';
 
@@ -76,6 +77,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <StickyBookNow />
+        <CookieNotice />
       </body>
     </html>
   );
