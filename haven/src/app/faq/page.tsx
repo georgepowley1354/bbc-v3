@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   title: 'FAQ',
   description:
     'Common questions about booking a massage with Jane Smith LMT — what to expect, what to wear, cancellation policy, prenatal safety, and more.',
+  openGraph: {
+    title: 'FAQ | Haven Therapeutic Massage',
+    description:
+      'Common questions about booking with Jane Smith LMT — what to expect, pricing, cancellation, and more.',
+  },
+  twitter: { card: 'summary_large_image' },
 };
 
 export default function FaqPage() {

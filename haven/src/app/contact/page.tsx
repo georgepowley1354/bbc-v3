@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: 'Contact',
   description:
     'Reach Jane Smith LMT at Haven Therapeutic Massage. Serving Albany, Clifton Park, and Saratoga Springs NY. Call, text, or send a message.',
+  openGraph: {
+    title: 'Contact | Haven Therapeutic Massage',
+    description:
+      'Reach Jane Smith LMT at Haven Therapeutic Massage. Serving Albany, Clifton Park, and Saratoga Springs NY.',
+  },
+  twitter: { card: 'summary_large_image' },
 };
 
 function FacebookIcon() {

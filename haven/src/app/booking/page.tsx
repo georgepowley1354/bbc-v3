@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   title: 'Book a Session',
   description:
     'Book a therapeutic massage with Jane Smith LMT in Albany, Clifton Park, or Saratoga Springs NY. Online booking available. Swedish, Deep Tissue, Hot Stone, Prenatal, and Couples massage.',
+  openGraph: {
+    title: 'Book a Session | Haven Therapeutic Massage',
+    description:
+      'Book therapeutic massage online with Jane Smith LMT in Albany, Clifton Park, or Saratoga Springs NY.',
+  },
+  twitter: { card: 'summary_large_image' },
 };
 
 const ACUITY_URL =

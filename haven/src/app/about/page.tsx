@@ -6,6 +6,12 @@ export const metadata: Metadata = {
   title: 'About Jane',
   description:
     'Jane Smith LMT — licensed massage therapist in the Capital Region NY since 2000. One therapist, one client at a time. Learn about Jane\'s approach, certifications, and what to expect on your first visit.',
+  openGraph: {
+    title: 'About Jane Smith LMT | Haven Therapeutic Massage',
+    description:
+      'Jane Smith has practiced therapeutic massage in the Capital Region NY since 2000. One therapist, one client at a time.',
+  },
+  twitter: { card: 'summary_large_image' },
 };
 
 // ─── Data ────────────────────────────────────────────────────────────────────
