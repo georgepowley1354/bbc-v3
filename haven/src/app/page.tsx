@@ -78,48 +78,39 @@ function Stars() {
 export default function HomePage() {
   return (
     <>
-      {/* ── Hero Gallery ─────────────────────────────────────────────── */}
-      <ScrollGalleryHero />
-
-      {/* ── Tagline ──────────────────────────────────────────────────── */}
-      <section className="bg-haven-bg py-20 md:py-28">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <FadeUp>
-            <p className="font-body font-medium text-[12px] uppercase tracking-[0.14em] text-haven-accent mb-5">
-              Therapeutic Massage · Capital Region NY
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.08}>
-            <h1 className="font-display text-[2.5rem] md:text-[3.25rem] font-normal leading-[1.2] text-haven-text mb-7 text-balance">
-              Your peace starts here.
-            </h1>
-          </FadeUp>
-          <FadeUp delay={0.14}>
-            <p className="font-body font-light text-[1.125rem] leading-[1.75] text-haven-text-muted mb-10 max-w-xl mx-auto text-balance">
-              Jane Smith has practiced massage therapy in the Capital Region for 25 years.
-              She works with one client at a time, takes no shortcuts, and remembers what
-              worked for you last time.
-            </p>
-          </FadeUp>
-          <FadeUp delay={0.2}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/booking"
-                className="inline-flex items-center justify-center px-8 py-3.5 font-body font-semibold text-[16px] tracking-wide text-haven-text-inverse rounded bg-haven-accent-interactive hover:bg-haven-accent-hover transition-colors duration-200 cursor-pointer"
-              >
-                Book your first session
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 font-body font-semibold text-[16px] text-haven-accent-interactive hover:text-haven-accent transition-colors duration-200 group cursor-pointer"
-              >
-                See all services
-                <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </Link>
-            </div>
-          </FadeUp>
+      {/* ── Hero ─────────────────────────────────────────────────────── */}
+      <section className="bg-haven-bg min-h-[92vh] flex items-center py-24 md:py-32">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center w-full">
+          <p className="font-body font-medium text-[12px] uppercase tracking-[0.16em] text-haven-accent mb-6">
+            Therapeutic Massage · Capital Region NY
+          </p>
+          <h1 className="font-display text-[2.75rem] md:text-[4rem] font-normal leading-[1.15] text-haven-text mb-8 text-balance">
+            Your peace starts here.
+          </h1>
+          <p className="font-body font-light text-[1.125rem] leading-[1.8] text-haven-text-muted mb-12 max-w-xl mx-auto text-balance">
+            Jane Smith has practiced massage therapy in the Capital Region for 25 years.
+            One client at a time, no shortcuts, and she remembers what worked for you last time.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/booking"
+              className="inline-flex items-center justify-center px-9 py-4 font-body font-semibold text-[16px] tracking-wide text-haven-text-inverse rounded bg-haven-accent-interactive hover:bg-haven-accent-hover transition-colors duration-200 cursor-pointer"
+            >
+              Book your first session
+            </Link>
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 font-body font-semibold text-[16px] text-haven-accent-interactive hover:text-haven-accent transition-colors duration-200 group cursor-pointer"
+            >
+              See all services
+              <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
         </div>
       </section>
+
+      {/* ── Gallery ──────────────────────────────────────────────────── */}
+      <ScrollGalleryHero />
 
       {/* ── Services Preview ─────────────────────────────────────────── */}
       <section className="bg-haven-surface py-20 md:py-28">
