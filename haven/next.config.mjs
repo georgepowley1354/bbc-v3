@@ -36,7 +36,7 @@ const securityHeaders = [
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https://images.unsplash.com",
       "frame-src https://app.acuityscheduling.com",
-      "connect-src 'self'",
+      "connect-src 'self' https://images.unsplash.com https://app.acuityscheduling.com",
       "base-uri 'self'",
       "form-action 'self'",
     ].join('; '),
