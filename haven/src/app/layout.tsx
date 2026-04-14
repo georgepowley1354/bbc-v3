@@ -70,6 +70,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${lora.variable} ${raleway.variable}`}>
+      <head>
+        {/* Preconnect to image CDN used by the hero gallery */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body className="antialiased bg-haven-bg text-haven-text font-body">
         <JsonLd data={localBusinessSchema} />
         <ServiceWorkerRegistration />
