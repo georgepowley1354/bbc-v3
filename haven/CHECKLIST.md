@@ -171,40 +171,40 @@
 - [ ] Read CLAUDE.md
 
 ### Booking Page
-- [ ] Drop in AcuityBookingEmbed from haven-components (do NOT rebuild)
-- [ ] Acuity URL wired: https://app.acuityscheduling.com/schedule/0f4e6dff/appointment/91881173/calendar/13937249
-- [ ] What to expect section above the embed
-- [ ] Cancellation policy — clear and fair
-- [ ] Preparation tips — arrive 5 mins early, avoid heavy meals
-- [ ] Phone number as fallback — Jane answers personally
+- [x] Drop in AcuityBookingEmbed from haven-components (do NOT rebuild)
+- [x] Acuity URL wired: https://app.acuityscheduling.com/schedule/0f4e6dff/appointment/91881173/calendar/13937249
+- [x] What to expect section above the embed
+- [x] Cancellation policy — clear and fair
+- [x] Preparation tips — arrive 5 mins early, avoid heavy meals
+- [x] Phone number as fallback — Jane answers personally
 - [ ] Acuity embed scrolls cleanly on mobile — no horizontal scroll
 
 ### FAQ Page
-- [ ] 10 questions, accordion style
-- [ ] Q: first visit experience
-- [ ] Q: what to wear
-- [ ] Q: pressure preferences
-- [ ] Q: tipping
-- [ ] Q: cancellation policy
-- [ ] Q: prenatal safety
-- [ ] Q: gift certificates
-- [ ] Q: parking
-- [ ] Q: payment methods
-- [ ] Q: new client special
-- [ ] All answers warm and human — feel like Jane wrote them
-- [ ] All copy through stop-slop skill
+- [x] 10 questions, accordion style
+- [x] Q: first visit experience
+- [x] Q: what to wear
+- [x] Q: pressure preferences
+- [x] Q: tipping
+- [x] Q: cancellation policy
+- [x] Q: prenatal safety
+- [x] Q: gift certificates
+- [x] Q: parking
+- [x] Q: payment methods
+- [x] Q: new client special
+- [x] All answers warm and human — feel like Jane wrote them
+- [x] All copy through stop-slop skill
 
 ### Contact Page
-- [ ] Service areas listed: Albany, Clifton Park, Saratoga Springs
-- [ ] Google Maps embed placeholder per location
-- [ ] Hours of operation
-- [ ] Phone number — tappable tel: link
-- [ ] Email address
-- [ ] Facebook link — https://facebook.com/havenmassageny (new tab)
-- [ ] Instagram link — https://instagram.com/havenmassageny (new tab)
-- [ ] Google Business placeholder link (new tab)
-- [ ] LinkedIn link — https://linkedin.com/in/janesmith-lmt (new tab)
-- [ ] Contact form via Netlify Forms as backup
+- [x] Service areas listed: Albany, Clifton Park, Saratoga Springs
+- [x] Google Maps embed placeholder per location
+- [x] Hours of operation
+- [x] Phone number — tappable tel: link
+- [x] Email address
+- [x] Facebook link — https://facebook.com/havenmassageny (new tab)
+- [x] Instagram link — https://instagram.com/havenmassageny (new tab)
+- [x] Google Business placeholder link (new tab)
+- [x] LinkedIn link — https://linkedin.com/in/janesmith-lmt (new tab)
+- [x] Contact form via Netlify Forms as backup
 
 ### Quality Gates
 - [ ] All three pages tested on iPhone viewport
