@@ -1,12 +1,13 @@
 {
-  "name": "verdant-scaffold",
+  "name": "verdant",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:smoke": "node playwright-test.js"
   },
   "dependencies": {
     "framer-motion": "^11.18.2",
