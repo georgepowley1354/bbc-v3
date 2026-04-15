@@ -42,17 +42,18 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-haven-text text-haven-text-inverse">
+    <footer
+      className="text-haven-text-inverse"
+      style={{ background: 'linear-gradient(180deg, #2F2925 0%, #26211D 100%)' }}
+    >
       <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-16 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
-
-          {/* Brand */}
+        <div className="grid grid-cols-1 gap-12 border-b border-white/10 pb-12 md:grid-cols-3">
           <div className="flex flex-col gap-4">
             <HavenLogo variant="inverse" width={120} />
-            <p className="font-body font-light text-[14px] leading-relaxed opacity-60 max-w-[220px]">
+            <p className="max-w-[220px] font-body text-[14px] font-light leading-relaxed opacity-60">
               Therapeutic massage in Albany, Clifton Park, and Saratoga Springs, NY.
             </p>
-            <div className="flex items-center gap-4 mt-1">
+            <div className="mt-1 flex items-center gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.href}
@@ -60,7 +61,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="text-haven-accent hover:text-haven-secondary transition-colors duration-200 cursor-pointer"
+                  className="cursor-pointer text-haven-accent transition-colors duration-200 hover:text-haven-secondary"
                 >
                   {social.svg}
                 </a>
@@ -68,9 +69,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Nav */}
           <div>
-            <p className="font-body font-semibold text-[12px] uppercase tracking-[0.12em] opacity-60 mb-5">
+            <p className="mb-5 font-body text-[12px] font-semibold uppercase tracking-[0.12em] opacity-60">
               Navigation
             </p>
             <ul className="flex flex-col gap-3">
@@ -78,7 +78,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body font-normal text-[14px] opacity-70 hover:opacity-100 hover:text-haven-accent transition-all duration-200"
+                    className="font-body text-[14px] font-normal opacity-70 transition-all duration-200 hover:text-haven-accent hover:opacity-100"
                   >
                     {link.label}
                   </Link>
@@ -87,42 +87,41 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <p className="font-body font-semibold text-[12px] uppercase tracking-[0.12em] opacity-60 mb-5">
+            <p className="mb-5 font-body text-[12px] font-semibold uppercase tracking-[0.12em] opacity-60">
               Contact
             </p>
             <div className="flex flex-col gap-3">
               <a
                 href="tel:+15185550174"
-                className="font-body font-normal text-[14px] opacity-70 hover:opacity-100 hover:text-haven-accent transition-all duration-200"
+                className="font-body text-[14px] font-normal opacity-70 transition-all duration-200 hover:text-haven-accent hover:opacity-100"
               >
                 (518) 555-0174
               </a>
               <a
                 href="mailto:jane@havenmassageny.com"
-                className="font-body font-normal text-[14px] opacity-70 hover:opacity-100 hover:text-haven-accent transition-all duration-200"
+                className="font-body text-[14px] font-normal opacity-70 transition-all duration-200 hover:text-haven-accent hover:opacity-100"
               >
                 jane@havenmassageny.com
               </a>
-              <p className="font-body font-light text-[13px] opacity-60 mt-2 leading-relaxed">
-                Albany · Clifton Park<br />Saratoga Springs, NY
+              <p className="mt-2 font-body text-[13px] font-light leading-relaxed opacity-60">
+                Albany · Clifton Park
+                <br />
+                Saratoga Springs, NY
               </p>
             </div>
           </div>
-
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-body font-normal text-[12px] opacity-60">
+        <div className="flex flex-col items-center justify-between gap-3 pt-6 sm:flex-row">
+          <p className="font-body text-[12px] font-normal opacity-60">
             © {new Date().getFullYear()} Haven Therapeutic Massage · Jane Smith LMT
           </p>
           <a
             href="https://big-bad-coding.netlify.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body font-normal text-[12px] opacity-60 hover:opacity-90 hover:underline transition-opacity duration-200"
+            className="font-body text-[12px] font-normal opacity-60 transition-opacity duration-200 hover:opacity-90 hover:underline"
           >
             Built by BBC
           </a>

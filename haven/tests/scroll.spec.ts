@@ -28,7 +28,7 @@ test.describe('ScrollGalleryHero — desktop', () => {
 
   test('hero tagline is visible above the fold', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByText('Your peace starts here.')).toBeVisible();
+    await expect(page.getByText('A private ritual for release, repair, and stillness.')).toBeVisible();
   });
 
   test('FadeUp sections reveal after scrolling — services section', async ({ page }) => {
@@ -37,7 +37,7 @@ test.describe('ScrollGalleryHero — desktop', () => {
     await page.evaluate(() => window.scrollTo({ top: 1200, behavior: 'instant' }));
     // Wait for IntersectionObserver + framer-motion to fire
     await page.waitForTimeout(600);
-    await expect(page.getByText('Find the right fit.')).toBeVisible();
+    await expect(page.getByText('Choose the pace, pressure, and care your body is asking for.')).toBeVisible();
   });
 
   test('FadeUp sections reveal after scrolling — testimonials section', async ({ page }) => {
@@ -51,7 +51,7 @@ test.describe('ScrollGalleryHero — desktop', () => {
     await page.goto('/');
     await page.evaluate(() => window.scrollTo({ top: 1800, behavior: 'instant' }));
     await page.waitForTimeout(600);
-    await expect(page.getByText("You're booking a person, not a service.")).toBeVisible();
+    await expect(page.getByText('Bodywork that feels deeply personal, never clinical.')).toBeVisible();
   });
 
   test('no JS errors that would break the hero', async ({ page }) => {
@@ -79,13 +79,13 @@ test.describe('ScrollGalleryHero — mobile', () => {
 
   test('hero tagline visible on mobile', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByText('Your peace starts here.')).toBeVisible();
+    await expect(page.getByText('A private ritual for release, repair, and stillness.')).toBeVisible();
   });
 
   test('FadeUp sections reveal on mobile after scroll', async ({ page }) => {
     await page.goto('/');
     await page.evaluate(() => window.scrollTo({ top: 900, behavior: 'instant' }));
     await page.waitForTimeout(600);
-    await expect(page.getByText('Find the right fit.')).toBeVisible();
+    await expect(page.getByText('Choose the pace, pressure, and care your body is asking for.')).toBeVisible();
   });
 });

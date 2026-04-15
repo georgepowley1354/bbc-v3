@@ -1,0 +1,124 @@
+.section {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: linear-gradient(180deg, #f4ede4 0%, #f8f3ed 100%);
+}
+
+.inner {
+  width: min(100% - 2rem, 1240px);
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  align-items: end;
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border: 1px solid rgba(92, 77, 66, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.55rem 0.95rem;
+  color: rgba(92, 77, 66, 0.86);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.headline {
+  margin: 0.85rem 0 0;
+  color: #47392f;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(2.1rem, 4.2vw, 4rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.intro {
+  color: rgba(71, 57, 47, 0.78);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.list {
+  border-top: 1px solid rgba(92, 77, 66, 0.12);
+}
+
+.item {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  align-items: start;
+  border-bottom: 1px solid rgba(92, 77, 66, 0.12);
+  padding: 1.5rem 0;
+}
+
+.duration {
+  color: rgba(92, 77, 66, 0.75);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  color: #47392f;
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: 1.7rem;
+  line-height: 1.05;
+}
+
+.description {
+  margin-top: 0.5rem;
+  max-width: 40rem;
+  color: rgba(71, 57, 47, 0.8);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.tags {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+
+.tag {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.56);
+  padding: 0.45rem 0.7rem;
+  color: rgba(71, 57, 47, 0.82);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.price {
+  color: #47392f;
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .item {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .inner {
+    width: min(100% - 1rem, 1240px);
+  }
+}

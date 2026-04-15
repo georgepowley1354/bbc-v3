@@ -13,27 +13,18 @@ test.describe('Home page', () => {
     await expect(page.locator('nav[aria-label="Main navigation"]')).toBeVisible();
   });
 
-  test('displays tagline and primary booking CTA', async ({ page }) => {
-    await expect(page.getByText('Your peace starts here.')).toBeVisible();
-    const bookFirstSession = page.getByRole('link', { name: /Book your first session/i });
-    await expect(bookFirstSession).toBeVisible();
-    await expect(bookFirstSession).toHaveAttribute('href', '/booking');
-  });
-
-  test('displays "See all services" link to /services', async ({ page }) => {
-    const seeAllLink = page.getByRole('link', { name: /See all services/i });
-    await expect(seeAllLink).toBeVisible();
-    await expect(seeAllLink).toHaveAttribute('href', '/services');
+  test('displays hero headline', async ({ page }) => {
+    await expect(page.getByText('A private ritual for release, repair, and stillness.')).toBeVisible();
   });
 
   test('services section heading is visible', async ({ page }) => {
-    await expect(page.getByText('Find the right fit.')).toBeVisible();
+    await expect(page.getByText('Choose the pace, pressure, and care your body is asking for.')).toBeVisible();
   });
 
-  test('shows 3 service preview cards with correct names', async ({ page }) => {
-    await expect(page.getByText('Swedish Massage').first()).toBeVisible();
-    await expect(page.getByText('Deep Tissue').first()).toBeVisible();
-    await expect(page.getByText('Hot Stone').first()).toBeVisible();
+  test('shows 3 signature service names', async ({ page }) => {
+    await expect(page.getByText('Grounding Reset').first()).toBeVisible();
+    await expect(page.getByText('Targeted Therapeutic').first()).toBeVisible();
+    await expect(page.getByText('Restorative Ritual').first()).toBeVisible();
   });
 
   test('service cards have Book Now links to /booking', async ({ page }) => {
@@ -50,8 +41,7 @@ test.describe('Home page', () => {
   });
 
   test('Jane intro section is visible', async ({ page }) => {
-    await expect(page.getByText("You're booking a person, not a service.")).toBeVisible();
-    await expect(page.getByText(/Licensed Massage Therapist since 2000/)).toBeVisible();
+    await expect(page.getByText('Bodywork that feels deeply personal, never clinical.')).toBeVisible();
   });
 
   test('testimonials section heading is visible', async ({ page }) => {
@@ -70,17 +60,10 @@ test.describe('Home page', () => {
     await expect(page.getByText(/Saratoga Springs/).first()).toBeVisible();
   });
 
-  test('gift certificate section is present', async ({ page }) => {
-    await expect(page.getByText('Give the gift of peace.')).toBeVisible();
-    const giftLink = page.getByRole('link', { name: /Get a gift certificate/i });
-    await expect(giftLink).toBeVisible();
-    await expect(giftLink).toHaveAttribute('href', '/contact');
-  });
-
-  test('final booking CTA section is present', async ({ page }) => {
-    await expect(page.getByText('Ready to feel better?')).toBeVisible();
-    const bookYourSession = page.getByRole('link', { name: /Book your session/i });
-    await expect(bookYourSession).toBeVisible();
+  test('closing CTA section is present', async ({ page }) => {
+    await expect(page.getByText('Come in carrying less. Leave with more room to breathe.')).toBeVisible();
+    const bookLink = page.getByRole('link', { name: /Book a session/i }).first();
+    await expect(bookLink).toBeVisible();
   });
 
   test('phone number is a tel link', async ({ page }) => {

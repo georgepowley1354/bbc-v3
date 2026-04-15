@@ -223,7 +223,6 @@ export default function ContactPage() {
                 <form
                   action="/contact/success"
                   method="POST"
-                  data-netlify="true"
                   name="contact"
                   className="space-y-5"
                 >

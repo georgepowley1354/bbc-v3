@@ -1,39 +1,12 @@
 import Link from 'next/link';
-import { Star, Leaf, Heart, Flame } from 'lucide-react';
-import { ScrollGalleryHero } from '~/my-project/haven-components';
+import { Star } from 'lucide-react';
+import { ScrollGalleryHero } from '@/components/ScrollGalleryHero';
+import { HavenStudioStory } from '@/components/HavenStudioStory';
+import { HavenSignatureServices } from '@/components/HavenSignatureServices';
+import { HavenClosingInvite } from '@/components/HavenClosingInvite';
 import { FadeUp } from '@/components/FadeUp';
 
 // ─── Data ────────────────────────────────────────────────────────────────────
-
-const services = [
-  {
-    icon: Leaf,
-    name: 'Swedish Massage',
-    duration: '60 or 90 min',
-    price: 'From $95',
-    description:
-      'Releases surface tension and resets your nervous system. Long, slow strokes that let your body remember what relaxed feels like.',
-    bestFor: 'Stress, general soreness, first-time clients',
-  },
-  {
-    icon: Flame,
-    name: 'Deep Tissue',
-    duration: '60 or 90 min',
-    price: 'From $110',
-    description:
-      'Gets into the layers underneath. If you have knots that have been there for months, this is where they go.',
-    bestFor: 'Chronic pain, athletic recovery, persistent tension',
-  },
-  {
-    icon: Heart,
-    name: 'Hot Stone',
-    duration: '90 min',
-    price: '$145',
-    description:
-      'Warmth that reaches muscle, not just skin. The stones do the work that takes hands twice as long.',
-    bestFor: 'Anyone who runs cold or carries stress in their back',
-  },
-];
 
 const testimonials = [
   {
@@ -78,108 +51,10 @@ function Stars() {
 export default function HomePage() {
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="bg-haven-bg min-h-[92vh] flex items-center py-24 md:py-32">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center w-full">
-          <p className="font-body font-medium text-[12px] uppercase tracking-[0.16em] text-haven-accent mb-6">
-            Therapeutic Massage · Capital Region NY
-          </p>
-          <h1 className="font-display text-[2.75rem] md:text-[4rem] font-normal leading-[1.15] text-haven-text mb-8 text-balance">
-            Your peace starts here.
-          </h1>
-          <p className="font-body font-light text-[1.125rem] leading-[1.8] text-haven-text-muted mb-12 max-w-xl mx-auto text-balance">
-            Jane Smith has practiced massage therapy in the Capital Region for 25 years.
-            One client at a time, no shortcuts, and she remembers what worked for you last time.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/booking"
-              className="inline-flex items-center justify-center px-9 py-4 font-body font-semibold text-[16px] tracking-wide text-haven-text-inverse rounded bg-haven-accent-interactive hover:bg-haven-accent-hover transition-colors duration-200 cursor-pointer"
-            >
-              Book your first session
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 font-body font-semibold text-[16px] text-haven-accent-interactive hover:text-haven-accent transition-colors duration-200 group cursor-pointer"
-            >
-              See all services
-              <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Gallery ──────────────────────────────────────────────────── */}
+      {/* ── Hero Gallery (owns the viewport, carries IntroCopy) ───── */}
       <ScrollGalleryHero />
 
-      {/* ── Services Preview ─────────────────────────────────────────── */}
-      <section className="bg-haven-surface py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <FadeUp>
-            <div className="text-center mb-14">
-              <p className="font-body font-medium text-[12px] uppercase tracking-[0.14em] text-haven-accent mb-4">
-                Services
-              </p>
-              <h2 className="font-display text-[2rem] md:text-[2.5rem] font-normal text-haven-text text-balance">
-                Find the right fit.
-              </h2>
-            </div>
-          </FadeUp>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <FadeUp key={service.name} delay={i * 0.08}>
-                  <div className="bg-haven-bg border border-haven-border rounded-xl p-7 flex flex-col gap-4 shadow-card hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-250 h-full">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center"
-                      style={{ backgroundColor: 'rgba(125, 155, 118, 0.12)' }}
-                    >
-                      <Icon size={20} className="text-haven-accent" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <h3 className="font-display text-[1.25rem] font-semibold text-haven-text mb-1">
-                        {service.name}
-                      </h3>
-                      <p className="font-body font-medium text-[13px] text-haven-text-muted tracking-wide">
-                        {service.duration} · {service.price}
-                      </p>
-                    </div>
-                    <p className="font-body font-light text-[15px] leading-[1.7] text-haven-text-muted flex-1">
-                      {service.description}
-                    </p>
-                    <p className="font-body font-medium text-[13px] text-haven-accent-interactive">
-                      Best for:{' '}
-                      <span className="font-light text-haven-text-muted">{service.bestFor}</span>
-                    </p>
-                    <Link
-                      href="/booking"
-                      className="mt-1 inline-flex items-center justify-center w-full py-3 font-body font-semibold text-[14px] tracking-wide border border-haven-accent text-haven-accent-interactive rounded transition-all duration-200 hover:bg-haven-surface hover:border-haven-accent-interactive cursor-pointer"
-                    >
-                      Book Now
-                    </Link>
-                  </div>
-                </FadeUp>
-              );
-            })}
-          </div>
-
-          <FadeUp delay={0.24}>
-            <div className="text-center mt-10">
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 font-body font-semibold text-[15px] text-haven-accent-interactive hover:text-haven-accent transition-colors duration-200 group cursor-pointer"
-              >
-                See all 6 services including Prenatal and Couples
-                <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-              </Link>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* ── New Client Offer Banner ───────────────────────────────────── */}
+      {/* ── New Client Offer Banner ───────────────────────────────── */}
       <div
         className="py-4 px-6 text-center"
         style={{ background: 'linear-gradient(135deg, #7D9B76 0%, #4E6B48 100%)' }}
@@ -196,70 +71,13 @@ export default function HomePage() {
         </p>
       </div>
 
-      {/* ── Jane Intro ───────────────────────────────────────────────── */}
-      <section className="bg-haven-bg py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
-            {/* Photo placeholder */}
-            <FadeUp>
-              <div
-                className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-sm mx-auto md:mx-0"
-                style={{ backgroundColor: '#EDE6DB' }}
-                aria-label="Jane Smith LMT — professional headshot placeholder"
-                role="img"
-              >
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-25">
-                  <div className="w-20 h-20 rounded-full bg-haven-accent" />
-                  <div className="w-32 h-2 rounded bg-haven-accent" />
-                  <div className="w-24 h-2 rounded bg-haven-accent" />
-                </div>
-                <div
-                  className="absolute inset-0"
-                  style={{ background: 'rgba(196, 137, 111, 0.04)' }}
-                />
-              </div>
-            </FadeUp>
+      {/* ── Studio Story ─────────────────────────────────────────── */}
+      <HavenStudioStory />
 
-            {/* Text */}
-            <FadeUp delay={0.1}>
-              <div className="flex flex-col gap-6">
-                <div>
-                  <p className="font-body font-medium text-[12px] uppercase tracking-[0.14em] text-haven-accent mb-4">
-                    About Jane
-                  </p>
-                  <h2 className="font-display text-[2rem] md:text-[2.5rem] font-normal text-haven-text leading-[1.25] text-balance mb-6">
-                    You're booking a person, not a service.
-                  </h2>
-                </div>
-                <p className="font-body font-light text-[1.0625rem] leading-[1.8] text-haven-text-muted">
-                  Jane Smith got her license in 2000. She&rsquo;s been in the Capital Region
-                  ever since — working with clients through injuries, pregnancies, stressful
-                  seasons, and ordinary weeks that needed a reset.
-                </p>
-                <p className="font-body font-light text-[1.0625rem] leading-[1.8] text-haven-text-muted">
-                  She answers her own phone. She&rsquo;ll remember your name. When you book
-                  with Haven, you&rsquo;re booking Jane.
-                </p>
-                <div className="flex items-center gap-3 py-4 border-t border-haven-border-subtle">
-                  <div className="w-10 h-px bg-haven-accent" />
-                  <p className="font-body font-light text-[14px] text-haven-text-muted italic">
-                    Licensed Massage Therapist since 2000
-                  </p>
-                </div>
-                <Link
-                  href="/about"
-                  className="inline-flex items-center gap-2 font-body font-semibold text-[15px] text-haven-accent-interactive hover:text-haven-accent transition-colors duration-200 group cursor-pointer w-fit"
-                >
-                  Learn more about Jane
-                  <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
-                </Link>
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
+      {/* ── Signature Services ───────────────────────────────────── */}
+      <HavenSignatureServices />
 
-      {/* ── Testimonials ─────────────────────────────────────────────── */}
+      {/* ── Testimonials ─────────────────────────────────────────── */}
       <section className="bg-haven-surface py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <FadeUp>
@@ -296,7 +114,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Availability Notice ───────────────────────────────────────── */}
+      {/* ── Availability Notice ───────────────────────────────────── */}
       <div className="bg-haven-bg py-5 border-y border-haven-border">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-3">
@@ -311,61 +129,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Gift Certificate CTA ─────────────────────────────────────── */}
-      <section className="bg-haven-bg py-20 md:py-28">
-        <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
-          <FadeUp>
-            <p className="font-body font-medium text-[12px] uppercase tracking-[0.14em] text-haven-accent mb-5">
-              Gift Certificates
-            </p>
-            <h2 className="font-display text-[2rem] md:text-[2.5rem] font-normal text-haven-text mb-6 text-balance">
-              Give the gift of peace.
-            </h2>
-            <p className="font-body font-light text-[1.0625rem] leading-[1.75] text-haven-text-muted mb-10 max-w-lg mx-auto text-balance">
-              An hour away from the phone, the to-do list, and the noise.
-              Available for any service, any amount.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-8 py-3.5 font-body font-semibold text-[16px] tracking-wide border border-haven-accent text-haven-accent-interactive rounded cursor-pointer transition-all duration-200 hover:bg-haven-surface hover:border-haven-accent-interactive"
-            >
-              Get a gift certificate
-            </Link>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* ── Booking CTA ──────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-haven-text">
-        <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
-          <FadeUp>
-            <h2 className="font-display text-[2rem] md:text-[2.75rem] font-normal text-haven-text-inverse mb-6 text-balance leading-[1.25]">
-              Ready to feel better?
-            </h2>
-            <p className="font-body font-light text-[1.0625rem] leading-[1.75] text-haven-text-inverse/60 mb-4 max-w-md mx-auto">
-              Takes about two minutes to book. Jane answers her own phone if you&rsquo;d
-              rather call.
-            </p>
-            <p className="font-body font-normal text-[15px] text-haven-text-inverse/40 mb-10">
-              First visit is 20% off.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/booking"
-                className="inline-flex items-center justify-center px-10 py-4 font-body font-semibold text-[17px] tracking-wide text-haven-text-inverse rounded bg-haven-accent-interactive hover:bg-haven-accent-hover transition-colors duration-200 cursor-pointer w-full sm:w-auto"
-              >
-                Book your session
-              </Link>
-              <a
-                href="tel:+15185550174"
-                className="inline-flex items-center justify-center px-8 py-4 font-body font-semibold text-[17px] tracking-wide rounded border border-white/25 text-haven-text-inverse/75 hover:border-white/50 hover:text-haven-text-inverse transition-all duration-200 cursor-pointer w-full sm:w-auto"
-              >
-                (518) 555-0174
-              </a>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
+      {/* ── Closing Invite ────────────────────────────────────────── */}
+      <HavenClosingInvite />
 
       {/* Bottom padding for mobile sticky button */}
       <div className="h-14 md:hidden" aria-hidden="true" />

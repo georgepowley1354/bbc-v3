@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Clock, Shirt, MessageCircle, Utensils, Phone } from 'lucide-react';
 import { FadeUp } from '@/components/FadeUp';
-import { AcuityBookingEmbed } from '~/my-project/haven-components';
+import { AcuityBookingEmbed } from '@/components/AcuityBookingEmbed';
 
 export const metadata: Metadata = {
   title: 'Book a Session',
@@ -40,29 +40,27 @@ const prepItems = [
 export default function BookingPage() {
   return (
     <>
-      {/* Page header */}
       <section className="bg-haven-surface pt-[96px] pb-16">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+        <div className="max-w-3xl mx-auto px-6 text-center lg:px-8">
           <FadeUp>
-            <p className="font-body font-medium text-[12px] uppercase tracking-[0.14em] text-haven-accent mb-5">
+            <p className="mb-5 font-body text-[12px] font-medium uppercase tracking-[0.14em] text-haven-accent">
               Book a Session
             </p>
-            <h1 className="font-display text-[2.75rem] sm:text-[3.25rem] font-normal text-haven-text mb-6 text-balance leading-[1.15]">
+            <h1 className="mb-6 text-balance font-display text-[2.75rem] font-normal leading-[1.15] text-haven-text sm:text-[3.25rem]">
               Time with Jane.
             </h1>
-            <p className="font-body font-light text-[1.0625rem] leading-[1.75] text-haven-text-muted max-w-md mx-auto">
-              When you're ready, booking takes two minutes. Pick a time that works and Jane will
+            <p className="mx-auto max-w-md font-body text-[1.0625rem] font-light leading-[1.75] text-haven-text-muted">
+              When you&apos;re ready, booking takes two minutes. Pick a time that works and Jane will
               take care of the rest.
             </p>
           </FadeUp>
         </div>
       </section>
 
-      {/* Prep section */}
-      <section className="bg-haven-bg py-16 border-b border-haven-border">
+      <section className="border-b border-haven-border bg-haven-bg py-16">
         <div className="max-w-2xl mx-auto px-6 lg:px-8">
           <FadeUp>
-            <h2 className="font-display text-[1.5rem] font-normal text-haven-text mb-8 text-center">
+            <h2 className="mb-8 text-center font-display text-[1.5rem] font-normal text-haven-text">
               Before you come in
             </h2>
           </FadeUp>
@@ -70,10 +68,13 @@ export default function BookingPage() {
             {prepItems.map(({ icon: Icon, text }, i) => (
               <FadeUp key={i} delay={i * 0.08}>
                 <li className="flex items-start gap-4">
-                  <span className="mt-0.5 flex-shrink-0 w-9 h-9 rounded-full bg-haven-surface flex items-center justify-center" aria-hidden="true">
+                  <span
+                    className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-haven-surface"
+                    aria-hidden="true"
+                  >
                     <Icon size={17} strokeWidth={1.75} className="text-haven-accent" />
                   </span>
-                  <p className="font-body font-light text-[1rem] leading-[1.75] text-haven-text-muted pt-1">
+                  <p className="pt-1 font-body text-[1rem] font-light leading-[1.75] text-haven-text-muted">
                     {text}
                   </p>
                 </li>
@@ -83,14 +84,13 @@ export default function BookingPage() {
         </div>
       </section>
 
-      {/* Cancellation section */}
-      <section className="bg-haven-surface py-14 border-b border-haven-border">
-        <div className="max-w-2xl mx-auto px-6 lg:px-8 text-center">
+      <section className="border-b border-haven-border bg-haven-surface py-14">
+        <div className="max-w-2xl mx-auto px-6 text-center lg:px-8">
           <FadeUp>
-            <h2 className="font-display text-[1.5rem] font-normal text-haven-text mb-4">
+            <h2 className="mb-4 font-display text-[1.5rem] font-normal text-haven-text">
               Cancellations
             </h2>
-            <p className="font-body font-light text-[1rem] leading-[1.8] text-haven-text-muted max-w-prose mx-auto">
+            <p className="mx-auto max-w-prose font-body text-[1rem] font-light leading-[1.8] text-haven-text-muted">
               If something comes up, let Jane know at least 24 hours ahead. Life happens — she just
               needs the heads-up so she can offer the slot to someone else.
             </p>
@@ -98,7 +98,6 @@ export default function BookingPage() {
         </div>
       </section>
 
-      {/* Acuity booking embed */}
       <section className="bg-haven-bg py-16">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <FadeUp>
@@ -107,19 +106,21 @@ export default function BookingPage() {
         </div>
       </section>
 
-      {/* Phone fallback */}
       <section className="bg-haven-surface py-14">
-        <div className="max-w-xl mx-auto px-6 lg:px-8 text-center">
+        <div className="max-w-xl mx-auto px-6 text-center lg:px-8">
           <FadeUp>
-            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-haven-bg mb-5" aria-hidden="true">
+            <span
+              className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-haven-bg"
+              aria-hidden="true"
+            >
               <Phone size={17} strokeWidth={1.75} className="text-haven-accent" />
             </span>
-            <p className="font-body font-light text-[1rem] leading-[1.75] text-haven-text-muted mb-2">
+            <p className="mb-2 font-body text-[1rem] font-light leading-[1.75] text-haven-text-muted">
               Prefer to call? Jane answers personally.
             </p>
             <a
               href="tel:+15185550174"
-              className="font-body font-semibold text-[1.0625rem] text-haven-accent hover:text-haven-secondary transition-colors duration-200"
+              className="font-body text-[1.0625rem] font-semibold text-haven-accent transition-colors duration-200 hover:text-haven-secondary"
             >
               (518) 555-0174
             </a>

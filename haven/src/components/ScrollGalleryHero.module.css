@@ -1,0 +1,432 @@
+.section {
+  position: relative;
+  min-height: 360vh;
+  padding-top: clamp(5rem, 10vh, 7rem);
+  overflow: clip;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(201, 163, 143, 0.28), transparent 30%),
+    radial-gradient(circle at 8% 82%, rgba(125, 155, 118, 0.18), transparent 26%),
+    linear-gradient(180deg, #f8f4ee 0%, #f3ece4 48%, #f7f1ea 100%);
+}
+
+.stickyFrame {
+  position: sticky;
+  top: 5rem;
+  min-height: calc(100vh - 5rem);
+  overflow: clip;
+  padding: clamp(1.5rem, 2vw, 2.5rem);
+  pointer-events: none;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  min-height: calc(100vh - 10rem);
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.ambientOrb {
+  position: absolute;
+  inset: 18% 50% auto;
+  width: min(72vw, 1080px);
+  height: min(72vw, 1080px);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, rgba(245, 228, 215, 0.95) 0%, rgba(245, 228, 215, 0.55) 34%, transparent 68%);
+  transform: translateX(-50%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.galleryBackdrop {
+  position: absolute;
+  inset: auto 50% 21%;
+  z-index: 1;
+  width: min(84vw, 1260px);
+  height: min(48vh, 500px);
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  border-radius: 50px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.36), rgba(244, 234, 225, 0.3)),
+    rgba(255, 255, 255, 0.16);
+  transform: translateX(-50%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 30px 80px rgba(116, 93, 74, 0.08);
+  backdrop-filter: blur(18px);
+  pointer-events: none;
+}
+
+.topCopy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1.15rem;
+  width: min(100%, 900px);
+  margin: 0 auto;
+  padding: 1rem 1.5rem 0;
+  text-align: center;
+  color: #4d4036;
+}
+
+.brandBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  justify-self: center;
+  border: 1px solid rgba(92, 77, 66, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  padding: 0.55rem 0.95rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  backdrop-filter: blur(14px);
+}
+
+.brandNote {
+  color: rgba(92, 77, 66, 0.72);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.headline {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(2.95rem, 5.3vw, 5.45rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.subcopy {
+  margin: 0 auto;
+  max-width: 40rem;
+  color: rgba(77, 64, 54, 0.82);
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.75;
+}
+
+.detailList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  color: rgba(77, 64, 54, 0.78);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.detailList span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.detailList span:not(:last-child)::after {
+  width: 1.5rem;
+  height: 1px;
+  background: rgba(92, 77, 66, 0.18);
+  content: "";
+}
+
+.desktopShell {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 1540px);
+  height: min(68vh, 720px);
+  margin-top: -2rem;
+  pointer-events: none;
+}
+
+.card {
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  width: min(16vw, 250px);
+  min-width: 170px;
+  will-change: transform, opacity;
+}
+
+.centerCard {
+  top: 14%;
+  width: min(34vw, 560px);
+  min-width: 300px;
+  z-index: 5;
+}
+
+.leftOne {
+  z-index: 4;
+}
+
+.rightOne {
+  z-index: 4;
+}
+
+.leftTwo {
+  z-index: 3;
+}
+
+.rightTwo {
+  z-index: 3;
+}
+
+.imageFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(44, 44, 44, 0.12),
+    0 36px 80px rgba(124, 96, 77, 0.14);
+  background: linear-gradient(180deg, #e7d8cb 0%, #e9ded5 100%);
+}
+
+.centerFrame {
+  box-shadow:
+    0 8px 32px rgba(44, 44, 44, 0.12),
+    0 42px 120px rgba(124, 96, 77, 0.22);
+}
+
+.imageFrame::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(52, 35, 24, 0.12));
+  content: "";
+  pointer-events: none;
+  z-index: 1;
+}
+
+.imageFrame::after {
+  position: absolute;
+  inset: 0;
+  background: rgba(196, 137, 111, 0.06);
+  content: "";
+  pointer-events: none;
+  z-index: 2;
+}
+
+.image {
+  object-fit: cover;
+  filter: saturate(0.92) contrast(0.98);
+  pointer-events: none;
+}
+
+.bottomBar {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  padding-bottom: 1.25rem;
+}
+
+.microNote {
+  color: rgba(77, 64, 54, 0.78);
+  font-size: 0.84rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.chevron {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  color: rgba(72, 62, 53, 0.82);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  will-change: opacity, transform;
+}
+
+.chevronLine {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(180deg, rgba(72, 62, 53, 0.1), rgba(72, 62, 53, 0.8));
+}
+
+.chevronMark {
+  width: 14px;
+  height: 14px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  animation: chevronBounce 1.8s ease-in-out infinite;
+}
+
+.mobileStack {
+  width: min(100%, 720px);
+  margin: 0 auto;
+  display: grid;
+  gap: 1.1rem;
+  padding: 0 1rem 1.5rem;
+  pointer-events: none;
+}
+
+.mobileCard {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mobileCardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fallbackShell {
+  padding: clamp(3rem, 6vw, 5rem) 1rem;
+  background:
+    radial-gradient(circle at top, rgba(196, 137, 111, 0.12), transparent 36%),
+    linear-gradient(180deg, #faf7f2 0%, #f5eee6 100%);
+}
+
+.fallbackIntro {
+  display: grid;
+  gap: 0.9rem;
+  width: min(100%, 900px);
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.fallbackGrid {
+  width: min(100%, 1220px);
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr 1.2fr;
+  align-items: start;
+}
+
+.fallbackGrid .imageFrame:nth-child(2),
+.fallbackGrid .imageFrame:nth-child(4) {
+  transform: translateY(1.5rem);
+}
+
+@keyframes chevronBounce {
+  0%,
+  100% {
+    transform: rotate(45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(45deg) translateY(6px);
+  }
+}
+
+@media (max-width: 1180px) {
+  .headline {
+    font-size: clamp(2.75rem, 6vw, 4.95rem);
+  }
+
+  .desktopShell {
+    transform: translateY(-1rem) scale(0.78);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .topCopy {
+    gap: 0.85rem;
+    padding-top: 0.75rem;
+  }
+
+  .desktopShell {
+    transform: translateY(-0.75rem) scale(0.68);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    min-height: auto;
+    padding-top: 0;
+  }
+
+  .stickyFrame {
+    position: relative;
+    min-height: auto;
+    top: 0;
+    padding: 1.25rem 0 2rem;
+  }
+
+  .stage {
+    min-height: auto;
+    gap: 1.5rem;
+    padding-top: 0;
+  }
+
+  .ambientOrb {
+    inset: 7rem 50% auto;
+    width: 120vw;
+    height: 120vw;
+  }
+
+  .galleryBackdrop {
+    display: none;
+  }
+
+  .topCopy {
+    padding: 0 1rem;
+  }
+
+  .brandBar {
+    gap: 0.55rem;
+  }
+
+  .brandNote {
+    width: 100%;
+  }
+
+  .headline {
+    font-size: clamp(2.35rem, 11vw, 3.5rem);
+  }
+
+  .subcopy {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .detailList {
+    gap: 0.55rem;
+  }
+
+  .detailList span:not(:last-child)::after {
+    display: none;
+  }
+
+  .fallbackGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fallbackGrid .imageFrame:nth-child(2),
+  .fallbackGrid .imageFrame:nth-child(4) {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevronMark {
+    animation: none;
+  }
+
+  .mobileCard {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}

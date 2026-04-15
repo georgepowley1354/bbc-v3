@@ -1,8 +1,3 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
 const isDev = process.env.NODE_ENV === 'development';
 
 const securityHeaders = [
@@ -45,6 +40,7 @@ const securityHeaders = [
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
   poweredByHeader: false,
   async headers() {
@@ -62,21 +58,6 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
       },
     ],
-  },
-  webpack: (config) => {
-    // Resolve the haven-components alias
-    config.resolve.alias['~/my-project/haven-components'] = path.resolve(
-      __dirname,
-      '../haven-components',
-    );
-
-    // Ensure external components can find this project's node_modules
-    config.resolve.modules = [
-      path.resolve(__dirname, 'node_modules'),
-      'node_modules',
-    ];
-
-    return config;
   },
 };
 

@@ -1,0 +1,150 @@
+.section {
+  padding: clamp(4rem, 8vw, 7rem) 0 clamp(5rem, 10vw, 8rem);
+  background:
+    radial-gradient(circle at 20% 25%, rgba(196, 137, 111, 0.12), transparent 22%),
+    linear-gradient(180deg, #f7f1e8 0%, #efe5db 100%);
+}
+
+.inner {
+  width: min(100% - 2rem, 1240px);
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 34px;
+  background:
+    linear-gradient(120deg, rgba(73, 55, 44, 0.93), rgba(92, 73, 59, 0.86)),
+    #49372c;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  color: #f8f2ea;
+  box-shadow: 0 28px 80px rgba(88, 68, 55, 0.18);
+}
+
+.panel::before {
+  position: absolute;
+  inset: auto auto -15% -8%;
+  width: min(36vw, 420px);
+  height: min(36vw, 420px);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(214, 180, 157, 0.3), transparent 68%);
+  content: "";
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  align-items: end;
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  color: rgba(248, 242, 234, 0.82);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.headline {
+  margin: 1rem 0 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(2.2rem, 4.8vw, 4.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.copy {
+  margin-top: 1rem;
+  max-width: 36rem;
+  color: rgba(248, 242, 234, 0.8);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.quoteBlock {
+  display: grid;
+  gap: 0.85rem;
+  align-self: stretch;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  padding-left: 1.4rem;
+}
+
+.quote {
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.55;
+}
+
+.quoteMeta {
+  color: rgba(248, 242, 234, 0.66);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  border-radius: 999px;
+  padding: 0.9rem 1.3rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.primaryAction {
+  background: #f3e7db;
+  color: #47392f;
+}
+
+.secondaryAction {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f8f2ea;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quoteBlock {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    padding-left: 0;
+    padding-top: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .inner {
+    width: min(100% - 1rem, 1240px);
+  }
+}

@@ -42,7 +42,12 @@ export function Nav() {
                 borderBottom: '1px solid #E4DDD4',
                 boxShadow: '0 1px 3px rgba(44, 35, 28, 0.06)',
               }
-            : { backgroundColor: 'transparent' }
+            : {
+                backgroundColor: 'rgba(248, 244, 238, 0.38)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
+                borderBottom: '1px solid rgba(228, 221, 212, 0.45)',
+              }
         }
       >
         <nav
@@ -50,7 +55,7 @@ export function Nav() {
           aria-label="Main navigation"
         >
           <Link href="/" className="flex-shrink-0">
-            <HavenLogo variant={scrolled ? 'default' : 'inverse'} width={120} />
+            <HavenLogo variant="default" width={120} />
           </Link>
 
           {/* Desktop links */}
@@ -60,7 +65,7 @@ export function Nav() {
                 key={link.href}
                 href={link.href}
                 className="font-body font-medium text-[15px] tracking-wide transition-colors duration-200 hover:text-haven-accent-interactive"
-                style={{ color: scrolled ? '#2C2C2C' : '#FAF8F5' }}
+                style={{ color: scrolled ? '#2C2C2C' : '#5A4A3E' }}
               >
                 {link.label}
               </Link>
@@ -69,19 +74,20 @@ export function Nav() {
               href="/booking"
               className="font-body font-semibold text-[15px] tracking-wide px-5 py-2.5 rounded transition-all duration-200 cursor-pointer"
               style={{
-                backgroundColor: scrolled ? '#4E6B48' : 'rgba(250, 248, 245, 0.15)',
+                backgroundColor: scrolled ? '#4E6B48' : 'rgba(78, 107, 72, 0.9)',
                 color: '#FAF8F5',
-                border: scrolled ? 'none' : '1.5px solid rgba(250, 248, 245, 0.6)',
+                border: scrolled ? 'none' : '1.5px solid rgba(78, 107, 72, 0.18)',
+                boxShadow: scrolled ? 'none' : '0 12px 24px rgba(78, 107, 72, 0.16)',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.backgroundColor = scrolled
                   ? '#3D5538'
-                  : 'rgba(250, 248, 245, 0.25)';
+                  : '#3D5538';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.backgroundColor = scrolled
                   ? '#4E6B48'
-                  : 'rgba(250, 248, 245, 0.15)';
+                  : 'rgba(78, 107, 72, 0.9)';
               }}
             >
               Book Now
@@ -91,7 +97,7 @@ export function Nav() {
           {/* Mobile hamburger */}
           <button
             className="md:hidden p-2 cursor-pointer transition-colors duration-200"
-            style={{ color: scrolled ? '#2C2C2C' : '#FAF8F5' }}
+            style={{ color: scrolled ? '#2C2C2C' : '#5A4A3E' }}
             onClick={() => setMobileOpen(true)}
             aria-label="Open navigation menu"
             aria-expanded={mobileOpen}
