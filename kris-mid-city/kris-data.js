@@ -6,6 +6,19 @@
   'use strict';
 
   // Table names in Supabase
+  // NOTE: daily_specials is a single-row table. Create it in Supabase with:
+  //   create table daily_specials (
+  //     id uuid primary key default gen_random_uuid(),
+  //     active boolean not null default false,
+  //     title text not null default '',
+  //     description text not null default '',
+  //     price text not null default '',
+  //     date text not null default ''
+  //   );
+  //   insert into daily_specials (active,title,description,price,date) values (false,'','','','');
+  //   alter table daily_specials enable row level security;
+  //   create policy "Public read" on daily_specials for select using (true);
+  //   create policy "Auth write" on daily_specials for all using (auth.role() = 'authenticated');
   var TABLES = {
     announcements:  'announcements',
     happyHour:      'happy_hour',
@@ -15,7 +28,8 @@
     team:           'team',
     drinks:         'drinks',
     menuItems:      'menu_items',
-    reviews:        'reviews'
+    reviews:        'reviews',
+    dailySpecial:   'daily_specials'
   };
 
   // In-memory cache — populated by init()
@@ -34,26 +48,52 @@
     return _sb;
   }
 
+  async function _accessToken() {
+    var sess = await _client().auth.getSession();
+    return sess.data.session && sess.data.session.access_token;
+  }
+
+  function _readAsDataUrl(file) {
+    return new Promise(function(resolve, reject) {
+      if (!file) return resolve(null);
+      var reader = new FileReader();
+      reader.onload = function(event) { resolve(event.target.result); };
+      reader.onerror = function() { reject(new Error('Failed to read file')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
   // Route all writes through the server-side function so the service key
   // never reaches the browser.
   async function _write(operation, table, id, data) {
-    var sess = await _client().auth.getSession();
-    var token = sess.data.session && sess.data.session.access_token;
-    if (!token) {
-      console.error('KMCData._write: no active session');
-      return { data: null, error: { message: 'Not authenticated' } };
+    try {
+      var token = await _accessToken();
+      if (!token) {
+        console.error('KMCData._write: no active session');
+        return { data: null, error: { message: 'Not authenticated' } };
+      }
+      var res = await fetch('/.netlify/functions/kmc-write', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ operation: operation, table: table, id: id || null, data: data || null })
+      });
+      var json = null;
+      try {
+        json = await res.json();
+      } catch (parseError) {
+        json = null;
+      }
+      if (!res.ok) {
+        return { data: null, error: { message: (json && json.error) || 'Server error' } };
+      }
+      return { data: json && json.data, error: null };
+    } catch (err) {
+      console.error('KMCData._write network error', err);
+      return { data: null, error: { message: err.message || 'Network error' } };
     }
-    var res = await fetch('/.netlify/functions/kmc-write', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify({ operation: operation, table: table, id: id || null, data: data || null })
-    });
-    var json = await res.json();
-    if (!res.ok) return { data: null, error: { message: json.error || 'Server error' } };
-    return { data: json.data, error: null };
   }
 
   // Map Supabase table name back to cache key
@@ -72,8 +112,8 @@
         return client.from(table).select('*').then(function(res) {
           if (res.error) { console.error('KMCData.init error on ' + table, res.error); return; }
           var key = _tableToKey[table];
-          if (table === 'happy_hour') {
-            // happy_hour is a single-row table — store as object, not array
+          if (table === 'happy_hour' || table === 'daily_specials') {
+            // single-row tables — store as object, not array
             _cache[key] = res.data && res.data.length ? res.data[0] : null;
           } else {
             _cache[key] = res.data || [];
@@ -87,7 +127,7 @@
     get: function(key) {
       if (_cache[key] === undefined) {
         console.warn('KMCData.get called before init() for key:', key);
-        return key === 'happyHour' ? null : [];
+        return (key === 'happyHour' || key === 'dailySpecial') ? null : [];
       }
       return JSON.parse(JSON.stringify(_cache[key]));
     },
@@ -96,7 +136,7 @@
     set: async function(key, data) {
       var table = TABLES[key];
       if (!table) { console.error('KMCData.set: unknown key', key); return false; }
-      if (key !== 'happyHour') {
+      if (key !== 'happyHour' && key !== 'dailySpecial') {
         console.error('KMCData.set: collection writes must use addItem/updateItem/removeItem. set() is reserved for single-row tables only.', key);
         return false;
       }
@@ -112,6 +152,7 @@
     // Add one item to a collection
     addItem: async function(key, item) {
       var table = TABLES[key];
+      if (!table) { console.error('KMCData.addItem: unknown key', key); return null; }
       var res = await _write('add', table, null, item);
       if (res.error) { console.error('KMCData.addItem error', res.error); return null; }
       _cache[key] = (_cache[key] || []).concat([res.data]);
@@ -121,20 +162,24 @@
     // Update one item by id
     updateItem: async function(key, id, updates) {
       var table = TABLES[key];
+      if (!table) { console.error('KMCData.updateItem: unknown key', key); return null; }
       var res = await _write('update', table, id, updates);
-      if (res.error) { console.error('KMCData.updateItem error', res.error); return; }
+      if (res.error) { console.error('KMCData.updateItem error', res.error); return null; }
       var arr = _cache[key] || [];
       var idx = arr.findIndex(function(x) { return x.id === id; });
       if (idx > -1) arr[idx] = res.data;
       _cache[key] = arr;
+      return res.data;
     },
 
     // Remove one item by id
     removeItem: async function(key, id) {
       var table = TABLES[key];
+      if (!table) { console.error('KMCData.removeItem: unknown key', key); return false; }
       var res = await _write('remove', table, id, null);
-      if (res.error) { console.error('KMCData.removeItem error', res.error); return; }
+      if (res.error) { console.error('KMCData.removeItem error', res.error); return false; }
       _cache[key] = (_cache[key] || []).filter(function(x) { return x.id !== id; });
+      return true;
     },
 
     // Export current cache as JSON (backup)
@@ -161,6 +206,83 @@
     getSession: async function() {
       var res = await _client().auth.getSession();
       return res.data.session;
+    },
+
+    uploadImage: async function(kind, file) {
+      if (!file) {
+        return { data: null, error: { message: 'No file selected' } };
+      }
+      try {
+        var token = await _accessToken();
+        if (!token) {
+          return { data: null, error: { message: 'Not authenticated' } };
+        }
+        var dataUrl = await _readAsDataUrl(file);
+        var res = await fetch('/.netlify/functions/kmc-upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            kind: kind,
+            filename: file.name || 'upload',
+            contentType: file.type || '',
+            size: file.size || 0,
+            dataUrl: dataUrl
+          })
+        });
+        var json = null;
+        try {
+          json = await res.json();
+        } catch (parseError) {
+          json = null;
+        }
+        if (!res.ok) {
+          return { data: null, error: { message: (json && json.error) || 'Upload failed' } };
+        }
+        return { data: json && json.data, error: null };
+      } catch (err) {
+        console.error('KMCData.uploadImage error', err);
+        return { data: null, error: { message: err.message || 'Upload failed' } };
+      }
+    },
+
+    deleteImage: async function(urlOrPath) {
+      if (!urlOrPath) {
+        return { data: null, error: null };
+      }
+      try {
+        var token = await _accessToken();
+        if (!token) {
+          return { data: null, error: { message: 'Not authenticated' } };
+        }
+        var res = await fetch('/.netlify/functions/kmc-upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            operation: 'remove',
+            url: urlOrPath,
+            path: urlOrPath
+          })
+        });
+        var json = null;
+        try {
+          json = await res.json();
+        } catch (parseError) {
+          json = null;
+        }
+        if (!res.ok) {
+          return { data: null, error: { message: (json && json.error) || 'Delete failed' } };
+        }
+        return { data: json && json.data, error: null };
+      } catch (err) {
+        console.error('KMCData.deleteImage error', err);
+        return { data: null, error: { message: err.message || 'Delete failed' } };
+      }
     }
   };
 

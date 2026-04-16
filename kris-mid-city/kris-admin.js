@@ -149,6 +149,7 @@
   function _esc(s) { var str = String(s||''); if (window.DOMPurify) str = DOMPurify.sanitize(str, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] }); return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function _v(id) { return (document.getElementById(id)||{}).value || ''; }
   function _b(id) { return !!(document.getElementById(id)||{}).checked; }
+  function _attr(s) { return _esc(s).replace(/'/g, '&#39;'); }
 
   function renderAnnouncements() {
     var items = KMCData.get('announcements');
@@ -172,9 +173,35 @@
   }
 
   function renderSpecials() {
+    var ds = KMCData.get('dailySpecial') || {};
+    var dsActive = ds.active === true;
+    var dsTitle = ds.title || '';
+    var dsDesc = ds.description || '';
+    var dsPrice = ds.price || '';
+    var dsDate = ds.date || new Date().toISOString().slice(0, 10);
     var weekly = KMCData.get('weeklySpecials');
-    var hh = KMCData.get('happyHour');
-    var html = '<h2 class="kmc-section-title">Weekly Specials</h2>';
+    var hh = KMCData.get('happyHour') || { days: '', time: '', deals: [] };
+    if (!Array.isArray(hh.deals)) hh.deals = [];
+    var html = '<h2 class="kmc-section-title">&#x1F4F8; Today\'s Special</h2>' +
+      '<p style="color:#a89880;margin:-10px 0 16px;font-size:14px">Post a daily special — it shows near the top of the home page and generates a ready-to-copy social caption.</p>' +
+      '<div class="kmc-card">' +
+        '<div class="kmc-row">' +
+          '<div class="kmc-field"><label>Special Name</label><input type="text" id="ds-title" value="' + _esc(dsTitle) + '" placeholder="e.g. Fish Fry Friday" /></div>' +
+          '<div class="kmc-field" style="flex:0 0 120px"><label>Price</label><input type="text" id="ds-price" value="' + _esc(dsPrice) + '" placeholder="$16" /></div>' +
+          '<div class="kmc-field" style="flex:0 0 155px"><label>Date</label><input type="date" id="ds-date" value="' + _esc(dsDate) + '" /></div>' +
+        '</div>' +
+        '<div class="kmc-row"><div class="kmc-field"><label>Description</label><input type="text" id="ds-desc" value="' + _esc(dsDesc) + '" placeholder="Beer-battered cod, fries, coleslaw, and tartar sauce" /></div></div>' +
+        '<div class="kmc-toggle-row">' +
+          '<input type="checkbox" id="ds-active"' + (dsActive ? ' checked' : '') + ' />' +
+          '<label for="ds-active">Show on home page</label>' +
+        '</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">' +
+          '<button class="kmc-btn kmc-btn-gold" onclick="KMCAdmin._saveDailySpecial()">Save Special</button>' +
+          '<button class="kmc-btn kmc-btn-outline kmc-btn-sm" onclick="KMCAdmin._copyDSCaption(\'fb\')">&#x1F4CB; Copy for Facebook</button>' +
+          '<button class="kmc-btn kmc-btn-outline kmc-btn-sm" onclick="KMCAdmin._copyDSCaption(\'ig\')">&#x1F4CB; Copy for Instagram</button>' +
+        '</div>' +
+      '</div>' +
+      '<hr class="kmc-divider"><h2 class="kmc-section-title">Weekly Specials</h2>';
     weekly.forEach(function(item) {
       html += '<div class="kmc-card"><div class="kmc-row">' +
         '<div class="kmc-field" style="flex:0 0 110px"><label>Day</label><input type="text" id="sp-day-' + item.id + '" value="' + _esc(item.day) + '" /></div>' +
@@ -208,18 +235,21 @@
     var items = KMCData.get('events');
     var html = '<h2 class="kmc-section-title">Events</h2>';
     items.forEach(function(item) {
+      var thumb = item.photo ? '<img src="' + _attr(item.photo) + '" class="kmc-photo-preview" onerror="this.hidden=true" />' : '';
       html += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.title) + '</strong>' +
           '<div style="display:flex;gap:8px">' +
             '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._saveEvent(\'' + item.id + '\')">Save</button>' +
             '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delEvent(\'' + item.id + '\')">Delete</button>' +
           '</div></div>' +
+        thumb +
         '<div class="kmc-row">' +
           '<div class="kmc-field"><label>Title</label><input type="text" id="ev-title-' + item.id + '" value="' + _esc(item.title) + '" /></div>' +
           '<div class="kmc-field" style="flex:0 0 150px"><label>Date</label><input type="date" id="ev-date-' + item.id + '" value="' + _esc(item.date) + '" /></div>' +
           '<div class="kmc-field" style="flex:0 0 120px"><label>Time</label><input type="time" id="ev-time-' + item.id + '" value="' + _esc(item.time) + '" /></div>' +
         '</div>' +
         '<div class="kmc-row"><div class="kmc-field"><label>Description</label><textarea id="ev-desc-' + item.id + '">' + _esc(item.description) + '</textarea></div></div>' +
+        '<div class="kmc-row"><div class="kmc-field"><label>Event Photo (upload new)</label><input type="file" id="ev-photo-' + item.id + '" accept="image/*" /></div></div>' +
         '<div class="kmc-toggle-row">' +
           '<input type="checkbox" id="ev-free-' + item.id + '"' + (item.free ? ' checked' : '') + ' /><label for="ev-free-' + item.id + '">Free</label>' +
           '<input type="checkbox" id="ev-active-' + item.id + '"' + (item.active ? ' checked' : '') + ' /><label for="ev-active-' + item.id + '">Active</label>' +
@@ -233,6 +263,7 @@
         '<div class="kmc-field" style="flex:0 0 120px"><label>Time</label><input type="time" id="ev-new-time" /></div>' +
       '</div>' +
       '<div class="kmc-row"><div class="kmc-field"><label>Description</label><textarea id="ev-new-desc"></textarea></div></div>' +
+      '<div class="kmc-row"><div class="kmc-field"><label>Event Photo</label><input type="file" id="ev-new-photo" accept="image/*" /></div></div>' +
       '<div class="kmc-toggle-row">' +
         '<input type="checkbox" id="ev-new-free" checked /><label for="ev-new-free">Free</label>' +
         '<input type="checkbox" id="ev-new-active" checked /><label for="ev-new-active">Active</label>' +
@@ -247,7 +278,7 @@
     var html = '<h2 class="kmc-section-title">Gallery Photos</h2>';
     items.forEach(function(item) {
       var src = item.src || '';
-      var thumb = src ? '<img src="' + src + '" class="kmc-photo-preview" onerror="this.hidden=true" />' : '';
+      var thumb = src ? '<img src="' + _attr(src) + '" class="kmc-photo-preview" onerror="this.hidden=true" />' : '';
       html += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.alt) + '</strong>' +
           '<button class="kmc-btn kmc-btn-danger kmc-btn-sm" onclick="KMCAdmin._delPhoto(\'' + item.id + '\')">Delete</button></div>' +
@@ -256,15 +287,16 @@
           '<div class="kmc-field"><label>Caption</label><input type="text" id="ph-cap-' + item.id + '" value="' + _esc(item.caption) + '" /></div>' +
           '<div class="kmc-field" style="flex:0 0 130px"><label>Category</label>' +
             '<select id="ph-cat-' + item.id + '">' +
-              ['food','drinks','interior','events'].map(function(c){ return '<option value="' + c + '"' + (item.category===c?' selected':'') + '>' + c + '</option>'; }).join('') +
+              ['food','drinks','interior','events','homepage'].map(function(c){ return '<option value="' + c + '"' + (item.category===c?' selected':'') + '>' + c + '</option>'; }).join('') +
             '</select></div></div>' +
+        '<div class="kmc-row"><div class="kmc-field"><label>Photo (upload new)</label><input type="file" id="ph-file-' + item.id + '" accept="image/*" /></div></div>' +
         '<button class="kmc-btn kmc-btn-gold kmc-btn-sm" onclick="KMCAdmin._savePhoto(\'' + item.id + '\')">Save</button></div>';
     });
     html += '<div class="kmc-add-form"><h4>+ Upload Photo</h4><div class="kmc-row">' +
       '<div class="kmc-field"><label>Photo File</label><input type="file" id="ph-new-file" accept="image/*" /></div>' +
       '<div class="kmc-field"><label>Caption</label><input type="text" id="ph-new-cap" /></div>' +
       '<div class="kmc-field" style="flex:0 0 130px"><label>Category</label>' +
-        '<select id="ph-new-cat"><option>food</option><option>drinks</option><option>interior</option><option>events</option></select></div>' +
+        '<select id="ph-new-cat"><option>food</option><option>drinks</option><option>interior</option><option>events</option><option>homepage</option></select></div>' +
       '</div><button class="kmc-btn kmc-btn-gold" onclick="KMCAdmin._addPhoto()">Upload Photo</button></div>';
     document.getElementById('kmc-admin-body').innerHTML = html;
   }
@@ -273,7 +305,7 @@
     var items = KMCData.get('team');
     var html = '<h2 class="kmc-section-title">Team Members</h2>';
     items.forEach(function(item) {
-      var thumb = item.photo ? '<img src="' + item.photo + '" class="kmc-photo-preview" />' : '';
+      var thumb = item.photo ? '<img src="' + _attr(item.photo) + '" class="kmc-photo-preview" />' : '';
       html += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.name) + ' &mdash; ' + _esc(item.role) + '</strong>' +
           '<div style="display:flex;gap:8px">' +
@@ -299,7 +331,7 @@
 
   var _IH = 'inner' + 'HTML';
   var _drinkCats = ['Cocktails','Beer','Wine','Spirits','Non-Alcoholic'];
-  var _foodCats  = ['Appetizers','Mains','Sides','Desserts'];
+  var _foodCats  = ['Starters','Salads','Wraps','Hot Sandwiches','Deli & Panini','Pizza','Sides'];
 
   function _catOptions(cats, selected) {
     return cats.map(function(c){ return '<option value="' + c + '"' + (c === selected ? ' selected' : '') + '>' + c + '</option>'; }).join('');
@@ -353,7 +385,14 @@
     var items = KMCData.get('menuItems');
     var h = '<h2 class="kmc-section-title">&#x1F354; Food Menu</h2>';
     h += '<p style="color:#a89880;margin:-10px 0 20px;font-size:14px">SpotOn handles orders — this controls what shows on the website menu. Featured items appear highlighted.</p>';
-    if (!items.length) h += '<p style="color:#666;margin-bottom:16px">No food items added yet.</p>';
+    if (!items.length) {
+      h += '<p style="color:#666;margin-bottom:16px">No food items added yet.</p>';
+      h += '<div style="margin-bottom:20px;padding:16px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-radius:6px">' +
+        '<p style="color:#C9A84C;font-weight:700;margin:0 0 8px">&#x1F4E5; Import Default Menu</p>' +
+        '<p style="color:#a89880;font-size:13px;margin:0 0 12px">Load all current menu items into the CMS so you can add, edit, or remove them. One-time setup — only run this once.</p>' +
+        '<button class="kmc-btn kmc-btn-gold" onclick="KMCAdmin._importDefaultMenu()">Import Menu Items</button>' +
+        '</div>';
+    }
     items.forEach(function(item) {
       h += '<div class="kmc-card">' +
         '<div class="kmc-card-header"><strong>' + _esc(item.name) + (item.available === false ? ' <span style="color:#e55;font-size:12px">86\'d</span>' : '') + '</strong>' +
@@ -392,12 +431,24 @@
   }
 
   /* ── CRUD HELPERS ── */
-  function _readFile(fileInput, cb) {
+  async function _uploadAsset(fileInput, kind) {
     var file = fileInput && fileInput.files && fileInput.files[0];
-    if (!file) { cb(null); return; }
-    var r = new FileReader();
-    r.onload = function(e){ cb(e.target.result); };
-    r.readAsDataURL(file);
+    if (!file) return null;
+    var upload = await KMCData.uploadImage(kind, file);
+    if (upload.error || !upload.data || !upload.data.url) {
+      _writeFailed('Upload image', upload.error && upload.error.message);
+      return null;
+    }
+    return upload.data.url;
+  }
+  async function _cleanupImage(urlOrPath) {
+    if (!urlOrPath) return true;
+    var removed = await KMCData.deleteImage(urlOrPath);
+    if (removed.error) {
+      console.warn('KMC image cleanup failed', removed.error);
+      return false;
+    }
+    return true;
   }
   function _toast(msg) {
     var existing = document.getElementById('kmc-toast');
@@ -411,30 +462,148 @@
     document.body.appendChild(t);
     setTimeout(function(){ t.remove(); }, 3000);
   }
+  function _writeFailed(action, detail) {
+    console.error('KMC admin write failed:', action, detail || '');
+    alert(action + ' failed. Please try again.');
+    return false;
+  }
 
-  async function _saveAnn(id){ await KMCData.updateItem('announcements',id,{text:_v('ann-text-'+id),active:_b('ann-active-'+id)}); _toast('Saved!'); renderAnnouncements(); }
-  async function _delAnn(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('announcements',id); renderAnnouncements(); }
-  async function _addAnn(){ var t=_v('ann-new-text').trim(); if(!t)return alert('Enter text.'); await KMCData.addItem('announcements',{text:t,active:true}); renderAnnouncements(); _toast('Added!'); }
-  async function _saveSpecial(id){ await KMCData.updateItem('weeklySpecials',id,{day:_v('sp-day-'+id),deal:_v('sp-deal-'+id),note:_v('sp-note-'+id),time:_v('sp-time-'+id)}); _toast('Saved!'); }
-  async function _saveHHMeta(){ var hh=KMCData.get('happyHour'); hh.days=_v('hh-days'); hh.time=_v('hh-time'); await KMCData.set('happyHour',hh); _toast('Saved!'); }
-  async function _saveHHDeal(i){ var hh=KMCData.get('happyHour'); hh.deals[i]={label:_v('hh-label-'+i),price:_v('hh-price-'+i)}; await KMCData.set('happyHour',hh); _toast('Saved!'); }
-  async function _delHHDeal(i){ if(!confirm('Delete?'))return; var hh=KMCData.get('happyHour'); hh.deals.splice(i,1); await KMCData.set('happyHour',hh); renderSpecials(); }
-  async function _addHHDeal(){ var l=_v('hh-new-label').trim(),p=_v('hh-new-price').trim(); if(!l)return alert('Enter a label.'); var hh=KMCData.get('happyHour'); hh.deals.push({label:l,price:p}); await KMCData.set('happyHour',hh); renderSpecials(); _toast('Added!'); }
-  async function _saveEvent(id){ await KMCData.updateItem('events',id,{title:_v('ev-title-'+id),date:_v('ev-date-'+id),time:_v('ev-time-'+id),description:_v('ev-desc-'+id),free:_b('ev-free-'+id),active:_b('ev-active-'+id),featured:_b('ev-feat-'+id)}); _toast('Saved!'); renderEvents(); }
-  async function _delEvent(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('events',id); renderEvents(); }
-  async function _addEvent(){ var t=_v('ev-new-title').trim(); if(!t)return alert('Enter a title.'); await KMCData.addItem('events',{title:t,date:_v('ev-new-date'),time:_v('ev-new-time'),description:_v('ev-new-desc'),free:_b('ev-new-free'),active:_b('ev-new-active'),featured:_b('ev-new-feat'),photo:''}); renderEvents(); _toast('Added!'); }
-  async function _savePhoto(id){ await KMCData.updateItem('gallery',id,{caption:_v('ph-cap-'+id),category:_v('ph-cat-'+id)}); _toast('Saved!'); }
-  async function _delPhoto(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('gallery',id); renderGallery(); }
-  async function _addPhoto(){ var fi=document.getElementById('ph-new-file'); _readFile(fi,async function(dataUrl){ var cap=_v('ph-new-cap'),cat=_v('ph-new-cat'); var arr=KMCData.get('gallery'); await KMCData.addItem('gallery',{src:dataUrl||('./krismidcity-images/gallery-'+(arr.length+1)+'.jpg'),alt:cap||'Gallery photo',caption:cap,category:cat,date:new Date().toISOString().slice(0,10)}); renderGallery(); _toast('Photo added!'); }); }
-  async function _saveTeam(id){ var fi=document.getElementById('tm-photo-'+id); _readFile(fi,async function(dataUrl){ var u={name:_v('tm-name-'+id),role:_v('tm-role-'+id),bio:_v('tm-bio-'+id)}; if(dataUrl)u.photo=dataUrl; await KMCData.updateItem('team',id,u); renderTeam(); _toast('Saved!'); }); }
-  async function _delTeam(id){ if(!confirm('Remove?'))return; await KMCData.removeItem('team',id); renderTeam(); }
-  async function _addTeam(){ var n=_v('tm-new-name').trim(); if(!n)return alert('Enter a name.'); var fi=document.getElementById('tm-new-photo'); _readFile(fi,async function(dataUrl){ await KMCData.addItem('team',{name:n,role:_v('tm-new-role'),bio:_v('tm-new-bio'),photo:dataUrl||''}); renderTeam(); _toast('Added!'); }); }
-  async function _saveDrink(id){ await KMCData.updateItem('drinks',id,{name:_v('dr-name-'+id),price:_v('dr-price-'+id),category:_v('dr-cat-'+id),description:_v('dr-desc-'+id),available:_b('dr-avail-'+id),featured:_b('dr-feat-'+id)}); _toast('Saved!'); renderDrinks(); }
-  async function _delDrink(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('drinks',id); renderDrinks(); }
-  async function _addDrink(){ var n=_v('dr-new-name').trim(); if(!n)return alert('Enter a name.'); await KMCData.addItem('drinks',{name:n,price:_v('dr-new-price'),category:_v('dr-new-cat'),description:_v('dr-new-desc'),available:_b('dr-new-avail'),featured:_b('dr-new-feat')}); renderDrinks(); _toast('Added!'); }
-  async function _saveFood(id){ await KMCData.updateItem('menuItems',id,{name:_v('fd-name-'+id),price:_v('fd-price-'+id),category:_v('fd-cat-'+id),description:_v('fd-desc-'+id),available:_b('fd-avail-'+id),featured:_b('fd-feat-'+id)}); _toast('Saved!'); renderFood(); }
-  async function _delFood(id){ if(!confirm('Delete?'))return; await KMCData.removeItem('menuItems',id); renderFood(); }
-  async function _addFood(){ var n=_v('fd-new-name').trim(); if(!n)return alert('Enter a name.'); await KMCData.addItem('menuItems',{name:n,price:_v('fd-new-price'),category:_v('fd-new-cat'),description:_v('fd-new-desc'),available:_b('fd-new-avail'),featured:_b('fd-new-feat')}); renderFood(); _toast('Added!'); }
+  async function _saveAnn(id){ var saved = await KMCData.updateItem('announcements',id,{text:_v('ann-text-'+id),active:_b('ann-active-'+id)}); if(!saved) return _writeFailed('Save announcement'); _toast('Saved!'); renderAnnouncements(); }
+  async function _delAnn(id){ if(!confirm('Delete?'))return; var removed = await KMCData.removeItem('announcements',id); if(!removed) return _writeFailed('Delete announcement'); renderAnnouncements(); }
+  async function _addAnn(){ var t=_v('ann-new-text').trim(); if(!t)return alert('Enter text.'); var added = await KMCData.addItem('announcements',{text:t,active:true}); if(!added) return _writeFailed('Add announcement'); renderAnnouncements(); _toast('Added!'); }
+  async function _saveSpecial(id){ var saved = await KMCData.updateItem('weeklySpecials',id,{day:_v('sp-day-'+id),deal:_v('sp-deal-'+id),note:_v('sp-note-'+id),time:_v('sp-time-'+id)}); if(!saved) return _writeFailed('Save special'); _toast('Saved!'); }
+  async function _saveHHMeta(){ var hh=KMCData.get('happyHour') || { deals: [] }; hh.days=_v('hh-days'); hh.time=_v('hh-time'); if(!Array.isArray(hh.deals)) hh.deals=[]; var saved = await KMCData.set('happyHour',hh); if(!saved) return _writeFailed('Save happy hour'); _toast('Saved!'); }
+  async function _saveHHDeal(i){ var hh=KMCData.get('happyHour') || { deals: [] }; if(!Array.isArray(hh.deals)) hh.deals=[]; hh.deals[i]={label:_v('hh-label-'+i),price:_v('hh-price-'+i)}; var saved = await KMCData.set('happyHour',hh); if(!saved) return _writeFailed('Save happy hour deal'); _toast('Saved!'); }
+  async function _delHHDeal(i){ if(!confirm('Delete?'))return; var hh=KMCData.get('happyHour') || { deals: [] }; if(!Array.isArray(hh.deals)) hh.deals=[]; hh.deals.splice(i,1); var saved = await KMCData.set('happyHour',hh); if(!saved) return _writeFailed('Delete happy hour deal'); renderSpecials(); }
+  async function _addHHDeal(){ var l=_v('hh-new-label').trim(),p=_v('hh-new-price').trim(); if(!l)return alert('Enter a label.'); var hh=KMCData.get('happyHour') || { days:'', time:'', deals:[] }; if(!Array.isArray(hh.deals)) hh.deals=[]; hh.deals.push({label:l,price:p}); var saved = await KMCData.set('happyHour',hh); if(!saved) return _writeFailed('Add happy hour deal'); renderSpecials(); _toast('Added!'); }
+  async function _saveEvent(id){ var existing=(KMCData.get('events')||[]).find(function(item){ return item.id===id; }) || null; var fi=document.getElementById('ev-photo-'+id); var imageUrl = await _uploadAsset(fi,'events'); var updates={title:_v('ev-title-'+id),date:_v('ev-date-'+id),time:_v('ev-time-'+id),description:_v('ev-desc-'+id),free:_b('ev-free-'+id),active:_b('ev-active-'+id),featured:_b('ev-feat-'+id)}; if(imageUrl) updates.photo=imageUrl; var saved = await KMCData.updateItem('events',id,updates); if(!saved) return _writeFailed('Save event'); if(imageUrl && existing && existing.photo && existing.photo !== imageUrl) await _cleanupImage(existing.photo); _toast('Saved!'); renderEvents(); }
+  async function _delEvent(id){ if(!confirm('Delete?'))return; var existing=(KMCData.get('events')||[]).find(function(item){ return item.id===id; }) || null; var removed = await KMCData.removeItem('events',id); if(!removed) return _writeFailed('Delete event'); if(existing && existing.photo) await _cleanupImage(existing.photo); renderEvents(); }
+  async function _addEvent(){ var t=_v('ev-new-title').trim(); if(!t)return alert('Enter a title.'); var fi=document.getElementById('ev-new-photo'); var imageUrl = await _uploadAsset(fi,'events'); var added = await KMCData.addItem('events',{title:t,date:_v('ev-new-date'),time:_v('ev-new-time'),description:_v('ev-new-desc'),free:_b('ev-new-free'),active:_b('ev-new-active'),featured:_b('ev-new-feat'),photo:imageUrl||''}); if(!added) return _writeFailed('Add event'); renderEvents(); _toast('Added!'); }
+  async function _savePhoto(id){ var existing=(KMCData.get('gallery')||[]).find(function(item){ return item.id===id; }) || null; var fi=document.getElementById('ph-file-'+id); var imageUrl = await _uploadAsset(fi,'gallery'); var updates={caption:_v('ph-cap-'+id),category:_v('ph-cat-'+id)}; if(imageUrl){ updates.src=imageUrl; updates.alt=_v('ph-cap-'+id)||'Gallery photo'; } var saved = await KMCData.updateItem('gallery',id,updates); if(!saved) return _writeFailed('Save photo'); if(imageUrl && existing && existing.src && existing.src !== imageUrl) await _cleanupImage(existing.src); _toast('Saved!'); renderGallery(); }
+  async function _delPhoto(id){ if(!confirm('Delete?'))return; var existing=(KMCData.get('gallery')||[]).find(function(item){ return item.id===id; }) || null; var removed = await KMCData.removeItem('gallery',id); if(!removed) return _writeFailed('Delete photo'); if(existing && existing.src) await _cleanupImage(existing.src); renderGallery(); }
+  async function _addPhoto(){ var fi=document.getElementById('ph-new-file'); var imageUrl = await _uploadAsset(fi,'gallery'); if(!imageUrl) return alert('Choose a photo to upload.'); var cap=_v('ph-new-cap'),cat=_v('ph-new-cat'); var added = await KMCData.addItem('gallery',{src:imageUrl,alt:cap||'Gallery photo',caption:cap,category:cat,date:new Date().toISOString().slice(0,10)}); if(!added) return _writeFailed('Add photo'); renderGallery(); _toast('Photo added!'); }
+  async function _saveTeam(id){ var existing=(KMCData.get('team')||[]).find(function(item){ return item.id===id; }) || null; var fi=document.getElementById('tm-photo-'+id); var u={name:_v('tm-name-'+id),role:_v('tm-role-'+id),bio:_v('tm-bio-'+id)}; var imageUrl = await _uploadAsset(fi,'team'); if(imageUrl)u.photo=imageUrl; var saved = await KMCData.updateItem('team',id,u); if(!saved) return _writeFailed('Save team member'); if(imageUrl && existing && existing.photo && existing.photo !== imageUrl) await _cleanupImage(existing.photo); renderTeam(); _toast('Saved!'); }
+  async function _delTeam(id){ if(!confirm('Remove?'))return; var existing=(KMCData.get('team')||[]).find(function(item){ return item.id===id; }) || null; var removed = await KMCData.removeItem('team',id); if(!removed) return _writeFailed('Delete team member'); if(existing && existing.photo) await _cleanupImage(existing.photo); renderTeam(); }
+  async function _addTeam(){ var n=_v('tm-new-name').trim(); if(!n)return alert('Enter a name.'); var fi=document.getElementById('tm-new-photo'); var imageUrl = await _uploadAsset(fi,'team'); var added = await KMCData.addItem('team',{name:n,role:_v('tm-new-role'),bio:_v('tm-new-bio'),photo:imageUrl||''}); if(!added) return _writeFailed('Add team member'); renderTeam(); _toast('Added!'); }
+  async function _saveDrink(id){ var saved = await KMCData.updateItem('drinks',id,{name:_v('dr-name-'+id),price:_v('dr-price-'+id),category:_v('dr-cat-'+id),description:_v('dr-desc-'+id),available:_b('dr-avail-'+id),featured:_b('dr-feat-'+id)}); if(!saved) return _writeFailed('Save drink'); _toast('Saved!'); renderDrinks(); }
+  async function _delDrink(id){ if(!confirm('Delete?'))return; var removed = await KMCData.removeItem('drinks',id); if(!removed) return _writeFailed('Delete drink'); renderDrinks(); }
+  async function _addDrink(){ var n=_v('dr-new-name').trim(); if(!n)return alert('Enter a name.'); var added = await KMCData.addItem('drinks',{name:n,price:_v('dr-new-price'),category:_v('dr-new-cat'),description:_v('dr-new-desc'),available:_b('dr-new-avail'),featured:_b('dr-new-feat')}); if(!added) return _writeFailed('Add drink'); renderDrinks(); _toast('Added!'); }
+  async function _saveFood(id){ var saved = await KMCData.updateItem('menuItems',id,{name:_v('fd-name-'+id),price:_v('fd-price-'+id),category:_v('fd-cat-'+id),description:_v('fd-desc-'+id),available:_b('fd-avail-'+id),featured:_b('fd-feat-'+id)}); if(!saved) return _writeFailed('Save food item'); _toast('Saved!'); renderFood(); }
+  async function _delFood(id){ if(!confirm('Delete?'))return; var removed = await KMCData.removeItem('menuItems',id); if(!removed) return _writeFailed('Delete food item'); renderFood(); }
+  async function _addFood(){ var n=_v('fd-new-name').trim(); if(!n)return alert('Enter a name.'); var added = await KMCData.addItem('menuItems',{name:n,price:_v('fd-new-price'),category:_v('fd-new-cat'),description:_v('fd-new-desc'),available:_b('fd-new-avail'),featured:_b('fd-new-feat')}); if(!added) return _writeFailed('Add food item'); renderFood(); _toast('Added!'); }
+
+  /* ── DAILY SPECIAL ── */
+  async function _saveDailySpecial() {
+    var data = { active:_b('ds-active'), title:_v('ds-title'), description:_v('ds-desc'), price:_v('ds-price'), date:_v('ds-date') };
+    var saved = await KMCData.set('dailySpecial', data);
+    if (!saved) return _writeFailed('Save daily special');
+    _toast(data.active ? 'Special is LIVE on home page!' : 'Special saved (not showing).');
+    renderSpecials();
+  }
+
+  function _copyDSCaption(platform) {
+    var title = _v('ds-title').trim();
+    var price = _v('ds-price').trim();
+    var desc  = _v('ds-desc').trim();
+    if (!title) { alert('Enter a special name first.'); return; }
+    var caption;
+    if (platform === 'fb') {
+      caption = '\uD83C\uDF7D\uFE0F TODAY\'S SPECIAL at Kris\' Mid City Tavern!\n\n' +
+        title + (price ? ' \u2014 ' + price : '') + '\n' +
+        (desc ? desc + '\n' : '') +
+        '\n\uD83D\uDCCD 327 Broadway, Menands NY' +
+        '\n\uD83D\uDCDE (518) 621-7449' +
+        '\n\uD83D\uDD17 Order online: https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a' +
+        '\n\n#KrisMidCityTavern #Menands #CapitalRegionNY #TodaysSpecial #LocalEats';
+    } else {
+      caption = '\uD83C\uDF7D\uFE0F TODAY\'S SPECIAL!\n' +
+        title + (price ? ' \u2014 ' + price : '') + '\n' +
+        (desc ? desc + '\n' : '') +
+        '\n\uD83D\uDCCD Menands, NY  \uD83D\uDCDE (518) 621-7449\n' +
+        '\n#KrisMidCityTavern #TodaysSpecial #MenandsNY #CapitalRegionFood #LocalTavern #FoodieAlbany';
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(caption).then(function() {
+        _toast('\u2705 Caption copied! Paste it into ' + (platform === 'fb' ? 'Facebook' : 'Instagram') + '.');
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = caption; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+      _toast('\u2705 Caption copied!');
+    }
+  }
+
+  /* ── IMPORT DEFAULT MENU ── */
+  async function _importDefaultMenu() {
+    if (!confirm('This will load all current menu items into the CMS. Only do this once. Continue?')) return;
+    var btn = document.querySelector('[onclick="KMCAdmin._importDefaultMenu()"]');
+    if (btn) { btn.textContent = 'Importing\u2026'; btn.disabled = true; }
+    var items = [
+      {name:'Soup of the Day',price:'Cup $6 / Bowl $8',category:'Starters',description:'Ask your server for today\'s selection',available:true,featured:false},
+      {name:'Crock of Chili',price:'$10',category:'Starters',description:'House-made, served with tortilla chips. Add cheese & onion +$1',available:true,featured:false},
+      {name:'Kettle Chips',price:'$9',category:'Starters',description:'House cooked, tossed in seasoning, with queso',available:true,featured:false},
+      {name:'Chicken Tenders',price:'$14',category:'Starters',description:'Served with fries',available:true,featured:false},
+      {name:'Pretzel Bites',price:'$11',category:'Starters',description:'Topped with butter & salt',available:true,featured:false},
+      {name:'Fried Mozzarella',price:'$13',category:'Starters',description:'Marinara or Melba',available:true,featured:false},
+      {name:'Loaded Tots or Fries',price:'$13',category:'Starters',description:'Double order, nacho cheese sauce, bacon, red onion, jalapeños, sour cream',available:true,featured:false},
+      {name:'Quesadilla',price:'$13',category:'Starters',description:'Jack cheddar, peppers, onions, tomatoes, jalapeños, salsa & sour cream. Add chicken or beef +$2.50 · Add steak +$5',available:true,featured:false},
+      {name:'Mid-City Nachos',price:'$14',category:'Starters',description:'House-fried tortillas, shredded lettuce, tomato, onions, black olives, jalapeños, queso or nacho cheese, salsa & sour cream. Add chicken or beef +$2.50 · Add steak +$5',available:true,featured:false},
+      {name:'Boneless Wings',price:'$13',category:'Starters',description:'Served with carrots, celery & blue cheese · Choice of sauce',available:true,featured:false},
+      {name:'Jumbo Chicken Wings',price:'$15',category:'Starters',description:'Served with carrots, celery & blue cheese · Choice of sauce',available:true,featured:true},
+      {name:'House Salad',price:'SM $10 / LG $12',category:'Salads',description:'Romaine hearts, tomato, cucumber, red onion, black olives, shaved carrots, croutons. Add grilled chicken +$5 · Crispy chicken +$6 · Steak +$7',available:true,featured:false},
+      {name:'Caesar Salad',price:'$8 / $10',category:'Salads',description:'Romaine, croutons, shaved & grated parmesan, Caesar dressing. Add grilled chicken +$5 · Add steak +$7',available:true,featured:false},
+      {name:'Hot Honey Salad',price:'$16',category:'Salads',description:'Boneless wings in hot honey sauce, mozzarella, roasted red peppers, cucumber, red onion',available:true,featured:false},
+      {name:'Steak Salad',price:'$18',category:'Salads',description:'Sliced strip steak, crispy onion straws, blue cheese crumbles, tomato, cucumber, red onion, croutons',available:true,featured:false},
+      {name:'Cali Salad',price:'$16',category:'Salads',description:'Grilled chicken, bacon, tomato, hard-boiled egg, avocado, cucumber, shredded cheddar',available:true,featured:false},
+      {name:'Buffalo Chicken Salad',price:'$16',category:'Salads',description:'Boneless wings in wing sauce of your choice, shredded carrots, red onion, celery, tomatoes, cheddar',available:true,featured:false},
+      {name:'Chef Salad',price:'$17',category:'Salads',description:'Ham, turkey, Swiss, American, hard-boiled eggs, cucumber, tomato, croutons',available:true,featured:false},
+      {name:'Buffalo Chicken Wrap',price:'$14',category:'Wraps',description:'Crispy chicken in buffalo sauce, lettuce, tomato, blue cheese dressing. Served with fries.',available:true,featured:false},
+      {name:'Fajita Wrap',price:'$15',category:'Wraps',description:'Shredded cheddar, sautéed onions and peppers, salsa & sour cream. Taco chicken or beef $14. Served with fries.',available:true,featured:false},
+      {name:'Cheeseburger Wrap',price:'$15',category:'Wraps',description:'Chopped burger, American cheese, bacon, jalapeños, sautéed onions, Russian dressing. Served with fries.',available:true,featured:false},
+      {name:'Philly Wrap',price:'$14',category:'Wraps',description:'Crispy chicken, American cheese, bacon, lettuce, tomato, Chick-fil-A style sauce. Served with fries.',available:true,featured:false},
+      {name:'Cajun Chicken Wrap',price:'$15',category:'Wraps',description:'Grilled Cajun chicken, shredded cheddar, avocado, lettuce, tomato, cajun ranch dressing. Served with fries.',available:true,featured:false},
+      {name:'The Beast',price:'$16',category:'Wraps',description:'House-roasted roast beef, crispy onion straws, cheese crumbles, lettuce, tomato, garlic aioli. Served with fries.',available:true,featured:false},
+      {name:'The Adriano',price:'$16',category:'Wraps',description:'Chopped ham, salami, pepperoni, lettuce, tomato, red onion, green peppers, Italian dressing. Served with fries.',available:true,featured:false},
+      {name:'Prime Rib Melt',price:'$16',category:'Hot Sandwiches',description:'Thinly sliced meat, melted provolone, horseradish mayo, sautéed onions and mushrooms on garlic-toasted bun. Served with fries.',available:true,featured:false},
+      {name:'Steak Sub',price:'$17',category:'Hot Sandwiches',description:'Sliced strip steak, sautéed onions, provolone, garlic aioli on toasted sub roll. Served with fries.',available:true,featured:false},
+      {name:'Reuben',price:'$14',category:'Hot Sandwiches',description:'Corned beef or turkey, Swiss, sauerkraut & Russian dressing on grilled marble rye. Served with fries.',available:true,featured:false},
+      {name:'French Dip',price:'$16',category:'Hot Sandwiches',description:'Sliced ribeye and melted Swiss on toasted sub roll, side of au jus. Served with fries.',available:true,featured:false},
+      {name:'Tuna Melt',price:'Market',category:'Hot Sandwiches',description:'House albacore tuna, bacon, cheddar, tomato on grilled bread. Served with fries.',available:true,featured:false},
+      {name:'The Felix',price:'$16',category:'Hot Sandwiches',description:'Sliced ribeye, provolone, sautéed mushrooms, onions, peppers, tiger sauce on grilled marble rye. Served with fries.',available:true,featured:false},
+      {name:'8oz Burger',price:'Market',category:'Hot Sandwiches',description:'Prime blended burger on grilled bun. Cheese: American, cheddar, Swiss, provolone, mozzarella, blue cheese. Add mushrooms, onions, bacon, jalapeños +$1 · Add patty melt +$2. Served with fries.',available:true,featured:true},
+      {name:'Kamcam Panini',price:'Market',category:'Deli & Panini',description:'House-cooked turkey, Swiss, bacon, red onion, raspberry mayo. Served with fries.',available:true,featured:false},
+      {name:'Hot Italian Panini',price:'$15',category:'Deli & Panini',description:'Ham, salami, pepperoni, provolone, hot pepper relish. Served with fries.',available:true,featured:false},
+      {name:'Cape Cod Panini',price:'$15',category:'Deli & Panini',description:'Turkey, house-made stuffing, cranberry mayo. Served with fries.',available:true,featured:false},
+      {name:'Grilled Cheese',price:'$11',category:'Deli & Panini',description:'Classic grilled cheese on your choice of bread. Served with fries.',available:true,featured:false},
+      {name:'Grilled Chicken',price:'$13',category:'Deli & Panini',description:'Grilled chicken sandwich on your choice of bread. Served with fries.',available:true,featured:false},
+      {name:'Deli Sandwich',price:'$12',category:'Deli & Panini',description:'Corned Beef, Turkey, Salami, Roast Beef, Ham, BLT, or Tuna. Make it a club +$2.50 · Add bacon or avocado +$1. Served with fries.',available:true,featured:false},
+      {name:'Personal Pizza (6")',price:'$14',category:'Pizza',description:'Red or white crust · Choose your toppings',available:true,featured:false},
+      {name:'12-Cut Pizza',price:'$20',category:'Pizza',description:'Red or white crust · Choose your toppings',available:true,featured:false},
+      {name:'Sidewinder Fries',price:'$7',category:'Sides',description:'',available:true,featured:false},
+      {name:'Chili Cheese Fries',price:'$10',category:'Sides',description:'',available:true,featured:false},
+      {name:'Potato Chips',price:'$2',category:'Sides',description:'',available:true,featured:false},
+      {name:'Macaroni Salad',price:'$3',category:'Sides',description:'',available:true,featured:false},
+      {name:'Tater Tots',price:'$6',category:'Sides',description:'',available:true,featured:false},
+      {name:'Sweet Fries',price:'$6',category:'Sides',description:'',available:true,featured:false},
+      {name:'Onion Rings',price:'$7',category:'Sides',description:'',available:true,featured:false},
+      {name:'Chips & Queso',price:'$5',category:'Sides',description:'',available:true,featured:false},
+      {name:'Side House Salad',price:'$5',category:'Sides',description:'',available:true,featured:false},
+      {name:'Caesar Side Salad',price:'$5',category:'Sides',description:'',available:true,featured:false}
+    ];
+    var failed = 0;
+    for (var i = 0; i < items.length; i++) {
+      var added = await KMCData.addItem('menuItems', items[i]);
+      if (!added) failed++;
+    }
+    if (failed > 0) {
+      alert('Import complete with ' + failed + ' error(s). Check console for details.');
+    } else {
+      _toast('All ' + items.length + ' items imported!');
+    }
+    renderFood();
+  }
+
   /* ── SUPABASE AUTH ── */
   window.kmc_doLogin = async function() {
     var email = document.getElementById('kmc-email').value.trim();
@@ -555,7 +724,9 @@
     _savePhoto:_savePhoto,_delPhoto:_delPhoto,_addPhoto:_addPhoto,
     _saveTeam:_saveTeam,_delTeam:_delTeam,_addTeam:_addTeam,
     _saveDrink:_saveDrink,_delDrink:_delDrink,_addDrink:_addDrink,
-    _saveFood:_saveFood,_delFood:_delFood,_addFood:_addFood
+    _saveFood:_saveFood,_delFood:_delFood,_addFood:_addFood,
+    _saveDailySpecial:_saveDailySpecial,_copyDSCaption:_copyDSCaption,
+    _importDefaultMenu:_importDefaultMenu
   };
 
   window.KMCAdmin = KMCAdmin;

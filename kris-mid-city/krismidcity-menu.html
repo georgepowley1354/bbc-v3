@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kris-shared.css">
+  <link rel="icon" type="image/png" href="krismidcity-images/logo-footer-live.png">
+  <link rel="apple-touch-icon" href="krismidcity-images/logo-footer-live.png">
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <style>
     /* === MENU PAGE HERO === */
@@ -17,13 +19,15 @@
       padding: 5rem 0 4rem;
       border-bottom: 1px solid var(--border);
       overflow: hidden;
-      background-image: url('https://images.pexels.com/photos/12478607/pexels-photo-12478607.jpeg?auto=compress&cs=tinysrgb&w=1280');
+      background-image: url('krismidcity-images/hero-krisbar2.jpg');
       background-size: cover;
-      background-position: center;
+      background-position: center 42%;
     }
     .menu-hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(15,14,11,0.6) 0%, rgba(15,14,11,0.88) 100%);
+      background:
+        linear-gradient(90deg, rgba(15,14,11,0.68) 0%, rgba(15,14,11,0.3) 45%, rgba(15,14,11,0.58) 100%),
+        linear-gradient(to bottom, rgba(15,14,11,0.56) 0%, rgba(15,14,11,0.9) 100%);
     }
     .menu-hero-inner {
       position: relative; z-index: 1;
@@ -212,7 +216,9 @@
 
   <nav id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="krismidcity-index.html" class="nav-logo">Kris' <span>Mid City</span> Tavern</a>
+      <a href="krismidcity-index.html" class="nav-logo" aria-label="Kris Mid City Tavern home">
+        <img src="krismidcity-images/logo-footer-live.png" alt="Kris Mid City Tavern logo">
+      </a>
       <div class="nav-links">
         <a href="krismidcity-index.html">Home</a>
         <a href="krismidcity-menu.html" class="active">Menu</a>
@@ -276,19 +282,7 @@
       <!-- STARTERS -->
       <div class="tab-panel active" id="tab-starters" role="tabpanel">
         <h2 class="menu-category-title">Starters</h2>
-        <div class="menu-items-grid">
-          <div class="menu-item"><div class="item-info"><div class="item-name">Soup of the Day</div><div class="item-desc">Ask your server for today's selection</div></div><div class="item-price">Cup $6 / Bowl $8</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Crock of Chili</div><div class="item-desc">House-made, served with tortilla chips</div><div class="item-add">Add cheese &amp; onion +$1</div></div><div class="item-price">$10</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Kettle Chips</div><div class="item-desc">House cooked, tossed in seasoning, with queso</div></div><div class="item-price">$9</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Chicken Tenders</div><div class="item-desc">Served with fries</div></div><div class="item-price">$14</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Pretzel Bites</div><div class="item-desc">Topped with butter &amp; salt</div></div><div class="item-price">$11</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Fried Mozzarella</div><div class="item-desc">Marinara or Melba</div></div><div class="item-price">$13</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Loaded Tots or Fries</div><div class="item-desc">Double order, nacho cheese sauce, bacon, red onion, jalapeños, sour cream</div></div><div class="item-price">$13</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Quesadilla</div><div class="item-desc">Jack cheddar, peppers, onions, tomatoes, jalapeños, salsa &amp; sour cream</div><div class="item-add">Add chicken or beef +$2.50 · Add steak +$5</div></div><div class="item-price">$13</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Mid-City Nachos</div><div class="item-desc">House-fried tortillas, shredded lettuce, tomato, onions, black olives, jalapeños, queso or nacho cheese, salsa &amp; sour cream</div><div class="item-add">Add chicken or beef +$2.50 · Add steak +$5</div></div><div class="item-price">$14</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Boneless Wings</div><div class="item-desc">Served with carrots, celery &amp; blue cheese · Choice of sauce</div></div><div class="item-price">$13</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Jumbo Chicken Wings</div><div class="item-desc">Served with carrots, celery &amp; blue cheese · Choice of sauce</div></div><div class="item-price">$15</div></div>
-        </div>
+        <div class="menu-items-grid" id="kmc-tab-items-starters"></div>
         <div style="margin-top:2rem;">
           <p class="menu-category-note">Wing Sauces (choose one):</p>
           <div class="sauce-grid"><span class="sauce-chip">Hot</span><span class="sauce-chip">Medium</span><span class="sauce-chip">Mild</span><span class="sauce-chip">Hot Honey Garlic</span><span class="sauce-chip">Nashville Hot</span><span class="sauce-chip">Spicy Peach</span><span class="sauce-chip">Garlic Parm</span><span class="sauce-chip">Sweet Red Chili</span><span class="sauce-chip">Cajun</span><span class="sauce-chip">Lemon Pepper</span><span class="sauce-chip">BBQ</span><span class="sauce-chip">Honey BBQ</span></div>
@@ -298,15 +292,7 @@
       <!-- SALADS -->
       <div class="tab-panel" id="tab-salads" role="tabpanel">
         <h2 class="menu-category-title">Salads</h2>
-        <div class="menu-items-grid">
-          <div class="menu-item"><div class="item-info"><div class="item-name">House Salad</div><div class="item-desc">Romaine hearts, tomato, cucumber, red onion, black olives, shaved carrots, croutons</div><div class="item-add">Add grilled chicken +$5 · Crispy chicken +$6 · Steak +$7</div></div><div class="item-price">SM $10 / LG $12</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Caesar Salad</div><div class="item-desc">Romaine, croutons, shaved &amp; grated parmesan, Caesar dressing</div><div class="item-add">Add grilled chicken +$5 · Add steak +$7</div></div><div class="item-price">$8 / $10</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Hot Honey Salad</div><div class="item-desc">Boneless wings in hot honey sauce, mozzarella, roasted red peppers, cucumber, red onion</div></div><div class="item-price">$16</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Steak Salad</div><div class="item-desc">Sliced strip steak, crispy onion straws, blue cheese crumbles, tomato, cucumber, red onion, croutons</div></div><div class="item-price">$18</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Cali Salad</div><div class="item-desc">Grilled chicken, bacon, tomato, hard-boiled egg, avocado, cucumber, shredded cheddar</div></div><div class="item-price">$16</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Buffalo Chicken Salad</div><div class="item-desc">Boneless wings in wing sauce of your choice, shredded carrots, red onion, celery, tomatoes, cheddar</div></div><div class="item-price">$16</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Chef Salad</div><div class="item-desc">Ham, turkey, Swiss, American, hard-boiled eggs, cucumber, tomato, croutons</div></div><div class="item-price">$17</div></div>
-        </div>
+        <div class="menu-items-grid" id="kmc-tab-items-salads"></div>
         <div style="margin-top:2rem;">
           <p class="menu-category-note">Dressings:</p>
           <div class="sauce-grid"><span class="sauce-chip">Ranch</span><span class="sauce-chip">Cajun Ranch</span><span class="sauce-chip">Blue Cheese</span><span class="sauce-chip">Creamy Caesar</span><span class="sauce-chip">Honey Mustard</span><span class="sauce-chip">Balsamic</span><span class="sauce-chip">Russian</span><span class="sauce-chip">Italian</span><span class="sauce-chip">Oil &amp; Vinegar</span></div>
@@ -317,55 +303,27 @@
       <div class="tab-panel" id="tab-wraps" role="tabpanel">
         <h2 class="menu-category-title">Wraps</h2>
         <p class="menu-category-note">All wraps served with fries</p>
-        <div class="menu-items-grid">
-          <div class="menu-item"><div class="item-info"><div class="item-name">Buffalo Chicken</div><div class="item-desc">Crispy chicken in buffalo sauce, lettuce, tomato, blue cheese dressing</div></div><div class="item-price">$14</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Fajita Wrap</div><div class="item-desc">Shredded cheddar, sautéed onions and peppers, salsa &amp; sour cream</div><div class="item-add">Taco chicken or beef $14</div></div><div class="item-price">$15</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Cheeseburger Wrap</div><div class="item-desc">Chopped burger, American cheese, bacon, jalapeños, sautéed onions, Russian dressing</div></div><div class="item-price">$15</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Philly Wrap</div><div class="item-desc">Crispy chicken, American cheese, bacon, lettuce, tomato, our take on Chick-fil-A sauce</div></div><div class="item-price">$14</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Cajun Chicken</div><div class="item-desc">Grilled Cajun chicken, shredded cheddar, avocado, lettuce, tomato, cajun ranch dressing</div></div><div class="item-price">$15</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">The Beast</div><div class="item-desc">House-roasted roast beef, crispy onion straws, cheese crumbles, lettuce, tomato, garlic aioli</div></div><div class="item-price">$16</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">The Adriano</div><div class="item-desc">Chopped ham, salami, pepperoni, lettuce, tomato, red onion, green peppers, Italian dressing</div></div><div class="item-price">$16</div></div>
-        </div>
+        <div class="menu-items-grid" id="kmc-tab-items-wraps"></div>
       </div>
 
       <!-- HOT SANDWICHES -->
       <div class="tab-panel" id="tab-hot-sandwiches" role="tabpanel">
         <h2 class="menu-category-title">Hot Sandwiches</h2>
         <p class="menu-category-note">All served with fries. Bread choice: white, marble rye, sub roll, or bun.</p>
-        <div class="menu-items-grid">
-          <div class="menu-item"><div class="item-info"><div class="item-name">Prime Rib Melt</div><div class="item-desc">Thinly sliced meat, melted provolone, horseradish mayo, sautéed onions and mushrooms on garlic-toasted bun</div></div><div class="item-price">$16</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Steak Sub</div><div class="item-desc">Sliced strip steak, sautéed onions, provolone, garlic aioli on toasted sub roll</div></div><div class="item-price">$17</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Reuben</div><div class="item-desc">Corned beef or turkey, Swiss, sauerkraut &amp; Russian dressing on grilled marble rye</div></div><div class="item-price">$14</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">French Dip</div><div class="item-desc">Sliced ribeye and melted Swiss on toasted sub roll, side of au jus</div></div><div class="item-price">$16</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Tuna Melt</div><div class="item-desc">House albacore tuna, bacon, cheddar, tomato on grilled bread</div></div><div class="item-price">Market</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">The Felix</div><div class="item-desc">Sliced ribeye, provolone, sautéed mushrooms, onions, peppers, tiger sauce on grilled marble rye</div></div><div class="item-price">$16</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">8oz Burger</div><div class="item-desc">Prime blended burger on grilled bun · Cheese: American, cheddar, Swiss, provolone, mozzarella, blue cheese crumbles</div><div class="item-add">Add mushrooms, onions, bacon, jalapeños +$1 · Add patty melt +$2</div></div><div class="item-price">Market</div></div>
-        </div>
+        <div class="menu-items-grid" id="kmc-tab-items-hot-sandwiches"></div>
       </div>
 
       <!-- DELI & PANINI -->
       <div class="tab-panel" id="tab-deli" role="tabpanel">
         <h2 class="menu-category-title">Deli &amp; Panini</h2>
         <p class="menu-category-note">All served with fries</p>
-        <div class="menu-items-grid">
-          <div class="menu-item"><div class="item-info"><div class="item-name">Kamcam Panini</div><div class="item-desc">House-cooked turkey, Swiss, bacon, red onion, raspberry mayo</div></div><div class="item-price">Market</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Hot Italian Panini</div><div class="item-desc">Ham, salami, pepperoni, provolone, hot pepper relish</div></div><div class="item-price">$15</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Cape Cod Panini</div><div class="item-desc">Turkey, house-made stuffing, cranberry mayo</div></div><div class="item-price">$15</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Grilled Cheese</div><div class="item-desc">Classic grilled cheese on your choice of bread</div></div><div class="item-price">$11</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Grilled Chicken</div><div class="item-desc">Grilled chicken sandwich on your choice of bread</div></div><div class="item-price">$13</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Deli Sandwich</div><div class="item-desc">Corned Beef, Turkey, Salami, Roast Beef, Ham, BLT, or Tuna</div><div class="item-add">Make it a club +$2.50 · Add bacon or avocado +$1</div></div><div class="item-price">$12</div></div>
-        </div>
+        <div class="menu-items-grid" id="kmc-tab-items-deli"></div>
       </div>
 
       <!-- PIZZA -->
       <div class="tab-panel" id="tab-pizza" role="tabpanel">
         <h2 class="menu-category-title">Pizza &amp; Wings</h2>
-        <div class="menu-items-grid">
-          <div class="menu-item"><div class="item-info"><div class="item-name">Personal Pizza (6")</div><div class="item-desc">Red or white crust · Choose your toppings</div></div><div class="item-price">$14</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">12-Cut Pizza</div><div class="item-desc">Red or white crust · Choose your toppings</div></div><div class="item-price">$20</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Jumbo Chicken Wings</div><div class="item-desc">Served with carrots, celery &amp; blue cheese · Choice of sauce</div></div><div class="item-price">$15</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Boneless Wings</div><div class="item-desc">Served with carrots, celery &amp; blue cheese · Choice of sauce</div></div><div class="item-price">$13</div></div>
-        </div>
+        <div class="menu-items-grid" id="kmc-tab-items-pizza"></div>
         <div style="margin-top:2rem;">
           <p class="menu-category-note">Pizza Toppings: Sausage, Pepperoni, Mushrooms, Green Pepper, Onions, Jalapeños, Black Olives, Bacon, Roasted Red Peppers</p>
           <br>
@@ -377,18 +335,7 @@
       <!-- SIDES -->
       <div class="tab-panel" id="tab-sides" role="tabpanel">
         <h2 class="menu-category-title">Sides</h2>
-        <div class="menu-items-grid">
-          <div class="menu-item"><div class="item-info"><div class="item-name">Sidewinder Fries</div></div><div class="item-price">$7</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Chili Cheese Fries</div></div><div class="item-price">$10</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Potato Chips</div></div><div class="item-price">$2</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Macaroni Salad</div></div><div class="item-price">$3</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Tater Tots</div></div><div class="item-price">$6</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Sweet Fries</div></div><div class="item-price">$6</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Onion Rings</div></div><div class="item-price">$7</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Chips &amp; Queso</div></div><div class="item-price">$5</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Side House Salad</div></div><div class="item-price">$5</div></div>
-          <div class="menu-item"><div class="item-info"><div class="item-name">Caesar Side Salad</div></div><div class="item-price">$5</div></div>
-        </div>
+        <div class="menu-items-grid" id="kmc-tab-items-sides"></div>
       </div>
 
       <!-- SPECIALS (dynamic) -->
@@ -412,10 +359,23 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-col"><h4>Kris' Mid City Tavern</h4><p>Your neighborhood escape.<br>327 Broadway<br>Menands, NY 12204</p></div>
+        <div class="footer-col"><img src="krismidcity-images/logo-footer-live.png" alt="Kris Mid City Tavern footer logo" class="footer-brand-logo"><h4>Kris' Mid City Tavern</h4><p>Your neighborhood escape.<br>327 Broadway<br>Menands, NY 12204</p></div>
         <div class="footer-col"><h4>Hours</h4><p>Mon–Sat &nbsp;11am–12am<br>Sunday &nbsp;12pm–10pm</p></div>
         <div class="footer-col"><h4>Contact</h4><p><a href="tel:5186217449">(518) 621-7449</a><br><a href="https://order.spoton.com/oua-kris-mid-city-tavern-7163/menands-ny/61d73c169adef3d0d0eac34a" target="_blank" rel="noopener noreferrer">Order Online</a></p></div>
-        <div class="footer-col"><h4>Follow Us</h4><p><a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer">Instagram @midcitymenands</a><br><a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer">Facebook · 5.5K followers</a></p></div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/midcitymenands/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/KMCTMENANDS" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.yelp.com/biz/kris-mid-city-tavern-menands-2" target="_blank" rel="noopener noreferrer" aria-label="Yelp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.19-1.64l2.747-4.332c.55-.867 1.8-.689 2.1.28l1.551 3.578c.245.683-.043 1.43-.213 1.681zm-9.378 6.89l-1.657 4.718c-.316.9.49 1.81 1.418 1.612l4.95-1.115c.943-.213 1.24-1.393.498-2.02l-3.293-2.77c-.81-.68-1.916-.424-1.916.575zm-3.698-2.96L2.1 17.864c-.932.246-1.278 1.41-.615 2.084l3.424 3.568c.668.696 1.845.413 2.12-.496l1.396-4.648c.316-1.048-.73-2.02-1.744-1.848h-.002zM3.9 11.503c-.012.96.912 1.67 1.84 1.393l4.707-1.4c1.01-.3 1.2-1.654.318-2.22L6.69 6.84c-.89-.567-2.06-.1-2.3.91L3.9 11.503zm9.013-9.5c-.44-.864-1.586-1.02-2.24-.307L7.4 5.16c-.653.71-.38 1.852.52 2.19l4.56 1.696c.987.366 1.977-.54 1.72-1.55L13.2 2.84c-.1-.295-.194-.59-.288-.838z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="footer-bottom"><span>© 2026 Kris' Mid City Tavern. All rights reserved.</span><span>327 Broadway, Menands, NY 12204</span><span>Built by Big Bad Coding</span></div>
     </div>

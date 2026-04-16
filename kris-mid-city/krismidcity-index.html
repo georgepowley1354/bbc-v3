@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="kris-shared.css">
+  <link rel="icon" type="image/png" href="krismidcity-images/logo-footer-live.png">
+  <link rel="apple-touch-icon" href="krismidcity-images/logo-footer-live.png">
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <style>
     /* === HERO === */
@@ -17,13 +19,15 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background-image: url('https://images.pexels.com/photos/30658142/pexels-photo-30658142.jpeg?auto=compress&cs=tinysrgb&w=1280');
+      background-image: url('krismidcity-images/hero-krisgirls.jpg');
       background-size: cover;
-      background-position: center;
+      background-position: center 24%;
     }
     .hero-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(15,14,11,0.3) 0%, rgba(15,14,11,0.65) 50%, rgba(15,14,11,0.9) 100%);
+      background:
+        linear-gradient(90deg, rgba(15,14,11,0.72) 0%, rgba(15,14,11,0.28) 42%, rgba(15,14,11,0.52) 100%),
+        linear-gradient(to bottom, rgba(15,14,11,0.38) 0%, rgba(15,14,11,0.7) 52%, rgba(15,14,11,0.94) 100%);
     }
     .hero-content {
       position: relative;
@@ -128,39 +132,6 @@
       color: var(--cream-dim);
     }
 
-    /* === STORY SECTION === */
-    .story { background: var(--bg-alt); }
-    .story-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-    .story-img {
-      aspect-ratio: 4/3;
-      border-radius: 2px;
-      background-image: url('https://images.pexels.com/photos/15789101/pexels-photo-15789101.jpeg?auto=compress&cs=tinysrgb&w=1280');
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .story-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 1px solid rgba(201,168,76,0.15);
-      border-radius: 2px;
-      pointer-events: none;
-    }
-    .story-text p {
-      color: var(--cream-dim);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-    .story-text p:last-of-type { margin-bottom: 2rem; }
-
     /* === MENU PREVIEW === */
     .menu-preview { background: var(--bg); }
     .menu-preview-header { text-align: center; margin-bottom: 3rem; }
@@ -195,6 +166,51 @@
     }
     .menu-card-sub { font-size: 0.73rem; color: var(--cream-dim); letter-spacing: 0.04em; }
     .menu-preview-cta { text-align: center; }
+
+    /* === DAILY SPECIAL BANNER === */
+    #kmc-daily-special-wrap {
+      background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.05) 100%);
+      border-top: 1px solid rgba(201,168,76,0.3);
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      padding: 1.25rem 0;
+    }
+    .daily-special-inner {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .daily-special-badge {
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .daily-special-body { flex: 1; min-width: 0; }
+    .daily-special-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--cream);
+      font-weight: 700;
+    }
+    .daily-special-price {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-left: 0.5rem;
+    }
+    .daily-special-desc { font-size: 0.82rem; color: var(--cream-dim); margin-top: 0.2rem; }
+    .daily-special-cta { flex-shrink: 0; padding: 0.6rem 1.25rem; font-size: 0.82rem; }
+    @media (max-width: 600px) {
+      .daily-special-inner { gap: 0.75rem; }
+      .daily-special-cta { width: 100%; text-align: center; }
+    }
 
     /* === SPECIALS SECTION === */
     .specials-section { background: var(--bg-alt); }
@@ -349,7 +365,9 @@
   <!-- NAVIGATION -->
   <nav id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="krismidcity-index.html" class="nav-logo">Kris' <span>Mid City</span> Tavern</a>
+      <a href="krismidcity-index.html" class="nav-logo" aria-label="Kris Mid City Tavern home">
+        <img src="krismidcity-images/logo-footer-live.png" alt="Kris Mid City Tavern logo">
+      </a>
       <ul class="nav-links" role="list">
         <li><a href="krismidcity-index.html" class="active">Home</a></li>
         <li><a href="krismidcity-menu.html">Menu</a></li>
@@ -421,18 +439,29 @@
       </div>
     </div>
 
-    <!-- STORY SECTION -->
-    <section class="story" aria-labelledby="story-heading">
+    <!-- DAILY SPECIAL BANNER (shown when admin sets an active special for today) -->
+    <div id="kmc-daily-special-wrap" style="display:none;" aria-live="polite"></div>
+
+    <!-- SEE FOR YOURSELF -->
+    <section class="gallery-preview" aria-labelledby="home-gallery-heading">
       <div class="container">
-        <div class="story-inner">
-          <div class="story-img reveal" role="img" aria-label="Inside Kris' Mid City Tavern"></div>
-          <div class="story-text reveal reveal-delay-1">
-            <span class="section-label">Our Story</span>
-            <h2 id="story-heading" class="section-title">Born from <em>Behind the Bar</em></h2>
-            <p>Kris spent years behind the bar before she had the chance to own one. When this Broadway spot came available, she took it — with a little help from a believer who saw what she saw.</p>
-            <p>That's how Mid City Tavern was born. A real neighborhood bar with a full kitchen, cold beers on tap, and the kind of food that makes you want to come back on a Wednesday just because.</p>
-            <a href="krismidcity-about.html" class="btn btn-outline">Read Our Story</a>
+        <div class="gallery-preview-header reveal">
+          <span class="section-label">The Tavern</span>
+          <h2 id="home-gallery-heading" class="section-title">See for <em>Yourself</em></h2>
+        </div>
+        <div class="gallery-preview-grid reveal" id="kmc-home-photos">
+          <div class="gp-item">
+            <img src="krismidcity-images/live-home/spoton-3.jpg" alt="House chili served with tri-color tortilla chips" loading="lazy">
           </div>
+          <div class="gp-item">
+            <img src="krismidcity-images/live-home/spoton-2.jpg" alt="Grilled chicken salad from Kris Mid City Tavern" loading="lazy">
+          </div>
+          <div class="gp-item">
+            <img src="krismidcity-images/live-home/spoton-1.jpg" alt="Seasoned chicken wings with celery and dipping sauce" loading="lazy">
+          </div>
+        </div>
+        <div class="gallery-preview-cta reveal">
+          <a href="krismidcity-gallery.html" class="btn btn-outline">View Full Gallery</a>
         </div>
       </div>
     </section>
@@ -528,32 +557,6 @@
 
     <hr class="gold-rule">
 
-    <!-- GALLERY PREVIEW -->
-    <section class="gallery-preview" aria-labelledby="gallery-heading">
-      <div class="container">
-        <div class="gallery-preview-header reveal">
-          <span class="section-label">The Tavern</span>
-          <h2 id="gallery-heading" class="section-title">See for <em>Yourself</em></h2>
-        </div>
-        <div class="gallery-preview-grid reveal">
-          <div class="gp-item">
-            <img src="https://images.pexels.com/photos/30658142/pexels-photo-30658142.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bar interior warm atmosphere" loading="lazy">
-          </div>
-          <div class="gp-item">
-            <img src="https://images.pexels.com/photos/31228738/pexels-photo-31228738.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wings and food" loading="lazy">
-          </div>
-          <div class="gp-item">
-            <img src="https://images.pexels.com/photos/12478607/pexels-photo-12478607.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Illuminated bar window" loading="lazy">
-          </div>
-        </div>
-        <div class="gallery-preview-cta reveal">
-          <a href="krismidcity-gallery.html" class="btn btn-outline">View Full Gallery</a>
-        </div>
-      </div>
-    </section>
-
-    <hr class="gold-rule">
-
     <!-- HOURS & LOCATION -->
     <section class="contact-section" aria-labelledby="contact-heading">
       <div class="container">
@@ -620,6 +623,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
+          <img src="krismidcity-images/logo-footer-live.png" alt="Kris Mid City Tavern footer logo" class="footer-brand-logo">
           <div class="footer-brand-name">Kris' Mid City Tavern</div>
           <p class="footer-tagline">Escape the Ordinary</p>
           <div class="footer-social">

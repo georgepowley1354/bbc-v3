@@ -8,12 +8,65 @@ const { createClient } = require('@supabase/supabase-js');
 
 const ALLOWED_TABLES = new Set([
   'announcements', 'happy_hour', 'weekly_specials', 'events',
-  'gallery', 'team', 'drinks', 'menu_items', 'reviews'
+  'gallery', 'team', 'drinks', 'menu_items', 'daily_specials'
 ]);
+
+const TABLE_FIELDS = {
+  announcements: ['text', 'active'],
+  happy_hour: ['days', 'time', 'deals'],
+  weekly_specials: ['day', 'deal', 'note', 'time'],
+  events: ['title', 'date', 'time', 'description', 'free', 'active', 'featured', 'photo'],
+  gallery: ['src', 'alt', 'caption', 'category', 'date'],
+  team: ['name', 'role', 'bio', 'photo'],
+  drinks: ['name', 'price', 'category', 'description', 'available', 'featured'],
+  menu_items: ['name', 'price', 'category', 'description', 'available', 'featured'],
+  daily_specials: ['active', 'title', 'description', 'price', 'date']
+};
+
+function normalizeString(value) {
+  if (value === undefined || value === null) return '';
+  return String(value).trim();
+}
+
+function isEmbeddedImage(value) {
+  return /^data:image\/[a-z0-9.+-]+;base64,/i.test(normalizeString(value));
+}
+
+function normalizeBoolean(value, fallback) {
+  if (typeof value === 'boolean') return value;
+  if (value === undefined) return fallback;
+  return !!value;
+}
+
+function normalizeDeals(value) {
+  if (!Array.isArray(value)) return [];
+  return value.map((deal) => ({
+    label: normalizeString(deal && deal.label),
+    price: normalizeString(deal && deal.price)
+  })).filter((deal) => deal.label || deal.price);
+}
+
+function sanitizePayload(table, payload, operation) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return null;
+  const clean = {};
+  TABLE_FIELDS[table].forEach((field) => {
+    if (!(field in payload)) return;
+    if (field === 'deals') clean[field] = normalizeDeals(payload[field]);
+    else if (field === 'active' || field === 'free' || field === 'featured' || field === 'available') {
+      clean[field] = normalizeBoolean(payload[field], true);
+    } else if ((field === 'src' || field === 'photo') && isEmbeddedImage(payload[field])) {
+      return;
+    } else {
+      clean[field] = normalizeString(payload[field]);
+    }
+  });
+  if (operation === 'upsert' && payload.id) clean.id = String(payload.id);
+  return Object.keys(clean).length ? clean : null;
+}
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+    return { statusCode: 405, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ error: 'Method Not Allowed' }) };
   }
 
   // Extract JWT
@@ -24,7 +77,7 @@ exports.handler = async (event) => {
   }
 
   const supabaseUrl = process.env.KMC_SUPABASE_URL;
-  const serviceKey = process.env.KMC_SUPABASE_SERVICE_KEY;
+  const serviceKey = process.env.KMC_SUPABASE_SERVICE_KEY || process.env.KMC_SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceKey) {
     console.error('kmc-write: missing environment variables');
     return { statusCode: 500, body: JSON.stringify({ error: 'Server misconfigured' }) };
@@ -52,23 +105,32 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'Invalid table' }) };
   }
 
+  if (!['add', 'update', 'remove', 'upsert'].includes(operation)) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid operation' }) };
+  }
+
+  if (operation === 'upsert' && table !== 'happy_hour' && table !== 'daily_specials') {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Upsert is only allowed for single-row tables' }) };
+  }
+
+  const cleanData = operation === 'remove' ? null : sanitizePayload(table, data, operation);
+  if (operation !== 'remove' && !cleanData) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'No valid fields provided' }) };
+  }
+
   // Execute write
   let res;
   try {
     if (operation === 'add') {
-      const row = Object.assign({}, data);
-      delete row.id;
-      res = await adminClient.from(table).insert(row).select().single();
+      res = await adminClient.from(table).insert(cleanData).select().single();
     } else if (operation === 'update') {
       if (!id) return { statusCode: 400, body: JSON.stringify({ error: 'id required for update' }) };
-      res = await adminClient.from(table).update(data).eq('id', id).select().single();
+      res = await adminClient.from(table).update(cleanData).eq('id', id).select().single();
     } else if (operation === 'remove') {
       if (!id) return { statusCode: 400, body: JSON.stringify({ error: 'id required for remove' }) };
       res = await adminClient.from(table).delete().eq('id', id);
     } else if (operation === 'upsert') {
-      res = await adminClient.from(table).upsert(data).select().single();
-    } else {
-      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid operation' }) };
+      res = await adminClient.from(table).upsert(cleanData).select().single();
     }
   } catch (err) {
     console.error('kmc-write execution error:', err);
