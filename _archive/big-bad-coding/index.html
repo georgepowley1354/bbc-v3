@@ -1,0 +1,2460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- Primary SEO -->
+  <title>Big Bad Coding — Web Design for Small Businesses | Capital Region NY</title>
+  <meta name="description" content="Big Bad Coding builds hand-coded websites for small businesses in Albany and the Capital Region NY. Landing pages, business sites, redesigns. No monthly fees, no lock-in — you own everything. Get a free quote." />
+  <link rel="canonical" href="https://bbcoding.netlify.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Big Bad Coding — Websites That Hit Harder | Capital Region NY" />
+  <meta property="og:description" content="Hand-coded websites for small businesses in Albany and the Capital Region NY. Fast turnaround, no monthly fees, no lock-in. Get a free quote." />
+  <meta property="og:url"         content="https://bbcoding.netlify.app/" />
+  <meta property="og:image"       content="https://bbcoding.netlify.app/og-image.jpg" />
+  <meta property="og:site_name"   content="Big Bad Coding" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Big Bad Coding — Websites That Hit Harder" />
+  <meta name="twitter:description" content="Hand-coded websites for small businesses in the Capital Region NY. No monthly fees. You own everything." />
+  <meta name="twitter:image"       content="https://bbcoding.netlify.app/og-image.jpg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="bbc-css-variables.css" />
+
+  <style>
+  /* ═══════════════════════════════════════════════════════════════
+     TOKENS
+  ═══════════════════════════════════════════════════════════════ */
+  :root {
+    --bg:       #0d0d0d;
+    --surface:  #161616;
+    --surface2: #202020;
+    --accent:   #0066FF;
+    --accent2:  #004dcc;
+    --white:    #ffffff;
+    --muted:    #9ca3af;
+    --border:   #252525;
+    --fd: 'Bebas Neue', sans-serif;
+    --fu: 'Inter', system-ui, -apple-system, sans-serif;
+    --fb: 'Inter', system-ui, -apple-system, sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  a, button, [role="button"] { touch-action: manipulation; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--fb);
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Noise grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 9000;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CUSTOM CURSOR — white dot, very subtle ring
+  ═══════════════════════════════════════════════════════════════ */
+  .cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 8px; height: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width .18s, height .18s;
+    will-change: left, top;
+  }
+  .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width .22s, height .22s, opacity .22s;
+    opacity: .14;
+    will-change: left, top;
+  }
+  body:has(a:hover) .cursor,
+  body:has(button:hover) .cursor { width: 14px; height: 14px; }
+  body:has(a:hover) .cursor-ring,
+  body:has(button:hover) .cursor-ring { width: 48px; height: 48px; opacity: .28; }
+
+  /* Hide custom cursor on touch devices */
+  @media (hover: none) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none !important; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     STICKY BOTTOM CTA — dark glass surface, single blue button
+  ═══════════════════════════════════════════════════════════════ */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(8,8,8,.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    z-index: 400;
+    padding: 14px 40px;
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    transform: translateY(100%);
+    transition: transform .4s var(--ease);
+  }
+  .sticky-cta.visible { transform: translateY(0); }
+  .sticky-cta-text {
+    font-family: var(--fu);
+    font-weight: 500;
+    font-size: .9rem;
+    letter-spacing: .06em;
+    color: var(--muted);
+  }
+  .sticky-cta-btn {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--accent);
+    padding: 12px 28px;
+    text-decoration: none;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    transition: background .2s;
+    cursor: pointer;
+  }
+  .sticky-cta-btn:hover { background: var(--accent2); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════════════════════════════ */
+  #main-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 300;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    transition: background .3s, border-color .3s, backdrop-filter .3s;
+    border-bottom: 1px solid transparent;
+  }
+  #main-nav.scrolled {
+    background: rgba(8,8,8,.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--border);
+  }
+  .nav-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 0;
+  }
+
+  /* BBC lettermark — nav size */
+  .nav-bbc-wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-bbc-mark {
+    display: inline-flex;
+    align-items: flex-end;
+    line-height: 0.82;
+    font-family: var(--fd);
+    font-size: 32px;
+    user-select: none;
+  }
+  .nav-bbc-mark span { display: inline-block; transition: filter 220ms var(--ease); }
+  .nav-bbc-b1 { color: #ffffff; }
+  .nav-bbc-b2 { color: #3d4a5c; margin-left: -0.085em; }
+  .nav-bbc-c  { color: #0066FF; margin-left: -0.085em; }
+  .nav-bbc-mark:hover .nav-bbc-b2 { filter: brightness(1.25); }
+  .nav-bbc-mark:hover .nav-bbc-c  { filter: brightness(1.12); }
+  .nav-bbc-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 0.45em;
+    font-family: var(--fb);
+    font-weight: 300;
+    font-size: 6.5px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 3px;
+    line-height: 1;
+  }
+  .nav-bbc-dot { font-size: 0.6em; color: #3a3a3a; }
+
+  /* Desktop nav links with active section indicator */
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .nav-link {
+    font-family: var(--fu);
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color .2s;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width .3s var(--ease);
+  }
+  .nav-link:hover { color: var(--white); }
+  .nav-link.active { color: var(--white); }
+  .nav-link.active::after { width: 100%; }
+
+  /* Desktop CTA pill */
+  .nav-cta-link {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 12px 28px;
+    text-decoration: none;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: background .2s, transform .15s;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .nav-cta-link:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  /* Hamburger (mobile only) */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 500;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--white);
+    transition: transform .3s var(--ease), opacity .3s;
+  }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOBILE MENU
+  ═══════════════════════════════════════════════════════════════ */
+  #mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s var(--ease);
+  }
+  #mobile-menu.open { opacity: 1; pointer-events: all; }
+  #mobile-menu a {
+    font-family: var(--fd);
+    font-size: clamp(3rem, 10vw, 5rem);
+    letter-spacing: .04em;
+    color: var(--white);
+    text-decoration: none;
+    transition: color .2s;
+    line-height: 1;
+  }
+  #mobile-menu a:hover, #mobile-menu a:focus { color: var(--accent); }
+  .mobile-menu-cta {
+    margin-top: 24px;
+    font-family: var(--fu) !important;
+    font-size: 1rem !important;
+    letter-spacing: .16em !important;
+    text-transform: uppercase;
+    color: var(--bg) !important;
+    background: var(--accent);
+    padding: 16px 40px;
+    min-height: 56px;
+    display: inline-flex !important;
+    align-items: center;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════════════════════════ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 40px 88px;
+    overflow: hidden;
+  }
+
+  /* Video background */
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    opacity: 0.28;
+  }
+
+  /* Background layers */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 65% 55% at 72% 25%, rgba(0,102,255,.07) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 18% 85%, rgba(0,102,255,.035) 0%, transparent 55%);
+    z-index: 0;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    animation: gridPulse 9s ease-in-out infinite;
+    z-index: 0;
+  }
+  @keyframes gridPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+
+  /* Ghost "BBC" behind content */
+  .hero-ghost-bbc {
+    position: absolute;
+    right: -2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--fd);
+    font-size: clamp(180px, 26vw, 400px);
+    line-height: 1;
+    letter-spacing: .02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.03);
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Atmospheric marquee inside hero */
+  .hero-marquee {
+    position: absolute;
+    left: 0; right: 0;
+    top: 38%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .05;
+  }
+  .hero-marquee-track {
+    display: flex;
+    width: max-content;
+    font-family: var(--fd);
+    font-size: clamp(64px, 10.5vw, 130px);
+    letter-spacing: .06em;
+    color: var(--white);
+    white-space: nowrap;
+    animation: heroMarquee 70s linear infinite;
+    will-change: transform;
+  }
+  .hero-marquee-track span { padding-right: 80px; }
+  @keyframes heroMarquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-marquee-track { animation: none; }
+    .ticker-track       { animation: none; }
+    .hero-grid          { animation: none; }
+    .fade-up            { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .hero-headline .word { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .hero-video         { display: none; }
+  }
+
+  /* Hero foreground content */
+  .hero-content { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-family: var(--fu);
+    font-weight: 600;
+    font-size: .78rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.38);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeIn .6s var(--ease) .1s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: rgba(255,255,255,.22);
+    flex-shrink: 0;
+  }
+
+  /* Split-text headline */
+  .hero-headline {
+    font-family: var(--fd);
+    font-size: clamp(4.5rem, 13.5vw, 13.5rem);
+    line-height: .875;
+    letter-spacing: -.01em;
+    color: var(--white);
+    display: block;
+  }
+  .hero-headline .line {
+    display: block;
+    overflow: hidden;
+  }
+  .hero-headline .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(70%) skewY(3deg);
+    animation: wordReveal .85s var(--ease) forwards;
+  }
+  /* "Hit" is the ONE hero accent element — the only blue in the hero */
+  .hero-headline .word.accent-word {
+    color: var(--accent);
+    text-shadow: 0 0 80px rgba(0,102,255,.28), 0 0 160px rgba(0,102,255,.1);
+  }
+
+  @keyframes wordReveal {
+    to { opacity: 1; transform: translateY(0) skewY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .hero-sub {
+    font-family: var(--fu);
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    font-weight: 400;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .02em;
+    margin-top: 26px;
+    max-width: 480px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeIn .7s var(--ease) .9s forwards;
+  }
+  .hero-cta-wrap {
+    margin-top: 44px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    opacity: 0;
+    animation: fadeIn .7s var(--ease) 1.05s forwards;
+  }
+  .btn-primary {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 20px 52px;
+    border: none;
+    text-decoration: none;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: background .2s, transform .15s, box-shadow .2s;
+    min-height: 56px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 44px rgba(0,102,255,.25);
+  }
+  /* Ghost secondary CTA — inspired by utility.agency's ghost button aesthetic */
+  .btn-ghost {
+    font-family: var(--fu);
+    font-weight: 400;
+    font-size: .85rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.45);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color .2s, gap .2s;
+    min-height: 56px;
+    white-space: nowrap;
+  }
+  .btn-ghost::after {
+    content: '↓';
+    font-size: .9em;
+    transition: transform .25s var(--ease);
+  }
+  .btn-ghost:hover { color: rgba(255,255,255,.75); gap: 12px; }
+  .btn-ghost:hover::after { transform: translateY(3px); }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 32px; left: 40px;
+    font-family: var(--fu);
+    font-size: .7rem;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.18);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1;
+    animation: fadeIn 1s var(--ease) 1.4s both;
+  }
+  .hero-scroll-hint::after {
+    content: '';
+    width: 36px; height: 1px;
+    background: rgba(255,255,255,.12);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PROOF TICKER — dark surface, muted text
+  ═══════════════════════════════════════════════════════════════ */
+  .ticker-wrap {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    padding: 13px 0;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker 34s linear infinite;
+    will-change: transform;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .ticker-item {
+    font-family: var(--fu);
+    font-weight: 500;
+    font-size: .78rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.28);
+    padding: 0 24px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+  .ticker-sep {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    flex-shrink: 0;
+    margin: 0 4px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SHARED SECTION ELEMENTS
+  ═══════════════════════════════════════════════════════════════ */
+  .section-label {
+    font-family: var(--fu);
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.32);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: rgba(255,255,255,.16);
+  }
+
+  /* Ghost section number behind title */
+  .ghost-num {
+    position: absolute;
+    font-family: var(--fd);
+    font-size: 18vw;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.03);
+    top: -.08em;
+    left: -.04em;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section-heading {
+    font-family: var(--fd);
+    font-size: clamp(2.8rem, 6vw, 5.8rem);
+    line-height: .9;
+    letter-spacing: -.01em;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Fade-up reveal */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .65s var(--ease), transform .65s var(--ease);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up.d1 { transition-delay: .1s; }
+  .fade-up.d2 { transition-delay: .2s; }
+  .fade-up.d3 { transition-delay: .3s; }
+  .fade-up.d4 { transition-delay: .4s; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     SERVICES — ACCORDION
+  ═══════════════════════════════════════════════════════════════ */
+  #services {
+    padding: 100px 40px;
+    background: var(--bg);
+  }
+  .services-container { max-width: 1200px; margin: 0 auto; }
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 64px;
+    position: relative;
+  }
+  .services-body-copy {
+    font-size: 1rem;
+    line-height: 1.72;
+    color: rgba(255,255,255,.36);
+    max-width: 400px;
+    align-self: end;
+  }
+
+  /* Accordion */
+  .accordion { border-top: 1px solid var(--border); }
+  .acc-item { border-bottom: 1px solid var(--border); }
+
+  .acc-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 28px 0;
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+    color: var(--white);
+    text-align: left;
+    transition: background .2s;
+  }
+  .acc-trigger:hover { background: rgba(255,255,255,.015); }
+  .acc-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+  .acc-num {
+    font-family: var(--fd);
+    font-size: 2.2rem;
+    line-height: 1;
+    color: rgba(255,255,255,.08);
+    transition: color .3s;
+  }
+  .acc-item.open .acc-num { color: var(--accent); }
+
+  .acc-name {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 2.8vw, 2rem);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--white);
+    transition: color .2s;
+  }
+
+  .acc-price {
+    font-family: var(--fu);
+    font-size: .78rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .acc-icon {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background .2s, border-color .2s;
+  }
+  .acc-item.open .acc-icon { background: var(--accent); border-color: var(--accent); }
+  .acc-icon svg {
+    width: 12px; height: 12px;
+    stroke: var(--muted);
+    transition: stroke .2s, transform .35s var(--ease);
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+  .acc-item.open .acc-icon svg { stroke: var(--bg); transform: rotate(45deg); }
+
+  .acc-body {
+    height: 0;
+    overflow: hidden;
+    transition: height .4s var(--ease);
+  }
+  .acc-body-inner {
+    padding: 0 0 40px 104px;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 40px;
+    align-items: start;
+  }
+  .acc-desc {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,.44);
+    max-width: 560px;
+  }
+  .acc-detail {
+    font-family: var(--fu);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.22);
+    line-height: 2.2;
+    border-left: 1px solid var(--border);
+    padding-left: 24px;
+  }
+  .acc-detail strong {
+    display: block;
+    color: var(--white);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     PORTFOLIO
+  ═══════════════════════════════════════════════════════════════ */
+  #portfolio {
+    padding: 100px 40px;
+    background: var(--surface);
+  }
+  .portfolio-container { max-width: 1200px; margin: 0 auto; }
+  .portfolio-header {
+    position: relative;
+    margin-bottom: 60px;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* Case study card */
+  .case-study {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform .5s var(--ease), border-color .4s, box-shadow .4s;
+    transform-origin: center bottom;
+    cursor: pointer;
+  }
+  .case-study:hover {
+    transform: rotate(1.5deg) translateY(-5px);
+    border-color: rgba(255,255,255,.1);
+    box-shadow: 0 24px 80px rgba(0,0,0,.65);
+  }
+
+  /* CSS-drawn WSB mockup */
+  .wsb-mockup {
+    background: #080405;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  /* Browser chrome */
+  .wsb-chrome {
+    background: #141010;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .wsb-dots { display: flex; gap: 5px; }
+  .wsb-dots span { width: 9px; height: 9px; border-radius: 50%; }
+  .wsb-dots span:nth-child(1) { background: #ff5f57; }
+  .wsb-dots span:nth-child(2) { background: #febc2e; }
+  .wsb-dots span:nth-child(3) { background: #28c840; }
+  .wsb-url-bar {
+    background: #1e1a1a;
+    border-radius: 3px;
+    padding: 4px 10px;
+    flex: 1;
+    font-family: var(--fb);
+    font-size: .65rem;
+    color: rgba(255,255,255,.28);
+    letter-spacing: .02em;
+  }
+  /* Site nav mockup */
+  .wsb-sitenav {
+    background: #0d0808;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    flex-shrink: 0;
+  }
+  .wsb-sitelogo {
+    font-family: var(--fd);
+    font-size: 1rem;
+    color: rgba(255,255,255,.7);
+    letter-spacing: .04em;
+  }
+  .wsb-navlinks { display: flex; gap: 8px; }
+  .wsb-navlinks span {
+    width: 28px; height: 4px;
+    background: rgba(255,255,255,.09);
+    border-radius: 2px;
+  }
+  /* Site hero */
+  .wsb-sitehero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 20px;
+    background: linear-gradient(160deg, #0e0505 0%, #1a0808 50%, #0a0404 100%);
+    position: relative;
+    gap: 8px;
+  }
+  .wsb-sitehero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,255,255,.02) 0%, transparent 70%);
+  }
+  .wsb-eyebrow {
+    font-family: var(--fu);
+    font-size: .58rem;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.22);
+    position: relative;
+  }
+  .wsb-title {
+    font-family: var(--fd);
+    font-size: clamp(1rem, 2.4vw, 1.9rem);
+    letter-spacing: .04em;
+    color: rgba(255,255,255,.9);
+    text-align: center;
+    text-shadow: none;
+    line-height: .95;
+    position: relative;
+  }
+  .wsb-rule {
+    width: 44%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,.2), transparent);
+    position: relative;
+  }
+  .wsb-tagline {
+    font-family: var(--fu);
+    font-size: .58rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.18);
+    text-align: center;
+    position: relative;
+  }
+  /* Content blocks */
+  .wsb-cards-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    padding: 10px 10px 0;
+    flex-shrink: 0;
+  }
+  .wsb-card-block {
+    height: 44px;
+    background: rgba(0,102,255,.08);
+    border: 1px solid rgba(0,102,255,.06);
+    border-radius: 2px;
+  }
+  .wsb-footer-bar {
+    height: 8px;
+    background: rgba(255,255,255,.03);
+    margin: 6px 10px 0;
+    flex-shrink: 0;
+  }
+
+  /* Hover reveal overlay — inspired by Redlab.bz focus hierarchy */
+  .wsb-hover-reveal {
+    position: absolute;
+    inset: 0;
+    background: rgba(6,6,6,.82);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity .35s var(--ease);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  .case-study:hover .wsb-hover-reveal { opacity: 1; }
+  .wsb-hover-label {
+    font-family: var(--fu);
+    font-weight: 600;
+    font-size: .72rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+  }
+  .wsb-hover-cta {
+    font-family: var(--fd);
+    font-size: 2rem;
+    letter-spacing: .06em;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .wsb-hover-cta::after {
+    content: '→';
+    color: rgba(255,255,255,.6);
+    font-size: .85em;
+  }
+
+  /* Case study info panel */
+  .case-study-info {
+    padding: 52px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cs-tag {
+    font-family: var(--fu);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.28);
+    margin-bottom: 16px;
+  }
+  .cs-title {
+    font-family: var(--fd);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: .92;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .cs-desc {
+    font-size: .95rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,.42);
+    margin-bottom: 36px;
+  }
+  .cs-link {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: gap .2s;
+  }
+  .cs-link:hover { gap: 18px; }
+  .cs-link-arrow { display: flex; align-items: center; gap: 0; }
+  .cs-link-arrow::before {
+    content: '';
+    display: block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+    transition: width .2s;
+  }
+  .cs-link-arrow::after {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    border-right: 1.5px solid var(--accent);
+    border-top: 1.5px solid var(--accent);
+    transform: rotate(45deg);
+    margin-left: -3px;
+  }
+  .cs-link:hover .cs-link-arrow::before { width: 44px; }
+
+  /* Smaller case study cards (2-column grid items) */
+  .case-study-sm {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .5s var(--ease), border-color .4s, box-shadow .4s;
+    cursor: pointer;
+  }
+  .case-study-sm:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,255,255,.1);
+    box-shadow: 0 24px 80px rgba(0,0,0,.65);
+  }
+  .sm-mockup {
+    flex: 1;
+    min-height: 220px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sm-chrome {
+    background: rgba(255,255,255,.04);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .sm-dots { display: flex; gap: 4px; }
+  .sm-dots span { width: 7px; height: 7px; border-radius: 50%; }
+  .sm-dots span:nth-child(1) { background: #ff5f57; }
+  .sm-dots span:nth-child(2) { background: #febc2e; }
+  .sm-dots span:nth-child(3) { background: #28c840; }
+  .sm-url {
+    flex: 1;
+    font-family: var(--fb);
+    font-size: .6rem;
+    color: rgba(255,255,255,.22);
+    letter-spacing: .02em;
+  }
+  .sm-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    gap: 8px;
+    position: relative;
+  }
+  .sm-logo {
+    font-family: var(--fd);
+    font-size: 1.6rem;
+    letter-spacing: .06em;
+    line-height: 1;
+    text-align: center;
+  }
+  .sm-tagline {
+    font-family: var(--fu);
+    font-size: .56rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: .4;
+  }
+  .sm-info {
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .sm-label {
+    font-family: var(--fu);
+    font-size: .65rem;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.25);
+    margin-bottom: 6px;
+  }
+  .sm-title {
+    font-family: var(--fd);
+    font-size: 1.6rem;
+    line-height: .95;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .sm-link {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap .2s;
+  }
+  .sm-link:hover { gap: 14px; }
+  .sm-hover-reveal {
+    position: absolute;
+    inset: 0;
+    background: rgba(6,6,6,.82);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .35s var(--ease);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    font-family: var(--fd);
+    font-size: 1.4rem;
+    letter-spacing: .06em;
+    color: var(--white);
+  }
+  .case-study-sm:hover .sm-hover-reveal { opacity: 1; }
+
+  /* In-progress cards */
+  .portfolio-pending {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 40px 36px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color .3s;
+  }
+  .portfolio-pending:hover { border-color: rgba(255,255,255,.1); }
+  .pending-status {
+    font-family: var(--fu);
+    font-size: .68rem;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.22);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pending-pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.28);
+    animation: pulse 2.4s ease infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.2} 50%{opacity:.65} }
+  .pending-label {
+    font-family: var(--fd);
+    font-size: 2rem;
+    line-height: .95;
+    color: rgba(255,255,255,.12);
+  }
+
+  /* Mid-page CTA strip */
+  .cta-strip {
+    background: var(--accent);
+    padding: 32px 40px;
+  }
+  .cta-strip-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .cta-strip-text {
+    font-family: var(--fd);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    color: var(--white);
+    letter-spacing: .03em;
+  }
+  .cta-strip-btn {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: .85rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,.6);
+    padding: 14px 28px;
+    white-space: nowrap;
+    transition: background .2s, border-color .2s;
+  }
+  .cta-strip-btn:hover {
+    background: rgba(255,255,255,.12);
+    border-color: var(--white);
+  }
+  @media (max-width: 600px) {
+    .cta-strip-inner { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     HOW IT WORKS
+  ═══════════════════════════════════════════════════════════════ */
+  #how-it-works {
+    padding: 100px 40px;
+    background: var(--surface);
+  }
+  .how-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .how-header {
+    position: relative;
+    margin-bottom: 64px;
+  }
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+  .how-step {
+    padding: 48px 44px;
+    position: relative;
+  }
+  .how-step + .how-step {
+    border-left: 1px solid var(--border);
+  }
+  .how-step-num {
+    font-family: var(--fd);
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(0,102,255,.2);
+    margin-bottom: 20px;
+  }
+  .how-step-title {
+    font-family: var(--fd);
+    font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+    line-height: .95;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .how-step-desc {
+    font-size: .93rem;
+    line-height: 1.72;
+    color: rgba(255,255,255,.4);
+  }
+  .how-step-arrow {
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: rgba(0,102,255,.3);
+    z-index: 1;
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .how-steps {
+      grid-template-columns: 1fr;
+    }
+    .how-step + .how-step {
+      border-left: none;
+      border-top: 1px solid var(--border);
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     TESTIMONIALS
+  ═══════════════════════════════════════════════════════════════ */
+  #testimonials {
+    padding: 80px 40px;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+  .testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .testimonials-label {
+    font-family: var(--fu);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.25);
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .testimonial-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 40px 40px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    transition: border-color .3s;
+  }
+  .testimonial-card:hover { border-color: rgba(255,255,255,.1); }
+  .testimonial-quote {
+    font-family: var(--fd);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    line-height: 1.25;
+    color: var(--white);
+    position: relative;
+  }
+  .testimonial-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.3em;
+    left: -0.1em;
+    font-size: 3em;
+    color: rgba(0,102,255,.2);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .testimonial-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .testimonial-name {
+    font-family: var(--fu);
+    font-weight: 600;
+    font-size: .82rem;
+    color: var(--white);
+    letter-spacing: .04em;
+  }
+  .testimonial-biz {
+    font-family: var(--fu);
+    font-size: .72rem;
+    color: rgba(255,255,255,.3);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 768px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     WHY US — dark editorial (redesigned from solid blue band)
+  ═══════════════════════════════════════════════════════════════ */
+  .why-band {
+    background: #0d0d0d;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .why-band::before {
+    content: 'BBC';
+    position: absolute;
+    right: -0.05em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--fd);
+    font-size: clamp(120px, 22vw, 300px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.03);
+    user-select: none;
+    pointer-events: none;
+  }
+  .why-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .why-item { padding: 36px 44px; }
+  .why-item + .why-item { border-left: 1px solid var(--border); }
+  .why-num {
+    font-family: var(--fd);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: rgba(0,102,255,.3);
+    margin-bottom: 8px;
+  }
+  .why-title {
+    font-family: var(--fd);
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    line-height: .95;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .why-desc {
+    font-size: .93rem;
+    line-height: 1.68;
+    color: rgba(255,255,255,.4);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     CONTACT
+  ═══════════════════════════════════════════════════════════════ */
+  #contact {
+    padding: 100px 40px;
+    background: var(--bg);
+  }
+  .contact-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-headline {
+    font-family: var(--fd);
+    font-size: clamp(3.2rem, 8vw, 7.5rem);
+    line-height: .87;
+    color: var(--white);
+    margin-top: 8px;
+    margin-bottom: 24px;
+  }
+  .contact-headline em { color: var(--accent); font-style: normal; }
+  .contact-body {
+    font-size: 1rem;
+    line-height: 1.72;
+    color: rgba(255,255,255,.4);
+    margin-bottom: 28px;
+    max-width: 360px;
+  }
+  .contact-promise {
+    font-family: var(--fu);
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.22);
+    line-height: 2;
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .form-field label {
+    font-family: var(--fu);
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.28);
+  }
+  .form-field input,
+  .form-field textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--white);
+    font-family: var(--fb);
+    font-size: 1rem;
+    padding: 14px 16px;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    transition: border-color .2s, background .2s;
+    min-height: 50px;
+  }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: rgba(255,255,255,.14); }
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-color: rgba(255,255,255,.42);
+    background: var(--surface2);
+  }
+  .form-field textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    font-family: var(--fu);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    padding: 20px 52px;
+    clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    transition: background .2s, transform .15s, box-shadow .2s;
+    min-height: 56px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  .form-submit:hover:not(:disabled) {
+    background: var(--accent2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(0,102,255,.25);
+  }
+  .form-submit:disabled { opacity: .55; cursor: not-allowed; }
+
+  .form-success {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 36px 32px;
+  }
+  .form-success.active { display: block; }
+  .success-title {
+    font-family: var(--fd);
+    font-size: 2.4rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .success-body { font-size: .95rem; color: rgba(255,255,255,.42); line-height: 1.6; }
+
+  /* ═══════════════════════════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════════════════════════ */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+  }
+  /* Full-width massive "LET'S BUILD" */
+  .footer-big {
+    font-family: var(--fd);
+    font-size: 17vw;
+    line-height: .82;
+    letter-spacing: -.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,.06);
+    white-space: nowrap;
+    display: block;
+    padding: 24px 0 0 28px;
+    transition: -webkit-text-stroke-color .4s;
+    cursor: default;
+  }
+  .footer-big:hover { -webkit-text-stroke-color: rgba(255,255,255,.1); }
+
+  .footer-bottom {
+    padding: 32px 40px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+  /* Footer uses BBC lettermark — same nav classes, smaller */
+  .footer-logo {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .footer-links a {
+    font-family: var(--fu);
+    font-size: .75rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy {
+    font-family: var(--fu);
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.16);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════════════════════════ */
+  @media (max-width: 960px) {
+    #main-nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .nav-cta-link { display: none; }
+    .nav-hamburger { display: flex; }
+
+    .hero { padding: 96px 20px 72px; }
+    .hero-ghost-bbc { display: none; }
+    .hero-scroll-hint { left: 20px; }
+    .hero-cta-wrap { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+    #services { padding: 80px 20px; }
+    .services-header { grid-template-columns: 1fr; gap: 12px; }
+    .acc-trigger { grid-template-columns: 60px 1fr auto; gap: 14px; }
+    .acc-price { display: none; }
+    .acc-body-inner { padding: 0 0 32px 74px; grid-template-columns: 1fr; gap: 20px; }
+    .acc-detail { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 16px; }
+
+    #portfolio { padding: 80px 20px; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .case-study { grid-template-columns: 1fr; }
+    .wsb-mockup { min-height: 240px; }
+    .case-study-info { padding: 32px 24px; }
+    .case-study:hover { transform: rotate(1deg) translateY(-4px); }
+
+    .why-grid { grid-template-columns: 1fr; }
+    .why-item + .why-item { border-left: none; border-top: 1px solid var(--border); }
+    .why-band { padding: 60px 20px; }
+
+    #contact { padding: 80px 20px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-submit { width: 100%; justify-content: center; clip-path: none; }
+
+    .sticky-cta { padding: 12px 20px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+    .sticky-cta-text { font-size: .85rem; }
+
+    .hero-cta-wrap .btn-primary { width: 100%; max-width: 340px; justify-content: center; clip-path: none; }
+
+    .footer-big { font-size: 14vw; }
+    .footer-bottom { padding: 24px 20px 32px; flex-direction: column; align-items: flex-start; }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-headline { font-size: clamp(3.8rem, 16vw, 5.5rem); }
+    .hero-sub { max-width: 100%; }
+
+    .acc-trigger { padding: 22px 0; }
+    .acc-body-inner { padding-left: 0; }
+
+    .ghost-num { font-size: 24vw; }
+
+    /* Sticky CTA on small screens: center the button */
+    .sticky-cta { justify-content: center; padding: 12px 20px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+    .sticky-cta-text { display: none; }
+    .sticky-cta-btn { width: 100%; max-width: 280px; justify-content: center; }
+  }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════
+       STICKY BOTTOM CTA
+  ══════════════════════════════════════════════ -->
+  <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+    <span class="sticky-cta-text">Ready to hit harder?</span>
+    <a href="#contact" class="sticky-cta-btn" tabindex="-1">GET A FREE QUOTE</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════════ -->
+  <nav id="main-nav" aria-label="Main navigation">
+    <a href="#" class="nav-logo" aria-label="Big Bad Coding — home">
+      <span class="nav-bbc-wordmark">
+        <span class="nav-bbc-mark" role="img" aria-hidden="true">
+          <span class="nav-bbc-b1">B</span>
+          <span class="nav-bbc-b2">B</span>
+          <span class="nav-bbc-c">C</span>
+        </span>
+        <span class="nav-bbc-subtitle" aria-hidden="true">
+          <span>BIG</span><span class="nav-bbc-dot">·</span>
+          <span>BAD</span><span class="nav-bbc-dot">·</span>
+          <span>CODING</span>
+        </span>
+      </span>
+    </a>
+
+    <!-- Desktop nav links with scroll-tracking active indicator -->
+    <div class="nav-links" role="list" aria-hidden="true">
+      <a href="#services" class="nav-link" data-section="services" role="listitem">Services</a>
+      <a href="#portfolio" class="nav-link" data-section="portfolio" role="listitem">Work</a>
+    </div>
+
+    <a href="#contact" class="nav-cta-link" aria-label="Get a free quote">Get a Free Quote</a>
+
+    <button
+      class="nav-hamburger"
+      id="nav-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open navigation menu"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       MOBILE MENU
+  ══════════════════════════════════════════════ -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="#services" class="mobile-menu-item">Services</a>
+    <a href="#portfolio" class="mobile-menu-item">Work</a>
+    <a href="#contact" class="mobile-menu-cta" aria-label="Get a free quote">Get a Free Quote</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════ -->
+  <header class="hero">
+    <video class="hero-video" autoplay muted loop playsinline aria-hidden="true"
+      poster="https://images.pexels.com/videos/3129957/pictures/preview-0.jpg">
+      <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="hero-glow"    aria-hidden="true"></div>
+    <div class="hero-grid"    aria-hidden="true"></div>
+    <div class="hero-ghost-bbc" aria-hidden="true">BBC</div>
+
+    <!-- Atmospheric marquee inside hero -->
+    <div class="hero-marquee" aria-hidden="true" role="presentation">
+      <div class="hero-marquee-track">
+        <span>WEBSITES THAT HIT HARDER ·</span>
+        <span>WEBSITES THAT HIT HARDER ·</span>
+        <span>WEBSITES THAT HIT HARDER ·</span>
+        <span>WEBSITES THAT HIT HARDER ·</span>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Capital Region NY · Web Design</p>
+
+      <!-- Split-text headline — staggered word reveal -->
+      <h1 class="hero-headline" aria-label="Websites That Hit Harder">
+        <span class="line"><span class="word" style="animation-delay:.15s">Websites</span></span>
+        <span class="line"><span class="word" style="animation-delay:.32s">That</span></span>
+        <span class="line">
+          <span class="word accent-word" style="animation-delay:.49s">Hit</span>&nbsp;<span class="word" style="animation-delay:.66s">Harder</span>
+        </span>
+      </h1>
+
+      <p class="hero-sub">Most small business sites look like they were built in 2011. Yours won't.</p>
+
+      <div class="hero-cta-wrap">
+        <a href="#contact" class="btn-primary" aria-label="Get a free quote from Big Bad Coding">GET A FREE QUOTE</a>
+        <a href="#services" class="btn-ghost" aria-label="See our services">See Our Work</a>
+      </div>
+    </div>
+
+    <span class="hero-scroll-hint" aria-hidden="true">Scroll</span>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       PROOF TICKER
+  ══════════════════════════════════════════════ -->
+  <div class="ticker-wrap" aria-hidden="true" role="presentation">
+    <div class="ticker-track">
+      <span class="ticker-item">Fast Turnaround</span><span class="ticker-sep"></span>
+      <span class="ticker-item">No Monthly Fees</span><span class="ticker-sep"></span>
+      <span class="ticker-item">You Own Everything</span><span class="ticker-sep"></span>
+      <span class="ticker-item">No Lock-In Contracts</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Capital Region NY</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Small Business Specialists</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Hand-Coded — No Templates</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Mobile-First</span><span class="ticker-sep"></span>
+      <!-- duplicate set for seamless loop -->
+      <span class="ticker-item">Fast Turnaround</span><span class="ticker-sep"></span>
+      <span class="ticker-item">No Monthly Fees</span><span class="ticker-sep"></span>
+      <span class="ticker-item">You Own Everything</span><span class="ticker-sep"></span>
+      <span class="ticker-item">No Lock-In Contracts</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Capital Region NY</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Small Business Specialists</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Hand-Coded — No Templates</span><span class="ticker-sep"></span>
+      <span class="ticker-item">Mobile-First</span><span class="ticker-sep"></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SERVICES — ACCORDION
+  ══════════════════════════════════════════════ -->
+  <section id="services">
+    <div class="services-container">
+
+      <div class="services-header fade-up">
+        <div style="position:relative;">
+          <span class="ghost-num" aria-hidden="true">01</span>
+          <p class="section-label">What We Build</p>
+          <h2 class="section-heading">Three services.<br>All killer.</h2>
+        </div>
+        <p class="services-body-copy fade-up d1">No bloated WordPress installs. No drag-and-drop templates. Every site is hand-coded from scratch, loads in under a second, and belongs to you — forever.</p>
+      </div>
+
+      <div class="accordion" role="list">
+
+        <!-- 01 Landing Pages -->
+        <div class="acc-item" role="listitem">
+          <button
+            class="acc-trigger"
+            aria-expanded="false"
+            aria-controls="acc-body-1"
+            id="acc-btn-1"
+          >
+            <span class="acc-num" aria-hidden="true">01</span>
+            <span class="acc-name">Landing Pages</span>
+            <span class="acc-price" aria-label="Starting from $500">From $500</span>
+            <span class="acc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="acc-body" id="acc-body-1" role="region" aria-labelledby="acc-btn-1">
+            <div class="acc-body-inner">
+              <p class="acc-desc">One page. One goal. Converts visitors before they can second-guess it. Built for food trucks, contractors, local shops, and anyone who needs a strong online presence fast — without a six-page site they'll never update.</p>
+              <div class="acc-detail">
+                <strong>Starting Price</strong>$500
+                <strong>Delivery</strong>1 week
+                <strong>Includes</strong>Contact form · Mobile-first · SEO setup
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 Business Sites -->
+        <div class="acc-item" role="listitem">
+          <button
+            class="acc-trigger"
+            aria-expanded="false"
+            aria-controls="acc-body-2"
+            id="acc-btn-2"
+          >
+            <span class="acc-num" aria-hidden="true">02</span>
+            <span class="acc-name">Business Sites</span>
+            <span class="acc-price" aria-label="Starting from $1,200">From $1,200</span>
+            <span class="acc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="acc-body" id="acc-body-2" role="region" aria-labelledby="acc-btn-2">
+            <div class="acc-body-inner">
+              <p class="acc-desc">Full multi-page sites for any industry. Everything your customers need to find you, trust you, and call you. We handle the design, the code, and the copy direction — you just show up on launch day.</p>
+              <div class="acc-detail">
+                <strong>Starting Price</strong>$1,200
+                <strong>Delivery</strong>2 weeks
+                <strong>Includes</strong>Up to 6 pages · Blog · Google Maps · Full SEO
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Redesigns -->
+        <div class="acc-item" role="listitem">
+          <button
+            class="acc-trigger"
+            aria-expanded="false"
+            aria-controls="acc-body-3"
+            id="acc-btn-3"
+          >
+            <span class="acc-num" aria-hidden="true">03</span>
+            <span class="acc-name">Redesigns</span>
+            <span class="acc-price" aria-label="Starting from $800">From $800</span>
+            <span class="acc-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="acc-body" id="acc-body-3" role="region" aria-labelledby="acc-btn-3">
+            <div class="acc-body-inner">
+              <p class="acc-desc">Your current site is costing you customers. We strip it to the studs and rebuild it into something you'd actually show people. Bring your old domain — everything else we handle from zero.</p>
+              <div class="acc-detail">
+                <strong>Starting Price</strong>$800
+                <strong>Delivery</strong>10 days
+                <strong>Includes</strong>Full rebuild · Content migration · SEO audit
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /accordion -->
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       PORTFOLIO
+  ══════════════════════════════════════════════ -->
+  <section id="portfolio">
+    <div class="portfolio-container">
+
+      <div class="portfolio-header fade-up">
+        <span class="ghost-num" aria-hidden="true">02</span>
+        <p class="section-label">Our Work</p>
+        <h2 class="section-heading">Real sites.<br>Real businesses.</h2>
+      </div>
+
+      <div class="portfolio-grid">
+
+        <!-- Case study: What's Shakin' Bacon -->
+        <article class="case-study fade-up" aria-labelledby="cs-title">
+
+          <!-- CSS-drawn mockup of WSB site -->
+          <div class="wsb-mockup" aria-label="Screenshot mockup of the What's Shakin' Bacon website">
+            <!-- Browser chrome -->
+            <div class="wsb-chrome" aria-hidden="true">
+              <div class="wsb-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="wsb-url-bar">whatsshakinbacon.com</div>
+            </div>
+            <!-- Site nav -->
+            <div class="wsb-sitenav" aria-hidden="true">
+              <span class="wsb-sitelogo">WSB</span>
+              <div class="wsb-navlinks">
+                <span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <!-- Site hero -->
+            <div class="wsb-sitehero" aria-hidden="true">
+              <p class="wsb-eyebrow">Capital Region NY Food Truck</p>
+              <p class="wsb-title">WHAT'S<br>SHAKIN'<br>BACON</p>
+              <div class="wsb-rule"></div>
+              <p class="wsb-tagline">Capital Region's Favorite Smash Burger</p>
+            </div>
+            <!-- Content blocks -->
+            <div class="wsb-cards-row" aria-hidden="true">
+              <div class="wsb-card-block"></div>
+              <div class="wsb-card-block"></div>
+              <div class="wsb-card-block"></div>
+            </div>
+            <div class="wsb-footer-bar" aria-hidden="true"></div>
+
+            <!-- Hover reveal overlay — inspired by Redlab.bz focus hierarchy -->
+            <div class="wsb-hover-reveal" aria-hidden="true">
+              <span class="wsb-hover-label">View Live Site</span>
+              <span class="wsb-hover-cta">What's Shakin' Bacon</span>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="case-study-info">
+            <p class="cs-tag">Case Study · Food Truck · Albany NY</p>
+            <h3 class="cs-title" id="cs-title">What's Shakin' Bacon</h3>
+            <p class="cs-desc">Full multi-page site for a smash burger food truck operating in the Capital Region. Animated splash screen, full menu, live event schedule, customer testimonials, and social media integration — built from scratch, no templates.</p>
+            <a
+              href="https://whatsshakinbacon.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cs-link"
+              aria-label="View the What's Shakin' Bacon live website (opens in new tab)"
+            >
+              View Live Site
+              <span class="cs-link-arrow" aria-hidden="true"></span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Case Study: Mister Black -->
+        <article class="case-study-sm fade-up d1" aria-labelledby="cs-mb-title">
+          <div class="sm-mockup" style="background:#080808;">
+            <div class="sm-chrome" aria-hidden="true">
+              <div class="sm-dots"><span></span><span></span><span></span></div>
+              <div class="sm-url">meetmisterblack.netlify.app</div>
+            </div>
+            <div class="sm-hero" style="background:linear-gradient(160deg,#080808 0%,#0e0e0e 100%);" aria-hidden="true">
+              <div class="sm-logo" style="color:#c4a882;">MISTER<br>BLACK</div>
+              <div style="width:40%;height:1px;background:linear-gradient(to right,transparent,#c4a882,transparent);opacity:.4;"></div>
+              <div class="sm-tagline" style="color:#c4a882;">Photography · Web Design · IT</div>
+            </div>
+            <div class="sm-hover-reveal" aria-hidden="true">View Live Site →</div>
+          </div>
+          <div class="sm-info">
+            <p class="sm-label">Case Study · Multi-Service · Capital Region NY</p>
+            <h3 class="sm-title" id="cs-mb-title">Mister Black</h3>
+            <a href="https://meetmisterblack.netlify.app/" target="_blank" rel="noopener noreferrer" class="sm-link" aria-label="View the Mister Black live website (opens in new tab)">View Live Site →</a>
+          </div>
+        </article>
+
+        <!-- Case Study: Kris' Mid City Tavern -->
+        <article class="case-study-sm fade-up d2" aria-labelledby="cs-kris-title">
+          <div class="sm-mockup" style="background:#0f0e0b;">
+            <div class="sm-chrome" aria-hidden="true">
+              <div class="sm-dots"><span></span><span></span><span></span></div>
+              <div class="sm-url">krismidcity.com</div>
+            </div>
+            <div class="sm-hero" style="background:linear-gradient(160deg,#0f0e0b 0%,#181510 100%);" aria-hidden="true">
+              <div class="sm-logo" style="color:#c9a84c;">KRIS'<br>MID CITY</div>
+              <div style="width:40%;height:1px;background:linear-gradient(to right,transparent,#c9a84c,transparent);opacity:.4;"></div>
+              <div class="sm-tagline" style="color:#f0e8d8;">Escape the Ordinary</div>
+            </div>
+            <div class="sm-hover-reveal" aria-hidden="true">View Live Site →</div>
+          </div>
+          <div class="sm-info">
+            <p class="sm-label">Case Study · Tavern &amp; Bar · Menands NY</p>
+            <h3 class="sm-title" id="cs-kris-title">Kris' Mid City Tavern</h3>
+            <a href="https://no-front-door.netlify.app/krismidcity-index" target="_blank" rel="noopener noreferrer" class="sm-link" aria-label="View Kris Mid City Tavern live website (opens in new tab)">View Live Site →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       MID-PAGE CTA STRIP
+  ══════════════════════════════════════════════ -->
+  <div class="cta-strip" aria-label="Get started with Big Bad Coding">
+    <div class="cta-strip-inner">
+      <p class="cta-strip-text">Your business deserves a site this good.</p>
+      <a href="#contact" class="cta-strip-btn">Get a Free Quote →</a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       HOW IT WORKS
+  ══════════════════════════════════════════════ -->
+  <section id="how-it-works">
+    <div class="how-container">
+
+      <div class="how-header fade-up">
+        <div style="position:relative;">
+          <span class="ghost-num" aria-hidden="true">03</span>
+          <p class="section-label">The Process</p>
+          <h2 class="section-heading">Simple as it gets.</h2>
+        </div>
+      </div>
+
+      <div class="how-steps">
+
+        <div class="how-step fade-up">
+          <div class="how-step-num" aria-hidden="true">01</div>
+          <h3 class="how-step-title">Tell Us About Your Business</h3>
+          <p class="how-step-desc">Fill out the form or shoot us a message. Tell us what you do, what you need, and what's broken about your current site (if you have one). No intake forms, no sales calls.</p>
+        </div>
+
+        <div class="how-step fade-up d1">
+          <div class="how-step-num" aria-hidden="true">02</div>
+          <h3 class="how-step-title">We Design &amp; Build It</h3>
+          <p class="how-step-desc">We handle everything — design, copy direction, code, SEO setup, and mobile optimization. Hand-coded from scratch, no templates. You stay in the loop without being buried in decisions.</p>
+        </div>
+
+        <div class="how-step fade-up d2">
+          <div class="how-step-num" aria-hidden="true">03</div>
+          <h3 class="how-step-title">You Go Live in Two Weeks</h3>
+          <p class="how-step-desc">Most projects ship in two weeks or less. You get the full source code, full ownership, and zero monthly fees. We hand you the keys and you drive — or we keep it updated for you.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       TESTIMONIALS
+  ══════════════════════════════════════════════ -->
+  <section id="testimonials">
+    <div class="testimonials-container">
+      <p class="testimonials-label">What Our Clients Say</p>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card fade-up">
+          <p class="testimonial-quote">Working with Big Bad Coding was the easiest part of launching our business online. They just got it — no back and forth, no fluff. The site looks insane.</p>
+          <div class="testimonial-attribution">
+            <span class="testimonial-name">— Client Name</span>
+            <span class="testimonial-biz">What's Shakin' Bacon · Albany NY</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up d1">
+          <p class="testimonial-quote">I've worked with agencies before and it was always a nightmare. BBC came in, listened, and delivered something I'm actually proud to show people.</p>
+          <div class="testimonial-attribution">
+            <span class="testimonial-name">— Client Name</span>
+            <span class="testimonial-biz">Kris' Mid City Tavern · Menands NY</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       WHY US
+  ══════════════════════════════════════════════ -->
+  <div class="why-band" aria-label="Why Big Bad Coding">
+    <div class="why-grid">
+      <div class="why-item fade-up">
+        <div class="why-num" aria-hidden="true">01</div>
+        <h3 class="why-title">We Work With the Little Guys.</h3>
+        <p class="why-desc">Big agencies want $20k minimums and a six-month runway. We build for food trucks, contractors, barbers, and bar owners — businesses that deserve a great site but get ignored everywhere else.</p>
+      </div>
+      <div class="why-item fade-up d1">
+        <div class="why-num" aria-hidden="true">02</div>
+        <h3 class="why-title">Albany-Based. You Can Actually Call Us.</h3>
+        <p class="why-desc">We're local. Not a faceless agency, not outsourced. When you have a question, a real person answers. No ticket system. No 72-hour response windows. Just straight talk from someone who knows the Capital Region.</p>
+      </div>
+      <div class="why-item fade-up d2">
+        <div class="why-num" aria-hidden="true">03</div>
+        <h3 class="why-title">No Jargon. No Runaround.</h3>
+        <p class="why-desc">We tell you what it costs, what we're building, and when it ships — before we start. No scope creep surprises, no monthly mystery invoices. The price we quote is the price you pay.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       CONTACT
+  ══════════════════════════════════════════════ -->
+  <section id="contact">
+    <div class="contact-grid">
+
+      <!-- Left copy -->
+      <div>
+        <div style="position:relative;">
+          <span class="ghost-num" aria-hidden="true">05</span>
+          <p class="section-label fade-up">Get Started</p>
+          <h2 class="contact-headline fade-up d1">Ready<br>to <em>hit<br>harder?</em></h2>
+        </div>
+        <p class="contact-body fade-up d2">Tell us about your business. No pushy sales calls, no 47-question intake forms. Just a straight answer on what it'll cost and how long it takes.</p>
+        <div class="contact-promise fade-up d3">
+          <p>We respond within 24 hours.</p>
+          <p>No pushy sales calls.</p>
+          <p>Capital Region, NY</p>
+        </div>
+      </div>
+
+      <!-- Right form -->
+      <div class="fade-up d1">
+        <form class="contact-form" id="contact-form" novalidate aria-label="Get a free quote form">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-name">Your Name</label>
+              <input type="text" id="cf-name" name="name" placeholder="Jorge" required autocomplete="name" aria-required="true" />
+            </div>
+            <div class="form-field">
+              <label for="cf-biz">Business Name</label>
+              <input type="text" id="cf-biz" name="business" placeholder="My Business" autocomplete="organization" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email Address</label>
+            <input type="email" id="cf-email" name="email" placeholder="you@yourbusiness.com" required autocomplete="email" aria-required="true" />
+          </div>
+          <div class="form-field">
+            <label for="cf-msg">Tell Us About Your Project</label>
+            <textarea id="cf-msg" name="message" placeholder="What does your business do? Do you have a site now? What's broken about it?"></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="form-btn">GET A FREE QUOTE</button>
+        </form>
+
+        <div class="form-success" id="form-success" aria-live="polite" role="status" tabindex="-1">
+          <p class="success-title">Message received.</p>
+          <p class="success-body">We'll be back within 24 hours. Get ready to hit harder.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER — BBC lettermark replaces plain text
+  ══════════════════════════════════════════════ -->
+  <footer>
+    <!-- Full-width massive display type -->
+    <span class="footer-big" aria-hidden="true">LET'S BUILD</span>
+
+    <div class="footer-bottom">
+      <!-- BBC lettermark (was plain text "Big Bad Coding") -->
+      <a href="#" class="footer-logo" aria-label="Big Bad Coding — back to top">
+        <span class="nav-bbc-wordmark">
+          <span class="nav-bbc-mark" role="img" aria-hidden="true">
+            <span class="nav-bbc-b1">B</span>
+            <span class="nav-bbc-b2">B</span>
+            <span class="nav-bbc-c">C</span>
+          </span>
+          <span class="nav-bbc-subtitle" aria-hidden="true">
+            <span>BIG</span><span class="nav-bbc-dot">·</span>
+            <span>BAD</span><span class="nav-bbc-dot">·</span>
+            <span>CODING</span>
+          </span>
+        </span>
+      </a>
+      <nav aria-label="Footer navigation">
+        <ul class="footer-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copy">© 2026 Big Bad Coding</p>
+    </div>
+  </footer>
+
+  <script>
+  /* ═══════════════════════════════════════════════════════════════
+     NAV SCROLL STATE
+  ═══════════════════════════════════════════════════════════════ */
+  const nav = document.getElementById('main-nav');
+  function updateNav() { nav.classList.toggle('scrolled', window.scrollY > 40); }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  /* ═══════════════════════════════════════════════════════════════
+     NAV ACTIVE SECTION INDICATOR
+  ═══════════════════════════════════════════════════════════════ */
+  const navLinks = document.querySelectorAll('.nav-link');
+  const trackedSections = document.querySelectorAll('#services, #portfolio, #contact');
+
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.dataset.section === entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-60px 0px 0px 0px' });
+
+  trackedSections.forEach(s => sectionObserver.observe(s));
+
+  /* ═══════════════════════════════════════════════════════════════
+     CUSTOM CURSOR
+  ═══════════════════════════════════════════════════════════════ */
+  const dot  = document.querySelector('.cursor');
+  const ring = document.querySelector('.cursor-ring');
+  let mx = -200, my = -200, rx = -200, ry = -200;
+
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+  }, { passive: true });
+
+  (function loop() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+
+  document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '0.14'; });
+
+  /* ═══════════════════════════════════════════════════════════════
+     STICKY BOTTOM CTA
+  ═══════════════════════════════════════════════════════════════ */
+  const stickyCta = document.getElementById('sticky-cta');
+  const contactSection = document.getElementById('contact');
+  const stickyCta_a = stickyCta.querySelector('a');
+
+  function updateStickyCta() {
+    const scrolled = window.scrollY > 400;
+    const contactRect = contactSection.getBoundingClientRect();
+    const contactVisible = contactRect.top < window.innerHeight && contactRect.bottom > 0;
+    const show = scrolled && !contactVisible;
+    stickyCta.classList.toggle('visible', show);
+    stickyCta.setAttribute('aria-hidden', String(!show));
+    stickyCta_a.setAttribute('tabindex', show ? '0' : '-1');
+  }
+  window.addEventListener('scroll', updateStickyCta, { passive: true });
+  updateStickyCta();
+
+  /* ═══════════════════════════════════════════════════════════════
+     MOBILE MENU
+  ═══════════════════════════════════════════════════════════════ */
+  const toggleBtn  = document.getElementById('nav-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    mobileLinks[0].focus();
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    toggleBtn.focus();
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+  });
+
+  // Trap focus inside mobile menu
+  mobileMenu.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const focusable = Array.from(mobileLinks);
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* ═══════════════════════════════════════════════════════════════
+     INTERSECTION OBSERVER — FADE-UP REVEALS
+  ═══════════════════════════════════════════════════════════════ */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -28px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ═══════════════════════════════════════════════════════════════
+     ACCORDION
+  ═══════════════════════════════════════════════════════════════ */
+  document.querySelectorAll('.acc-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item    = trigger.closest('.acc-item');
+      const body    = item.querySelector('.acc-body');
+      const isOpen  = item.classList.contains('open');
+
+      // Close all items
+      document.querySelectorAll('.acc-item').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.acc-body').style.height = '0';
+        el.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked (unless it was already open)
+      if (!isOpen) {
+        item.classList.add('open');
+        body.style.height = body.scrollHeight + 'px';
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ═══════════════════════════════════════════════════════════════
+     CONTACT FORM
+  ═══════════════════════════════════════════════════════════════ */
+  const form    = document.getElementById('contact-form');
+  const formBtn = document.getElementById('form-btn');
+  const success = document.getElementById('form-success');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const nameVal  = document.getElementById('cf-name').value.trim();
+    const emailVal = document.getElementById('cf-email').value.trim();
+
+    // Basic validation — error red border, not blue
+    let valid = true;
+    [['cf-name', nameVal], ['cf-email', emailVal]].forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (!val) {
+        el.style.borderColor = 'rgba(239,68,68,.65)';
+        el.focus();
+        valid = false;
+      } else {
+        el.style.borderColor = '';
+      }
+    });
+    if (!valid) return;
+
+    formBtn.textContent = 'Sending…';
+    formBtn.disabled = true;
+
+    // Replace setTimeout with fetch() to your backend endpoint
+    setTimeout(() => {
+      form.style.display = 'none';
+      success.classList.add('active');
+      success.focus();
+    }, 700);
+  });
+
+  // Clear error border on input
+  ['cf-name', 'cf-email'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function() {
+      this.style.borderColor = '';
+    });
+  });
+  </script>
+</body>
+</html>

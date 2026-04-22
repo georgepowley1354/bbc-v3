@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Big Bad Coding — bbc-logo.svg
+  ════════════════════════════════════════════════════════════════════
+
+  MIDDLE B COLOR: #3d4a5c (blue-tinted slate, hue ≈215°)
+
+  Why #3d4a5c and not a neutral gray:
+  It shares hue family with the electric C (#0066FF) — same 215° axis,
+  but desaturated 80% and darkened to 29% luminance. At a distance it
+  reads "structural dark" (not decorative). Up close, the blue undertone
+  emerges — signaling tech, trust, craft. A flat gray like #555 or #444
+  would sever the chromatic connection between B1 (white) and C (blue).
+  This color earns its position as the connective tissue of the mark.
+
+  ════════════════════════════════════════════════════════════════════
+
+  PRODUCTION NOTES:
+  • Letters are outlined geometric paths — zero font dependency ✓
+  • Subtitle uses Inter via @import (web-safe fallback included)
+  • For embroidery/screen-print: subtitle is secondary, use BBC mark only
+  • For zero-dependency subtitle: replace <text> with path data via Inkscape
+    (Text → Select → Path → Object to Path → Save As Plain SVG)
+
+  WCAG CONTRAST (all on #080808):
+  • #ffffff (B1): 21:1 — AAA ✓
+  • #0066FF (C):   5.1:1 — AA  ✓
+  • #6b7280 (sub): 4.6:1 — AA  ✓
+
+  ════════════════════════════════════════════════════════════════════
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 380 268"
+     role="img"
+     aria-labelledby="bbc-title bbc-desc"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <title id="bbc-title">Big Bad Coding</title>
+  <desc id="bbc-desc">
+    Big Bad Coding logo — BBC lettermark: white B, blue-tinted slate B (#3d4a5c),
+    and electric blue C (#0066FF) on matte black (#080808). Letters slightly overlap,
+    middle B sits behind white B and blue C.
+  </desc>
+
+  <defs>
+    <!-- Subtitle font (web use) -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&amp;display=swap');
+    </style>
+
+    <!--
+      ── LETTER B — geometric outlined path ──────────────────────────
+      Coordinate space: origin at top-left, cap height = 200px
+      Width: upper bowl 106px, lower bowl 112px (condensed, ~56% ratio)
+      Construction: outer silhouette (evenodd) + two D-shaped counter holes
+      Proportions modelled on Bebas Neue's bold condensed geometry:
+        - Stem:        24px wide (12% of H)
+        - Top bar:     16px tall ( 8% of H)
+        - Crossbar:    y=78 to y=116 = 38px (19% of H)
+        - Bottom bar:  16px tall ( 8% of H)
+        - Upper bowl:  peaks at x=106, center y=52
+        - Lower bowl:  peaks at x=112, center y=148 (slightly wider)
+    -->
+    <path id="bbc-B"
+      fill-rule="evenodd"
+      d="M 0,0
+         L 80,0
+         Q 106,0 106,52
+         Q 106,94 80,94
+         L 82,94
+         Q 112,94 112,148
+         Q 112,200 82,200
+         L 0,200
+         Z
+         M 24,16
+         L 68,16
+         Q 92,16 92,52
+         Q 92,78 68,78
+         L 24,78
+         Z
+         M 24,116
+         L 72,116
+         Q 96,116 96,148
+         Q 96,184 72,184
+         L 24,184
+         Z"/>
+
+    <!--
+      ── LETTER C — geometric outlined path ──────────────────────────
+      Coordinate space: origin at top-left, cap height = 200px, width = 104px
+      Construction: single closed path tracing outer arc → bottom arm →
+        inner arc → top arm. Fill-rule: nonzero (default).
+      Outer ellipse: center (54,100), rx=54, ry=100 — leftmost at x=0
+      Inner ellipse: center (54,100), rx=28, ry=74  — leftmost at x=26
+      Arms: 50px wide, 26px tall, extending right from arc
+      Opening: right side, y=26 to y=174 (inner arc span)
+    -->
+    <path id="bbc-C"
+      d="M 104,0
+         H 54
+         A 54,100 0 0,0 54,200
+         H 104
+         V 174
+         H 54
+         A 28,74 0 0,1 54,26
+         H 104
+         V 0
+         Z"/>
+
+  </defs>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       DARK BACKGROUND VERSION (primary)
+  ══════════════════════════════════════════════════════════════════ -->
+  <rect id="bbc-bg-dark" width="380" height="268" fill="#080808"/>
+
+  <!-- BBC LETTERMARK — Z-order: B2 (behind) → B1 (left-top) → C (right-top) -->
+
+  <!-- B2: blue-tinted slate — rendered FIRST, sits behind both -->
+  <use href="#bbc-B"
+    transform="translate(126,32)"
+    fill="#3d4a5c"
+    aria-hidden="true"/>
+
+  <!-- B1: pure white — rendered SECOND, covers B2's left 18px -->
+  <use href="#bbc-B"
+    transform="translate(32,32)"
+    fill="#ffffff"
+    aria-hidden="true"/>
+
+  <!-- C: electric blue — rendered LAST, covers B2's right 18px -->
+  <use href="#bbc-C"
+    transform="translate(220,32)"
+    fill="#0066FF"
+    aria-hidden="true"/>
+
+  <!-- SUBTITLE: each word centered under its matching capital -->
+  <text x="88"  y="250"
+    font-family="'Inter', system-ui, -apple-system, sans-serif"
+    font-size="10.5" font-weight="300" fill="#6b7280"
+    text-anchor="middle" letter-spacing="3.5"
+    aria-hidden="true">BIG</text>
+
+  <text x="182" y="250"
+    font-family="'Inter', system-ui, -apple-system, sans-serif"
+    font-size="10.5" font-weight="300" fill="#6b7280"
+    text-anchor="middle" letter-spacing="3.5"
+    aria-hidden="true">BAD</text>
+
+  <text x="272" y="250"
+    font-family="'Inter', system-ui, -apple-system, sans-serif"
+    font-size="10.5" font-weight="300" fill="#6b7280"
+    text-anchor="middle" letter-spacing="3.5"
+    aria-hidden="true">CODING</text>
+
+  <!-- Separator dots -->
+  <circle cx="135" cy="246" r="1.5" fill="#6b7280" aria-hidden="true"/>
+  <circle cx="227" cy="246" r="1.5" fill="#6b7280" aria-hidden="true"/>
+
+</svg>

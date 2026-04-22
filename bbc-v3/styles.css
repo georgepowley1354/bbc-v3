@@ -41,14 +41,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   overflow-x: clip;
-  cursor: none; /* hidden — replaced by custom cursor */
   transition: background-color var(--t-slow) var(--ease-smooth),
               color var(--t-slow) var(--ease-smooth);
-}
-
-/* Restore cursor for devices without fine pointer */
-@media (pointer: coarse) {
-  body { cursor: auto; }
 }
 
 img, video {
@@ -139,59 +133,19 @@ body::before {
 }
 
 /* ───────────────────────────────────────────────────────
- * CUSTOM CURSOR
+ * ICON SPRITE — <use href="#ico-*"/> refs
  * ─────────────────────────────────────────────────────── */
 
-.cursor {
-  pointer-events: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: var(--z-cursor);
-  mix-blend-mode: normal;
+.ico {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  flex-shrink: 0;
 }
 
-.cursor-dot {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: var(--c-accent);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: transform var(--t-fast) var(--ease-out),
-              width var(--t-fast) var(--ease-out),
-              height var(--t-fast) var(--ease-out);
-}
-
-.cursor-ring {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border: 1.5px solid var(--c-text-2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: transform var(--t-base) var(--ease-out),
-              width var(--t-slow) var(--ease-out),
-              height var(--t-slow) var(--ease-out),
-              border-color var(--t-base) var(--ease-out),
-              opacity var(--t-base);
-}
-
-.cursor.hovering .cursor-dot {
-  width: 8px;
-  height: 8px;
-}
-
-.cursor.hovering .cursor-ring {
-  width: 44px;
-  height: 44px;
-  border-color: var(--c-accent);
-  opacity: 0.6;
-}
-
-@media (pointer: coarse) {
-  .cursor { display: none; }
-}
+.ico--bold { stroke-width: 2.5; }
+.ico--thin { stroke-width: 2; }
 
 /* ───────────────────────────────────────────────────────
  * NAVIGATION
@@ -761,6 +715,27 @@ body::before {
   text-transform: uppercase;
   color: var(--c-text-3);
   margin-bottom: var(--sp-4);
+  position: relative;
+  z-index: 1;
+}
+
+/* Ghost section numbers — large outlined numerals sitting behind the label */
+.section-header { position: relative; }
+.section-header .section-heading,
+.section-header .section-label { position: relative; z-index: 1; }
+.ghost-num {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 14vw, 14rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-border-muted);
+  top: -0.18em;
+  left: -0.04em;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .section-label::before {
@@ -961,78 +936,6 @@ section + section {
 }
 
 .why-item--wide .why-title { color: var(--c-text); }
-
-/* ══════════════════════════════════════
-   MEET THE TEAM
-   ══════════════════════════════════════ */
-
-.team-header {
-  max-width: 54ch;
-  margin-bottom: var(--sp-16);
-}
-
-.team-sub {
-  font-size: var(--fs-lg);
-  color: var(--c-text-2);
-  margin-top: var(--sp-6);
-  line-height: var(--lh-relaxed);
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sp-8);
-}
-
-@media (min-width: 640px) {
-  .team-grid { grid-template-columns: 1fr 1fr; }
-}
-
-.team-card {
-  background: var(--c-surface);
-  border: var(--border);
-  padding: var(--sp-10) var(--sp-8);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-6);
-}
-
-.team-avatar {
-  width: 80px;
-  height: 80px;
-  background: var(--c-surface-2);
-  border: var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: var(--fs-3xl);
-  color: var(--c-text-3);
-}
-
-.team-name {
-  font-family: var(--font-display);
-  font-size: var(--fs-2xl);
-  letter-spacing: 0.04em;
-  color: var(--c-text);
-  margin-bottom: var(--sp-1);
-}
-
-.team-role {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--c-accent);
-  margin-bottom: var(--sp-4);
-}
-
-.team-bio {
-  font-size: var(--fs-base);
-  color: var(--c-text-2);
-  line-height: var(--lh-relaxed);
-}
-
 /* ───────────────────────────────────────────────────────
  * HOW IT WORKS
  * ─────────────────────────────────────────────────────── */
@@ -1369,85 +1272,60 @@ section + section {
   margin-bottom: var(--sp-12);
 }
 
-.testimonials-rating {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  font-size: var(--fs-sm);
+.tm-subtitle {
+  font-size: var(--fs-lg);
   color: var(--c-text-2);
+  max-width: 55ch;
+  line-height: var(--lh-relaxed);
+  margin-top: var(--sp-2);
 }
 
-.rating-stars {
+/* Testimonial grid — 3 real client quotes */
+.tm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6);
+}
+
+@media (max-width: 960px) {
+  .tm-grid { grid-template-columns: 1fr; gap: var(--sp-5); }
+}
+
+.tm-card {
   display: flex;
-  gap: 2px;
-  color: var(--c-accent);
-}
-
-.rating-stars svg { width: 16px; height: 16px; fill: currentColor; }
-
-.marquee-wrapper {
-  overflow: hidden;
-  overflow-x: clip;
-  margin-inline: calc(var(--container-pad) * -1);
-  padding-bottom: var(--sp-4);
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .marquee-wrapper { margin-inline: calc(var(--sp-8) * -1); }
-}
-
-.marquee-track {
-  display: flex;
-  gap: var(--sp-4);
-  width: max-content;
-  animation: marquee-scroll 40s linear infinite;
-}
-
-.marquee-track:hover { animation-play-state: paused; }
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-    flex-wrap: wrap;
-    width: auto;
-    padding-inline: var(--container-pad);
-  }
-}
-
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.testimonial-card {
-  flex-shrink: 0;
-  width: 320px;
+  flex-direction: column;
+  gap: var(--sp-6);
   padding: var(--sp-8);
   background: var(--c-surface);
   border: var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-5);
+  position: relative;
 }
 
-.t-stars {
-  display: flex;
-  gap: 2px;
+.tm-card::before {
+  content: '"';
+  position: absolute;
+  top: -0.25em;
+  left: var(--sp-4);
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 1;
   color: var(--c-accent);
+  opacity: 0.35;
+  pointer-events: none;
 }
 
-.t-stars svg { width: 14px; height: 14px; fill: currentColor; }
-
-.t-quote {
-  font-size: var(--fs-sm);
-  color: var(--c-text-2);
+.tm-quote {
+  font-size: var(--fs-base);
   line-height: var(--lh-relaxed);
+  color: var(--c-text);
+  margin: 0;
+  font-style: normal;
   flex: 1;
-  font-style: italic;
+  position: relative;
+  z-index: 1;
 }
 
-.t-author {
+.tm-author {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -1455,18 +1333,19 @@ section + section {
   padding-top: var(--sp-4);
 }
 
-.t-name {
+.tm-name {
   font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--c-text);
 }
 
-.t-business {
+.tm-business {
   font-family: var(--font-mono);
   font-size: var(--fs-xs);
   color: var(--c-text-3);
   letter-spacing: 0.05em;
 }
+
 
 /* ───────────────────────────────────────────────────────
  * PRICING
@@ -1478,7 +1357,48 @@ section + section {
   max-width: 55ch;
   line-height: var(--lh-relaxed);
   margin-top: var(--sp-4);
-  margin-bottom: var(--sp-16);
+  margin-bottom: var(--sp-8);
+}
+
+/* Price promise — risk-reversal strip above pricing grid */
+.price-promise {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-5);
+  padding: var(--sp-6) var(--sp-8);
+  margin-bottom: var(--sp-12);
+  background: var(--c-accent-dim);
+  border-left: 3px solid var(--c-accent);
+  border-top: var(--border-muted);
+  border-right: var(--border-muted);
+  border-bottom: var(--border-muted);
+}
+
+@media (max-width: 640px) {
+  .price-promise { flex-direction: column; gap: var(--sp-3); padding: var(--sp-5); }
+}
+
+.price-promise-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  white-space: nowrap;
+  padding-top: 0.25em;
+}
+
+.price-promise-body {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+}
+
+.price-promise-body strong {
+  color: var(--c-text);
+  font-weight: 600;
 }
 
 .pricing-grid {
@@ -2310,24 +2230,9 @@ select {
     justify-content: center;
   }
 
-  .marquee-wrapper {
-    margin-inline: 0;
-    padding-inline: var(--container-pad);
-  }
-
-  .marquee-track {
-    animation: none;
-    width: auto;
-    padding-right: var(--container-pad);
-  }
-
-  .testimonial-card {
-    width: min(78vw, 300px);
-  }
 }
 
 /* ── iOS: momentum scrolling on scrollable containers ── */
-.marquee-wrapper,
 .mobile-menu {
   -webkit-overflow-scrolling: touch;
 }
@@ -2343,14 +2248,6 @@ select {
 /* ── iOS: safe area bottom on footer ── */
 .footer {
   padding-bottom: calc(var(--sp-16) + env(safe-area-inset-bottom));
-}
-
-/* ── Custom cursor: strictly scoped to fine-pointer hover devices ──
-   Body cursor:none is already reset for coarse pointer above.
-   This ensures no-cursor experience never applies on touch. ── */
-@media not all and (hover: hover) and (pointer: fine) {
-  .cursor { display: none !important; }
-  body { cursor: auto !important; }
 }
 
 /* ── PWA: Add to Home Screen prompt ── */

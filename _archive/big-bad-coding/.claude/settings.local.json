@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(gsd:new-project)",
+      "Bash(firecrawl --status)",
+      "Bash(python3 /c/Users/georg/my-project/.claude/skills/ui-ux-pro-max/scripts/search.py \"bold aggressive dark agency landing page small business web design\" --design-system -p \"Big Bad Coding\" -f markdown)",
+      "Bash(python /c/Users/georg/my-project/.claude/skills/ui-ux-pro-max/scripts/search.py \"bold aggressive dark agency landing page small business web design\" --design-system -p \"Big Bad Coding\" -f markdown)",
+      "WebFetch(domain:bbcoding.netlify.app)",
+      "WebFetch(domain:bocaindesigns.com)",
+      "WebFetch(domain:capitaldistrictdigital.com)",
+      "WebFetch(domain:postmktg.com)",
+      "WebFetch(domain:lapa.ninja)",
+      "WebFetch(domain:whatsshakinbacon.netlify.app)",
+      "Read(//c/Users/georg/my-project/big-bad-coding/**)"
+    ]
+  }
+}

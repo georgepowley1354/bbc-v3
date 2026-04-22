@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Big Bad Coding — bbc-favicon.svg
+  MIDDLE B COLOR: #3d4a5c — chromatic bridge, hue 215°, same family as #0066FF
+  BC mark only (no subtitle) — optimized for 32x32 and 64x64 display
+  Crisp geometric paths, no font dependency
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 32 32"
+     role="img"
+     aria-label="Big Bad Coding">
+
+  <title>Big Bad Coding</title>
+
+  <!-- Background -->
+  <rect width="32" height="32" fill="#080808"/>
+
+  <!--
+    BC mark at 32px: B (white) + C (blue) overlapping
+    B path scaled from H=200 → H=28 (scale = 28/200 = 0.14)
+    B width at scale: 112 * 0.14 = 15.7px
+    C width at scale: 104 * 0.14 = 14.6px
+    Overlap: 2.4px (15% of B width)
+    Total mark width: 15.7 + 14.6 - 2.4 = 27.9px
+    Positioned: x=2 to x=29.9 (centered in 32px)
+  -->
+
+  <!-- B: white — left mark -->
+  <path
+    transform="translate(2, 2) scale(0.14)"
+    fill="#ffffff"
+    fill-rule="evenodd"
+    d="M 0,0 L 80,0 Q 106,0 106,52 Q 106,94 80,94 L 82,94 Q 112,94 112,148 Q 112,200 82,200 L 0,200 Z M 24,16 L 68,16 Q 92,16 92,52 Q 92,78 68,78 L 24,78 Z M 24,116 L 72,116 Q 96,116 96,148 Q 96,184 72,184 L 24,184 Z"/>
+
+  <!-- C: electric blue — right mark, overlaps B -->
+  <path
+    transform="translate(15.3, 2) scale(0.14)"
+    fill="#0066FF"
+    d="M 104,0 H 54 A 54,100 0 0,0 54,200 H 104 V 174 H 54 A 28,74 0 0,1 54,26 H 104 V 0 Z"/>
+
+</svg>

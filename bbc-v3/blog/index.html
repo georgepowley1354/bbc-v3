@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Field notes and honest writing about small business websites, custom code, and what actually works online. From Big Bad Coding." />
+  <meta name="theme-color" content="#0E0E0E" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#F4F1ED" media="(prefers-color-scheme: light)" />
+
+  <link rel="canonical" href="https://bigbadcoding.com/blog/" />
+
+  <title>Blog · Big Bad Coding</title>
+
+  <!-- Preconnect for font performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/bbc-tokens.css" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/blog.css" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bigbadcoding.com/blog/" />
+  <meta property="og:title" content="Blog · Big Bad Coding" />
+  <meta property="og:description" content="Field notes and honest writing about small business websites, custom code, and what actually works online." />
+  <meta property="og:image" content="https://bigbadcoding.com/images/og-image.jpg" />
+  <meta property="og:site_name" content="Big Bad Coding" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog · Big Bad Coding" />
+  <meta name="twitter:description" content="Field notes and honest writing about small business websites." />
+  <meta name="twitter:image" content="https://bigbadcoding.com/images/og-image.jpg" />
+
+  <!-- Theme: set before first paint to prevent flash -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('bbc-theme');
+      var theme = saved || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    }());
+  </script>
+</head>
+
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- Icon sprite -->
+<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <symbol id="ico-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m4.5 12.75 6 6 9-13.5"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Navigation -->
+<header class="nav" role="banner" id="site-nav">
+  <div class="container">
+    <nav class="nav-inner" aria-label="Primary navigation">
+
+      <a href="/" class="bbc-logo" aria-label="Big Bad Coding — home">
+        <div class="logo-letters" aria-hidden="true">
+          <span class="logo-l">B</span>
+          <span class="logo-l">B</span>
+          <span class="logo-l">C</span>
+        </div>
+        <span class="logo-name">Big Bad Coding</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="/#services" class="nav-link">Services</a></li>
+        <li><a href="/#work"     class="nav-link">Work</a></li>
+        <li><a href="/blog/"     class="nav-link" aria-current="page">Blog</a></li>
+        <li><a href="/#contact"  class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-controls">
+        <button class="theme-btn" id="theme-toggle" aria-label="Toggle light/dark mode">
+          <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
+          </svg>
+          <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
+          </svg>
+        </button>
+        <a href="/#contact" class="nav-cta">Get a Free Quote</a>
+      </div>
+
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="blog-hero">
+    <div class="container">
+      <div class="blog-hero-inner">
+        <p class="section-label">Blog · Field notes</p>
+        <h1 class="blog-hero-title">Honest writing<br>about small<br>business websites.</h1>
+        <p class="blog-hero-sub">No growth hacks. No "10 things you won't believe." Just practical posts about what works, what costs you money, and what your customers are actually doing on their phones.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="post-list">
+
+        <a class="post-card" href="/blog/where-your-customers-already-live/">
+          <span class="post-card-meta">Apr 22, 2026 · 5 min read</span>
+          <h2 class="post-card-title">Your website isn't an expense. It's where your customers already live.</h2>
+          <p class="post-card-excerpt">Most small business owners think of a website as a bill. Meanwhile their customers spend five hours a day inside a phone. Here's what that disconnect costs you.</p>
+          <span class="post-card-arrow">Read →</span>
+        </a>
+
+        <a class="post-card" href="/blog/wix-squarespace-custom-5-year-math/">
+          <span class="post-card-meta">Apr 22, 2026 · 5 min read</span>
+          <h2 class="post-card-title">Wix, Squarespace, or custom? The 5-year math for a small business.</h2>
+          <p class="post-card-excerpt">An honest cost breakdown of the three real options for a small business website, including the hidden fees the platform ads don't mention.</p>
+          <span class="post-card-arrow">Read →</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="bbc-logo footer-logo" aria-label="Big Bad Coding — home">
+          <div class="logo-letters" aria-hidden="true">
+            <span class="logo-l">B</span>
+            <span class="logo-l">B</span>
+            <span class="logo-l">C</span>
+          </div>
+          <span class="logo-name">Big Bad Coding</span>
+        </a>
+        <p class="footer-tagline">Custom websites for small businesses. Based in the Capital Region, NY — working nationally. You own everything. No monthly fees. No BS.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div class="footer-nav-title">Navigate</div>
+        <ul class="footer-nav-links" role="list">
+          <li><a href="/#services" class="footer-nav-link">Services</a></li>
+          <li><a href="/#work"     class="footer-nav-link">Work</a></li>
+          <li><a href="/blog/"     class="footer-nav-link">Blog</a></li>
+          <li><a href="/#contact"  class="footer-nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Big Bad Coding. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/script.js" defer></script>
+</body>
+</html>

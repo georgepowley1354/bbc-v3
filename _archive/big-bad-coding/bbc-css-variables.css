@@ -1,0 +1,415 @@
+/*
+  Big Bad Coding — Design Token System  (V2 · Acid Yellow)
+  ════════════════════════════════════════════════════════════════════════
+
+  V2 BRAND PIVOT: #0066FF (electric blue) → #E5FF00 (acid yellow)
+  ───────────────────────────────────────────────────────────────────────
+  Acid yellow is a deliberate break from the "every agency uses blue" cliché.
+  It reads aggressive, technical, and distinct on matte near-black.
+  Use at ≤10% visual weight — it earns its power through scarcity.
+
+  MIDDLE B COLOR: #3d4a5c (Blue-Tinted Slate)
+  The bridge between white (#ffffff) and acid yellow (#E5FF00).
+  Hue ≈215° — structural, not decorative. Unchanged from V1.
+
+  HOW TO SWAP INTO index-v2.html:
+  ─────────────────────────────────
+  index-v2.html already has all V2 tokens in its inline :root block.
+  This file is the canonical source — for any future pages, add:
+    <link rel="stylesheet" href="bbc-css-variables.css">
+  and the variables cascade automatically.
+
+  V1 → V2 COLOR MAPPING:
+  ──────────────────────────────────────────────────────────
+  --accent:         #0066FF  →  #E5FF00    (blue → acid yellow)
+  --accent2:        #004dcc  →  #B8CC00    (blue pressed → dark yellow)
+  --bbc-blue:       #0066FF  →  #E5FF00    (renamed semantically: still "blue" var)
+  --bbc-blue-dim:   #004dcc  →  #B8CC00    (hover/pressed state)
+  --bbc-blue-bright:#1a7fff  →  #f0ff4d    (focus ring / glow variant)
+  --bbc-blue-ghost: rgba(0,102,255,.12) → rgba(229,255,0,.08)
+  --bbc-blue-glow:  rgba(0,102,255,.25) → rgba(229,255,0,.20)
+  --bbc-shadow-blue: 0 0 24px rgba(0,102,255,.3) → 0 0 24px rgba(229,255,0,.25)
+
+  NOTE: Variable NAMES are intentionally unchanged so existing references
+  don't break. Only the VALUES change.
+
+  IMPORTANT — DARK MODE ONLY:
+  Acid yellow (#E5FF00) on white has near-zero contrast — this palette
+  is designed exclusively for dark backgrounds. Light mode falls back
+  to a deep charcoal accent (see light mode overrides below).
+
+  ════════════════════════════════════════════════════════════════════════
+*/
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ROOT — DARK MODE (primary, always on)
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+
+  /* ── BRAND COLORS ───────────────────────────────────────────────── */
+
+  /* B1: pure white — the surface, the clean slate */
+  --bbc-white:         #ffffff;
+
+  /* B2: blue-tinted slate — the structural middle, the bridge */
+  /* Hue 215° | Sat 20% | Lum 29% — reads as authoritative dark blue-grey */
+  --bbc-slate:         #3d4a5c;
+  --bbc-slate-dim:     #2e3847;   /* darker variant for hover / pressed states */
+  --bbc-slate-bright:  #4e5d72;   /* lighter variant for focus rings, etc. */
+
+  /* C: acid yellow — the delivery, the energy, the call-to-action */
+  /* WCAG AAA on dark: 17.5:1 contrast ratio vs #080808 ✓✓ */
+  /* WARNING: near-zero contrast on white — dark mode only */
+  --bbc-blue:          #E5FF00;   /* V2: acid yellow */
+  --bbc-blue-dim:      #B8CC00;   /* hover / pressed: darker yellow */
+  --bbc-blue-bright:   #f0ff4d;   /* focus ring / glow variant: lighter yellow */
+  --bbc-blue-ghost:    rgba(229, 255, 0, 0.08);  /* subtle yellow tint, backgrounds */
+  --bbc-blue-glow:     rgba(229, 255, 0, 0.20);  /* glow effects, shadows */
+
+
+  /* ── NEUTRAL PALETTE ────────────────────────────────────────────── */
+
+  /* Primary background: matte near-black (NOT pure #000 — has warmth) */
+  --bbc-bg:            #080808;
+
+  /* Surface layers — three levels of elevation */
+  --bbc-surface:       #111111;   /* cards, panels */
+  --bbc-surface2:      #1a1a1a;   /* nested elements, hovers */
+  --bbc-surface3:      #242424;   /* inputs, highlighted items */
+
+  /* Borders — subtle structure */
+  --bbc-border:        #1e1e1e;   /* default border */
+  --bbc-border-mid:    #2a2a2a;   /* slightly more visible */
+  --bbc-border-bright: #363636;   /* hover state borders */
+
+  /* Text hierarchy */
+  --bbc-text:          #f0f0f0;   /* primary body text */
+  --bbc-text-dim:      #a0a6b0;   /* secondary text */
+  --bbc-muted:         #6b7280;   /* muted text, placeholders, subtitles */
+  --bbc-muted-bright:  #9ca3af;   /* muted hover state */
+
+
+  /* ── SEMANTIC COLORS ────────────────────────────────────────────── */
+  --bbc-success:       #22c55e;   /* green — deployed, live, confirmed */
+  --bbc-warning:       #f59e0b;   /* amber — attention, pending */
+  --bbc-error:         #ef4444;   /* red — error, failed */
+  --bbc-info:          #E5FF00;   /* same as brand accent — info, links (dark mode only) */
+
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────────────────── */
+
+  /* Display: Bebas Neue — the BBC lettermark and all headlines */
+  /* Already loaded in index.html via Google Fonts link tag */
+  --bbc-font-display:  'Bebas Neue', sans-serif;
+
+  /* Body / UI: Inter — replaces Barlow for a crisper, more modern feel */
+  /* Add to index.html <head>: */
+  /* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"> */
+  --bbc-font-body:     'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Subtitle / labels: Inter Light — the BIG·BAD·CODING tagline font */
+  --bbc-font-sub:      'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Code / mono */
+  --bbc-font-mono:     'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+
+  /* ── FONT WEIGHTS ───────────────────────────────────────────────── */
+  --bbc-weight-light:   300;
+  --bbc-weight-regular: 400;
+  --bbc-weight-medium:  500;
+  --bbc-weight-semi:    600;
+
+  /* Note: Bebas Neue is display-only weight (400), treated as bold */
+
+
+  /* ── FONT SIZES ─────────────────────────────────────────────────── */
+  /* Scale: 1.25 ratio (Major Third) */
+  --bbc-text-xs:   0.64rem;   /*  ~10px — labels, legal */
+  --bbc-text-sm:   0.8rem;    /*  ~13px — captions, small labels */
+  --bbc-text-base: 1rem;      /*  ~16px — body text */
+  --bbc-text-md:   1.25rem;   /*  ~20px — large body, lead text */
+  --bbc-text-lg:   1.563rem;  /*  ~25px — small headings */
+  --bbc-text-xl:   1.953rem;  /*  ~31px — section headings */
+  --bbc-text-2xl:  2.441rem;  /*  ~39px — page headings */
+  --bbc-text-3xl:  3.052rem;  /*  ~49px — hero subheadings */
+  --bbc-text-4xl:  4rem;      /*  ~64px — hero display */
+  --bbc-text-5xl:  6rem;      /*  ~96px — logo / identity display */
+
+  /* Bebas Neue display sizes (these are the identity sizes) */
+  --bbc-display-sm:   48px;   /* nav logo */
+  --bbc-display-md:   80px;   /* section marks */
+  --bbc-display-lg:   120px;  /* hero accent */
+  --bbc-display-xl:   200px;  /* full BBC mark reference size */
+
+
+  /* ── LETTER SPACING ─────────────────────────────────────────────── */
+  --bbc-tracking-tight:  -0.02em;   /* headlines */
+  --bbc-tracking-normal:  0;
+  --bbc-tracking-wide:    0.05em;   /* body labels */
+  --bbc-tracking-wider:   0.15em;   /* subtitle: BIG · BAD · CODING */
+  --bbc-tracking-widest:  0.3em;    /* all-caps micro labels */
+
+  /* Line heights */
+  --bbc-leading-tight:  1.1;
+  --bbc-leading-snug:   1.25;
+  --bbc-leading-normal: 1.5;
+  --bbc-leading-loose:  1.75;
+
+
+  /* ── SPACING SCALE ──────────────────────────────────────────────── */
+  /* Base: 4px — all values are multiples */
+  --bbc-space-1:   4px;
+  --bbc-space-2:   8px;
+  --bbc-space-3:   12px;
+  --bbc-space-4:   16px;
+  --bbc-space-5:   20px;
+  --bbc-space-6:   24px;
+  --bbc-space-8:   32px;
+  --bbc-space-10:  40px;
+  --bbc-space-12:  48px;
+  --bbc-space-16:  64px;
+  --bbc-space-20:  80px;
+  --bbc-space-24:  96px;
+  --bbc-space-32: 128px;
+
+  /* Logo clear space rule: equal to cap height of 'C' (~115px at reference size) */
+  /* At 48px nav logo: clear space = 115/200 * 48 ≈ 28px */
+  --bbc-logo-clear-space: 28px;   /* update if logo display size changes */
+
+
+  /* ── BORDER RADIUS ──────────────────────────────────────────────── */
+  --bbc-radius-sm:  4px;
+  --bbc-radius-md:  8px;
+  --bbc-radius-lg:  12px;
+  --bbc-radius-xl:  20px;
+  --bbc-radius-pill: 9999px;
+
+
+  /* ── SHADOWS ────────────────────────────────────────────────────── */
+  --bbc-shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
+  --bbc-shadow-md:  0 4px 16px rgba(0,0,0,0.5);
+  --bbc-shadow-lg:  0 8px 32px rgba(0,0,0,0.6);
+  --bbc-shadow-blue: 0 0 24px rgba(229, 255, 0, 0.25);  /* CTA glow — acid yellow */
+  --bbc-shadow-inset: inset 0 1px 0 rgba(255,255,255,0.04);
+
+
+  /* ── Z-INDEX SCALE ──────────────────────────────────────────────── */
+  --bbc-z-below:   -1;
+  --bbc-z-base:     0;
+  --bbc-z-raised:   10;
+  --bbc-z-dropdown: 100;
+  --bbc-z-sticky:   200;
+  --bbc-z-overlay:  300;
+  --bbc-z-modal:    400;
+  --bbc-z-toast:    500;
+
+
+  /* ── ANIMATION TIMING ───────────────────────────────────────────── */
+
+  /* Durations */
+  --bbc-duration-fast:   120ms;
+  --bbc-duration-base:   220ms;
+  --bbc-duration-slow:   350ms;
+  --bbc-duration-slower: 500ms;
+
+  /* Logo entrance animation: letters stagger in */
+  --bbc-logo-b1-delay:   0ms;      /* B1 (white) fades in first */
+  --bbc-logo-b2-delay:   80ms;     /* B2 (slate) follows */
+  --bbc-logo-c-delay:    160ms;    /* C (acid yellow) arrives last */
+  --bbc-logo-sub-delay:  360ms;    /* Subtitle fades in after mark settles */
+  --bbc-logo-duration:   400ms;    /* Each letter fade duration */
+
+  /* Easing curves */
+  --bbc-ease-out:   cubic-bezier(0.16, 1, 0.3, 1);     /* snappy entrance */
+  --bbc-ease-in:    cubic-bezier(0.4, 0, 1, 1);         /* fast exit */
+  --bbc-ease-inout: cubic-bezier(0.4, 0, 0.2, 1);       /* smooth transition */
+  --bbc-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot */
+
+
+  /* ── LAYOUT ─────────────────────────────────────────────────────── */
+  --bbc-container-sm:  640px;
+  --bbc-container-md:  768px;
+  --bbc-container-lg:  1024px;
+  --bbc-container-xl:  1280px;
+  --bbc-container-2xl: 1440px;
+
+  /* Nav height — logo at 40px requires 64px total for proper clear space */
+  --bbc-nav-height: 64px;
+
+  /* Section padding */
+  --bbc-section-pad-y: clamp(64px, 8vw, 120px);
+  --bbc-section-pad-x: clamp(24px, 5vw, 80px);
+
+
+  /* ── WCAG ACCESSIBILITY NOTES ───────────────────────────────────── */
+  /*
+    All foreground/background pairs below meet WCAG 2.1 AA (4.5:1 minimum):
+
+    --bbc-white  (#ffffff) on --bbc-bg (#080808):          21:1  ✓ AAA
+    --bbc-blue   (#E5FF00) on --bbc-bg (#080808):          17.5:1 ✓ AAA  ← V2
+    --bbc-bg     (#080808) on --bbc-blue (#E5FF00):        17.5:1 ✓ AAA  (button text)
+    --bbc-text   (#f0f0f0) on --bbc-bg (#080808):          18.5:1 ✓ AAA
+    --bbc-text   (#f0f0f0) on --bbc-surface (#111111):     16.8:1 ✓ AAA
+    --bbc-muted  (#6b7280) on --bbc-bg (#080808):           4.6:1 ✓ AA  (just passes)
+    --bbc-muted  (#6b7280) on --bbc-surface (#111111):      4.2:1 ✗ AA (use --bbc-muted-bright instead)
+    --bbc-blue   (#E5FF00) on --bbc-white (#ffffff):        1.2:1 ✗ FAIL (dark mode only — never use on light)
+    --bbc-white  (#ffffff) on --bbc-slate (#3d4a5c):        6.3:1 ✓ AA
+    --bbc-blue   (#E5FF00) on --bbc-surface (#111111):     15.9:1 ✓ AAA
+  */
+
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LIGHT MODE OVERRIDES
+   Applied when user prefers light mode (or .bbc-light class is added)
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bbc-bg:            #f5f5f5;
+    --bbc-surface:       #ffffff;
+    --bbc-surface2:      #f0f0f0;
+    --bbc-surface3:      #e8e8e8;
+    --bbc-border:        #e0e0e0;
+    --bbc-border-mid:    #d0d0d0;
+    --bbc-border-bright: #b8b8b8;
+    --bbc-text:          #0d0d0d;
+    --bbc-text-dim:      #4a5568;
+    --bbc-muted:         #6b7280;    /* same — works on both */
+    --bbc-muted-bright:  #4b5563;
+
+    /* On light backgrounds, B1 inverts from white to near-black */
+    /* The CSS variable below lets you set B1 color conditionally: */
+    --bbc-logo-b1: #080808;          /* dark on light surface */
+
+    /* V2: Acid yellow FAILS on light backgrounds — override to deep charcoal */
+    /* #E5FF00 on #f5f5f5 = 1.2:1 ✗ — MUST override in light mode */
+    --bbc-blue:        #1a1a1a;   /* light mode accent: near-black (21:1 on white) */
+    --bbc-blue-dim:    #2d2d2d;   /* light mode hover state */
+    --bbc-blue-bright: #444444;   /* light mode focus ring */
+    --bbc-blue-ghost:  rgba(0, 0, 0, 0.06);
+    --bbc-blue-glow:   rgba(0, 0, 0, 0.15);
+    --bbc-shadow-blue: 0 0 24px rgba(0, 0, 0, 0.20);
+    --bbc-shadow-sm:  0 1px 3px rgba(0,0,0,0.12);
+    --bbc-shadow-md:  0 4px 16px rgba(0,0,0,0.15);
+    --bbc-shadow-lg:  0 8px 32px rgba(0,0,0,0.18);
+  }
+}
+
+/* Force dark mode regardless of system preference */
+.bbc-dark {
+  --bbc-bg:            #080808;
+  --bbc-surface:       #111111;
+  --bbc-surface2:      #1a1a1a;
+  --bbc-surface3:      #242424;
+  --bbc-border:        #1e1e1e;
+  --bbc-text:          #f0f0f0;
+  --bbc-text-dim:      #a0a6b0;
+  --bbc-logo-b1:       #ffffff;
+}
+
+/* Force light mode regardless of system preference */
+.bbc-light {
+  --bbc-bg:            #f5f5f5;
+  --bbc-surface:       #ffffff;
+  --bbc-surface2:      #f0f0f0;
+  --bbc-text:          #0d0d0d;
+  --bbc-logo-b1:       #080808;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LOGO ANIMATION UTILITIES
+   Add these classes to logo wrapper elements in index.html
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Keyframes for letter entrance */
+@keyframes bbc-letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bbc-sub-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.05em;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: var(--bbc-tracking-wider);
+  }
+}
+
+/* Apply to individual letter wrappers */
+.bbc-letter-animate {
+  animation: bbc-letter-in var(--bbc-logo-duration) var(--bbc-ease-out) both;
+}
+
+.bbc-letter-b1 { animation-delay: var(--bbc-logo-b1-delay); }
+.bbc-letter-b2 { animation-delay: var(--bbc-logo-b2-delay); }
+.bbc-letter-c  { animation-delay: var(--bbc-logo-c-delay);  }
+
+.bbc-subtitle-animate {
+  animation: bbc-sub-in var(--bbc-duration-slower) var(--bbc-ease-out) both;
+  animation-delay: var(--bbc-logo-sub-delay);
+}
+
+/* Hover effect on the BBC mark */
+.bbc-mark {
+  transition: transform var(--bbc-duration-base) var(--bbc-ease-out);
+  cursor: pointer;
+}
+.bbc-mark:hover {
+  transform: scale(1.02);
+}
+.bbc-mark:focus-visible {
+  outline: 2px solid var(--bbc-blue);   /* acid yellow in dark mode */
+  outline-offset: 8px;
+  border-radius: var(--bbc-radius-sm);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   INTEGRATION NOTES FOR index-v2.html
+   ═══════════════════════════════════════════════════════════════════════
+
+   index-v2.html is self-contained — it has its own inline :root block
+   with all V2 tokens already applied. This file is the canonical source
+   for any additional pages built on the BBC V2 design system.
+
+   To add a new page:
+   Step 1: Add this CSS file link (before closing </head>):
+     <link rel="stylesheet" href="bbc-css-variables.css">
+
+   Step 2: Map your local shorthands to the token system:
+     --bg       → var(--bbc-bg)         (#080808)
+     --accent   → var(--bbc-blue)       (#E5FF00) ← acid yellow
+     --accent2  → var(--bbc-blue-dim)   (#B8CC00)
+     --white    → var(--bbc-white)      (#ffffff)
+     --muted    → var(--bbc-muted)      (#6b7280)
+     --fu       → var(--bbc-font-sub)   (Inter)
+     --fb       → var(--bbc-font-body)  (Inter)
+
+   Step 3: Button text on acid yellow MUST be dark:
+     color: var(--bbc-bg)  /* #080808 — gives 17.5:1 contrast ✓ */
+
+   Step 4: Never use --bbc-blue as a text color on light backgrounds.
+           Acid yellow (#E5FF00) on white = 1.2:1 contrast ✗ FAIL.
+
+   DESIGN NOTES — V2 ACID YELLOW PALETTE:
+   ─────────────────────────────────────────────────────────────────────
+   · Use at ≤10% visual weight — scarcity makes it powerful
+   · Reserve for: primary CTAs, active nav indicator, hero accent word,
+     lettermark "C", focus rings, hover underlines
+   · Remove from: decorative numbers, quote marks, backgrounds, glows
+     (these should be rgba(255,255,255, very-low-opacity) instead)
+   · The BBC "C" lettermark color: #E5FF00 (was #0066FF in V1)
+*/

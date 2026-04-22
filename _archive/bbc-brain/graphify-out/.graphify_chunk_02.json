@@ -1,0 +1,1471 @@
+{
+  "nodes": [
+    {
+      "id": "workflows_context_pipeline",
+      "label": "Build Studio 4-Stage Production Pipeline",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "workflows_context_stage_routing",
+      "label": "Stage Routing Table",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "workflows_context_file_handoffs",
+      "label": "File Handoffs Between Pipeline Stages",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "briefs_context_stage01",
+      "label": "Stage 01 — Briefs",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/01-briefs/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "briefs_context_brief_format",
+      "label": "Build Brief File Format",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/01-briefs/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "briefs_context_sow_reference",
+      "label": "SOW Reference in Brief",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/01-briefs/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "designs_context_stage02",
+      "label": "Stage 02 — Designs",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/02-designs/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "designs_context_design_spec_format",
+      "label": "Design Spec File Format",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/02-designs/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "designs_context_figma_reference",
+      "label": "Figma Design Reference",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/02-designs/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "builds_context_stage03",
+      "label": "Stage 03 — Builds",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/03-builds/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "builds_context_build_tracking_format",
+      "label": "Build Tracking Log File Format",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/03-builds/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "builds_context_build_checklist",
+      "label": "Pre-Handoff Build Checklist",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/03-builds/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "live_context_stage04",
+      "label": "Stage 04 — Live",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "live_context_live_site_record_format",
+      "label": "Live Site Record File Format",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "live_context_retainer_status",
+      "label": "Retainer Status in Live Record",
+      "file_type": "document",
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "delivery_playbook_context",
+      "label": "Delivery Playbook Context",
+      "file_type": "document",
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "delivery_playbook_deployment_to_handoff_process",
+      "label": "Deployment to Handoff Process",
+      "file_type": "document",
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_handoff_post_launch_checklist",
+      "label": "Post-Launch Checklist",
+      "file_type": "document",
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_handoff_call_agenda",
+      "label": "Handoff Call Agenda",
+      "file_type": "document",
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_handoff_document_template",
+      "label": "Handoff Document Template",
+      "file_type": "document",
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_handoff_offboarding",
+      "label": "Client Offboarding Process",
+      "file_type": "document",
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "deployment_guide_netlify",
+      "label": "Netlify Deployment Guide",
+      "file_type": "document",
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "deployment_guide_cloudflare",
+      "label": "Cloudflare Pages Deployment Guide",
+      "file_type": "document",
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "deployment_guide_pre_deploy_checklist",
+      "label": "Pre-Deploy Checklist",
+      "file_type": "document",
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "deployment_guide_platform_decision",
+      "label": "Cloudflare vs Netlify Decision Guide",
+      "file_type": "document",
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hosting_setup_dns",
+      "label": "DNS Setup Guide",
+      "file_type": "document",
+      "source_file": "delivery-playbook/hosting-setup.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hosting_setup_ssl",
+      "label": "SSL Setup Guide",
+      "file_type": "document",
+      "source_file": "delivery-playbook/hosting-setup.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hosting_setup_email_forwarding",
+      "label": "Email Forwarding Setup",
+      "file_type": "document",
+      "source_file": "delivery-playbook/hosting-setup.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_engine_context",
+      "label": "Project Engine Context",
+      "file_type": "document",
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_engine_status_values",
+      "label": "Project Status Values",
+      "file_type": "document",
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_engine_full_pipeline",
+      "label": "Full BBC Project Pipeline (Lead to Retainer)",
+      "file_type": "document",
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lead_capture_format",
+      "label": "Lead Capture Entry Format",
+      "file_type": "document",
+      "source_file": "project-engine/lead-capture.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_bank_active_projects",
+      "label": "Active and Recent Projects (P-001 to P-005)",
+      "file_type": "document",
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_bank_tier_reference",
+      "label": "Project Tier Reference",
+      "file_type": "document",
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_p001_bbc_v3",
+      "label": "P-001 BBC Agency Site (bbc-v3)",
+      "file_type": "document",
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_p002_kris_mid_city",
+      "label": "P-002 Kris Mid-City",
+      "file_type": "document",
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_p003_whatsshakinbacon",
+      "label": "P-003 What's Shakin' Bacon",
+      "file_type": "document",
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_p004_remodelnow",
+      "label": "P-004 Remodelnow",
+      "file_type": "document",
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "project_p005_doberts_canvas",
+      "label": "P-005 Dobert's Canvas",
+      "file_type": "document",
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "services_context",
+      "label": "Services and Packages Context",
+      "file_type": "document",
+      "source_file": "services-and-packages/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "services_tier_summary",
+      "label": "Service Tier Summary (T1/T2/T3)",
+      "file_type": "document",
+      "source_file": "services-and-packages/CONTEXT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_segments_ideal_clients",
+      "label": "Ideal Client Types",
+      "file_type": "document",
+      "source_file": "services-and-packages/client-segments.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_segments_fit_scoring",
+      "label": "Client Fit Scoring System",
+      "file_type": "document",
+      "source_file": "services-and-packages/client-segments.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_segments_red_flags",
+      "label": "Client Red Flags",
+      "file_type": "document",
+      "source_file": "services-and-packages/client-segments.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "client_segments_borderline_handling",
+      "label": "Borderline Client Handling Rationale",
+      "file_type": "document",
+      "source_file": "services-and-packages/client-segments.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier1_package_a",
+      "label": "T1 Package A — Launch Site ($2,500)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier1_package_b",
+      "label": "T1 Package B — Launch + Content ($3,500)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier1_package_c",
+      "label": "T1 Package C — Launch + Book ($4,500)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier1_addons",
+      "label": "T1 Add-Ons",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier2_package_d",
+      "label": "T2 Package D — Custom Site ($5,000–$8,000)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-2-design-systems/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier2_package_e",
+      "label": "T2 Package E — Custom + Commerce ($8,000–$12,000)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-2-design-systems/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier2_package_f",
+      "label": "T2 Package F — Brand + Build ($7,500–$11,000)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-2-design-systems/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier3_plan_a",
+      "label": "T3 Plan A — Maintenance ($500/mo)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier3_plan_b",
+      "label": "T3 Plan B — Growth ($900/mo)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier3_plan_c",
+      "label": "T3 Plan C — Partner ($1,500/mo)",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier3_retainer_vs_project",
+      "label": "Retainer vs Project Scope Boundary",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "tier3_retainer_terms",
+      "label": "Retainer Contract Terms",
+      "file_type": "document",
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "workflows_context_pipeline",
+      "target": "briefs_context_stage01",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "workflows_context_pipeline",
+      "target": "designs_context_stage02",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "workflows_context_pipeline",
+      "target": "builds_context_stage03",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "workflows_context_pipeline",
+      "target": "live_context_stage04",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "workflows_context_stage_routing",
+      "target": "workflows_context_pipeline",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "workflows_context_file_handoffs",
+      "target": "workflows_context_pipeline",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "briefs_context_stage01",
+      "target": "briefs_context_brief_format",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/01-briefs/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "briefs_context_brief_format",
+      "target": "briefs_context_sow_reference",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/01-briefs/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "briefs_context_stage01",
+      "target": "designs_context_stage02",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/01-briefs/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "designs_context_stage02",
+      "target": "designs_context_design_spec_format",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/02-designs/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "designs_context_design_spec_format",
+      "target": "designs_context_figma_reference",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/02-designs/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "designs_context_stage02",
+      "target": "briefs_context_stage01",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/02-designs/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "designs_context_stage02",
+      "target": "builds_context_stage03",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/02-designs/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "builds_context_stage03",
+      "target": "builds_context_build_tracking_format",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/03-builds/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "builds_context_stage03",
+      "target": "builds_context_build_checklist",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/03-builds/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "builds_context_stage03",
+      "target": "designs_context_stage02",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/03-builds/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "builds_context_stage03",
+      "target": "live_context_stage04",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/03-builds/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "live_context_stage04",
+      "target": "live_context_live_site_record_format",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "live_context_live_site_record_format",
+      "target": "live_context_retainer_status",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "live_context_stage04",
+      "target": "delivery_playbook_context",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "live_context_stage04",
+      "target": "client_handoff_call_agenda",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "live_context_retainer_status",
+      "target": "tier3_plan_a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/04-live/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_context",
+      "target": "deployment_guide_netlify",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_context",
+      "target": "deployment_guide_cloudflare",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_context",
+      "target": "client_handoff_post_launch_checklist",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_context",
+      "target": "hosting_setup_dns",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_context",
+      "target": "hosting_setup_email_forwarding",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_deployment_to_handoff_process",
+      "target": "builds_context_stage03",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_deployment_to_handoff_process",
+      "target": "hosting_setup_dns",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_deployment_to_handoff_process",
+      "target": "client_handoff_post_launch_checklist",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_deployment_to_handoff_process",
+      "target": "client_handoff_call_agenda",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "delivery_playbook_deployment_to_handoff_process",
+      "target": "tier3_plan_a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "client_handoff_post_launch_checklist",
+      "target": "client_handoff_call_agenda",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "client_handoff_call_agenda",
+      "target": "client_handoff_document_template",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "client_handoff_call_agenda",
+      "target": "tier3_plan_a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "client_handoff_offboarding",
+      "target": "project_engine_status_values",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "deployment_guide_pre_deploy_checklist",
+      "target": "builds_context_build_checklist",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "deployment_guide_netlify",
+      "target": "deployment_guide_cloudflare",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "deployment_guide_platform_decision",
+      "target": "deployment_guide_netlify",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "deployment_guide_platform_decision",
+      "target": "deployment_guide_cloudflare",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "delivery-playbook/deployment-guide.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "hosting_setup_ssl",
+      "target": "deployment_guide_netlify",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "delivery-playbook/hosting-setup.md",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "hosting_setup_ssl",
+      "target": "deployment_guide_cloudflare",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "delivery-playbook/hosting-setup.md",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "hosting_setup_dns",
+      "target": "hosting_setup_ssl",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "delivery-playbook/hosting-setup.md",
+      "source_location": null,
+      "weight": 0.75
+    },
+    {
+      "source": "project_engine_context",
+      "target": "project_bank_active_projects",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_engine_context",
+      "target": "lead_capture_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_engine_context",
+      "target": "project_engine_status_values",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_engine_full_pipeline",
+      "target": "lead_capture_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_engine_full_pipeline",
+      "target": "briefs_context_stage01",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_engine_full_pipeline",
+      "target": "builds_context_stage03",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_engine_full_pipeline",
+      "target": "live_context_stage04",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_engine_context",
+      "target": "client_segments_fit_scoring",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_bank_active_projects",
+      "target": "project_p001_bbc_v3",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_bank_active_projects",
+      "target": "project_p002_kris_mid_city",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_bank_active_projects",
+      "target": "project_p003_whatsshakinbacon",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_bank_active_projects",
+      "target": "project_p004_remodelnow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_bank_active_projects",
+      "target": "project_p005_doberts_canvas",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "project_bank_tier_reference",
+      "target": "services_tier_summary",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "services_context",
+      "target": "client_segments_ideal_clients",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "services_context",
+      "target": "tier1_package_a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "services_context",
+      "target": "tier2_package_d",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "services_context",
+      "target": "tier3_plan_a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/CONTEXT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "client_segments_fit_scoring",
+      "target": "client_segments_red_flags",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/client-segments.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "client_segments_borderline_handling",
+      "target": "client_segments_red_flags",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/client-segments.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "client_segments_borderline_handling",
+      "target": "client_segments_fit_scoring",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/client-segments.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier1_package_a",
+      "target": "tier1_package_b",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier1_package_b",
+      "target": "tier1_package_c",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier1_package_a",
+      "target": "tier1_addons",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier1_addons",
+      "target": "tier3_plan_a",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier2_package_d",
+      "target": "tier2_package_e",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-2-design-systems/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier2_package_d",
+      "target": "tier2_package_f",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-2-design-systems/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier3_retainer_vs_project",
+      "target": "tier3_plan_a",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier3_plan_a",
+      "target": "tier3_plan_b",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier3_plan_b",
+      "target": "tier3_plan_c",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier3_retainer_terms",
+      "target": "tier3_plan_a",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "services-and-packages/tier-3-retainer/SERVICES.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "tier1_package_a",
+      "target": "tier2_package_d",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "services-and-packages/tier-1-websites/SERVICES.md",
+      "source_location": null,
+      "weight": 0.7
+    },
+    {
+      "source": "project_engine_full_pipeline",
+      "target": "delivery_playbook_deployment_to_handoff_process",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "project-engine/CONTEXT.md",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "client_handoff_post_launch_checklist",
+      "target": "deployment_guide_pre_deploy_checklist",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "delivery-playbook/client-handoff.md",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "project_p002_kris_mid_city",
+      "target": "client_segments_ideal_clients",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 0.75
+    },
+    {
+      "source": "project_p003_whatsshakinbacon",
+      "target": "client_segments_ideal_clients",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "project-engine/project-bank.md",
+      "source_location": null,
+      "weight": 0.75
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "bbc_4stage_build_pipeline",
+      "label": "BBC 4-Stage Build Pipeline (Briefs → Designs → Builds → Live)",
+      "nodes": [
+        "briefs_context_stage01",
+        "designs_context_stage02",
+        "builds_context_stage03",
+        "live_context_stage04"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "build-studio/workflows/CONTEXT.md"
+    },
+    {
+      "id": "bbc_deployment_and_handoff_system",
+      "label": "BBC Deployment and Client Handoff System",
+      "nodes": [
+        "deployment_guide_netlify",
+        "deployment_guide_cloudflare",
+        "hosting_setup_dns",
+        "client_handoff_post_launch_checklist",
+        "client_handoff_call_agenda"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "delivery-playbook/CONTEXT.md"
+    },
+    {
+      "id": "bbc_service_tiers_pricing_structure",
+      "label": "BBC Service Tiers and Pricing Structure (T1/T2/T3)",
+      "nodes": [
+        "tier1_package_a",
+        "tier2_package_d",
+        "tier3_plan_a",
+        "client_segments_fit_scoring",
+        "project_bank_tier_reference"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "services-and-packages/CONTEXT.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

@@ -12,63 +12,6 @@
  * Reduced motion detection
  * ─────────────────────────────────────────────────────── */
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
-
-/* ───────────────────────────────────────────────────────
- * Custom Cursor
- * ─────────────────────────────────────────────────────── */
-if (hasFinePointer && !prefersReducedMotion) {
-  const cursor    = document.querySelector('.cursor');
-  const cursorDot = document.querySelector('.cursor-dot');
-  const cursorRing = document.querySelector('.cursor-ring');
-
-  if (cursor && cursorDot && cursorRing) {
-    // Dot follows immediately — ring follows with JS lag
-    let ringX = 0, ringY = 0;
-    let mouseX = 0, mouseY = 0;
-    let rafId = null;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      // Dot: instant follow via transform
-      cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
-      cursor.style.display = 'block';
-    });
-
-    // Ring: lerp towards mouse on each frame
-    function animateCursor() {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
-      cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
-      rafId = requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Hovering state for interactive elements
-    const hoverTargets = 'a, button, [role="button"], input, textarea, select, label, .work-card, .service-card, .price-card, .faq-question';
-
-    function setHovering() { cursor.classList.add('hovering'); }
-    function clearHovering() { cursor.classList.remove('hovering'); }
-
-    document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(hoverTargets)) setHovering();
-    });
-
-    document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(hoverTargets)) clearHovering();
-    });
-
-    // Pause RAF when tab hidden
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(rafId);
-      } else {
-        animateCursor();
-      }
-    });
-  }
-}
 
 /* ───────────────────────────────────────────────────────
  * Theme Toggle (Dark / Light)
@@ -235,23 +178,6 @@ if (!prefersReducedMotion) {
   document.querySelectorAll('.reveal').forEach((el) => {
     el.classList.add('revealed');
   });
-}
-
-/* ───────────────────────────────────────────────────────
- * Marquee: pause when out of view
- * ─────────────────────────────────────────────────────── */
-const marqueeTrack = document.querySelector('.marquee-track');
-
-if (marqueeTrack && !prefersReducedMotion) {
-  const marqueeObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        marqueeTrack.style.animationPlayState = entry.isIntersecting ? 'running' : 'paused';
-      });
-    },
-    { threshold: 0 }
-  );
-  marqueeObserver.observe(marqueeTrack);
 }
 
 /* ───────────────────────────────────────────────────────

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Big Bad Coding — Logo System</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ════════════════════════════════════════════════════════
+       MIDDLE B COLOR: #3d4a5c
+       Hue 215° — same family as electric blue #0066FF,
+       desaturated 80%, luminance 29%. Chromatic bridge.
+    ════════════════════════════════════════════════════════ */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark:  #080808;
+      --bg-light: #f4f4f4;
+      --b1-dark:  #ffffff;
+      --b1-light: #0d0d0d;
+      --b2:       #3d4a5c;
+      --c:        #0066FF;
+      --muted:    #6b7280;
+      --surface:  #111111;
+      --border:   #1e1e1e;
+      --font-d:   'Bebas Neue', 'Arial Black', sans-serif;
+      --font-b:   'Inter', system-ui, sans-serif;
+      --ease:     cubic-bezier(0.16, 1, 0.3, 1);
+      --sub-ls:   0.3em;
+    }
+
+    body {
+      background: #0d0d0d;
+      font-family: var(--font-b);
+      color: #f0f0f0;
+      line-height: 1.5;
+    }
+
+    /* ── PAGE HEADER ─────────────────────────────────────── */
+    .sys-header {
+      padding: 40px 48px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+    .sys-header h1 {
+      font-family: var(--font-d);
+      font-size: 22px;
+      color: #333;
+      letter-spacing: 0.06em;
+    }
+    .sys-header p { font-size: 11px; color: #2a2a2a; }
+
+    /* ── SECTION LABELS ──────────────────────────────────── */
+    .sys-label {
+      padding: 40px 48px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .sys-label span:first-child {
+      font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #3a3a3a; font-weight: 400;
+    }
+    .sys-label span:last-child {
+      font-size: 10px; color: #222; letter-spacing: 0.1em;
+    }
+    .sys-divider {
+      width: 1px; height: 12px; background: #222; display: inline-block;
+    }
+
+    /* ── GRID LAYOUTS ────────────────────────────────────── */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    @media (max-width: 640px) { .preview-grid { grid-template-columns: 1fr; } }
+
+    .preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 48px;
+      min-height: 300px;
+    }
+    .preview.dark  { background: var(--bg-dark); }
+    .preview.light { background: var(--bg-light); }
+    .preview.light .bbc-b1 { color: var(--b1-light); }
+    .preview.light .bbc-subtitle { color: #999; }
+    .preview.light .bbc-dot { color: #ccc; }
+
+    /* ── BBC MARK CORE ───────────────────────────────────── */
+    .bbc-wordmark {
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .bbc-mark {
+      display: inline-flex;
+      align-items: flex-end;
+      line-height: 0.82;
+      cursor: pointer;
+      user-select: none;
+    }
+    .bbc-mark:focus-visible {
+      outline: 2px solid var(--c);
+      outline-offset: 10px;
+      border-radius: 4px;
+    }
+
+    .bbc-mark span {
+      font-family: var(--font-d);
+      display: inline-block;
+      position: relative;
+    }
+
+    .bbc-b1 { color: var(--b1-dark); z-index: 3; }
+    .bbc-b2 { color: var(--b2);      z-index: 1; }
+    .bbc-c  { color: var(--c);       z-index: 2; }
+
+    /* ── VARIATION: TIGHT (edgy, primary) ────────────────── */
+    .bbc-mark.tight .bbc-b2 { margin-left: -0.085em; }
+    .bbc-mark.tight .bbc-c  { margin-left: -0.085em; }
+
+    /* ── VARIATION: BREATHING (premium, refined) ─────────── */
+    .bbc-mark.breathing .bbc-b2 { margin-left: -0.022em; }
+    .bbc-mark.breathing .bbc-c  { margin-left: -0.022em; }
+
+    /* ── VARIATION: STACKED (compact, nav, mobile) ────────── */
+    .bbc-mark.stacked { flex-direction: column; align-items: flex-start; line-height: 0.88; }
+    .bbc-mark.stacked .bbc-b2 { margin-left: 0; margin-top: -0.06em; }
+    .bbc-mark.stacked .bbc-c  { margin-left: 0; margin-top: -0.06em; }
+
+    /* ── SUBTITLE ─────────────────────────────────────────── */
+    .bbc-subtitle {
+      display: flex; align-items: center; gap: 0.55em;
+      font-family: var(--font-b); font-weight: 300;
+      color: var(--muted); letter-spacing: var(--sub-ls);
+      text-transform: uppercase; margin-top: 0.22em;
+    }
+    .bbc-dot { color: #3a3a3a; font-size: 0.65em; position: relative; top: -0.05em; }
+
+    /* ── SIZE TOKENS ─────────────────────────────────────── */
+    .sz-hero  { font-size: clamp(72px, 14vw, 200px); }
+    .sz-lg    { font-size: clamp(56px, 8vw,  120px); }
+    .sz-md    { font-size: clamp(40px, 5vw,   80px); }
+    .sz-nav   { font-size: 32px; }
+    .sz-sm    { font-size: 20px; }
+    .sz-fav   { font-size: 14px; }
+
+    .sub-hero { font-size: clamp(9px, 1.1vw, 13px); }
+    .sub-sm   { font-size: 7.5px; }
+    .sub-nav  { font-size: 6.5px; letter-spacing: 0.25em; }
+
+    /* ── HOVER INTERACTIONS ───────────────────────────────── */
+    .bbc-mark:hover .bbc-b2 { filter: brightness(1.25); transition: filter 220ms var(--ease); }
+    .bbc-mark:hover .bbc-c  { filter: brightness(1.12); transition: filter 220ms var(--ease); }
+    .bbc-mark span { transition: filter 220ms var(--ease); }
+
+    /* ── ANIMATIONS ───────────────────────────────────────── */
+    @keyframes letter-in {
+      from { opacity: 0; transform: translateY(7px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes sub-in {
+      from { opacity: 0; letter-spacing: 0.05em; }
+      to   { opacity: 1; letter-spacing: var(--sub-ls); }
+    }
+
+    .bbc-mark.animate .bbc-b1 { animation: letter-in 0.4s var(--ease) 0ms   both; }
+    .bbc-mark.animate .bbc-b2 { animation: letter-in 0.4s var(--ease) 80ms  both; }
+    .bbc-mark.animate .bbc-c  { animation: letter-in 0.4s var(--ease) 160ms both; }
+    .bbc-animate-sub           { animation: sub-in    0.5s var(--ease) 360ms both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bbc-mark.animate span, .bbc-animate-sub { animation: none; }
+    }
+
+    /* ── MOCKUP CONTEXTS ──────────────────────────────────── */
+    .mockups-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .mockup-cell {
+      background: var(--surface);
+      padding: 24px 32px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .mockup-label {
+      font-size: 9px; letter-spacing: 0.16em; color: #333;
+      text-transform: uppercase; font-weight: 400;
+    }
+    .mockup-frame {
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Nav bar */
+    .mockup-nav {
+      width: 100%; height: 64px; background: var(--bg-dark);
+      border: 1px solid var(--border); border-radius: 8px;
+      display: flex; align-items: center; padding: 0 24px;
+      justify-content: space-between;
+    }
+    .mock-nav-links {
+      display: flex; gap: 24px;
+      font-size: 11px; color: #555; letter-spacing: 0.06em;
+    }
+    .mock-nav-cta {
+      font-size: 10px; padding: 8px 16px; background: var(--c);
+      color: #fff; border-radius: 4px; letter-spacing: 0.05em;
+    }
+
+    /* T-shirt */
+    .mockup-tshirt {
+      width: 240px; height: 280px;
+      background: #141414;
+      border-radius: 12px 12px 6px 6px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .mockup-tshirt::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 28px;
+      background: #1a1a1a; border-radius: 0 0 24px 24px;
+    }
+
+    /* Browser tab */
+    .mockup-browser {
+      width: 100%; background: #1c1c1e; border-radius: 10px; overflow: hidden;
+    }
+    .mockup-tab-bar {
+      height: 36px; background: #2a2a2a; display: flex; align-items: flex-end;
+      padding: 0 12px; gap: 2px;
+    }
+    .mockup-tab {
+      height: 30px; min-width: 160px; background: #1c1c1e;
+      border-radius: 8px 8px 0 0;
+      display: flex; align-items: center; padding: 0 12px; gap: 8px;
+      font-size: 11px; color: #888;
+    }
+    .mock-favicon {
+      width: 14px; height: 14px; border-radius: 2px;
+      background: var(--bg-dark);
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .mockup-browser-body {
+      height: 72px; background: var(--bg-dark);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Hero splash */
+    .mockup-hero {
+      width: 100%; min-height: 200px;
+      background: var(--bg-dark);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 20px; padding: 40px;
+      border: 1px solid var(--border); border-radius: 8px;
+    }
+    .mock-hero-text {
+      font-family: var(--font-b); font-size: 11px; color: #3a3a3a;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+
+    /* ── SPACING ──────────────────────────────────────────── */
+    .section-gap { height: 2px; background: #0d0d0d; }
+  </style>
+</head>
+<body>
+
+  <div class="sys-header">
+    <h1>BIG BAD CODING — LOGO SYSTEM</h1>
+    <p>Three variations · Dark &amp; light · Animated · Responsive</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+    01 — TIGHT OVERLAP (edgy, primary mark)
+  ════════════════════════════════════════════════════ -->
+  <div class="sys-label">
+    <span>01</span>
+    <div class="sys-divider"></div>
+    <span>Tight Overlap — Edgy · Primary Brand Mark</span>
+  </div>
+
+  <div class="preview-grid">
+    <div class="preview dark">
+      <div class="bbc-wordmark">
+        <div class="bbc-mark tight animate sz-hero"
+             tabindex="0" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span>
+          <span class="bbc-b2">B</span>
+          <span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-subtitle sub-hero bbc-animate-sub">
+          <span>BIG</span><span class="bbc-dot">·</span>
+          <span>BAD</span><span class="bbc-dot">·</span>
+          <span>CODING</span>
+        </div>
+      </div>
+    </div>
+    <div class="preview light">
+      <div class="bbc-wordmark">
+        <div class="bbc-mark tight sz-hero"
+             tabindex="0" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span>
+          <span class="bbc-b2">B</span>
+          <span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-subtitle sub-hero">
+          <span>BIG</span><span class="bbc-dot">·</span>
+          <span>BAD</span><span class="bbc-dot">·</span>
+          <span>CODING</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- ════════════════════════════════════════════════════
+    02 — BREATHING ROOM (premium, website header)
+  ════════════════════════════════════════════════════ -->
+  <div class="sys-label">
+    <span>02</span>
+    <div class="sys-divider"></div>
+    <span>Breathing Room — Premium · Refined · Website Header</span>
+  </div>
+
+  <div class="preview-grid">
+    <div class="preview dark">
+      <div class="bbc-wordmark">
+        <div class="bbc-mark breathing sz-lg"
+             tabindex="0" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span>
+          <span class="bbc-b2">B</span>
+          <span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-subtitle sub-sm">
+          <span>BIG</span><span class="bbc-dot">·</span>
+          <span>BAD</span><span class="bbc-dot">·</span>
+          <span>CODING</span>
+        </div>
+      </div>
+    </div>
+    <div class="preview light">
+      <div class="bbc-wordmark">
+        <div class="bbc-mark breathing sz-lg"
+             tabindex="0" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span>
+          <span class="bbc-b2">B</span>
+          <span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-subtitle sub-sm">
+          <span>BIG</span><span class="bbc-dot">·</span>
+          <span>BAD</span><span class="bbc-dot">·</span>
+          <span>CODING</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+
+  <!-- ════════════════════════════════════════════════════
+    03 — STACKED (compact, nav, mobile, favicon use)
+  ════════════════════════════════════════════════════ -->
+  <div class="sys-label">
+    <span>03</span>
+    <div class="sys-divider"></div>
+    <span>Stacked — Compact · Mobile · Nav · Favicon Context</span>
+  </div>
+
+  <div class="preview-grid">
+    <div class="preview dark" style="flex-direction:row;gap:60px;align-items:center;">
+      <!-- Nav size -->
+      <div class="bbc-wordmark">
+        <div class="bbc-mark tight sz-nav"
+             tabindex="0" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span>
+          <span class="bbc-b2">B</span>
+          <span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-subtitle sub-nav">
+          <span>BIG</span><span class="bbc-dot">·</span>
+          <span>BAD</span><span class="bbc-dot">·</span>
+          <span>CODING</span>
+        </div>
+      </div>
+      <!-- Multiple sizes for reference -->
+      <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+        <div class="bbc-mark tight sz-md" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span><span class="bbc-b2">B</span><span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-mark tight sz-sm" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span><span class="bbc-b2">B</span><span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-mark tight sz-fav" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span><span class="bbc-b2">B</span><span class="bbc-c">C</span>
+        </div>
+      </div>
+    </div>
+    <div class="preview light" style="flex-direction:row;gap:60px;align-items:center;">
+      <div class="bbc-wordmark">
+        <div class="bbc-mark tight sz-nav"
+             tabindex="0" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span>
+          <span class="bbc-b2">B</span>
+          <span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-subtitle sub-nav">
+          <span>BIG</span><span class="bbc-dot">·</span>
+          <span>BAD</span><span class="bbc-dot">·</span>
+          <span>CODING</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start;">
+        <div class="bbc-mark tight sz-md" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span><span class="bbc-b2">B</span><span class="bbc-c">C</span>
+        </div>
+        <div class="bbc-mark tight sz-sm" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span><span class="bbc-b2">B</span><span class="bbc-c">C</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-gap" style="height:40px;"></div>
+
+  <!-- ════════════════════════════════════════════════════
+    STRESS TESTS — Real world contexts
+  ════════════════════════════════════════════════════ -->
+  <div class="sys-label">
+    <span>STRESS</span>
+    <div class="sys-divider"></div>
+    <span>Real World Contexts — Nav · Hero · T-shirt · Browser Tab · Favicon</span>
+  </div>
+
+  <div class="mockups-grid">
+
+    <!-- Nav bar at 40px height -->
+    <div class="mockup-cell">
+      <div class="mockup-label">Website nav bar — 40px height</div>
+      <div class="mockup-nav">
+        <div class="bbc-mark tight sz-nav" role="img" aria-label="Big Bad Coding">
+          <span class="bbc-b1">B</span>
+          <span class="bbc-b2">B</span>
+          <span class="bbc-c">C</span>
+        </div>
+        <div class="mock-nav-links">
+          <span>Work</span><span>About</span><span>Contact</span>
+        </div>
+        <div class="mock-nav-cta">Get a Quote</div>
+      </div>
+    </div>
+
+    <!-- Hero splash -->
+    <div class="mockup-cell">
+      <div class="mockup-label">Hero / splash screen — large format</div>
+      <div class="mockup-hero">
+        <div class="mock-hero-text">Web design for small businesses</div>
+        <div class="bbc-wordmark">
+          <div class="bbc-mark tight sz-md" role="img" aria-label="Big Bad Coding">
+            <span class="bbc-b1">B</span>
+            <span class="bbc-b2">B</span>
+            <span class="bbc-c">C</span>
+          </div>
+          <div class="bbc-subtitle sub-sm">
+            <span>BIG</span><span class="bbc-dot">·</span>
+            <span>BAD</span><span class="bbc-dot">·</span>
+            <span>CODING</span>
+          </div>
+        </div>
+        <div class="mock-hero-text">Capital Region NY</div>
+      </div>
+    </div>
+
+    <!-- Black t-shirt -->
+    <div class="mockup-cell">
+      <div class="mockup-label">Black t-shirt mockup</div>
+      <div style="display:flex;justify-content:center;">
+        <div class="mockup-tshirt">
+          <div class="bbc-wordmark">
+            <div class="bbc-mark tight sz-md" role="img" aria-label="Big Bad Coding">
+              <span class="bbc-b1">B</span>
+              <span class="bbc-b2">B</span>
+              <span class="bbc-c">C</span>
+            </div>
+            <div class="bbc-subtitle sub-sm">
+              <span>BIG</span><span class="bbc-dot">·</span>
+              <span>BAD</span><span class="bbc-dot">·</span>
+              <span>CODING</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Browser tab + favicon -->
+    <div class="mockup-cell">
+      <div class="mockup-label">Dark mode browser tab · 32×32 favicon</div>
+      <div class="mockup-browser">
+        <div class="mockup-tab-bar">
+          <div class="mockup-tab">
+            <div class="mock-favicon">
+              <!-- Inline favicon-scale BBC mark -->
+              <div class="bbc-mark tight" style="font-size:9px;line-height:1;" aria-label="BBC">
+                <span class="bbc-b1" style="color:#fff;">B</span>
+                <span class="bbc-c" style="color:#0066FF;margin-left:-0.085em;">C</span>
+              </div>
+            </div>
+            <span>Big Bad Coding</span>
+          </div>
+        </div>
+        <div class="mockup-browser-body">
+          <div class="bbc-mark tight sz-sm" role="img" aria-label="Big Bad Coding">
+            <span class="bbc-b1">B</span>
+            <span class="bbc-b2">B</span>
+            <span class="bbc-c">C</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Favicon size references -->
+      <div style="display:flex;gap:16px;align-items:center;margin-top:16px;">
+        <div>
+          <div class="mockup-label" style="margin-bottom:8px;">32×32</div>
+          <div style="width:32px;height:32px;background:#080808;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+            <div class="bbc-mark tight" style="font-size:12px;line-height:0.85;" aria-label="BBC">
+              <span class="bbc-b1">B</span>
+              <span class="bbc-b2">B</span>
+              <span class="bbc-c">C</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="mockup-label" style="margin-bottom:8px;">64×64</div>
+          <div style="width:64px;height:64px;background:#080808;border-radius:6px;display:flex;align-items:center;justify-content:center;">
+            <div class="bbc-mark tight" style="font-size:24px;line-height:0.85;" aria-label="BBC">
+              <span class="bbc-b1">B</span>
+              <span class="bbc-b2">B</span>
+              <span class="bbc-c">C</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="mockup-label" style="margin-bottom:8px;">White bg</div>
+          <div style="width:64px;height:64px;background:#f4f4f4;border-radius:6px;display:flex;align-items:center;justify-content:center;">
+            <div class="bbc-mark tight" style="font-size:24px;line-height:0.85;" aria-label="BBC">
+              <span class="bbc-b1" style="color:#0d0d0d;">B</span>
+              <span class="bbc-b2">B</span>
+              <span class="bbc-c">C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /mockups-grid -->
+
+  <div style="height:60px;"></div>
+
+</body>
+</html>
